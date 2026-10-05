@@ -665,6 +665,19 @@
   @media (hover: hover) { .zc-salvar:hover { background: var(--acc-hover); } .zc-fechar:hover { background: rgba(255, 255, 255, 0.18); } }
   .zc-ok { margin: 8px 0 0; font-size: 0.86rem; font-weight: 700; text-align: center; color: #FFF3F7; }
   .zc-ok:empty { display: none; }
+  /* Barra de binders */
+  .bd-bar { margin: 0 0 12px; }
+  .bd-tabs { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 2px; }
+  .bd-tab { flex: none; display: inline-flex; align-items: center; gap: 2px; max-width: min(280px, 100%); height: 40px; padding: 0 4px; border: 1.5px solid var(--line); border-radius: 99px; color: var(--text); }
+  .bd-tab.on { background: var(--seg-on-bg); border-color: var(--seg-on-bg); color: var(--seg-on-fg); }
+  .bd-nome { min-width: 0; height: 32px; display: flex; align-items: center; padding: 0 10px; border: 0; border-radius: 99px; background: transparent; color: inherit; font: 700 14px "Figtree", system-ui, sans-serif; cursor: pointer; }
+  .bd-nome span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bd-ic { flex: none; min-width: 30px; height: 30px; display: grid; place-items: center; padding: 0 6px; border: 0; border-radius: 99px; background: transparent; color: inherit; cursor: pointer; font: 700 12px "Figtree", system-ui, sans-serif; white-space: nowrap; }
+  .bd-ic.arm { background: #B0123A; color: #FFFFFF; }
+  .bd-tab.edit { padding: 0 6px; }
+  .bd-input { width: min(220px, 60vw); min-width: 0; height: 30px; padding: 0 10px; border: 0; border-radius: 99px; background: var(--surface); color: var(--field-fg); font: 700 15px "Figtree", system-ui, sans-serif; }
+  .bd-novo { flex: none; display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px; border: 1.5px dashed var(--line); border-radius: 99px; background: transparent; color: var(--text); font: 700 14px "Figtree", system-ui, sans-serif; cursor: pointer; white-space: nowrap; }
+  @media (hover: hover) { .bd-tab:not(.on) .bd-nome:hover, .bd-novo:hover { background: var(--seg-bg); } .bd-tab.on .bd-ic:not(.arm):hover { background: color-mix(in srgb, var(--seg-on-fg) 18%, transparent); } }
 </style>
 </head>
 <body>
@@ -725,6 +738,7 @@
 
   <main>
    <div id="areaBinder">
+    <div class="bd-bar"><div class="bd-tabs" id="bdTabs" role="group" data-i18n-aria="bindersAria" aria-label="Binders"></div></div>
     <div class="controls">
       <div class="tabs" role="group" data-i18n-aria="show" aria-label="Show">
         <button type="button" data-tab="todas" aria-pressed="true"><span data-i18n="tabAll">All</span> <span class="count" id="cTodas">0</span></button>
@@ -1390,9 +1404,25 @@
     Object.entries(obj || {}).forEach(([id, arr]) => { if (Array.isArray(arr) && arr.length) cop[id] = arr.slice(0, 999).map(x => limparCopia(x)); });
     return cop;
   }
-  function carregar() {
+  /* ---------- Vários binders: cada um guarda a própria coleção ---------- */
+  const KEY_BINDERS = "fichario-pokemon-binders-v1";
+  const chaveBinder = id => id === "main" ? KEY : KEY + ":" + id;
+  function carregarBinders() {
     try {
-      const raw = localStorage.getItem(KEY);
+      const o = JSON.parse(localStorage.getItem(KEY_BINDERS) || "null");
+      if (o && Array.isArray(o.lista)) {
+        const lista = o.lista.filter(b => b && b.id).map(b => ({ id: String(b.id), name: String(b.name || "").slice(0, 30) }));
+        if (lista.length) return { lista, atual: lista.some(b => b.id === o.atual) ? o.atual : lista[0].id };
+      }
+    } catch (e) { /* começa com um binder */ }
+    return { lista: [{ id: "main", name: "" }], atual: "main" };
+  }
+  const bnd = carregarBinders();
+  function salvarBinders() { try { localStorage.setItem(KEY_BINDERS, JSON.stringify(bnd)); } catch (e) { /* segue */ } }
+  function carregar(chave) {
+    chave = chave || KEY;
+    try {
+      const raw = localStorage.getItem(chave);
       if (raw) {
         const o = JSON.parse(raw);
         const qty = {}, langs = {};
@@ -1406,6 +1436,8 @@
         const cop = o.cop && typeof o.cop === "object" ? lerCopias(o.cop) : copiasDe(qty, langs, meta);
         return { qty, langs, fav: new Set(o.fav || []), star: new Set(o.star || []), meta, cop };
       }
+      // binder novo (que não é o principal) começa vazio
+      if (chave !== KEY) return { qty: {}, langs: {}, fav: new Set(), star: new Set(), cop: {} };
       const old = localStorage.getItem(KEY_OLD);
       if (old) {
         const o = JSON.parse(old);
@@ -1424,7 +1456,7 @@
     return { qty: Object.assign({}, SEED_QTY), langs, fav: new Set(SEED_FAV), star: new Set(SEED_STAR), cop: copiasDe(SEED_QTY, langs) };
   }
   function salvar() {
-    try { localStorage.setItem(KEY, JSON.stringify({ cop: state.cop, qty: state.qty, langs: state.langs, fav: [...state.fav], star: [...state.star] })); } catch (e) { /* segue sem salvar */ }
+    try { localStorage.setItem(chaveBinder(bnd.atual), JSON.stringify({ cop: state.cop, qty: state.qty, langs: state.langs, fav: [...state.fav], star: [...state.star] })); } catch (e) { /* segue sem salvar */ }
   }
 
   /* ---------- Conta e configurações (salvas no navegador) ---------- */
@@ -1452,7 +1484,7 @@
     try { localStorage.setItem(KEY_CONTA, JSON.stringify(conta)); } catch (e) { /* segue sem salvar */ }
   }
 
-  const saved = carregar();
+  const saved = carregar(chaveBinder(bnd.atual));
   const conta = carregarConta();
   const state = {
     tab: "todas", q: "", posse: "", serie: "", set: "", page: 0,
@@ -3119,6 +3151,7 @@
     document.querySelectorAll(".lang-btn").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === conta.cfg.lang)));
     document.querySelectorAll("#temas [data-tema]").forEach(b => b.setAttribute("aria-label", t("themes")[b.dataset.tema]));
     rotuloModo();
+    if (typeof renderBinders === "function" && $("bdTabs") && bnd) renderBinders();
     reset.textContent = t(armado ? "resetArm" : "reset");
     $("deckDel").textContent = t("deckDel");
     if (dState.form) $("deckFormLbl").textContent = t(dState.form === "new" ? "deckNewLbl" : "deckRenLbl");
@@ -3180,7 +3213,7 @@
       tlInstall: "Install app", tlInstalled: "The app is installed on this device.",
       tlAppHow: "In Chrome or Edge, open the browser menu and choose “Install”. On iPhone or iPad: tap Share and then “Add to Home Screen”.",
       tlOffOk: "Offline mode is on.", tlOffNo: "Offline mode isn't available on this page.",
-      copyTitle: "My copy", copiesTitle: "My copies", copiesByLang: "Copies by language", copySave: "Save", copyClose: "Close", copySaved: "Saved ✓", copiesHint: "Choose the language and condition of each copy. Use + and − above to change how many you have.", copyN: n => `Copy ${n}`, copyLang: n => `Language of copy ${n}`, condLbl: "Condition", finLbl: "Finish", gradeLbl: "Graded by", gradeVal: "Grade", optNone: "—",
+      copyTitle: "My copy", copiesTitle: "My copies", copiesByLang: "Copies by language", copySave: "Save", bindersAria: "Your binders", binderDefault: "My binder", binderN: n => `Binder ${n}`, binderNew: "New binder", binderNewShort: "New", binderRen: "Rename binder", binderRenLbl: "Binder name", binderDel: "Remove binder", binderDelArm: "Remove?", copyClose: "Close", copySaved: "Saved ✓", copiesHint: "Choose the language and condition of each copy. Use + and − above to change how many you have.", copyN: n => `Copy ${n}`, copyLang: n => `Language of copy ${n}`, condLbl: "Condition", finLbl: "Finish", gradeLbl: "Graded by", gradeVal: "Grade", optNone: "—",
       conds: { NM: "Near Mint", LP: "Lightly Played", MP: "Moderately Played", HP: "Heavily Played", DMG: "Damaged" },
       fins: { normal: "Normal", holo: "Holo", reverse: "Reverse Holo" }, gradeOther: "Other",
       deckTools: "Deck tools", dtTitle: "Deck tools", dtStats: "Stats", dtHand: "Test hand", dtIO: "Export / Import", dtClose: "Close",
@@ -3231,7 +3264,7 @@
       tlInstall: "Instalar app", tlInstalled: "O app está instalado neste aparelho.",
       tlAppHow: "No Chrome ou no Edge, abra o menu do navegador e escolha “Instalar”. No iPhone ou iPad: toque em Compartilhar e depois em “Adicionar à Tela de Início”.",
       tlOffOk: "O modo offline está ativo.", tlOffNo: "O modo offline não está disponível nesta página.",
-      copyTitle: "Minha cópia", copiesTitle: "Minhas cópias", copiesByLang: "Cópias por idioma", copySave: "Salvar", copyClose: "Fechar", copySaved: "Salvo ✓", copiesHint: "Escolha o idioma e o estado de cada cópia. Use + e − acima para mudar quantas você tem.", copyN: n => `Cópia ${n}`, copyLang: n => `Idioma da cópia ${n}`, condLbl: "Estado", finLbl: "Acabamento", gradeLbl: "Graduada por", gradeVal: "Nota", optNone: "—",
+      copyTitle: "Minha cópia", copiesTitle: "Minhas cópias", copiesByLang: "Cópias por idioma", copySave: "Salvar", bindersAria: "Seus fichários", binderDefault: "Meu fichário", binderN: n => `Fichário ${n}`, binderNew: "Novo fichário", binderNewShort: "Novo", binderRen: "Renomear fichário", binderRenLbl: "Nome do fichário", binderDel: "Remover fichário", binderDelArm: "Remover?", copyClose: "Fechar", copySaved: "Salvo ✓", copiesHint: "Escolha o idioma e o estado de cada cópia. Use + e − acima para mudar quantas você tem.", copyN: n => `Cópia ${n}`, copyLang: n => `Idioma da cópia ${n}`, condLbl: "Estado", finLbl: "Acabamento", gradeLbl: "Graduada por", gradeVal: "Nota", optNone: "—",
       conds: { NM: "Near Mint (perfeita)", LP: "Pouco jogada", MP: "Jogada", HP: "Muito jogada", DMG: "Danificada" },
       fins: { normal: "Normal", holo: "Holo", reverse: "Reverse Holo" }, gradeOther: "Outra",
       deckTools: "Ferramentas do deck", dtTitle: "Ferramentas do deck", dtStats: "Estatísticas", dtHand: "Testar mão", dtIO: "Exportar / Importar", dtClose: "Fechar",
@@ -3282,7 +3315,7 @@
       tlInstall: "アプリをインストール", tlInstalled: "この端末にインストール済みです。",
       tlAppHow: "Chrome や Edge ではブラウザのメニューから「インストール」を選びます。iPhone・iPad では共有ボタンから「ホーム画面に追加」をタップします。",
       tlOffOk: "オフラインモードが有効です。", tlOffNo: "このページではオフラインモードを使えません。",
-      copyTitle: "わたしのカード", copiesTitle: "持っているカード", copiesByLang: "言語ごとの枚数", copySave: "保存", copyClose: "閉じる", copySaved: "保存しました ✓", copiesHint: "1枚ずつ言語と状態を選べます。枚数は上の＋と−で変えられます。", copyN: n => `${n}枚目`, copyLang: n => `${n}枚目の言語`, condLbl: "状態", finLbl: "仕上げ", gradeLbl: "鑑定会社", gradeVal: "グレード", optNone: "—",
+      copyTitle: "わたしのカード", copiesTitle: "持っているカード", copiesByLang: "言語ごとの枚数", copySave: "保存", bindersAria: "あなたのバインダー", binderDefault: "マイバインダー", binderN: n => `バインダー ${n}`, binderNew: "新しいバインダー", binderNewShort: "新規", binderRen: "名前を変更", binderRenLbl: "バインダーの名前", binderDel: "バインダーを削除", binderDelArm: "削除？", copyClose: "閉じる", copySaved: "保存しました ✓", copiesHint: "1枚ずつ言語と状態を選べます。枚数は上の＋と−で変えられます。", copyN: n => `${n}枚目`, copyLang: n => `${n}枚目の言語`, condLbl: "状態", finLbl: "仕上げ", gradeLbl: "鑑定会社", gradeVal: "グレード", optNone: "—",
       conds: { NM: "ニアミント（美品）", LP: "軽いプレイ跡", MP: "プレイ跡あり", HP: "強いプレイ跡", DMG: "ダメージあり" },
       fins: { normal: "ノーマル", holo: "ホロ", reverse: "リバースホロ" }, gradeOther: "その他",
       deckTools: "デッキツール", dtTitle: "デッキツール", dtStats: "統計", dtHand: "手札テスト", dtIO: "書き出し / 読み込み", dtClose: "閉じる",
@@ -3595,6 +3628,15 @@
   function aplicarImport(imp) {
     if (imp.tipo === "json") {
       const c = imp.o.collection;
+      // backup com vários binders: restaura todos
+      const bb = imp.o.binders;
+      if (bb && Array.isArray(bb.lista) && bb.lista.length) {
+        bnd.lista.forEach(b => { if (b.id !== "main") try { localStorage.removeItem(chaveBinder(b.id)); } catch (e) { /* segue */ } });
+        bnd.lista = bb.lista.filter(b => b && b.id).map(b => ({ id: String(b.id), name: String(b.name || "").slice(0, 30) }));
+        bb.lista.forEach(b => { if (b && b.id && b.dados) try { localStorage.setItem(chaveBinder(String(b.id)), JSON.stringify(b.dados)); } catch (e) { /* segue */ } });
+        bnd.atual = bnd.lista.some(b => b.id === bb.atual) ? bb.atual : bnd.lista[0].id;
+        salvarBinders();
+      }
       state.cop = c.cop ? lerCopias(c.cop) : copiasDe(c.qty || {}, c.langs || {}, c.meta || {});
       state.qty = {}; state.langs = {}; state.own = new Set();
       Object.keys(state.cop).forEach(sincronizar);
@@ -3617,6 +3659,7 @@
   function backupJSON() {
     return JSON.stringify({ app: "virtual-pokemon-binder", version: 1, date: new Date().toISOString(),
       collection: { cop: state.cop, qty: state.qty, langs: state.langs, fav: [...state.fav], star: [...state.star] },
+      binders: { atual: bnd.atual, lista: bnd.lista.map(b => { let dados = null; try { dados = b.id === bnd.atual ? { cop: state.cop, fav: [...state.fav], star: [...state.star] } : JSON.parse(localStorage.getItem(chaveBinder(b.id)) || "null"); } catch (e) { /* segue */ } return { id: b.id, name: b.name, dados }; }) },
       decks: dk, profile: conta.perfil, settings: conta.cfg }, null, 1);
   }
   function renderImport() {
@@ -4453,8 +4496,90 @@
     dtIO(novo);
   }
 
+  /* ---------- Barra de binders: trocar, criar, renomear e remover ---------- */
+  const bdState = { editando: null, armado: null };
+  let bdTimer = 0;
+  const nomeBinder = b => b.name || t("binderDefault");
+  function renderBinders() {
+    const ICON_LAPIS = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M13.5 6.5l4 4" stroke="currentColor" stroke-width="2.2"/></svg>';
+    const ICON_X = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>';
+    const varios = bnd.lista.length > 1;
+    $("bdTabs").innerHTML = bnd.lista.map(b => {
+      const on = b.id === bnd.atual, nome = nomeBinder(b);
+      if (bdState.editando === b.id) return `<div class="bd-tab on edit"><input class="bd-input" id="bdInput" type="text" maxlength="30" value="${esc(b.name || nome)}" aria-label="${esc(t("binderRenLbl"))}" autocomplete="off"></div>`;
+      const armado = bdState.armado === b.id;
+      return `<div class="bd-tab${on ? " on" : ""}">
+        <button type="button" class="bd-nome" data-bd="${esc(b.id)}" aria-pressed="${on}" title="${esc(nome)}"><span>${esc(nome)}</span></button>
+        ${on ? `<button type="button" class="bd-ic" data-bdren="${esc(b.id)}" aria-label="${esc(t("binderRen"))}: ${esc(nome)}" title="${esc(t("binderRen"))}">${ICON_LAPIS}</button>` : ""}
+        ${on && varios ? `<button type="button" class="bd-ic${armado ? " arm" : ""}" data-bddel="${esc(b.id)}" aria-label="${esc(armado ? t("binderDelArm") : t("binderDel"))}: ${esc(nome)}" title="${esc(armado ? t("binderDelArm") : t("binderDel"))}">${armado ? `<span>${esc(t("binderDelArm"))}</span>` : ICON_X}</button>` : ""}
+      </div>`;
+    }).join("") + `<button type="button" class="bd-novo" data-bdnovo="1" aria-label="${esc(t("binderNew"))}" title="${esc(t("binderNew"))}">${ICON.plus}<span>${esc(t("binderNewShort"))}</span></button>`;
+    const inp = $("bdInput");
+    if (inp) { inp.focus(); inp.select(); }
+  }
+  function trocarBinder(id) {
+    if (id === bnd.atual) return;
+    if (bnd.atual) salvar();
+    bnd.atual = id;
+    salvarBinders();
+    const d = carregar(chaveBinder(id));
+    state.cop = d.cop || {}; state.fav = d.fav; state.star = d.star;
+    state.qty = {}; state.langs = {}; state.own = new Set();
+    Object.keys(state.cop).forEach(sincronizar);
+    state.page = 0; state.qtyOpen = null;
+    renderBinders();
+    atualizar();
+  }
+  function terminarRenomear(salvarNome) {
+    const id = bdState.editando;
+    if (!id) return;
+    const inp = $("bdInput");
+    const b = bnd.lista.find(x => x.id === id);
+    if (salvarNome && b && inp) { b.name = inp.value.replace(/\s+/g, " ").trim().slice(0, 30); salvarBinders(); }
+    bdState.editando = null;
+    renderBinders();
+    const r = $("bdTabs").querySelector(`[data-bdren="${CSS.escape(id)}"]`); if (r) r.focus();
+  }
+  $("bdTabs").addEventListener("click", e => {
+    const t1 = e.target.closest("[data-bd]"), ren = e.target.closest("[data-bdren]"), del = e.target.closest("[data-bddel]"), novo = e.target.closest("[data-bdnovo]");
+    if (t1) { bdState.armado = null; trocarBinder(t1.dataset.bd); const b = $("bdTabs").querySelector(`[data-bd="${CSS.escape(t1.dataset.bd)}"]`); if (b) b.focus(); return; }
+    if (ren) { bdState.armado = null; bdState.editando = ren.dataset.bdren; renderBinders(); return; }
+    if (del) {
+      const id = del.dataset.bddel;
+      if (bdState.armado !== id) {
+        bdState.armado = id; renderBinders();
+        clearTimeout(bdTimer); bdTimer = setTimeout(() => { bdState.armado = null; renderBinders(); }, 3500);
+        const nb = $("bdTabs").querySelector(`[data-bddel="${CSS.escape(id)}"]`); if (nb) nb.focus();
+        return;
+      }
+      clearTimeout(bdTimer); bdState.armado = null;
+      const i = bnd.lista.findIndex(b => b.id === id);
+      try { localStorage.removeItem(chaveBinder(id)); } catch (err) { /* segue */ }
+      bnd.lista.splice(i, 1);
+      const prox = bnd.lista[Math.max(0, i - 1)];
+      bnd.atual = null;
+      trocarBinder(prox.id);
+      const b = $("bdTabs").querySelector(`[data-bd="${CSS.escape(prox.id)}"]`); if (b) b.focus();
+      return;
+    }
+    if (novo) {
+      const id = "b" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+      bnd.lista.push({ id, name: t("binderN", bnd.lista.length + 1) });
+      trocarBinder(id);
+      bdState.editando = id;
+      renderBinders();
+    }
+  });
+  $("bdTabs").addEventListener("keydown", e => {
+    if (e.target.id !== "bdInput") return;
+    if (e.key === "Enter") { e.preventDefault(); terminarRenomear(true); }
+    else if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); terminarRenomear(false); }
+  });
+  $("bdTabs").addEventListener("focusout", e => { if (e.target.id === "bdInput") setTimeout(() => { if (bdState.editando) terminarRenomear(true); }, 0); });
+
   aplicarIdioma();
   aplicarCfg();
+  renderBinders();
   carregarDados();
 })();
 </script>
