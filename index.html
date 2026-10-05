@@ -593,15 +593,15 @@
   .tc-prev { position: sticky; top: 16px; }
   @media (max-width: 859px) { .tc-prev { position: static; } }
   .tc-prev .tl-acoes { margin-top: 14px; }
-  .tc-fotos { list-style: none; margin: 0; padding: 3px; display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 10px; max-height: 420px; overflow-y: auto; }
+  .tc-fotos { list-style: none; margin: 0; padding: 3px; display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 10px; max-height: 440px; overflow-y: auto; }
   .tc-foto { width: 100%; display: grid; gap: 4px; padding: 4px 4px 6px; border: 1px solid var(--tl-line); border-radius: 12px; background: var(--hd-bg); color: var(--hd-fg); cursor: pointer; font: 700 11.5px/1.2 "Figtree", system-ui, sans-serif; }
   .tc-foto small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: inherit; }
-  .tc-recorte { position: relative; display: block; width: 100%; aspect-ratio: 360 / 595; border-radius: 8px; overflow: hidden; background: color-mix(in srgb, var(--hd-fg) 18%, transparent); }
+  .tc-recorte { position: relative; display: block; width: 100%; aspect-ratio: 520 / 358; border-radius: 8px; overflow: hidden; background: color-mix(in srgb, var(--hd-fg) 18%, transparent); }
   .tc-recorte img, .tc-sobre img { position: absolute; display: block; height: auto; max-width: none; }
   .tc-foto.tc-esp { align-content: center; justify-items: center; }
   .tc-foto.tc-esp > .tc-sil, .tc-foto.tc-esp > .tc-mais, .tc-foto.tc-esp > img { margin: auto; }
   .tc-foto.tc-esp { aspect-ratio: auto; min-height: 100%; }
-  .tc-foto img.tc-up { width: 100%; aspect-ratio: 360 / 595; object-fit: cover; border-radius: 8px; }
+  .tc-foto img.tc-up { width: 100%; aspect-ratio: 520 / 358; object-fit: cover; border-radius: 8px; }
   .tc-foto[aria-pressed="true"] { border-color: var(--tl-pri-bg); box-shadow: 0 0 0 3px var(--tl-pri-bg); }
   html[data-modo="escuro"] .tc-foto[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--hd-fg); border-color: var(--hd-fg); }
   .tc-sil { width: 62%; aspect-ratio: 158 / 176; background: var(--hd-fg); -webkit-mask: var(--sil) center / contain no-repeat; mask: var(--sil) center / contain no-repeat; }
@@ -630,7 +630,7 @@
   .tc-pk[aria-pressed="true"] { border-color: var(--tl-pri-bg); box-shadow: 0 0 0 3px var(--tl-pri-bg); }
   html[data-modo="escuro"] .tc-pk[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--hd-fg); border-color: var(--hd-fg); }
   .tc-stage { position: relative; }
-  .tc-sobre { position: absolute; left: 3.333%; top: 5.926%; width: 30%; height: 88.148%; border-radius: 2.8% / 5%; overflow: hidden; pointer-events: none; }
+  .tc-sobre { position: absolute; left: 3.333%; top: 5.926%; width: 43.333%; height: 53.037%; border-radius: 2.5% / 4.4%; overflow: hidden; pointer-events: none; }
   .tc-ajuste { display: grid; gap: 4px; margin-top: 12px; font-size: 0.84rem; font-weight: 700; }
   .tc-ajuste input { width: 100%; accent-color: var(--tl-pri-bg); }
   html[data-modo="escuro"] .tc-ajuste input { accent-color: var(--hd-fg); }
@@ -845,7 +845,6 @@
         <h3 class="tl-h3" id="tcFotoT" data-i18n="tcPhoto">Photo</h3>
         <label class="search tc-busca"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="tcBusca" type="search" data-i18n-ph="tcSearch" data-i18n-aria="tcSearch" placeholder="Search trainer" aria-label="Search trainer" autocomplete="off"></label>
         <ul class="tc-fotos" id="tcFotos" aria-labelledby="tcFotoT"></ul>
-        <label class="tc-ajuste" id="tcAjuste" hidden><span data-i18n="tcAdjust">Adjust framing</span><input type="range" id="tcPx" min="0" max="100" step="1" value="50"></label>
         <div class="tl-acoes"><button type="button" class="tl-btn" data-tc="up" id="tcEnviar" data-i18n="tcUploadBtn">Upload a photo</button><button type="button" class="tl-btn" data-tc="rm" id="tcRemover" data-i18n="tcRemove" hidden>Remove my photo</button></div>
         <input type="file" id="tcArquivo" accept="image/*" hidden>
         <p class="tl-nota" data-i18n="tcCredit"></p>
@@ -3604,9 +3603,11 @@
   };
   const TR_NOME = new Map(TREINADORES.map(x => [x[1], x[0]]));
   // Quadro da foto no cartão: 360 × 440. Recorte da ilustração dentro da carta, em frações da carta.
-  const QUADRO = { w: 360, h: 595 };
-  const RECORTE = { y0: 0.125, h: 0.44 };
-  RECORTE.w = (QUADRO.w / QUADRO.h) * RECORTE.h * (88 / 63);
+  // Quadro da foto (horizontal, no formato da ilustração da carta) e recorte da ilustração, em frações da carta:
+  // a largura quase toda e, na altura, do fim do nome até antes do texto.
+  const QUADRO = { x: 40, y: 40, w: 520, h: 358 };
+  const RECORTE = { x0: 0.05, w: 0.9, y0: 0.13 };
+  RECORTE.h = RECORTE.w * (63 / 88) * (QUADRO.h / QUADRO.w);
   function urlCartaTr(id, alta) {
     const c = POR_ID.get(id);
     let base = c && c.img;
@@ -3636,7 +3637,7 @@
   const cartao = carregarCartao();
   function salvarCartaoDados() { try { localStorage.setItem(KEY_CARTAO, JSON.stringify(cartao)); return true; } catch (e) { return false; } }
   const nomeCartao = () => cartao.nome.trim() || nomeTreinador() || t("trainer");
-  const recorteX = () => (1 - RECORTE.w) * cartao.px / 100;
+  const recorteX = () => RECORTE.x0;
   // posição da ilustração dentro de um quadro (galeria e prévia), em % do quadro
   const estiloRecorte = x0 => `width:${(100 / RECORTE.w).toFixed(3)}%;left:${(-x0 / RECORTE.w * 100).toFixed(3)}%;top:${(-RECORTE.y0 / RECORTE.h * 100).toFixed(3)}%`;
 
@@ -3670,64 +3671,67 @@
     const W = 1200, H = 675;
     const cv = document.createElement("canvas"); cv.width = W; cv.height = H;
     const g = cv.getContext("2d");
+    g.imageSmoothingEnabled = true; g.imageSmoothingQuality = "high";
     const pal = CORES_CARTAO[cartao.cor] || CORES_CARTAO.rosa;
     const bg = pal.bg, fg = pal.fg, sub = pal.sub, ac = pal.ac;
-    const tinta = (a) => { g.fillStyle = fg; g.globalAlpha = a; g.fill(); g.globalAlpha = 1; };
+    const tinta = a => { g.fillStyle = fg; g.globalAlpha = a; g.fill(); g.globalAlpha = 1; };
     g.fillStyle = bg; g.fillRect(0, 0, W, H);
-    const px = 40, py = 40, pw = 360, ph = H - 80;
-    retRedondo(g, px, py, pw, ph, 34); tinta(0.08);
+    const { x: qx, y: qy, w: qw, h: qh } = QUADRO;
+    retRedondo(g, qx, qy, qw, qh, 30); tinta(0.08);
     const foto = await fotoAtual();
     const sil = await silhueta();
     let semFoto = false;
+    g.save(); retRedondo(g, qx, qy, qw, qh, 30); g.clip();
     if (foto && foto.tipo === "carta") {
-      // ilustração da carta no quadro de cima e o nome do treinador embaixo
       if (foto.img) {
         const iw = foto.img.naturalWidth, ih = foto.img.naturalHeight;
-        g.save(); retRedondo(g, px, py, QUADRO.w, QUADRO.h, 34); g.clip();
-        g.drawImage(foto.img, recorteX() * iw, RECORTE.y0 * ih, RECORTE.w * iw, RECORTE.h * ih, px, py, QUADRO.w, QUADRO.h);
-        g.restore();
+        g.drawImage(foto.img, RECORTE.x0 * iw, RECORTE.y0 * ih, RECORTE.w * iw, RECORTE.h * ih, qx, qy, qw, qh);
       } else semFoto = true;
     } else if (foto && foto.tipo === "upload") {
       const iw = foto.img.naturalWidth, ih = foto.img.naturalHeight;
-      g.save(); retRedondo(g, px, py, pw, ph, 34); g.clip();
       if (foto.alfa) {
-        const k = Math.min((pw - 40) / iw, (ph - 50) / ih), w = iw * k, h = ih * k;
-        g.drawImage(foto.img, px + (pw - w) / 2, py + ph - 25 - h, w, h);
+        const k = Math.min((qw - 40) / iw, (qh - 30) / ih), w = iw * k, h = ih * k;
+        g.drawImage(foto.img, qx + (qw - w) / 2, qy + qh - 10 - h, w, h);
       } else {
-        const k = Math.max(pw / iw, ph / ih), w = iw * k, h = ih * k;
-        g.drawImage(foto.img, px - (w - pw) * cartao.px / 100, py + (ph - h) / 2, w, h);
+        // preenche o quadro; em fotos verticais, prioriza a parte de cima (onde costuma estar o rosto)
+        const k = Math.max(qw / iw, qh / ih), w = iw * k, h = ih * k;
+        g.drawImage(foto.img, qx + (qw - w) / 2, qy + (qh - h) * 0.3, w, h);
       }
-      g.restore();
-    }
-    const pkImg = cartao.pkOn ? await carregarImg(ARTE(pidDe(cartao.pk)), true) : null;
+    } else if (sil) g.drawImage(silPintada(sil, ac, 210, 234), qx + (qw - 210) / 2, qy + (qh - 234) / 2);
+    g.restore();
+    // nome do treinador, embaixo da foto
+    g.textBaseline = "alphabetic";
+    g.fillStyle = ac; g.font = `700 24px ${FONTE_C}`;
+    g.fillText(t("cardTitle"), qx + 4, qy + qh + 62);
+    g.fillStyle = fg; g.font = `800 64px ${FONTE_T}`;
+    g.fillText(cortarTexto(g, nomeCartao().toUpperCase(), qw), qx, qy + qh + 132);
+    g.fillStyle = sub; g.globalAlpha = 0.8; g.font = `500 19px ${FONTE_C}`;
+    g.fillText(cortarTexto(g, t("title") + (location.host ? " · " + location.host : "") + " · " + hoje(), qw), qx + 4, H - 40);
+    g.globalAlpha = 1;
+    // coluna da direita: logo, Pokémon favorito e números
+    const rx = 600, rw = W - 40 - rx;
+    if (sil) g.drawImage(silPintada(sil, ac, 72, 80), rx, 44);
     if (cartao.pkOn) {
-      const cx = W - 120, cy = 128, r = 84;
+      const r = 92, cx = W - 40 - r, cy = 40 + r;
       g.beginPath(); g.arc(cx, cy, r, 0, Math.PI * 2); tinta(0.1);
-      g.beginPath(); g.arc(cx, cy, r, 0, Math.PI * 2); g.strokeStyle = ac; g.lineWidth = 4; g.globalAlpha = 0.55; g.stroke(); g.globalAlpha = 1;
+      g.beginPath(); g.arc(cx, cy, r - 2, 0, Math.PI * 2); g.strokeStyle = ac; g.lineWidth = 4; g.globalAlpha = 0.55; g.stroke(); g.globalAlpha = 1;
+      const pkImg = await carregarImg(ARTE(pidDe(cartao.pk)), true);
       if (pkImg) {
         const d = r * 2 * 0.94;
         g.save(); g.shadowColor = "rgba(0,0,0,0.25)"; g.shadowBlur = 14; g.shadowOffsetY = 6;
         g.drawImage(pkImg, cx - d / 2, cy - d / 2, d, d); g.restore();
       }
-    } else if (foto && !semFoto) { if (sil) g.drawImage(silPintada(sil, ac, 54, 60), W - 104, 56); }
-    else if (!foto && sil) g.drawImage(silPintada(sil, ac, 240, 267), 100, 150);
-    g.fillStyle = ac; g.font = `700 24px ${FONTE_C}`; g.textBaseline = "alphabetic";
-    g.fillText(t("cardTitle"), 450, 110);
-    g.fillStyle = fg; g.font = `800 64px ${FONTE_T}`;
-    g.fillText(cortarTexto(g, nomeCartao().toUpperCase(), cartao.pkOn ? W - 680 : W - 580), 448, 180);
+    }
+    const bw = (rw - 2 * 16) / 3, bh = 168;
     numerosCartao().forEach(([rot, val], i) => {
-      const x = 450 + (i % 3) * 240, y = 240 + Math.floor(i / 3) * 170;
-      retRedondo(g, x, y, 220, 146, 22); tinta(0.08);
-      g.fillStyle = fg; g.font = `800 ${val.length > 7 ? 34 : 46}px ${FONTE_T}`; g.fillText(cortarTexto(g, val, 190), x + 20, y + 72);
-      g.fillStyle = sub; g.font = `600 20px ${FONTE_C}`; g.fillText(cortarTexto(g, rot, 190), x + 20, y + 112);
+      const x = rx + (i % 3) * (bw + 16), y = 263 + Math.floor(i / 3) * (bh + 16);
+      retRedondo(g, x, y, bw, bh, 22); tinta(0.08);
+      g.fillStyle = fg; g.font = `800 ${val.length > 7 ? 32 : 46}px ${FONTE_T}`; g.fillText(cortarTexto(g, val, bw - 36), x + 20, y + 84);
+      g.fillStyle = sub; g.font = `600 20px ${FONTE_C}`; g.fillText(cortarTexto(g, rot, bw - 36), x + 20, y + 126);
     });
-    g.fillStyle = sub; g.globalAlpha = 0.75; g.font = `500 20px ${FONTE_C}`;
-    g.fillText(t("title") + (location.host ? " · " + location.host : "") + " · " + hoje(), 450, H - 50);
-    g.globalAlpha = 1;
     cv.semFoto = semFoto;
     return cv;
   }
-
   let cartaoPedido = 0;
   async function renderCartao() {
     const meu = ++cartaoPedido;
@@ -3752,14 +3756,12 @@
     let html = "";
     html += bt("upload", cartao.img ? `<img src="${esc(cartao.img)}" alt="" class="tc-up">` : `<span class="tc-mais" aria-hidden="true">${ICON.plus}</span><small>${esc(t("tcYours"))}</small>`, cartao.img ? t("tcYours") : t("tcUpload"), "tc-esp");
     const q = norm(($("tcBusca").value || "").trim());
-    html += TREINADORES.filter(([nome]) => !q || norm(nome).includes(q)).map(([nome, id]) => bt("c:" + id, `<span class="tc-recorte"><img src="${esc(urlCartaTr(id, false))}" alt="" loading="lazy" referrerpolicy="no-referrer" style="${estiloRecorte((1 - RECORTE.w) / 2)}"></span><small>${esc(nome)}</small>`, nome)).join("");
+    html += TREINADORES.filter(([nome]) => !q || norm(nome).includes(q)).map(([nome, id]) => bt("c:" + id, `<span class="tc-recorte"><img src="${esc(urlCartaTr(id, false))}" alt="" loading="lazy" referrerpolicy="no-referrer" style="${estiloRecorte(RECORTE.x0)}"></span><small>${esc(nome)}</small>`, nome)).join("");
     if (q && !TREINADORES.some(([nome]) => norm(nome).includes(q))) html += `<li class="tc-vazio">${esc(t("tcNoTr"))}</li>`;
     $("tcFotos").innerHTML = html;
     $("tcCores").innerHTML = TEMAS.map(k => `<button type="button" data-cor="${k}" aria-pressed="${k === cartao.cor}" aria-label="${esc(t("themes")[k])}" title="${esc(t("themes")[k])}"><i style="--sw:${CORES_CARTAO[k].bg}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="${CORES_CARTAO[k].fg}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>`).join("");
     $("tcRemover").hidden = !cartao.img;
-    const ajusta = sel.startsWith("c:") || (sel === "upload" && !cartao.alfa);
-    $("tcAjuste").hidden = !ajusta;
-    $("tcPx").value = cartao.px;
+
   }
   const PK_SUGESTOES = [25, 6, 150, 151, 133, 94, 448, 700, 197, 282, 445, 658, 1, 4, 7, 39];
   function renderPk() {
@@ -3874,13 +3876,6 @@
     salvarCartaoDados();
     clearTimeout(nomeTimer);
     nomeTimer = setTimeout(renderCartao, 200);
-  });
-  $("tcPx").addEventListener("input", e => {
-    cartao.px = Math.max(0, Math.min(100, Number(e.target.value) || 0));
-    const im = $("tcSobre").querySelector("img");
-    if (im) im.setAttribute("style", estiloRecorte(recorteX()));
-    clearTimeout(pxTimer);
-    pxTimer = setTimeout(() => { salvarCartaoDados(); renderCartao(); }, 120);
   });
   $("tcBusca").addEventListener("input", renderFotos);
   $("tcPkOn").addEventListener("change", e => { cartao.pkOn = e.target.checked; salvarCartaoDados(); renderPk(); renderCartao(); });
