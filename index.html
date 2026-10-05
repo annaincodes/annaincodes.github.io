@@ -49,7 +49,7 @@
   }
   :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
-  .wrap { max-width: 760px; margin: 0 auto; padding: clamp(18px, 4vw, 40px) clamp(14px, 4vw, 24px) 96px 52px; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: clamp(18px, 4vw, 40px) clamp(14px, 4vw, 24px) 96px 52px; }
   .temas { position: fixed; right: calc(env(safe-area-inset-right, 0px) + 14px); bottom: calc(env(safe-area-inset-bottom, 0px) + 14px); z-index: 15; display: flex; gap: 4px; padding: 5px; border-radius: 99px; background: rgba(255, 255, 255, 0.92); box-shadow: 0 6px 20px -6px rgba(0, 0, 0, 0.45); --focus: #2338C8; }
   .temas button { width: 36px; height: 36px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; }
   .temas button i { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--sw); box-shadow: inset 0 0 0 1.5px rgba(0, 0, 0, 0.28); transition: transform 0.15s ease; }
@@ -132,6 +132,45 @@
   .bar i { display: block; height: 100%; width: 0; background: var(--own); border-radius: inherit; transition: width 0.3s ease; }
   .stats .por-colecao { margin: 8px 0 0; font-size: 0.8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
 
+  /* Áreas e Deck Builder */
+  .areas { display: flex; gap: 6px; margin: 0 0 18px; }
+  .areas button { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border: 1.5px solid var(--line); border-radius: 99px; background: transparent; color: var(--text); font: 700 15px "Figtree", system-ui, sans-serif; cursor: pointer; }
+  .areas button[aria-pressed="true"] { background: var(--seg-on-bg); border-color: var(--seg-on-bg); color: var(--seg-on-fg); }
+  @media (hover: hover) { .areas button[aria-pressed="false"]:hover { background: var(--seg-bg); } .pill:not(:disabled):hover { background: var(--seg-bg); } .pill.on:hover { opacity: 0.9; background: var(--seg-on-bg); } }
+  .deck-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .deck-pick { display: flex; align-items: center; gap: 8px; flex: 1 1 240px; min-width: 0; font-weight: 700; font-size: 0.92rem; }
+  .deck-pick select { flex: 1; min-width: 0; height: 42px; padding: 0 10px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--field-fg); font: 600 15px "Figtree", system-ui, sans-serif; }
+  .pill { height: 42px; padding: 0 14px; border: 1px solid var(--line); border-radius: 12px; background: transparent; color: var(--text); font: 700 14px "Figtree", system-ui, sans-serif; white-space: nowrap; cursor: pointer; }
+  .pill:disabled { opacity: 0.45; cursor: default; }
+  .pill.on { background: var(--seg-on-bg); border-color: var(--seg-on-bg); color: var(--seg-on-fg); }
+  .deck-form { margin: 0 0 12px; padding: 12px; border: 1px solid var(--line); border-radius: 14px; }
+  .deck-form label { display: block; margin-bottom: 6px; font-weight: 700; font-size: 0.92rem; }
+  .deck-form-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .deck-form input { flex: 1 1 200px; min-width: 0; height: 42px; padding: 0 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--field-fg); font: 500 16px "Figtree", system-ui, sans-serif; }
+  .deck-form .erro { margin: 6px 0 0; min-height: 0; }
+  .deck-sem { display: grid; justify-items: start; gap: 10px; margin: 6px 0 20px; padding: 20px; border: 1.5px dashed var(--line); border-radius: 16px; }
+  .deck-sem p { margin: 0; }
+  .deck-aviso { margin: 0 0 12px; font-size: 0.88rem; font-weight: 600; color: var(--muted); }
+  .deck-aviso.ok { color: var(--text); }
+  .deck-badge { position: absolute; top: 5px; right: 5px; z-index: 2; min-width: 34px; height: 28px; display: inline-flex; align-items: center; justify-content: center; padding: 0 8px; border: 1px solid #FFFFFF; border-radius: 99px; background: var(--acc); color: var(--acc-ink); font: 800 13px "Figtree", system-ui, sans-serif; font-variant-numeric: tabular-nums; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35); }
+  .dctl { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+  .dctl .dlbl { flex: 1 1 auto; min-width: 0; color: var(--b-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+  .dctl button, .btn-step { flex: none; width: 32px; height: 32px; display: grid; place-items: center; padding: 0; border: 1px solid var(--b-line); border-radius: 9px; background: rgba(255, 255, 255, 0.06); color: var(--b-ink); cursor: pointer; }
+  .dctl button:disabled, .btn-step:disabled { opacity: 0.35; cursor: default; }
+  .dctl output { min-width: 22px; text-align: center; color: var(--b-ink); font-weight: 800; font-size: 14px; font-variant-numeric: tabular-nums; }
+  .dctl.own.ok output { color: var(--acc-soft); }
+  .dstatus { display: flex; align-items: center; gap: 4px; margin: 0; font-size: 11.5px; font-weight: 700; color: var(--b-muted); }
+  .dstatus.ok { color: var(--acc-soft); }
+  .dstatus.miss { color: #FFB3A6; }
+  .ctrl .btn-step { height: 36px; width: 36px; border-radius: 10px; }
+  .btn-add { flex: 1; min-width: 0; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 8px; white-space: nowrap; }
+  .btn-add.on { background: var(--acc); border-color: var(--acc); color: var(--acc-ink); }
+  .btn-add .n { min-width: 20px; height: 20px; display: inline-grid; place-items: center; padding: 0 5px; border-radius: 99px; background: rgba(0, 0, 0, 0.15); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .dinfo { margin: 0; color: var(--b-muted); font-size: 11.5px; }
+  @container (max-width: 175px) { .dctl .dlbl { flex-basis: 100%; } .btn-add .lbl { display: none; } }
+  @media (hover: hover) { .dctl button:not(:disabled):hover, .btn-step:not(:disabled):hover { background: rgba(255, 255, 255, 0.14); } .btn-add.on:hover { background: var(--acc-hover); } }
+  .cell.empty .dctl, .cell.empty .dstatus, .cell.empty .dinfo { visibility: hidden; }
+
   /* Controles */
   .controls { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
   .tabs { display: flex; gap: 2px; padding: 4px; background: var(--seg-bg); border-radius: 12px; flex: 0 1 auto; overflow-x: auto; }
@@ -155,7 +194,7 @@
   .spine { flex: none; width: 44px; display: flex; flex-direction: column; justify-content: space-evenly; align-items: center; }
   .spine i { width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #F4F6F9, #8E98A8 55%, #5A6474); box-shadow: 0 2px 4px rgba(90, 30, 55, 0.5); }
   .sheet { flex: 1; min-width: 0; padding: clamp(10px, 2.4vw, 22px); border-radius: 12px; background: var(--page); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 2px 8px rgba(58, 22, 38, 0.45); }
-  .grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(8px, 2vw, 18px); }
+  .grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(8px, 2vw, 18px); }
   .grid:focus, .vazio:focus { outline: none; }
 
   .cell { container-type: inline-size; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
@@ -190,6 +229,7 @@
   .vazio { display: grid; place-content: center; justify-items: center; gap: 12px; }
   .spin { width: 28px; height: 28px; border-radius: 50%; border: 3px solid rgba(255, 255, 255, 0.2); border-top-color: var(--acc); animation: girar 0.9s linear infinite; }
   @keyframes girar { to { transform: rotate(360deg); } }
+  .erro-tec { font-size: 0.78rem; opacity: 0.8; overflow-wrap: anywhere; }
   .btn-retry { height: 40px; padding: 0 18px; border: 0; border-radius: 12px; background: var(--acc); color: var(--acc-ink); font: 700 14px "Figtree", system-ui, sans-serif; cursor: pointer; }
 
   .ctrl { display: flex; gap: 6px; }
@@ -287,6 +327,7 @@
     .spine { width: 14px; }
     .spine i { display: none; }
   }
+  @media (max-width: 859px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (max-width: 479px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -318,16 +359,27 @@
   <header class="top">
     <div>
       <h1 data-i18n="h1">Pokémon Binder</h1>
-      <p class="lead" data-i18n="lead">Mark the cards you own and keep your favorites.</p>
+      <p class="lead" id="lead">Mark the cards you own and keep your favorites.</p>
     </div>
-    <div class="stats">
+    <div class="stats" id="statsDeck" hidden>
+      <p id="deckLine"></p>
+      <div class="bar" id="dBar" role="progressbar" data-i18n-aria="deckProgress" aria-label="Deck cards owned" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="dBarFill"></i></div>
+      <p class="por-colecao" id="deckSub"></p>
+    </div>
+    <div class="stats" id="statsBinder">
       <p id="statsLine"></p>
       <div class="bar" id="bar" role="progressbar" data-i18n-aria="progress" aria-label="Collection progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="barFill"></i></div>
       <p class="por-colecao" id="porColecao"></p>
     </div>
   </header>
 
+  <nav class="areas" data-i18n-aria="areasAria" aria-label="Sections">
+    <button type="button" data-area="binder" aria-pressed="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 3v18" stroke="currentColor" stroke-width="2"/></svg><span data-i18n="areaBinder">Binder</span></button>
+    <button type="button" data-area="decks" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="8" y="3" width="11" height="15" rx="2" stroke="currentColor" stroke-width="2"/><path d="M5 7v11a3 3 0 0 0 3 3h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-i18n="areaDecks">Deck Builder</span></button>
+  </nav>
+
   <main>
+   <div id="areaBinder">
     <div class="controls">
       <div class="tabs" role="group" data-i18n-aria="show" aria-label="Show">
         <button type="button" data-tab="todas" aria-pressed="true"><span data-i18n="tabAll">All</span> <span class="count" id="cTodas">0</span></button>
@@ -366,6 +418,63 @@
         </nav>
       </div>
     </section>
+   </div>
+
+   <div id="areaDecks" hidden>
+    <div class="deck-bar">
+      <label class="deck-pick"><span data-i18n="deckLbl">Deck</span><select id="deckSel"></select></label>
+      <button type="button" class="pill" id="deckNew" data-i18n="deckNew">+ New deck</button>
+      <button type="button" class="pill" id="deckRen" data-i18n="deckRen">Rename</button>
+      <button type="button" class="pill danger" id="deckDel">Delete deck</button>
+    </div>
+    <form class="deck-form" id="deckForm" hidden novalidate>
+      <label for="deckNome" id="deckFormLbl">Deck name</label>
+      <div class="deck-form-row">
+        <input id="deckNome" type="text" maxlength="40" autocomplete="off">
+        <button type="submit" class="pill on" data-i18n="save">Save</button>
+        <button type="button" class="pill" id="deckCancel" data-i18n="cancel">Cancel</button>
+      </div>
+      <p class="erro" id="deckErro" role="alert"></p>
+    </form>
+    <div class="deck-sem" id="deckSemDeck" hidden>
+      <p data-i18n="deckNone">You don't have any decks yet.</p>
+      <button type="button" class="btn-retry" id="deckPrimeiro" data-i18n="deckFirst">+ Create your first deck</button>
+    </div>
+    <div id="deckCorpo" hidden>
+      <div class="controls">
+        <div class="tabs dtabs" role="group" data-i18n-aria="show" aria-label="Show">
+          <button type="button" data-dtab="deck" aria-pressed="true"><span data-i18n="dTabDeck">In deck</span> <span class="count" id="dCount">0</span></button>
+          <button type="button" data-dtab="add" aria-pressed="false"><span data-i18n="dTabAdd">Add cards</span></button>
+        </div>
+        <div class="filters">
+          <label class="search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <input id="dBusca" type="search" data-i18n-ph="searchPh" data-i18n-aria="searchAria" placeholder="Search by name or number" aria-label="Search cards by name or number" autocomplete="off">
+          </label>
+          <select id="dPosse" data-i18n-aria="sitAria" aria-label="Filter by ownership"></select>
+          <select id="dSerie" data-i18n-aria="serieAria" aria-label="Filter by series"></select>
+          <select id="dSet" data-i18n-aria="setAria" aria-label="Filter by set"></select>
+        </div>
+      </div>
+      <p class="deck-aviso" id="deckAviso" role="status"></p>
+      <section class="binder" data-i18n-aria="deckBinderAria" aria-label="Deck cards">
+        <div class="spine" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="sheet">
+          <ul id="dGrid" class="grid" tabindex="-1"></ul>
+          <div id="dVazio" class="vazio" tabindex="-1" role="status" hidden></div>
+          <nav class="pager" data-i18n-aria="deckPagerAria" aria-label="Deck pages">
+            <button type="button" id="dPrev" data-i18n-aria="prevPage" aria-label="Previous page"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <span class="pg" aria-live="polite">
+              <label for="dPgIn" data-i18n="page">Page</label>
+              <input id="dPgIn" type="number" inputmode="numeric" min="1" value="1">
+              <span id="dPgDe">of 1</span>
+            </span>
+            <button type="button" id="dNext" data-i18n-aria="nextPage" aria-label="Next page"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </nav>
+        </div>
+      </section>
+    </div>
+   </div>
   </main>
 
   <footer class="foot">
@@ -480,6 +589,24 @@
 
   const I18N = {
     en: {
+      areasAria: "Sections", areaBinder: "Binder", areaDecks: "Deck Builder",
+      leadDeck: "Build decks to play the TCG and see which cards you still need.",
+      deckProgress: "Deck cards you own", deckBinderAria: "Deck cards", deckPagerAria: "Deck pages",
+      deckLbl: "Deck", deckNew: "+ New deck", deckRen: "Rename", deckDel: "Delete deck", deckDelArm: "Tap again to delete",
+      deckNewLbl: "Name of the new deck", deckRenLbl: "New name for this deck", deckDefault: "My deck", save: "Save", cancel: "Cancel",
+      deckNameErr: "Give your deck a name.", deckNone: "You don't have any decks yet. Create one to start building.", deckFirst: "+ Create your first deck",
+      deckNoneLine: "No deck selected",
+      dTabDeck: "In deck", dTabAdd: "Add cards",
+      deckLine: (n, max, nm) => `<strong>${n}</strong> / ${max} cards in ${nm}`,
+      deckSub: (c, n) => `You own ${c} of ${n} · Missing ${n - c}`,
+      deckNeed: n => `Add ${n} more ${n === 1 ? "card" : "cards"} to reach 60.`,
+      deckOver: n => `This deck has ${n} cards. A standard deck has exactly 60.`,
+      deckOk: "60 cards: ready to play!", deckFour: nm => `More than 4 copies: ${nm}.`,
+      deckEmpty: "This deck is empty. Open “Add cards” to start building it.",
+      inDeck: "In deck", ownedLbl: "Owned", complete: "Complete", missingN: n => `Missing ${n}`, addBtn: "Add", ownedN: n => `Owned: ${n}`,
+      dMais: nm => `Add one ${nm} to the deck`, dMenos: nm => `Remove one ${nm} from the deck`, dTirar: nm => `Remove ${nm} from the deck`,
+      oMais: nm => `Add one owned copy of ${nm}`, oMenos: nm => `Remove one owned copy of ${nm}`,
+      deckGroup: nm => `Copies in the deck: ${nm}`, ownGroup: nm => `Copies you own: ${nm}`,
       htmlLang: "en", title: "Pokémon Binder", h1: "Pokémon Binder", sideTab: "Account & settings",
       lead: "Mark the cards you own and keep your favorites.",
       stats: (n, tot) => `<strong>${n}</strong> of <span>${tot}</span> cards in your collection`,
@@ -509,7 +636,7 @@
       qtyDec: nm => `Remove one copy of ${nm}`, qtyInc: nm => `Add one copy of ${nm}`,
       copiesTotal: n => n === 1 ? "1 copy in total" : `${n} copies in total`,
       loading: "Loading every Pokémon TCG set from TCGdex…",
-      loadErr: "Couldn't load the cards from TCGdex. Check your internet connection and try again.", retry: "Try again",
+      loadErr: "Couldn't load the cards from TCGdex. Check your internet connection and try again. If you use an ad blocker, allow api.tcgdex.net.", retry: "Try again", techDetail: "Details",
       allOwned: "Congratulations, no card is missing! You marked them all as yours.",
       emptyOwned: "Your collection is empty. Under “All”, tap “I own it” on the cards you have.",
       emptyFav: "Your wishlist is empty. Tap the heart on a card you want to get.",
@@ -517,6 +644,24 @@
       none: "No cards found. Try another name or number, or clear the filters."
     },
     pt: {
+      areasAria: "Seções", areaBinder: "Fichário", areaDecks: "Montar deck",
+      leadDeck: "Monte decks para jogar o TCG e veja quais cartas ainda faltam.",
+      deckProgress: "Cartas do deck que você tem", deckBinderAria: "Cartas do deck", deckPagerAria: "Páginas do deck",
+      deckLbl: "Deck", deckNew: "+ Novo deck", deckRen: "Renomear", deckDel: "Apagar deck", deckDelArm: "Toque de novo para apagar",
+      deckNewLbl: "Nome do novo deck", deckRenLbl: "Novo nome do deck", deckDefault: "Meu deck", save: "Salvar", cancel: "Cancelar",
+      deckNameErr: "Dê um nome ao deck.", deckNone: "Você ainda não tem decks. Crie um para começar a montar.", deckFirst: "+ Criar meu primeiro deck",
+      deckNoneLine: "Nenhum deck selecionado",
+      dTabDeck: "No deck", dTabAdd: "Adicionar cartas",
+      deckLine: (n, max, nm) => `<strong>${n}</strong> / ${max} cartas em ${nm}`,
+      deckSub: (c, n) => `Você tem ${c} de ${n} · Faltam ${n - c}`,
+      deckNeed: n => `Adicione mais ${n} ${n === 1 ? "carta" : "cartas"} para chegar a 60.`,
+      deckOver: n => `Este deck tem ${n} cartas. Um deck padrão tem exatamente 60.`,
+      deckOk: "60 cartas: pronto para jogar!", deckFour: nm => `Mais de 4 cópias: ${nm}.`,
+      deckEmpty: "Este deck está vazio. Abra “Adicionar cartas” para começar a montar.",
+      inDeck: "No deck", ownedLbl: "Tenho", complete: "Completo", missingN: n => `Faltam ${n}`, addBtn: "Adicionar", ownedN: n => `Tenho: ${n}`,
+      dMais: nm => `Adicionar uma ${nm} ao deck`, dMenos: nm => `Tirar uma ${nm} do deck`, dTirar: nm => `Remover ${nm} do deck`,
+      oMais: nm => `Adicionar uma cópia de ${nm} que você tem`, oMenos: nm => `Tirar uma cópia de ${nm} que você tem`,
+      deckGroup: nm => `Cópias no deck: ${nm}`, ownGroup: nm => `Cópias que você tem: ${nm}`,
       htmlLang: "pt-BR", title: "Fichário Pokémon", h1: "Fichário Pokémon", sideTab: "Conta e configurações",
       lead: "Marque as cartas que você tem e guarde as favoritas.",
       stats: (n, tot) => `<strong>${n}</strong> de <span>${tot}</span> cartas na coleção`,
@@ -546,7 +691,7 @@
       qtyDec: nm => `Tirar uma cópia de ${nm}`, qtyInc: nm => `Adicionar uma cópia de ${nm}`,
       copiesTotal: n => n === 1 ? "1 cópia no total" : `${n} cópias no total`,
       loading: "Carregando todas as coleções de Pokémon TCG da TCGdex…",
-      loadErr: "Não foi possível carregar as cartas da TCGdex. Verifique sua internet e tente de novo.", retry: "Tentar de novo",
+      loadErr: "Não foi possível carregar as cartas da TCGdex. Verifique sua internet e tente de novo. Se você usa bloqueador de anúncios, libere api.tcgdex.net.", retry: "Tentar de novo", techDetail: "Detalhes",
       allOwned: "Parabéns, nenhuma carta falta! Você marcou todas como suas.",
       emptyOwned: "Sua coleção está vazia. Em “Todas”, toque em “Tenho” nas cartas que você possui.",
       emptyFav: "Sua lista de desejos está vazia. Toque no coração de uma carta que você quer conseguir.",
@@ -554,6 +699,24 @@
       none: "Nenhuma carta encontrada. Tente outro nome ou número, ou limpe os filtros."
     },
     ja: {
+      areasAria: "セクション", areaBinder: "バインダー", areaDecks: "デッキ作成",
+      leadDeck: "デッキを作って、まだ足りないカードを確認しましょう。",
+      deckProgress: "持っているデッキのカード", deckBinderAria: "デッキのカード", deckPagerAria: "デッキのページ",
+      deckLbl: "デッキ", deckNew: "+ 新しいデッキ", deckRen: "名前を変更", deckDel: "デッキを削除", deckDelArm: "もう一度タップで削除",
+      deckNewLbl: "新しいデッキの名前", deckRenLbl: "デッキの新しい名前", deckDefault: "マイデッキ", save: "保存", cancel: "キャンセル",
+      deckNameErr: "デッキに名前を付けてください。", deckNone: "まだデッキがありません。作成して始めましょう。", deckFirst: "+ 最初のデッキを作成",
+      deckNoneLine: "デッキが選択されていません",
+      dTabDeck: "デッキ内", dTabAdd: "カードを追加",
+      deckLine: (n, max, nm) => `${nm}：<strong>${n}</strong> / ${max} 枚`,
+      deckSub: (c, n) => `所持 ${c} / ${n} 枚 · 不足 ${n - c} 枚`,
+      deckNeed: n => `60枚まであと ${n} 枚です。`,
+      deckOver: n => `このデッキは ${n} 枚です。通常のデッキはちょうど60枚です。`,
+      deckOk: "60枚：準備完了！", deckFour: nm => `5枚以上入っているカード：${nm}。`,
+      deckEmpty: "このデッキは空です。「カードを追加」から作り始めましょう。",
+      inDeck: "デッキ", ownedLbl: "所持", complete: "そろった", missingN: n => `${n} 枚不足`, addBtn: "追加", ownedN: n => `所持：${n}`,
+      dMais: nm => `${nm} をデッキに1枚追加`, dMenos: nm => `${nm} をデッキから1枚減らす`, dTirar: nm => `${nm} をデッキから外す`,
+      oMais: nm => `${nm} の所持枚数を1増やす`, oMenos: nm => `${nm} の所持枚数を1減らす`,
+      deckGroup: nm => `デッキ内の枚数：${nm}`, ownGroup: nm => `所持枚数：${nm}`,
       htmlLang: "ja", title: "ポケモンバインダー", h1: "ポケモンバインダー", sideTab: "アカウントと設定",
       lead: "持っているカードをチェックして、お気に入りを保存しましょう。",
       stats: (n, tot) => `<strong>${n}</strong> / <span>${tot}</span> 枚を所持`,
@@ -583,7 +746,7 @@
       qtyDec: nm => `${nm} を1枚減らす`, qtyInc: nm => `${nm} を1枚増やす`,
       copiesTotal: n => `合計 ${n} 枚`,
       loading: "TCGdex からすべてのセットを読み込み中…",
-      loadErr: "TCGdex からカードを読み込めませんでした。インターネット接続を確認して、もう一度お試しください。", retry: "再試行",
+      loadErr: "TCGdex からカードを読み込めませんでした。インターネット接続を確認して、もう一度お試しください。広告ブロッカーを使っている場合は api.tcgdex.net を許可してください。", retry: "再試行", techDetail: "詳細",
       allOwned: "おめでとう！すべてのカードを持っています。",
       emptyOwned: "コレクションは空です。「すべて」で持っているカードの「持ってる」をタップしてください。",
       emptyFav: "ほしいものリストは空です。欲しいカードのハートをタップしてください。",
@@ -668,7 +831,7 @@
   const KEY_CONTA = "fichario-pokemon-conta-v2";
   const reduzir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   function carregarConta() {
-    const padrao = { perfil: null, cfg: { cinza: true, anim: !reduzir, ordem: "num", lang: "en", tema: "rosa" } };
+    const padrao = { perfil: null, cfg: { cinza: true, anim: !reduzir, ordem: "num", lang: "en", tema: "rosa", area: "binder" } };
     try {
       const raw = localStorage.getItem(KEY_CONTA);
       if (raw) {
@@ -678,6 +841,7 @@
         if (cfg.ordem !== "nome") cfg.ordem = "num";
         if (!LANGS.includes(cfg.lang)) cfg.lang = "en";
         if (!TEMAS.includes(cfg.tema)) cfg.tema = "rosa";
+        if (cfg.area !== "decks") cfg.area = "binder";
         return { perfil, cfg };
       }
     } catch (e) { /* usa o padrão */ }
@@ -701,26 +865,101 @@
   let SETS = {};      // id -> { id, name, serie, serieName, official, total }
   let SERIES = [];    // [{ id, name, sets: [ids] }] da mais nova para a mais antiga
 
-  async function getJSON(url) {
-    const r = await fetch(url);
-    if (!r.ok) throw new Error("HTTP " + r.status + " " + url);
-    return r.json();
+  async function getJSON(url, tentativas = 2) {
+    let ultimo;
+    for (let i = 0; i < tentativas; i++) {
+      try {
+        const r = await fetch(url);
+        if (!r.ok) throw new Error("HTTP " + r.status + " — " + url.replace(API, ""));
+        return await r.json();
+      } catch (e) {
+        ultimo = e;
+        await new Promise(res => setTimeout(res, 700 * (i + 1)));
+      }
+    }
+    throw ultimo;
   }
-  async function carregarDados() {
-    state.status = "loading";
-    render();
+
+  /* Cópia local dos dados (IndexedDB) para abrir rápido e funcionar mesmo se a API falhar */
+  const CACHE_DB = "fichario-pokemon-cache", CACHE_KEY = "en-v1", CACHE_HORAS = 24;
+  function abrirDB() {
+    return new Promise((ok, falha) => {
+      try {
+        const req = indexedDB.open(CACHE_DB, 1);
+        req.onupgradeneeded = () => req.result.createObjectStore("dados");
+        req.onsuccess = () => ok(req.result);
+        req.onerror = () => falha(req.error);
+      } catch (e) { falha(e); }
+    });
+  }
+  async function lerCache() {
     try {
-      const [lista, cards] = await Promise.all([getJSON(API + "/series"), getJSON(API + "/cards")]);
-      const detalhes = await Promise.all(lista.filter(s => !SKIP_SERIES.has(s.id))
-        .map(s => getJSON(API + "/series/" + encodeURIComponent(s.id)).catch(() => null)));
-      montar(detalhes.filter(Boolean), cards);
+      const db = await abrirDB();
+      return await new Promise(ok => {
+        const r = db.transaction("dados").objectStore("dados").get(CACHE_KEY);
+        r.onsuccess = () => ok(r.result || null);
+        r.onerror = () => ok(null);
+      });
+    } catch (e) { return null; }
+  }
+  async function gravarCache(valor) {
+    try {
+      const db = await abrirDB();
+      db.transaction("dados", "readwrite").objectStore("dados").put(valor, CACHE_KEY);
+    } catch (e) { /* segue sem cache */ }
+  }
+
+  // Busca as cartas coleção por coleção (plano B se a lista completa falhar)
+  async function cartasPorColecao(detalhes) {
+    const ids = [];
+    detalhes.forEach(s => (s.sets || []).forEach(st => ids.push(st.id)));
+    const todas = [];
+    let feitos = 0, i = 0;
+    async function trabalhador() {
+      while (i < ids.length) {
+        const id = ids[i++];
+        try {
+          const set = await getJSON(API + "/sets/" + encodeURIComponent(id));
+          (set.cards || []).forEach(c => todas.push(c));
+        } catch (e) { console.warn("Set não carregou:", id, e); }
+        feitos++;
+        state.progresso = `${feitos}/${ids.length}`;
+        if (feitos % 10 === 0 || feitos === ids.length) atualizar();
+      }
+    }
+    await Promise.all(Array.from({ length: 6 }, trabalhador));
+    if (!todas.length) throw new Error("No set could be loaded");
+    return todas;
+  }
+
+  async function carregarDados() {
+    state.status = "loading"; state.erro = ""; state.progresso = "";
+    atualizar();
+    const cache = await lerCache();
+    if (cache && Date.now() - cache.quando < CACHE_HORAS * 3600e3) {
+      montar(cache.detalhes, cache.cards);
       state.status = "ok";
+      preencherFiltros(); atualizar();
+      return;
+    }
+    try {
+      const lista = await getJSON(API + "/series");
+      const detalhes = (await Promise.all(lista.filter(s => !SKIP_SERIES.has(s.id))
+        .map(s => getJSON(API + "/series/" + encodeURIComponent(s.id)).catch(() => null)))).filter(Boolean);
+      if (!detalhes.length) throw new Error("No series could be loaded");
+      let cards;
+      try { cards = await getJSON(API + "/cards"); }
+      catch (e) { console.warn("Lista completa falhou, carregando por coleção:", e); cards = await cartasPorColecao(detalhes); }
+      montar(detalhes, cards);
+      state.status = "ok";
+      gravarCache({ quando: Date.now(), detalhes, cards });
     } catch (e) {
       console.error(e);
-      state.status = "error";
+      if (cache) { montar(cache.detalhes, cache.cards); state.status = "ok"; }
+      else { state.status = "error"; state.erro = (e && e.message) || String(e); }
     }
     preencherFiltros();
-    render();
+    atualizar();
   }
 
   function montar(detalhes, cards) {
@@ -773,8 +1012,9 @@
   const setNome = c => (SETS[c.set] ? SETS[c.set].name : "");
 
   /* ---------- Lista filtrada e desenho ---------- */
-  const mq = window.matchMedia("(max-width: 479px)");
-  let porPagina = mq.matches ? 6 : 9;
+  const mqLarga = window.matchMedia("(min-width: 860px)"), mqEstreita = window.matchMedia("(max-width: 479px)");
+  const calcPorPagina = () => mqLarga.matches ? 12 : mqEstreita.matches ? 6 : 9;
+  let porPagina = calcPorPagina();
   const grid = $("grid"), vazio = $("vazio"), prev = $("prev"), next = $("next"), pgIn = $("pgIn");
 
   const ORDENS = {
@@ -863,6 +1103,11 @@
     return t("none");
   }
 
+  function statusHTML() {
+    return state.status === "loading"
+      ? `<span class="spin" aria-hidden="true"></span><span>${esc(t("loading"))}${state.progresso ? ` (${esc(state.progresso)})` : ""}</span>`
+      : `<span>${esc(t("loadErr"))}</span>${state.erro ? `<small class="erro-tec">${esc(t("techDetail"))}: ${esc(state.erro)}</small>` : ""}<button type="button" class="btn-retry" data-retry="1">${esc(t("retry"))}</button>`;
+  }
   function render() {
     const carregado = state.status === "ok";
     const lista = carregado ? filtradas() : [];
@@ -873,9 +1118,7 @@
     if (!carregado) {
       grid.hidden = true; vazio.hidden = false;
       vazio.setAttribute("aria-busy", String(state.status === "loading"));
-      vazio.innerHTML = state.status === "loading"
-        ? `<span class="spin" aria-hidden="true"></span><span>${esc(t("loading"))}</span>`
-        : `<span>${esc(t("loadErr"))}</span><button type="button" class="btn-retry" id="retry">${esc(t("retry"))}</button>`;
+      vazio.innerHTML = statusHTML();
     } else if (!lista.length) {
       grid.hidden = true; vazio.hidden = false; vazio.removeAttribute("aria-busy"); vazio.textContent = mensagemVazia();
     } else {
@@ -997,7 +1240,8 @@
   document.addEventListener("click", e => {
     if (state.qtyOpen && !e.target.closest(".pocket-wrap")) fecharQty(false);
   });
-  vazio.addEventListener("click", e => { if (e.target.closest("#retry")) carregarDados(); });
+  vazio.addEventListener("click", e => { if (e.target.closest("[data-retry]")) carregarDados(); });
+  $("dVazio").addEventListener("click", e => { if (e.target.closest("[data-retry]")) carregarDados(); });
 
   document.querySelector(".tabs").addEventListener("click", e => {
     const b = e.target.closest("button[data-tab]");
@@ -1030,12 +1274,16 @@
   });
   pgIn.addEventListener("keydown", e => { if (e.key === "Enter") pgIn.blur(); });
 
-  mq.addEventListener("change", e => {
-    const primeira = state.page * porPagina;
-    porPagina = e.matches ? 6 : 9;
-    state.page = Math.floor(primeira / porPagina);
-    render();
-  });
+  function mudouLargura() {
+    const novo = calcPorPagina();
+    if (novo === porPagina) return;
+    state.page = Math.floor(state.page * porPagina / novo);
+    dState.page = Math.floor(dState.page * porPagina / novo);
+    porPagina = novo;
+    atualizar();
+  }
+  mqLarga.addEventListener("change", mudouLargura);
+  mqEstreita.addEventListener("change", mudouLargura);
 
   // Limpar em dois toques, sem janela de confirmação
   const reset = $("reset");
@@ -1099,8 +1347,8 @@
     $("zPrev").disabled = zState.i === 0;
     $("zNext").disabled = zState.i >= zState.ids.length - 1;
   }
-  function abrirZoom(id) {
-    const ids = state.lista.map(c => c.id);
+  function abrirZoom(id, lista) {
+    const ids = lista || state.lista.map(c => c.id);
     const i = ids.indexOf(id);
     if (i < 0) return;
     zState.ids = ids; zState.i = i;
@@ -1115,10 +1363,12 @@
     zoom.hidden = true;
     wrap.inert = false;
     const atual = zState.ids[zState.i];
+    const deck = conta.cfg.area === "decks";
+    const lista = deck ? dState.lista : state.lista, st = deck ? dState : state, g = deck ? dGrid : grid;
     // leva o fichário até a página da carta que estava aberta
-    const pos = state.lista.findIndex(c => c.id === atual);
-    if (pos >= 0 && Math.floor(pos / porPagina) !== state.page) { state.page = Math.floor(pos / porPagina); render(); }
-    const alvo = grid.querySelector(`.cell[data-id="${CSS.escape(atual)}"] [data-act="zoom"]`) || sideTab;
+    const pos = lista.findIndex(c => c.id === atual);
+    if (pos >= 0 && Math.floor(pos / porPagina) !== st.page) { st.page = Math.floor(pos / porPagina); atualizar(); }
+    const alvo = g.querySelector(`.cell[data-id="${CSS.escape(atual)}"] [data-act="zoom"]`) || sideTab;
     alvo.focus({ preventScroll: false });
   }
   function irZoom(d) {
@@ -1127,7 +1377,7 @@
     zState.i = n;
     desenharZoom();
   }
-  function depoisZoom(foco) { salvar(); render(); desenharZoom(); if (foco) { const b = typeof foco === "string" ? $(foco) : foco(); if (b) b.focus(); } }
+  function depoisZoom(foco) { salvar(); atualizar(); desenharZoom(); if (foco) { const b = typeof foco === "string" ? $(foco) : foco(); if (b) b.focus(); } }
   $("zClose").addEventListener("click", fecharZoom);
   $("zPrev").addEventListener("click", () => irZoom(-1));
   $("zNext").addEventListener("click", () => irZoom(1));
@@ -1151,7 +1401,7 @@
       else if (e.key === "ArrowRight") irZoom(1);
       return;
     }
-    if (e.key === "Escape" && state.qtyOpen) { e.preventDefault(); fecharQty(true); }
+    if (e.key === "Escape" && state.qtyOpen && conta.cfg.area !== "decks") { e.preventDefault(); fecharQty(true); }
   });
   let toqueX = null;
   $("zStage").addEventListener("touchstart", e => { toqueX = e.touches[0].clientX; }, { passive: true });
@@ -1161,6 +1411,311 @@
     toqueX = null;
     if (Math.abs(dx) > 50) irZoom(dx < 0 ? 1 : -1);
   }, { passive: true });
+
+  /* ---------- Áreas: Binder e Deck Builder ---------- */
+  function atualizar() { if (conta.cfg.area === "decks") renderDeck(); else render(); }
+  function aplicarArea() {
+    const deck = conta.cfg.area === "decks";
+    $("areaBinder").hidden = deck;
+    $("areaDecks").hidden = !deck;
+    $("statsBinder").hidden = deck;
+    $("statsDeck").hidden = !deck;
+    $("reset").hidden = deck;
+    $("lead").textContent = t(deck ? "leadDeck" : "lead");
+    document.querySelectorAll(".areas [data-area]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.area === conta.cfg.area)));
+  }
+  document.querySelector(".areas").addEventListener("click", e => {
+    const b = e.target.closest("[data-area]");
+    if (!b || b.dataset.area === conta.cfg.area) return;
+    conta.cfg.area = b.dataset.area;
+    state.qtyOpen = null;
+    salvarConta();
+    aplicarArea();
+    atualizar();
+  });
+
+  /* ---------- Decks (salvos no navegador) ---------- */
+  const KEY_DECKS = "fichario-pokemon-decks-v1";
+  const DECK_MAX = 60;
+  function carregarDecks() {
+    try {
+      const o = JSON.parse(localStorage.getItem(KEY_DECKS) || "null");
+      if (o && Array.isArray(o.decks)) {
+        const decks = o.decks.filter(d => d && d.id).map(d => {
+          const cards = {};
+          Object.entries(d.cards || {}).forEach(([id, n]) => { n = parseInt(n, 10); if (n > 0) cards[id] = Math.min(99, n); });
+          return { id: String(d.id), name: String(d.name || "Deck").slice(0, 40), cards };
+        });
+        return { decks, atual: o.atual };
+      }
+    } catch (e) { /* começa sem decks */ }
+    return { decks: [], atual: null };
+  }
+  const dk = carregarDecks();
+  function salvarDecks() { try { localStorage.setItem(KEY_DECKS, JSON.stringify(dk)); } catch (e) { /* segue sem salvar */ } }
+  const deckAtual = () => dk.decks.find(d => d.id === dk.atual) || dk.decks[0] || null;
+  const totalDeck = d => Object.values(d.cards).reduce((a, b) => a + b, 0);
+  const ENERGIA_BASICA = /^(basic )?(grass|fire|water|lightning|psychic|fighting|darkness|metal|fairy) energy$/i;
+
+  const dState = { tab: "deck", q: "", posse: "", serie: "", set: "", page: 0, lista: [], form: null };
+  const dGrid = $("dGrid"), dVazio = $("dVazio"), dPrev = $("dPrev"), dNext = $("dNext"), dPgIn = $("dPgIn");
+
+  function dFiltradas(d) {
+    const tks = norm(dState.q.trim()).split(/\s+/).filter(Boolean);
+    const emDeck = dState.tab === "deck";
+    const base = emDeck ? CARTAS.filter(c => d.cards[c.id]) : CARTAS;
+    const lista = base.filter(c => {
+      const need = d.cards[c.id] || 0, have = state.qty[c.id] || 0;
+      if (dState.posse === "tenho" && (emDeck ? have < need : have === 0)) return false;
+      if (dState.posse === "faltam" && (emDeck ? have >= need : have > 0)) return false;
+      if (dState.serie && SETS[c.set].serie !== dState.serie) return false;
+      if (dState.set && c.set !== dState.set) return false;
+      if (tks.length && !casaBusca(c, tks)) return false;
+      return true;
+    });
+    return conta.cfg.ordem === "nome" ? lista.sort(ORDENS.nome) : lista;
+  }
+
+  const ICON_LIXO = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7h14M10 7V5h4v2M7 7l1 12h8l1-12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  function deckCartaHTML(c, d) {
+    const need = d.cards[c.id] || 0, have = state.qty[c.id] || 0;
+    const num = numeroTxt(c);
+    const src = imgPequena(c);
+    const emDeck = dState.tab === "deck";
+    const falta = Math.max(0, need - have);
+    const cinza = conta.cfg.cinza && (emDeck ? falta > 0 : have === 0);
+    const rotulo = `${c.n}, ${t("number")} ${num}, ${setNome(c)}`;
+    const topo = `<div class="pocket-wrap">
+        <button type="button" class="pocket" data-act="zoom" aria-label="${esc(t("enlarge"))}: ${esc(rotulo)}">
+          ${src ? `<img class="${cinza ? "ghost" : ""}" src="${esc(src)}" alt="" width="245" height="342" loading="lazy" decoding="async" referrerpolicy="no-referrer">` : fallbackHTML(c)}
+        </button>
+        ${need ? `<span class="deck-badge" aria-hidden="true">×${need}</span>` : ""}
+      </div>
+      <div class="cap" title="${esc(c.n)} #${esc(num)}">
+        <span class="l1"><span class="no">#${esc(num)}</span><span class="nm">${esc(c.n)}</span></span>
+        <span class="st">${esc(setNome(c))}</span>
+      </div>`;
+    if (!emDeck) {
+      return `<li class="cell" data-id="${esc(c.id)}">${topo}
+        <div class="ctrl">
+          <button type="button" class="btn-step" data-act="dmenos" aria-label="${esc(t("dMenos", c.n))}" ${need ? "" : "disabled"}>${ICON.minus}</button>
+          <button type="button" class="btn-add${need ? " on" : ""}" data-act="dmais" aria-label="${esc(t("dMais", c.n))}${need ? ` (${need})` : ""}">${ICON.plus}<span class="lbl">${esc(t("addBtn"))}</span>${need ? `<span class="n">${need}</span>` : ""}</button>
+        </div>
+        <p class="dinfo">${esc(t("ownedN", have))}</p>
+      </li>`;
+    }
+    return `<li class="cell" data-id="${esc(c.id)}">${topo}
+      <div class="dctl" role="group" aria-label="${esc(t("deckGroup", c.n))}">
+        <span class="dlbl">${esc(t("inDeck"))}</span>
+        <button type="button" data-act="dmenos" aria-label="${esc(need === 1 ? t("dTirar", c.n) : t("dMenos", c.n))}">${need === 1 ? ICON_LIXO : ICON.minus}</button>
+        <output>${need}</output>
+        <button type="button" data-act="dmais" aria-label="${esc(t("dMais", c.n))}">${ICON.plus}</button>
+      </div>
+      <div class="dctl own ${falta ? "miss" : "ok"}" role="group" aria-label="${esc(t("ownGroup", c.n))}">
+        <span class="dlbl">${esc(t("ownedLbl"))}</span>
+        <button type="button" data-act="omenos" aria-label="${esc(t("oMenos", c.n))}" ${have ? "" : "disabled"}>${ICON.minus}</button>
+        <output>${have}</output>
+        <button type="button" data-act="omais" aria-label="${esc(t("oMais", c.n))}">${ICON.plus}</button>
+      </div>
+      <p class="dstatus ${falta ? "miss" : "ok"}">${falta ? esc(t("missingN", falta)) : ICON.check + esc(t("complete"))}</p>
+    </li>`;
+  }
+  const deckVagaHTML = () => `<li class="cell empty" aria-hidden="true"><div class="pocket-wrap"><div class="pocket"></div></div><div class="cap"><span class="l1">&nbsp;</span><span class="st">&nbsp;</span></div><div class="ctrl"><button type="button" tabindex="-1"></button></div></li>`;
+
+  function renderDeck() {
+    const d = deckAtual();
+    if (d) dk.atual = d.id;
+    // seletor de decks
+    $("deckSel").innerHTML = dk.decks.map(x => `<option value="${esc(x.id)}">${esc(x.name)} (${totalDeck(x)})</option>`).join("");
+    if (d) $("deckSel").value = d.id;
+    $("deckSel").disabled = !d;
+    $("deckRen").disabled = !d;
+    $("deckDel").disabled = !d;
+    $("deckForm").hidden = !dState.form;
+    $("deckSemDeck").hidden = !!d || !!dState.form;
+    $("deckCorpo").hidden = !d;
+    document.querySelectorAll("[data-dtab]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.dtab === dState.tab)));
+
+    if (!d) {
+      $("deckLine").innerHTML = t("deckNoneLine");
+      $("dBarFill").style.width = "0%"; $("dBar").setAttribute("aria-valuenow", 0);
+      $("deckSub").textContent = "";
+      return;
+    }
+    // números do deck
+    const total = totalDeck(d);
+    let cobertas = 0;
+    const porNome = {};
+    Object.entries(d.cards).forEach(([id, n]) => {
+      cobertas += Math.min(n, state.qty[id] || 0);
+      const c = POR_ID.get(id);
+      const nome = c ? c.n : id;
+      porNome[nome] = (porNome[nome] || 0) + n;
+    });
+    $("deckLine").innerHTML = t("deckLine", total, DECK_MAX, esc(d.name));
+    const pct = total ? cobertas / total * 100 : 0;
+    $("dBarFill").style.width = pct + "%";
+    $("dBar").setAttribute("aria-valuenow", Math.round(pct));
+    $("deckSub").textContent = t("deckSub", cobertas, total);
+    $("dCount").textContent = total;
+    const avisos = [];
+    if (total < DECK_MAX) avisos.push(t("deckNeed", DECK_MAX - total));
+    else if (total > DECK_MAX) avisos.push(t("deckOver", total));
+    else avisos.push(t("deckOk"));
+    const demais = Object.entries(porNome).filter(([nome, n]) => n > 4 && !ENERGIA_BASICA.test(nome)).map(([nome]) => nome);
+    if (demais.length) avisos.push(t("deckFour", demais.join(", ")));
+    $("deckAviso").textContent = avisos.join(" ");
+    $("deckAviso").classList.toggle("ok", total === DECK_MAX && !demais.length);
+
+    // grade
+    const carregado = state.status === "ok";
+    const lista = carregado ? dFiltradas(d) : [];
+    dState.lista = lista;
+    const paginas = Math.max(1, Math.ceil(lista.length / porPagina));
+    dState.page = Math.min(dState.page, paginas - 1);
+    if (!carregado) {
+      dGrid.hidden = true; dVazio.hidden = false;
+      dVazio.innerHTML = statusHTML();
+    } else if (!lista.length) {
+      dGrid.hidden = true; dVazio.hidden = false;
+      const semFiltro = !dState.q.trim() && !dState.posse && !dState.serie && !dState.set;
+      dVazio.textContent = dState.tab === "deck" && semFiltro ? t("deckEmpty") : t("none");
+    } else {
+      dVazio.hidden = true; dGrid.hidden = false;
+      const fatia = lista.slice(dState.page * porPagina, dState.page * porPagina + porPagina);
+      let html = fatia.map(c => deckCartaHTML(c, d)).join("");
+      for (let i = fatia.length; i < porPagina; i++) html += deckVagaHTML();
+      dGrid.innerHTML = html;
+    }
+    dPgIn.value = dState.page + 1;
+    dPgIn.max = paginas;
+    dPgIn.disabled = !carregado;
+    $("dPgDe").textContent = t("of", paginas);
+    dPrev.disabled = !carregado || dState.page === 0;
+    dNext.disabled = !carregado || dState.page >= paginas - 1;
+  }
+
+  function mudarDeck(id, delta) {
+    const d = deckAtual();
+    if (!d) return;
+    const n = Math.max(0, Math.min(99, (d.cards[id] || 0) + delta));
+    if (n) d.cards[id] = n; else delete d.cards[id];
+    salvarDecks();
+  }
+  function focarDeck(id, sel) {
+    const alvo = dGrid.querySelector(`.cell[data-id="${CSS.escape(id)}"] ${sel}`);
+    if (alvo && !alvo.disabled) { alvo.focus({ preventScroll: true }); return; }
+    const alt = dGrid.querySelector(`.cell[data-id="${CSS.escape(id)}"] [data-act="dmais"]`);
+    if (alt) alt.focus({ preventScroll: true }); else (dGrid.hidden ? dVazio : dGrid).focus({ preventScroll: true });
+  }
+  dGrid.addEventListener("error", e => {
+    const img = e.target;
+    if (!(img instanceof HTMLImageElement)) return;
+    const c = POR_ID.get(img.closest(".cell").dataset.id);
+    if (!c) return;
+    if (c.fb && img.dataset.fb !== "1" && img.src !== c.fb) { img.dataset.fb = "1"; img.src = c.fb; return; }
+    const div = document.createElement("div");
+    div.innerHTML = fallbackHTML(c);
+    img.replaceWith(div.firstElementChild);
+  }, true);
+  dGrid.addEventListener("click", e => {
+    const b = e.target.closest("button[data-act]");
+    if (!b) return;
+    const id = b.closest(".cell").dataset.id;
+    const act = b.dataset.act;
+    if (act === "zoom") { abrirZoom(id, dState.lista.map(c => c.id)); return; }
+    if (act === "dmais") mudarDeck(id, 1);
+    else if (act === "dmenos") mudarDeck(id, -1);
+    else if (act === "omais") { setQty(id, (state.qty[id] || 0) + 1); salvar(); }
+    else if (act === "omenos") { setQty(id, (state.qty[id] || 0) - 1); salvar(); }
+    renderDeck();
+    focarDeck(id, `[data-act="${act}"]`);
+  });
+
+  document.querySelector(".dtabs").addEventListener("click", e => {
+    const b = e.target.closest("[data-dtab]");
+    if (!b) return;
+    dState.tab = b.dataset.dtab; dState.page = 0; renderDeck();
+  });
+  let dBuscaTimer;
+  $("dBusca").addEventListener("input", e => {
+    clearTimeout(dBuscaTimer);
+    dBuscaTimer = setTimeout(() => { dState.q = e.target.value; dState.page = 0; renderDeck(); }, 120);
+  });
+  $("dPosse").addEventListener("change", e => { dState.posse = e.target.value; dState.page = 0; renderDeck(); });
+  $("dSerie").addEventListener("change", e => {
+    dState.serie = e.target.value;
+    if (dState.set && SETS[dState.set] && dState.serie && SETS[dState.set].serie !== dState.serie) dState.set = "";
+    dState.page = 0; preencherFiltros(); renderDeck();
+  });
+  $("dSet").addEventListener("change", e => { dState.set = e.target.value; dState.page = 0; renderDeck(); });
+  dPrev.addEventListener("click", () => { if (dState.page > 0) { dState.page--; renderDeck(); if (dPrev.disabled) dNext.focus(); } });
+  dNext.addEventListener("click", () => { dState.page++; renderDeck(); if (dNext.disabled) dPrev.focus(); });
+  dPgIn.addEventListener("change", () => {
+    const max = Number(dPgIn.max) || 1;
+    dState.page = Math.min(max, Math.max(1, parseInt(dPgIn.value, 10) || 1)) - 1; renderDeck();
+  });
+  dPgIn.addEventListener("keydown", e => { if (e.key === "Enter") dPgIn.blur(); });
+
+  // criar, renomear e apagar decks
+  function abrirForm(tipo) {
+    dState.form = tipo;
+    const d = deckAtual();
+    $("deckFormLbl").textContent = t(tipo === "new" ? "deckNewLbl" : "deckRenLbl");
+    $("deckNome").value = tipo === "rename" && d ? d.name : "";
+    $("deckNome").placeholder = t("deckDefault");
+    $("deckErro").textContent = "";
+    renderDeck();
+    $("deckNome").focus();
+  }
+  function fecharForm(focoEm) {
+    dState.form = null;
+    renderDeck();
+    const alvo = $(focoEm) || $("deckNew");
+    if (alvo && !alvo.hidden && !alvo.disabled) alvo.focus();
+  }
+  $("deckNew").addEventListener("click", () => abrirForm("new"));
+  $("deckPrimeiro").addEventListener("click", () => abrirForm("new"));
+  $("deckRen").addEventListener("click", () => abrirForm("rename"));
+  $("deckCancel").addEventListener("click", () => fecharForm(dState.form === "rename" ? "deckRen" : "deckNew"));
+  $("deckForm").addEventListener("keydown", e => { if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); fecharForm(dState.form === "rename" ? "deckRen" : "deckNew"); } });
+  $("deckForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const nome = $("deckNome").value.trim().slice(0, 40);
+    if (!nome) { $("deckErro").textContent = t("deckNameErr"); $("deckNome").focus(); return; }
+    if (dState.form === "new") {
+      const novo = { id: "d" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), name: nome, cards: {} };
+      dk.decks.push(novo);
+      dk.atual = novo.id;
+      dState.tab = "add"; dState.page = 0;
+    } else {
+      const d = deckAtual();
+      if (d) d.name = nome;
+    }
+    salvarDecks();
+    fecharForm("deckSel");
+  });
+  $("deckSel").addEventListener("change", e => { dk.atual = e.target.value; dState.page = 0; salvarDecks(); renderDeck(); });
+  const deckDel = $("deckDel");
+  let delArmado = false, delTimer;
+  deckDel.addEventListener("click", () => {
+    const d = deckAtual();
+    if (!d) return;
+    if (!delArmado) {
+      delArmado = true;
+      deckDel.textContent = t("deckDelArm");
+      delTimer = setTimeout(() => { delArmado = false; deckDel.textContent = t("deckDel"); }, 3500);
+      return;
+    }
+    clearTimeout(delTimer); delArmado = false; deckDel.textContent = t("deckDel");
+    dk.decks = dk.decks.filter(x => x.id !== d.id);
+    dk.atual = dk.decks.length ? dk.decks[0].id : null;
+    dState.page = 0;
+    salvarDecks();
+    renderDeck();
+    (dk.decks.length ? $("deckSel") : $("deckPrimeiro")).focus();
+  });
 
   /* ---------- Painel lateral: cadastro e configurações ---------- */
   const wrap = $("wrap"), painel = $("painel"), scrim = $("scrim"), sideTab = $("sideTab");
@@ -1232,9 +1787,9 @@
     salvarConta();
     aplicarCfg();
   });
-  $("cfgCinza").addEventListener("click", () => { conta.cfg.cinza = !conta.cfg.cinza; salvarConta(); aplicarCfg(); render(); });
+  $("cfgCinza").addEventListener("click", () => { conta.cfg.cinza = !conta.cfg.cinza; salvarConta(); aplicarCfg(); atualizar(); });
   $("cfgAnim").addEventListener("click", () => { conta.cfg.anim = !conta.cfg.anim; salvarConta(); aplicarCfg(); });
-  $("cfgOrdem").addEventListener("change", e => { conta.cfg.ordem = e.target.value; state.page = 0; salvarConta(); render(); });
+  $("cfgOrdem").addEventListener("change", e => { conta.cfg.ordem = e.target.value; state.page = 0; dState.page = 0; salvarConta(); atualizar(); });
 
   /* ---------- Idioma (bandeiras) ---------- */
   const FLAGS = (() => {
@@ -1258,6 +1813,12 @@
     sel("fSet", `<option value="">${esc(t("set"))}</option>` + (state.serie
       ? grupos.map(opts).join("")
       : grupos.map(s => `<optgroup label="${esc(s.name)}">${opts(s)}</optgroup>`).join("")), state.set);
+    sel("dPosse", `<option value="">${esc(t("sit"))}</option><option value="tenho">${esc(t("fOwn"))}</option><option value="faltam">${esc(t("fMissing"))}</option>`, dState.posse);
+    sel("dSerie", `<option value="">${esc(t("serie"))}</option>` + SERIES.map(s => `<option value="${esc(s.id)}">${esc(s.name)}</option>`).join(""), dState.serie);
+    const dGrupos = dState.serie ? SERIES.filter(s => s.id === dState.serie) : SERIES;
+    sel("dSet", `<option value="">${esc(t("set"))}</option>` + (dState.serie
+      ? dGrupos.map(opts).join("")
+      : dGrupos.map(s => `<optgroup label="${esc(s.name)}">${opts(s)}</optgroup>`).join("")), dState.set);
     sel("cfgOrdem", `<option value="num">${esc(t("ordNum"))}</option><option value="nome">${esc(t("ordName"))}</option>`, conta.cfg.ordem);
   }
   function aplicarIdioma() {
@@ -1271,6 +1832,9 @@
     document.querySelectorAll(".lang-btn").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === conta.cfg.lang)));
     document.querySelectorAll("#temas [data-tema]").forEach(b => b.setAttribute("aria-label", t("themes")[b.dataset.tema]));
     reset.textContent = t(armado ? "resetArm" : "reset");
+    $("deckDel").textContent = t("deckDel");
+    if (dState.form) $("deckFormLbl").textContent = t(dState.form === "new" ? "deckNewLbl" : "deckRenLbl");
+    aplicarArea();
     preencherFiltros();
     const tinhaForm = !conta.perfil && $("inNome") ? [$("inNome").value, $("inEmail").value] : null;
     renderConta();
@@ -1282,7 +1846,7 @@
     conta.cfg.lang = b.dataset.lang;
     salvarConta();
     aplicarIdioma();
-    render();
+    atualizar();
     if (!zoom.hidden) desenharZoom();
   });
 
