@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Fichário Pokémon</title>
+<title>Pokémon Binder</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Figtree:wght@400..700&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
     --seg-on-bg: #4A1B30;
     --seg-on-fg: #FFFFFF;
     --focus: #2338C8;
-    --own: #0F6048;
+    --own: #D94F86;
     --page: #2A1822;
     color-scheme: light;
     padding-top: env(safe-area-inset-top, 0px);
@@ -86,10 +86,19 @@
   .row-d { color: var(--muted); font-size: 0.82rem; line-height: 1.4; }
   .row.col { display: block; }
   .row.col .field { margin-top: 0; }
-  .switch { position: relative; flex: none; width: 48px; height: 28px; padding: 0; border: 0; border-radius: 99px; background: #A5788A; cursor: pointer; }
-  .switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #FFFFFF; transition: transform 0.18s ease; }
-  .switch[aria-checked="true"] { background: var(--own); }
-  .switch[aria-checked="true"]::after { transform: translateX(20px); }
+  .switch { position: relative; flex: none; width: 56px; height: 32px; padding: 0; border: 1.5px solid #B8607E; border-radius: 99px; background: #FBDFEA; cursor: pointer; transition: background 0.18s ease; }
+  .switch .knob { position: absolute; top: 2px; left: 2px; width: 25px; height: 25px; display: block; transition: transform 0.18s ease; filter: drop-shadow(0 1px 2px rgba(90, 30, 55, 0.45)); }
+  .switch .knob svg { display: block; width: 100%; height: 100%; }
+  .switch[aria-checked="true"] { background: #F6A3C0; }
+  .switch[aria-checked="true"] .knob { transform: translateX(24px); }
+  .langs { display: grid; gap: 8px; margin-top: 8px; }
+  .lang-btn { display: flex; align-items: center; gap: 12px; width: 100%; height: 46px; padding: 0 12px; border: 1px solid var(--line); border-radius: 12px; background: #FFFFFF; color: var(--text); font: 600 15px "Figtree", system-ui, sans-serif; text-align: left; cursor: pointer; }
+  .lang-btn[aria-pressed="true"] { background: var(--seg-on-bg); border-color: var(--seg-on-bg); color: #FFFFFF; }
+  .lang-btn .flag { flex: none; display: block; width: 30px; height: 20px; }
+  .lang-btn .flag svg { display: block; border-radius: 4px; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25); }
+  .lang-btn .tick { margin-left: auto; opacity: 0; }
+  .lang-btn[aria-pressed="true"] .tick { opacity: 1; }
+  @media (hover: hover) { .lang-btn[aria-pressed="false"]:hover { background: var(--bg); } }
 
   /* Cabeçalho */
   .top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 24px; margin-bottom: 22px; }
@@ -117,7 +126,7 @@
 
   /* Fichário */
   .binder {
-    --b-fav: #FF8FA9; --b-own: #43C995; --b-ink: #F3E9EE; --b-muted: #D9BFCB; --b-line: rgba(255, 255, 255, 0.2); --focus: #FFE3EA;
+    --b-fav: #FF8FA9; --b-own: #F8B4CB; --b-ink: #F3E9EE; --b-muted: #D9BFCB; --b-line: rgba(255, 255, 255, 0.2); --focus: #FFE3EA;
     position: relative; display: flex; padding: 14px 14px 14px 0; border-radius: 20px; background: #FCE5EF;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), 0 0 0 1px rgba(122, 58, 82, 0.4), 0 20px 36px -20px rgba(90, 30, 55, 0.65);
   }
@@ -129,7 +138,8 @@
   .grid:focus, .vazio:focus { outline: none; }
 
   .cell { container-type: inline-size; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
-  .pocket { position: relative; display: flex; aspect-ratio: 63 / 88; padding: 3cqw; border-radius: 9px; border: 1px solid var(--b-line); background: rgba(255, 255, 255, 0.05); overflow: hidden; }
+  .pocket { position: relative; display: flex; width: 100%; aspect-ratio: 63 / 88; padding: 3cqw; border-radius: 9px; border: 1px solid var(--b-line); background: rgba(255, 255, 255, 0.05); overflow: hidden; font: inherit; color: inherit; text-align: inherit; }
+  button.pocket { appearance: none; cursor: zoom-in; }
   .pocket::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(115deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 36%, rgba(255, 255, 255, 0) 64%, rgba(255, 255, 255, 0.06) 100%); pointer-events: none; }
   .pocket img { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: 3.5cqw; transition: filter 0.2s ease; }
   .pocket img.ghost { filter: grayscale(1) brightness(0.55); }
@@ -149,15 +159,56 @@
   .btn-fav[aria-pressed="true"] { color: var(--b-fav); background: rgba(255, 143, 169, 0.16); border-color: rgba(255, 143, 169, 0.55); }
   .btn-fav[aria-pressed="true"] svg path { fill: currentColor; }
   .btn-own { flex: 1; min-width: 0; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 8px; white-space: nowrap; }
-  .btn-own[aria-pressed="true"] { background: var(--b-own); border-color: var(--b-own); color: #06241A; }
+  .btn-own[aria-pressed="true"] { background: var(--b-own); border-color: var(--b-own); color: #4A1B30; }
   .ctrl svg { display: block; }
+  .flags { display: flex; gap: 6px; }
+  .flags button { flex: 1; min-width: 0; height: 34px; display: grid; place-items: center; padding: 0; border: 1px solid var(--b-line); border-radius: 10px; background: rgba(255, 255, 255, 0.06); cursor: pointer; }
+  .flags button .fl { display: block; line-height: 0; opacity: 0.8; }
+  .flags button .fl svg { display: block; width: 22px; height: auto; border-radius: 3px; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3); }
+  .flags button[aria-pressed="true"] { background: #F8B4CB; border-color: #FFE3EA; box-shadow: 0 0 0 1px #FFE3EA; }
+  .flags button[aria-pressed="true"] .fl { opacity: 1; }
+  .flags.big button { height: 44px; border-color: rgba(255, 255, 255, 0.3); }
+  .flags.big button .fl svg { width: 30px; }
+  @media (hover: hover) { .flags button[aria-pressed="false"]:hover { background: rgba(255, 255, 255, 0.14); } .flags button[aria-pressed="true"]:hover { background: #FBC8D9; } }
   @container (max-width: 112px) { .btn-own .lbl { display: none; } .cap .num { display: none; } }
   @media (hover: hover) {
     .ctrl button:hover { background: rgba(255, 255, 255, 0.13); }
-    .btn-own[aria-pressed="true"]:hover { background: #5FD8A6; }
+    .btn-own[aria-pressed="true"]:hover { background: #FBC8D9; }
     .btn-fav[aria-pressed="true"]:hover { background: rgba(255, 143, 169, 0.26); }
     .pager button:not(:disabled):hover { background: rgba(255, 255, 255, 0.14); }
     .tabs button[aria-pressed="false"]:hover { color: var(--text); }
+  }
+
+  /* Carta ampliada */
+  .zoom { position: fixed; inset: 0; z-index: 40; display: flex; align-items: center; justify-content: center; padding: calc(env(safe-area-inset-top, 0px) + 16px) 16px calc(env(safe-area-inset-bottom, 0px) + 16px); background: rgba(24, 8, 16, 0.95); overflow-y: auto; }
+  .zoom-box { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; width: min(100%, 420px); margin: auto; color: #FFF3F7; }
+  .zoom-close { position: absolute; top: -4px; right: -4px; z-index: 2; width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 50%; background: rgba(24, 8, 16, 0.7); color: #FFF3F7; cursor: pointer; }
+  .zoom-stage { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; touch-action: pan-y; }
+  .zoom-nav { flex: none; width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 50%; background: rgba(255, 255, 255, 0.08); color: #FFF3F7; cursor: pointer; }
+  .zoom-nav:disabled { opacity: 0.3; cursor: default; }
+  .zoom-img { flex: 1; min-width: 0; display: grid; place-items: center; aspect-ratio: 63 / 88; max-height: min(66vh, 560px); }
+  .zoom-img img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 4.5%; box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55); }
+  .zoom-img .fallback { width: 100%; height: 100%; font-size: 1.1rem; }
+  .zoom-info { width: 100%; text-align: center; }
+  .zoom-info h2 { margin: 0; font: 800 1.35rem/1.2 "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif; letter-spacing: -0.01em; overflow-wrap: anywhere; }
+  .zoom-info p { margin: 4px 0 0; font-size: 0.9rem; color: #E6C7D3; }
+  .zoom-info .pos { font-variant-numeric: tabular-nums; }
+  .zoom-ctrl { display: flex; gap: 8px; width: 100%; max-width: 340px; }
+  .zoom-ctrl button { height: 44px; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 12px; background: rgba(255, 255, 255, 0.08); color: #FFF3F7; cursor: pointer; font: 700 15px "Figtree", system-ui, sans-serif; }
+  .zoom-ctrl .z-fav { flex: none; width: 48px; display: grid; place-items: center; }
+  .zoom-ctrl .z-fav svg path { fill: none; }
+  .zoom-ctrl .z-fav[aria-pressed="true"] { color: #FF8FA9; background: rgba(255, 143, 169, 0.18); border-color: rgba(255, 143, 169, 0.6); }
+  .zoom-ctrl .z-fav[aria-pressed="true"] svg path { fill: currentColor; }
+  .zoom-ctrl .z-own { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+  .zoom-ctrl .z-own[aria-pressed="true"] { background: #F8B4CB; border-color: #F8B4CB; color: #4A1B30; }
+  .zoom :focus-visible { outline-color: #FFE3EA; }
+  @media (hover: hover) { .zoom-close:hover, .zoom-nav:not(:disabled):hover, .zoom-ctrl button:hover { background: rgba(255, 255, 255, 0.18); } .zoom-ctrl .z-own[aria-pressed="true"]:hover { background: #FBC8D9; } }
+  @media (max-width: 420px) { .zoom-stage { gap: 4px; } .zoom-nav { width: 38px; height: 38px; } }
+  @media (prefers-reduced-motion: no-preference) {
+    .zoom { animation: zfade 0.18s ease-out; }
+    .zoom-img img { animation: zpop 0.2s ease-out; }
+    @keyframes zfade { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes zpop { from { transform: scale(0.94); opacity: 0.6; } to { transform: none; opacity: 1; } }
   }
 
   .vazio { min-height: min(60vw, 360px); display: grid; place-items: center; margin: 0; padding: 24px; border: 1.5px dashed rgba(255, 255, 255, 0.25); border-radius: 12px; color: var(--b-muted); text-align: center; font-size: 0.95rem; }
@@ -177,6 +228,8 @@
     .tabs { flex: 1 1 100%; }
     .tabs button { flex: 1; justify-content: center; padding: 8px 6px; }
     .search input, .filters select { font-size: 16px; }
+    .search { flex: 1 1 100%; }
+    .filters select { flex: 1 1 0; padding: 0 4px; }
   }
   @media (max-width: 560px) {
     .wrap { padding-left: 46px; }
@@ -197,56 +250,67 @@
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="pbh" viewBox="0 0 32 32">
+    <circle cx="16" cy="16" r="14" fill="#FFFFFF"/>
+    <path d="M2 16a14 14 0 0 1 28 0z" fill="#FF8FB1"/>
+    <path d="M2 16h28" stroke="#4A1B30" stroke-width="2.2"/>
+    <circle cx="16" cy="16" r="14" fill="none" stroke="#4A1B30" stroke-width="2.2"/>
+    <circle cx="16" cy="16" r="6" fill="#FFFFFF" stroke="#4A1B30" stroke-width="2.2"/>
+    <path d="M16 19.4s-3.8-2.3-3.8-4.8c0-1.3.9-2.1 2-2.1.7 0 1.3.4 1.8 1 .5-.6 1.1-1 1.8-1 1.1 0 2 .8 2 2.1 0 2.5-3.8 4.8-3.8 4.8z" fill="#F0457A"/>
+  </symbol>
+</svg>
 <button type="button" class="side-tab" id="sideTab" aria-expanded="false" aria-controls="painel">
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4.5 20c.8-3.8 3.7-6 7.5-6s6.7 2.2 7.5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-  <span>Conta e configurações</span>
+  <span data-i18n="sideTab">Account &amp; settings</span>
 </button>
 
 <div class="wrap" id="wrap">
   <header class="top">
     <div>
-      <h1>Fichário Pokémon</h1>
-      <p class="lead">Marque as cartas que você tem e guarde as favoritas.</p>
+      <h1 data-i18n="h1">Pokémon Binder</h1>
+      <p class="lead" data-i18n="lead">Mark the cards you own and keep your favorites.</p>
     </div>
     <div class="stats">
-      <p><strong id="nOwn">0</strong> de <span id="nTotal">0</span> cartas na coleção</p>
-      <div class="bar" id="bar" role="progressbar" aria-label="Progresso da coleção" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="barFill"></i></div>
+      <p id="statsLine"></p>
+      <div class="bar" id="bar" role="progressbar" data-i18n-aria="progress" aria-label="Collection progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="barFill"></i></div>
       <p class="por-colecao" id="porColecao"></p>
     </div>
   </header>
 
   <main>
     <div class="controls">
-      <div class="tabs" role="group" aria-label="Mostrar">
-        <button type="button" data-tab="todas" aria-pressed="true">Todas <span class="count" id="cTodas">0</span></button>
-        <button type="button" data-tab="colecao" aria-pressed="false">Na coleção <span class="count" id="cColecao">0</span></button>
-        <button type="button" data-tab="favoritas" aria-pressed="false">Favoritas <span class="count" id="cFavoritas">0</span></button>
+      <div class="tabs" role="group" data-i18n-aria="show" aria-label="Show">
+        <button type="button" data-tab="todas" aria-pressed="true"><span data-i18n="tabAll">All</span> <span class="count" id="cTodas">0</span></button>
+        <button type="button" data-tab="colecao" aria-pressed="false"><span data-i18n="tabOwned">Owned</span> <span class="count" id="cColecao">0</span></button>
+        <button type="button" data-tab="favoritas" aria-pressed="false"><span data-i18n="tabFav">Favorites</span> <span class="count" id="cFavoritas">0</span></button>
       </div>
       <div class="filters">
         <label class="search">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          <input id="busca" type="search" placeholder="Buscar pelo nome" aria-label="Buscar carta pelo nome" autocomplete="off">
+          <input id="busca" type="search" data-i18n-ph="searchPh" data-i18n-aria="searchAria" placeholder="Search by name" aria-label="Search cards by name" autocomplete="off">
         </label>
-        <select id="fSet" aria-label="Filtrar por coleção"></select>
-        <select id="fCat" aria-label="Filtrar por categoria"></select>
+        <select id="fPosse" data-i18n-aria="sitAria" aria-label="Filter by ownership"></select>
+        <select id="fSet" data-i18n-aria="setAria" aria-label="Filter by set"></select>
+        <select id="fCat" data-i18n-aria="catAria" aria-label="Filter by category"></select>
       </div>
     </div>
 
-    <section class="binder" aria-label="Fichário de cartas">
+    <section class="binder" data-i18n-aria="binderAria" aria-label="Card binder">
       <div class="spine" aria-hidden="true"><i></i><i></i><i></i></div>
       <div class="sheet">
         <ul id="grid" class="grid" tabindex="-1"></ul>
         <p id="vazio" class="vazio" tabindex="-1" hidden></p>
-        <nav class="pager" aria-label="Páginas do fichário">
-          <button type="button" id="prev" aria-label="Página anterior">
+        <nav class="pager" data-i18n-aria="pagerAria" aria-label="Binder pages">
+          <button type="button" id="prev" data-i18n-aria="prevPage" aria-label="Previous page">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <span class="pg" aria-live="polite">
-            <label for="pgIn">Página</label>
+            <label for="pgIn" data-i18n="page">Page</label>
             <input id="pgIn" type="number" inputmode="numeric" min="1" value="1">
-            <span id="pgDe">de 1</span>
+            <span id="pgDe">of 1</span>
           </span>
-          <button type="button" id="next" aria-label="Próxima página">
+          <button type="button" id="next" data-i18n-aria="nextPage" aria-label="Next page">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </nav>
@@ -255,56 +319,89 @@
   </main>
 
   <footer class="foot">
-    <p>Imagens e nomes das cartas das coleções Escarlate e Violeta — 151 e Celebração de 30 Anos, da galeria oficial do Pokémon Estampas Ilustradas. Sua coleção e suas favoritas ficam salvas neste navegador.</p>
-    <button type="button" class="link-btn" id="reset">Limpar fichário</button>
+    <p data-i18n="footer"></p>
+    <button type="button" class="link-btn" id="reset"></button>
   </footer>
+</div>
+
+<div class="zoom" id="zoom" role="dialog" aria-modal="true" aria-labelledby="zNome" hidden>
+  <div class="zoom-box" id="zoomBox">
+    <button type="button" class="zoom-close" id="zClose" data-i18n-aria="zClose" aria-label="Close enlarged card">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+    </button>
+    <div class="zoom-stage" id="zStage">
+      <button type="button" class="zoom-nav" id="zPrev" data-i18n-aria="zPrev" aria-label="Previous card">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="zoom-img" id="zImg"></div>
+      <button type="button" class="zoom-nav" id="zNext" data-i18n-aria="zNext" aria-label="Next card">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <div class="zoom-info">
+      <h2 id="zNome"></h2>
+      <p id="zDet"></p>
+      <p class="pos" id="zPos" aria-live="polite"></p>
+    </div>
+    <div class="zoom-ctrl">
+      <button type="button" class="z-fav" id="zFav" aria-pressed="false" aria-label="Favorita"></button>
+      <button type="button" class="z-own" id="zOwn" aria-pressed="false"></button>
+    </div>
+    <div class="zoom-ctrl"><div class="flags big" id="zFlags" role="group" style="width:100%"></div></div>
+  </div>
 </div>
 
 <div class="scrim" id="scrim" hidden></div>
 <div class="painel" id="painel" role="dialog" aria-modal="true" aria-labelledby="tPainel">
   <div class="painel-top">
-    <h2 id="tPainel">Conta e configurações</h2>
-    <button type="button" class="fechar" id="fechar" aria-label="Fechar painel">
+    <h2 id="tPainel" data-i18n="panelTitle">Account &amp; settings</h2>
+    <button type="button" class="fechar" id="fechar" data-i18n-aria="closePanel" aria-label="Close panel">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
     </button>
   </div>
 
   <section aria-labelledby="tConta">
-    <h3 id="tConta">Cadastro</h3>
+    <h3 id="tConta" data-i18n="account">Account</h3>
     <div id="contaBox"></div>
   </section>
 
   <section aria-labelledby="tSite">
-    <h3 id="tSite">Configurações do site</h3>
+    <h3 id="tSite" data-i18n="siteSettings">Site settings</h3>
     <div class="row">
       <div>
-        <p class="row-t" id="lCinza">Escurecer cartas que não tenho</p>
-        <p class="row-d">Desligue para ver todas as cartas com a cor original.</p>
+        <p class="row-t" id="lCinza" data-i18n="dim"></p>
+        <p class="row-d" data-i18n="dimD"></p>
       </div>
-      <button type="button" class="switch" id="cfgCinza" role="switch" aria-checked="true" aria-labelledby="lCinza"></button>
+      <button type="button" class="switch" id="cfgCinza" role="switch" aria-checked="true" aria-labelledby="lCinza"><span class="knob"><svg viewBox="0 0 32 32" aria-hidden="true"><use href="#pbh"/></svg></span></button>
     </div>
     <div class="row">
       <div>
-        <p class="row-t" id="lAnim">Animações</p>
-        <p class="row-d">Efeitos ao virar a página e ao marcar uma carta.</p>
+        <p class="row-t" id="lAnim" data-i18n="anim"></p>
+        <p class="row-d" data-i18n="animD"></p>
       </div>
-      <button type="button" class="switch" id="cfgAnim" role="switch" aria-checked="true" aria-labelledby="lAnim"></button>
+      <button type="button" class="switch" id="cfgAnim" role="switch" aria-checked="true" aria-labelledby="lAnim"><span class="knob"><svg viewBox="0 0 32 32" aria-hidden="true"><use href="#pbh"/></svg></span></button>
     </div>
     <div class="row col">
       <div class="field">
-        <label for="cfgOrdem">Ordem das cartas</label>
-        <select id="cfgOrdem">
-          <option value="num">Número da carta</option>
-          <option value="nome">Nome (A a Z)</option>
-        </select>
+        <label for="cfgOrdem" data-i18n="order"></label>
+        <select id="cfgOrdem"></select>
       </div>
+    </div>
+    <div class="row col">
+      <p class="row-t" id="lLang" data-i18n="lang"></p>
+      <div class="langs" role="group" aria-labelledby="lLang">
+        <button type="button" class="lang-btn" data-lang="en" lang="en" aria-pressed="true"><span class="flag" data-flag="us"></span><span>English (USA)</span><svg class="tick" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" class="lang-btn" data-lang="pt" lang="pt-BR" aria-pressed="false"><span class="flag" data-flag="br"></span><span>Português (Brasil)</span><svg class="tick" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" class="lang-btn" data-lang="ja" lang="ja" aria-pressed="false"><span class="flag" data-flag="jp"></span><span>日本語 (Japan)</span><svg class="tick" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <p class="row-d" id="langNote" style="margin-top:8px"></p>
     </div>
   </section>
 </div>
 
 <script>
 (() => {
-  /* ---------- Dados das cartas (galeria oficial do Pokémon Estampas Ilustradas) ---------- */
+  /* ---------- Dados das cartas (official Pokémon TCG gallery) ---------- */
   const CDN = "https://dz3we2x72f7ol.cloudfront.net/expansions/";
 
   const DEX = "Bulbasaur,Ivysaur,Venusaur ex,Charmander,Charmeleon,Charizard ex,Squirtle,Wartortle,Blastoise ex,Caterpie,Metapod,Butterfree,Weedle,Kakuna,Beedrill,Pidgey,Pidgeotto,Pidgeot,Rattata,Raticate,Spearow,Fearow,Ekans,Arbok ex,Pikachu,Raichu,Sandshrew,Sandslash,Nidoran♀,Nidorina,Nidoqueen,Nidoran♂,Nidorino,Nidoking,Clefairy,Clefable,Vulpix,Ninetales ex,Jigglypuff,Wigglytuff ex,Zubat,Golbat,Oddish,Gloom,Vileplume,Paras,Parasect,Venonat,Venomoth,Diglett,Dugtrio,Meowth,Persian,Psyduck,Golduck,Mankey,Primeape,Growlithe,Arcanine,Poliwag,Poliwhirl,Poliwrath,Abra,Kadabra,Alakazam ex,Machop,Machoke,Machamp,Bellsprout,Weepinbell,Victreebel,Tentacool,Tentacruel,Geodude,Graveler,Golem ex,Ponyta,Rapidash,Slowpoke,Slowbro,Magnemite,Magneton,Farfetch'd,Doduo,Dodrio,Seel,Dewgong,Grimer,Muk,Shellder,Cloyster,Gastly,Haunter,Gengar,Onix,Drowzee,Hypno,Krabby,Kingler,Voltorb,Electrode,Exeggcute,Exeggutor,Cubone,Marowak,Hitmonlee,Hitmonchan,Lickitung,Koffing,Weezing,Rhyhorn,Rhydon,Chansey,Tangela,Kangaskhan ex,Horsea,Seadra,Goldeen,Seaking,Staryu,Starmie,Mr. Mime,Scyther,Jynx ex,Electabuzz,Magmar,Pinsir,Tauros,Magikarp,Gyarados,Lapras,Ditto,Eevee,Vaporeon,Jolteon,Flareon,Porygon,Omanyte,Omastar,Kabuto,Kabutops,Aerodactyl,Snorlax,Articuno,Zapdos ex,Moltres,Dratini,Dragonair,Dragonite,Mewtwo,Mew ex".split(",");
@@ -314,21 +411,135 @@
   const C30 = "Exeggcute,Alolan Exeggutor,Volbeat,Illumise,Tropius,Cherubi,Cherrim,Vivillon,Vulpix,Ninetales,Moltres,Ho-Oh,Victini,Reshiram,Fuecoco ex,Slowpoke,Lapras,Articuno,Kyogre,Palkia,Greninja ex,Wishiwashi".split(",")
     .concat(Array(30).fill("Pikachu"))
     .concat("Pikachu ex,Pikachu ex,Zapdos,Zekrom,Zeraora,Toxel,Toxtricity,Toxtricity,Morpeko,Miraidon,Mewtwo,Mewtwo ex,Mew,Mew ex,Marill,Azumarill,Espeon,Espeon ex,Sylveon ex,Unown,Drifloon,Cresselia,Chandelure,Xerneas,Comfey,Cosmog,Cosmoem,Lunala,Gimmighoul,Groudon,Lucario,Seismitoad,Lycanroc,Koraidon,Nidoran♀,Nidorina,Alolan Meowth,Gengar ex,Umbreon,Umbreon ex,Murkrow,Scraggy,Zorua,Zoroark,Deino,Zweilous,Hydreigon,Yveltal,Galarian Meowth,Jirachi ex,Dialga,Ferrothorn,Solgaleo,Zacian,Zamazenta,Gholdengo,Salamence ex,Jangmo-o,Hakamo-o,Kommo-o,Meowth,Kangaskhan,Ditto,Eevee,Eevee,Eevee,Snorlax,Igglybuff,Lugia,Hisuian Zorua,Hisuian Zoroark,Minior,Maushold,Poké Pad,Switch,Ultra Ball,Alolan Exeggutor,Moltres,Lapras,Articuno,Zapdos,Toxtricity,Morpeko,Drifloon,Chandelure,Lycanroc,Alolan Meowth,Scraggy,Galarian Meowth,Gholdengo,Kommo-o,Meowth,Hisuian Zorua,Maushold,Fuecoco ex,Greninja ex,Pikachu ex,Pikachu ex,Mewtwo ex,Mew ex,Sylveon ex,Gengar ex,Jirachi ex,Salamence ex,Mewtwo ex,Mew ex".split(","));
-  const CL = "Charizard,Delcatty,Metagross δ,Genesect EX,Misty,Dark Tyranitar,Sneasel,Pikachu & Zekrom GX,Greninja BREAK,Uxie,Crobat,Raikou,Buzzwole GX,Pikachu,Erika's Jigglypuff,Rayquaza EX,Solgaleo GX,Gengar,Darkrai & Cresselia LEGEND (parte 1),Darkrai & Cresselia LEGEND (parte 2),N,Palkia LV.X,M Gardevoir EX,Shining Celebi,Scizor ex,Mew VMAX,Arceus VSTAR,Zacian V,Lugia,Magikarp".split(",");
+  const CL = "Charizard,Delcatty,Metagross δ,Genesect EX,Misty,Dark Tyranitar,Sneasel,Pikachu & Zekrom GX,Greninja BREAK,Uxie,Crobat,Raikou,Buzzwole GX,Pikachu,Erika's Jigglypuff,Rayquaza EX,Solgaleo GX,Gengar,Darkrai & Cresselia LEGEND (part 1),Darkrai & Cresselia LEGEND (part 2),N,Palkia LV.X,M Gardevoir EX,Shining Celebi,Scizor ex,Mew VMAX,Arceus VSTAR,Zacian V,Lugia,Magikarp".split(",");
 
-  const SETS = {
-    s151: { label: "151" },
-    s30:  { label: "30 Anos" },
-    s30c: { label: "30 Anos Clássicas" }
+  const I18N = {
+    en: {
+      htmlLang: "en", title: "Pokémon Binder", h1: "Pokémon Binder", sideTab: "Account & settings",
+      lead: "Mark the cards you own and keep your favorites.",
+      stats: (n, tot) => `<strong>${n}</strong> of <span>${tot}</span> cards in your collection`,
+      progress: "Collection progress", show: "Show", tabAll: "All", tabOwned: "Owned", tabFav: "Favorites",
+      searchPh: "Search by name", searchAria: "Search cards by name",
+      sitAria: "Filter by ownership", sit: "Status", fOwn: "Owned", fMissing: "Not owned",
+      setAria: "Filter by set", set: "Set", catAria: "Filter by category", cat: "Category",
+      binderAria: "Card binder", pagerAria: "Binder pages", prevPage: "Previous page", nextPage: "Next page",
+      page: "Page", of: n => "of " + n,
+      footer: "Card images and names from the Scarlet & Violet—151 and 30th Celebration sets, from the official Pokémon TCG gallery. Your collection and favorites are saved in this browser.",
+      reset: "Clear binder", resetArm: "Tap again to clear everything",
+      zClose: "Close enlarged card", zPrev: "Previous card", zNext: "Next card", zPos: (i, n) => `${i} of ${n}`,
+      panelTitle: "Account & settings", closePanel: "Close panel", account: "Account", siteSettings: "Site settings",
+      dim: "Darken cards I don't own", dimD: "Turn off to see every card in full color.",
+      anim: "Animations", animD: "Effects when turning pages and marking cards.",
+      order: "Card order", ordNum: "Card number", ordName: "Name (A to Z)",
+      lang: "Language",
+      langNote: "Card images match the language's official gallery. Japanese has no official gallery there, so it shows the English cards.",
+      acctIntro: "Create your account to personalize your binder.", name: "Trainer name", email: "Email",
+      create: "Create account", acctNote: "For now, the account is saved only in this browser.",
+      acctDone: "Account created in this browser. Password login and access from any device are planned for a later version.",
+      signOut: "Sign out", errName: "Enter a trainer name with at least 2 characters.", errEmail: "Enter a valid email, like name@example.com.",
+      enlarge: "Enlarge card", number: "number", inColl: "owned", notInColl: "not owned", favLabel: "Favorite", haveLabel: "I own it",
+      btnHave: "I own it", btnOwned: "Owned", ownedIn: "Owned in", langNames: { en: "English", pt: "Portuguese", ja: "Japanese" },
+      allOwned: "Congratulations, no card is missing! You marked them all as yours.",
+      emptyOwned: "Your collection is empty. Under “All”, tap “I own it” on the cards you have.",
+      emptyFav: "No favorites yet. Tap the heart on a card to keep it here.",
+      none: "No cards found. Try another name or clear the filters.",
+      sets: { s151: "151", s30: "30th Celebration", s30c: "30th Classics" },
+      shortSets: { s151: "151", s30: "30th", s30c: "Classics" },
+      cats: ["Main", "Trainers & items", "Illustration Rare", "Ultra Rare", "Special Illustration Rare", "Hyper Rare", "Futuristic Rare", "Classic"]
+    },
+    pt: {
+      htmlLang: "pt-BR", title: "Fichário Pokémon", h1: "Fichário Pokémon", sideTab: "Conta e configurações",
+      lead: "Marque as cartas que você tem e guarde as favoritas.",
+      stats: (n, tot) => `<strong>${n}</strong> de <span>${tot}</span> cartas na coleção`,
+      progress: "Progresso da coleção", show: "Mostrar", tabAll: "Todas", tabOwned: "Na coleção", tabFav: "Favoritas",
+      searchPh: "Buscar pelo nome", searchAria: "Buscar carta pelo nome",
+      sitAria: "Filtrar por situação na coleção", sit: "Situação", fOwn: "Tenho", fMissing: "Não tenho",
+      setAria: "Filtrar por coleção", set: "Coleção", catAria: "Filtrar por categoria", cat: "Categoria",
+      binderAria: "Fichário de cartas", pagerAria: "Páginas do fichário", prevPage: "Página anterior", nextPage: "Próxima página",
+      page: "Página", of: n => "de " + n,
+      footer: "Imagens e nomes das cartas das coleções Escarlate e Violeta — 151 e Celebração de 30 Anos, da galeria oficial do Pokémon Estampas Ilustradas. Sua coleção e suas favoritas ficam salvas neste navegador.",
+      reset: "Limpar fichário", resetArm: "Toque de novo para limpar tudo",
+      zClose: "Fechar carta ampliada", zPrev: "Carta anterior", zNext: "Próxima carta", zPos: (i, n) => `${i} de ${n}`,
+      panelTitle: "Conta e configurações", closePanel: "Fechar painel", account: "Cadastro", siteSettings: "Configurações do site",
+      dim: "Escurecer cartas que não tenho", dimD: "Desligue para ver todas as cartas com a cor original.",
+      anim: "Animações", animD: "Efeitos ao virar a página e ao marcar uma carta.",
+      order: "Ordem das cartas", ordNum: "Número da carta", ordName: "Nome (A a Z)",
+      lang: "Idioma",
+      langNote: "As imagens das cartas seguem a galeria oficial do idioma. O japonês não tem galeria oficial lá, então mostra as cartas em inglês.",
+      acctIntro: "Crie sua conta para identificar o seu fichário.", name: "Nome de treinador", email: "E-mail",
+      create: "Criar conta", acctNote: "Por enquanto, a conta fica salva só neste navegador.",
+      acctDone: "Conta criada neste navegador. Login com senha e acesso de qualquer aparelho ficam para a próxima versão.",
+      signOut: "Sair da conta", errName: "Digite um nome de treinador com pelo menos 2 letras.", errEmail: "Digite um e-mail válido, como nome@exemplo.com.",
+      enlarge: "Ampliar carta", number: "número", inColl: "na coleção", notInColl: "fora da coleção", favLabel: "Favorita", haveLabel: "Tenho na coleção",
+      btnHave: "Tenho", btnOwned: "Na coleção", ownedIn: "Tenho em", langNames: { en: "inglês", pt: "português", ja: "japonês" },
+      allOwned: "Parabéns, nenhuma carta falta! Você marcou todas como suas.",
+      emptyOwned: "Sua coleção está vazia. Em “Todas”, toque em “Tenho” nas cartas que você possui.",
+      emptyFav: "Nenhuma favorita ainda. Toque no coração de uma carta para guardá-la aqui.",
+      none: "Nenhuma carta encontrada. Tente outro nome ou limpe os filtros.",
+      sets: { s151: "151", s30: "30 Anos", s30c: "30 Anos Clássicas" },
+      shortSets: { s151: "151", s30: "30 Anos", s30c: "Clássicas" },
+      cats: ["Principal", "Treinadores e itens", "Ilustração Rara", "Ultra Rara", "Ilustração Especial", "Hiper Rara", "Rara Futurista", "Clássica"]
+    },
+    ja: {
+      htmlLang: "ja", title: "ポケモンバインダー", h1: "ポケモンバインダー", sideTab: "アカウントと設定",
+      lead: "持っているカードをチェックして、お気に入りを保存しましょう。",
+      stats: (n, tot) => `<strong>${n}</strong> / <span>${tot}</span> 枚を所持`,
+      progress: "コレクションの進み具合", show: "表示", tabAll: "すべて", tabOwned: "所持", tabFav: "お気に入り",
+      searchPh: "名前で検索", searchAria: "カードを名前で検索",
+      sitAria: "所持状況で絞り込み", sit: "状況", fOwn: "持っている", fMissing: "持っていない",
+      setAria: "セットで絞り込み", set: "セット", catAria: "カテゴリで絞り込み", cat: "カテゴリ",
+      binderAria: "カードバインダー", pagerAria: "バインダーのページ", prevPage: "前のページ", nextPage: "次のページ",
+      page: "ページ", of: n => "/ " + n,
+      footer: "カード画像と名前は、公式ポケモンカードゲームギャラリーのスカーレット＆バイオレット「151」と30周年セレクションのものです。コレクションとお気に入りはこのブラウザに保存されます。",
+      reset: "バインダーをリセット", resetArm: "もう一度タップですべて削除",
+      zClose: "拡大カードを閉じる", zPrev: "前のカード", zNext: "次のカード", zPos: (i, n) => `${i} / ${n}`,
+      panelTitle: "アカウントと設定", closePanel: "パネルを閉じる", account: "アカウント", siteSettings: "サイト設定",
+      dim: "持っていないカードを暗くする", dimD: "オフにすると、すべてのカードが元の色で表示されます。",
+      anim: "アニメーション", animD: "ページをめくるときやカードをチェックするときの効果。",
+      order: "カードの並び順", ordNum: "カード番号", ordName: "名前（A〜Z）",
+      lang: "言語",
+      langNote: "カード画像は各言語の公式ギャラリーに合わせます。日本語の公式ギャラリーはないため、英語版のカードを表示します。",
+      acctIntro: "アカウントを作成して、バインダーを自分用にしましょう。", name: "トレーナー名", email: "メールアドレス",
+      create: "アカウントを作成", acctNote: "現在、アカウントはこのブラウザにのみ保存されます。",
+      acctDone: "このブラウザにアカウントを作成しました。パスワードログインと他の端末からの利用は次のバージョンで対応予定です。",
+      signOut: "ログアウト", errName: "トレーナー名を2文字以上で入力してください。", errEmail: "name@example.com のような有効なメールアドレスを入力してください。",
+      enlarge: "カードを拡大", number: "番号", inColl: "所持", notInColl: "未所持", favLabel: "お気に入り", haveLabel: "持っている",
+      btnHave: "持ってる", btnOwned: "所持", ownedIn: "所持している言語", langNames: { en: "英語", pt: "ポルトガル語", ja: "日本語" },
+      allOwned: "おめでとう！すべてのカードを持っています。",
+      emptyOwned: "コレクションは空です。「すべて」で持っているカードの「持ってる」をタップしてください。",
+      emptyFav: "お気に入りはまだありません。カードのハートをタップするとここに保存されます。",
+      none: "カードが見つかりません。別の名前を試すか、絞り込みを解除してください。",
+      sets: { s151: "151", s30: "30周年", s30c: "30周年クラシック" },
+      shortSets: { s151: "151", s30: "30周年", s30c: "クラシック" },
+      cats: ["通常", "トレーナーズ・グッズ", "イラストレア", "ウルトラレア", "スペシャルイラストレア", "ハイパーレア", "フューチャーレア", "クラシック"]
+    }
   };
-  const CATS = ["Principal", "Treinadores e itens", "Ilustração Rara", "Ultra Rara", "Ilustração Especial", "Hiper Rara", "Rara Futurista", "Clássica"];
+  const LANGS = ["en", "pt", "ja"];
+  const t = (k, ...a) => {
+    const d = I18N[conta.cfg.lang] || I18N.en;
+    const v = d[k] !== undefined ? d[k] : I18N.en[k];
+    return typeof v === "function" ? v(...a) : v;
+  };
+  const setLabel = id => t("sets")[id];
+  const catLabel = i => t("cats")[i];
+
+  /* Imagens: inglês (EUA) por padrão; português usa a galeria do Brasil; japonês usa as inglesas (não existe galeria oficial em japonês) */
+  const LOC = { en: { dir: "en-us", tag: "EN" }, pt: { dir: "pt-br", tag: "PTBR" }, ja: { dir: "en-us", tag: "EN" } };
+  function imgUrl(c) {
+    const L = LOC[conta.cfg.lang] || LOC.en;
+    if (c.set === "s151") return CDN + `151/${L.dir}/SV3pt5_${L.tag}_${c.num}.png`;
+    if (c.set === "s30") return CDN + `30th-celebration/${L.dir}/2M6P_${L.tag}_${c.num}.png`;
+    return CDN + `30th-celebration/${L.dir}/2M6P_Classic_${L.tag}_${c.num}.png`;
+  }
+  const SET_ID = ["s151", "s30", "s30c"];
+
   const cat151 = n => n <= 151 ? 0 : n <= 165 ? 1 : n <= 181 ? 2 : n <= 197 ? 3 : n <= 204 ? 4 : 5;
   const cat30 = n => n <= 128 ? 0 : n <= 146 ? 2 : n <= 156 ? 4 : 6;
 
   const CARTAS = [];
-  N151.forEach((nome, i) => { const n = i + 1; CARTAS.push({ id: "151-" + n, set: "s151", n: nome, num: n, cat: cat151(n), img: CDN + "151/pt-br/SV3pt5_PTBR_" + n + ".png" }); });
-  C30.forEach((nome, i) => { const n = i + 1; CARTAS.push({ id: "30-" + n, set: "s30", n: nome, num: n, cat: cat30(n), img: CDN + "30th-celebration/pt-br/2M6P_PTBR_" + n + ".png" }); });
-  CL.forEach((nome, i) => { const n = i + 1; CARTAS.push({ id: "30c-" + n, set: "s30c", n: nome, num: n, cat: 7, img: CDN + "30th-celebration/pt-br/2M6P_Classic_PTBR_" + n + ".png" }); });
+  N151.forEach((nome, i) => { const n = i + 1; CARTAS.push({ id: "151-" + n, set: "s151", n: nome, num: n, cat: cat151(n) }); });
+  C30.forEach((nome, i) => { const n = i + 1; CARTAS.push({ id: "30-" + n, set: "s30", n: nome, num: n, cat: cat30(n) }); });
+  CL.forEach((nome, i) => { const n = i + 1; CARTAS.push({ id: "30c-" + n, set: "s30c", n: nome, num: n, cat: 7 }); });
   const POR_SET = { s151: 207, s30: 158, s30c: 30 };
 
   const ICON = {
@@ -347,19 +558,26 @@
   function carregar() {
     try {
       const raw = localStorage.getItem(KEY);
-      if (raw) { const o = JSON.parse(raw); return { own: new Set(o.own || []), fav: new Set(o.fav || []) }; }
+      if (raw) {
+        const o = JSON.parse(raw);
+        const langs = {};
+        const src = o.langs || {};
+        (o.own || []).forEach(id => { langs[id] = Array.isArray(src[id]) && src[id].length ? src[id].filter(l => LANGS.includes(l)) : ["en"]; });
+        return { own: new Set(Object.keys(langs)), fav: new Set(o.fav || []), langs };
+      }
     } catch (e) { /* usa os exemplos */ }
-    return { own: new Set(SEED_OWN), fav: new Set(SEED_FAV) };
+    const langs = {}; SEED_OWN.forEach(id => { langs[id] = ["en"]; });
+    return { own: new Set(SEED_OWN), fav: new Set(SEED_FAV), langs };
   }
   function salvar() {
-    try { localStorage.setItem(KEY, JSON.stringify({ own: [...state.own], fav: [...state.fav] })); } catch (e) { /* segue sem salvar */ }
+    try { localStorage.setItem(KEY, JSON.stringify({ own: [...state.own], fav: [...state.fav], langs: state.langs })); } catch (e) { /* segue sem salvar */ }
   }
 
   /* ---------- Conta e configurações (salvas no navegador) ---------- */
   const KEY_CONTA = "fichario-pokemon-conta-v2";
   const reduzir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   function carregarConta() {
-    const padrao = { perfil: null, cfg: { cinza: true, anim: !reduzir, ordem: "num" } };
+    const padrao = { perfil: null, cfg: { cinza: true, anim: !reduzir, ordem: "num", lang: "en" } };
     try {
       const raw = localStorage.getItem(KEY_CONTA);
       if (raw) {
@@ -367,6 +585,7 @@
         const perfil = o.perfil && o.perfil.nome ? { nome: String(o.perfil.nome), email: String(o.perfil.email || "") } : null;
         const cfg = Object.assign(padrao.cfg, o.cfg || {});
         if (cfg.ordem !== "nome") cfg.ordem = "num";
+        if (!LANGS.includes(cfg.lang)) cfg.lang = "en";
         return { perfil, cfg };
       }
     } catch (e) { /* usa o padrão */ }
@@ -378,7 +597,7 @@
 
   const saved = carregar();
   const conta = carregarConta();
-  const state = { tab: "todas", q: "", set: "", cat: "", page: 0, own: saved.own, fav: saved.fav };
+  const state = { tab: "todas", q: "", posse: "", set: "", cat: "", page: 0, own: saved.own, fav: saved.fav, langs: saved.langs };
 
   const mq = window.matchMedia("(max-width: 479px)");
   let porPagina = mq.matches ? 6 : 9;
@@ -388,13 +607,15 @@
   const SET_ORDEM = { s151: 0, s30: 1, s30c: 2 };
   const ORDENS = {
     num: (a, b) => SET_ORDEM[a.set] - SET_ORDEM[b.set] || a.num - b.num,
-    nome: (a, b) => a.n.localeCompare(b.n, "pt-BR") || SET_ORDEM[a.set] - SET_ORDEM[b.set] || a.num - b.num
+    nome: (a, b) => a.n.localeCompare(b.n, conta.cfg.lang === "pt" ? "pt-BR" : "en") || SET_ORDEM[a.set] - SET_ORDEM[b.set] || a.num - b.num
   };
   function filtradas() {
     const q = norm(state.q.trim());
     return CARTAS.filter(c => {
       if (state.tab === "colecao" && !state.own.has(c.id)) return false;
       if (state.tab === "favoritas" && !state.fav.has(c.id)) return false;
+      if (state.posse === "tenho" && !state.own.has(c.id)) return false;
+      if (state.posse === "faltam" && state.own.has(c.id)) return false;
       if (state.set && c.set !== state.set) return false;
       if (state.cat !== "" && c.cat !== Number(state.cat)) return false;
       if (q && !norm(c.n).includes(q)) return false;
@@ -405,30 +626,52 @@
   function cartaHTML(c) {
     const own = state.own.has(c.id), fav = state.fav.has(c.id);
     const cinza = !own && conta.cfg.cinza;
-    const rotulo = `${c.n}, número ${c.num}, ${SETS[c.set].label}, ${CATS[c.cat]}, ${own ? "na coleção" : "fora da coleção"}`;
+    const rotulo = `${c.n}, ${t("number")} ${c.num}, ${setLabel(c.set)}, ${catLabel(c.cat)}, ${own ? t("inColl") : t("notInColl")}`;
     return `<li class="cell" data-id="${c.id}">
-      <div class="pocket">
-        <img class="${cinza ? "ghost" : ""}" src="${c.img}" alt="${esc(rotulo)}" width="330" height="460" loading="lazy" decoding="async" referrerpolicy="no-referrer">
-      </div>
+      <button type="button" class="pocket" data-act="zoom" aria-label="${esc(t("enlarge"))}: ${esc(rotulo)}">
+        <img class="${cinza ? "ghost" : ""}" src="${imgUrl(c)}" alt="" width="330" height="460" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+      </button>
       <div class="cap"><span class="n" title="${esc(c.n)}">${esc(c.n)}</span><span class="num">#${c.num}</span></div>
       <div class="ctrl">
-        <button type="button" class="btn-fav" data-act="fav" aria-pressed="${fav}" aria-label="Favorita: ${esc(c.n)}, número ${c.num}, ${SETS[c.set].label}">${ICON.heart}</button>
-        <button type="button" class="btn-own" data-act="own" aria-pressed="${own}" aria-label="Tenho na coleção: ${esc(c.n)}, número ${c.num}, ${SETS[c.set].label}">${own ? ICON.check : ICON.plus}<span class="lbl">${own ? "Na coleção" : "Tenho"}</span></button>
+        <button type="button" class="btn-fav" data-act="fav" aria-pressed="${fav}" aria-label="${esc(t("favLabel"))}: ${esc(c.n)}, ${t("number")} ${c.num}, ${esc(setLabel(c.set))}">${ICON.heart}</button>
+        <button type="button" class="btn-own" data-act="own" aria-pressed="${own}" aria-label="${esc(t("haveLabel"))}: ${esc(c.n)}, ${t("number")} ${c.num}, ${esc(setLabel(c.set))}">${own ? ICON.check : ICON.plus}<span class="lbl">${own ? t("btnOwned") : t("btnHave")}</span></button>
       </div>
+      ${flagsHTML(c)}
     </li>`;
   }
-  const vagaHTML = () => `<li class="cell empty" aria-hidden="true"><div class="pocket"></div><div class="cap">&nbsp;</div><div class="ctrl"><button type="button" tabindex="-1"></button></div></li>`;
+  const LANG_FLAG = { en: "us", pt: "br", ja: "jp" };
+  function flagsHTML(c, big) {
+    const have = state.langs[c.id] || [];
+    const nm = t("langNames");
+    return (big ? "" : `<div class="flags" role="group" aria-label="${esc(t("ownedIn"))}: ${esc(c.n)}, ${t("number")} ${c.num}, ${esc(setLabel(c.set))}">`) +
+      LANGS.map(l => `<button type="button" data-act="flag" data-l="${l}" aria-pressed="${have.includes(l)}" aria-label="${esc(t("ownedIn"))} ${esc(nm[l])}: ${esc(c.n)}, ${t("number")} ${c.num}"><span class="fl">${FLAGS[LANG_FLAG[l]]}</span></button>`).join("") +
+      (big ? "" : "</div>");
+  }
+  function toggleOwn(id) {
+    if (state.own.has(id)) { state.own.delete(id); delete state.langs[id]; }
+    else { state.own.add(id); state.langs[id] = [conta.cfg.lang]; }
+  }
+  function toggleLang(id, l) {
+    const a = (state.langs[id] || []).slice();
+    const i = a.indexOf(l);
+    if (i >= 0) a.splice(i, 1); else a.push(l);
+    if (a.length) { state.langs[id] = LANGS.filter(x => a.includes(x)); state.own.add(id); }
+    else { delete state.langs[id]; state.own.delete(id); }
+  }
+  const vagaHTML = () => `<li class="cell empty" aria-hidden="true"><div class="pocket"></div><div class="cap">&nbsp;</div><div class="ctrl"><button type="button" tabindex="-1"></button></div><div class="flags" style="visibility:hidden"><button type="button" tabindex="-1"></button></div></li>`;
 
   function mensagemVazia() {
-    if (!state.q.trim() && !state.set && state.cat === "") {
-      if (state.tab === "colecao") return "Sua coleção está vazia. Em “Todas”, toque em “Tenho” nas cartas que você possui.";
-      if (state.tab === "favoritas") return "Nenhuma favorita ainda. Toque no coração de uma carta para guardá-la aqui.";
+    if (!state.q.trim() && !state.set && state.cat === "" && state.posse === "faltam" && state.tab === "todas") return t("allOwned");
+    if (!state.q.trim() && !state.set && state.cat === "" && !state.posse) {
+      if (state.tab === "colecao") return t("emptyOwned");
+      if (state.tab === "favoritas") return t("emptyFav");
     }
-    return "Nenhuma carta encontrada. Tente outro nome ou limpe os filtros.";
+    return t("none");
   }
 
   function render() {
     const lista = filtradas();
+    state.lista = lista;
     const paginas = Math.max(1, Math.ceil(lista.length / porPagina));
     state.page = Math.min(state.page, paginas - 1);
 
@@ -444,19 +687,18 @@
 
     pgIn.value = state.page + 1;
     pgIn.max = paginas;
-    $("pgDe").textContent = "de " + paginas;
+    $("pgDe").textContent = t("of", paginas);
     prev.disabled = state.page === 0;
     next.disabled = state.page >= paginas - 1;
 
     const total = CARTAS.length;
     const tem = state.own.size;
-    $("nOwn").textContent = tem;
-    $("nTotal").textContent = total;
+    $("statsLine").innerHTML = t("stats", tem, total);
     $("barFill").style.width = (tem / total * 100) + "%";
     $("bar").setAttribute("aria-valuenow", Math.round(tem / total * 100));
     const cont = { s151: 0, s30: 0, s30c: 0 };
     CARTAS.forEach(c => { if (state.own.has(c.id)) cont[c.set]++; });
-    $("porColecao").textContent = `151: ${cont.s151}/${POR_SET.s151} · 30 Anos: ${cont.s30}/${POR_SET.s30} · Clássicas: ${cont.s30c}/${POR_SET.s30c}`;
+    $("porColecao").textContent = SET_ID.map(k => `${t("shortSets")[k]}: ${cont[k]}/${POR_SET[k]}`).join(" · ");
     $("cTodas").textContent = total;
     $("cColecao").textContent = tem;
     $("cFavoritas").textContent = state.fav.size;
@@ -478,9 +720,7 @@
     const c = CARTAS.find(x => x.id === cell.dataset.id);
     const div = document.createElement("div");
     div.className = "fallback";
-    div.setAttribute("role", "img");
-    div.setAttribute("aria-label", img.alt);
-    div.innerHTML = `<span>${esc(c.n)}</span><small>#${c.num} · ${esc(SETS[c.set].label)}</small>`;
+    div.innerHTML = `<span>${esc(c.n)}</span><small>#${c.num} · ${esc(setLabel(c.set))}</small>`;
     img.replaceWith(div);
   }, true);
 
@@ -489,11 +729,14 @@
     if (!b) return;
     const id = b.closest(".cell").dataset.id;
     const act = b.dataset.act;
-    const conj = act === "fav" ? state.fav : state.own;
-    if (conj.has(id)) conj.delete(id); else conj.add(id);
+    if (act === "zoom") { abrirZoom(id); return; }
+    const lg = b.dataset.l;
+    if (act === "fav") { if (state.fav.has(id)) state.fav.delete(id); else state.fav.add(id); }
+    else if (act === "flag") toggleLang(id, lg);
+    else toggleOwn(id);
     salvar();
     render();
-    const novo = grid.querySelector(`.cell[data-id="${id}"] [data-act="${act}"]`);
+    const novo = grid.querySelector(`.cell[data-id="${id}"] ${act === "flag" ? `[data-l="${lg}"]` : `[data-act="${act}"]`}`);
     if (novo) { novo.focus({ preventScroll: true }); novo.classList.add("pop"); }
     else (grid.hidden ? vazio : grid).focus({ preventScroll: true });
   });
@@ -504,6 +747,7 @@
     state.tab = b.dataset.tab; state.page = 0; render();
   });
   $("busca").addEventListener("input", e => { state.q = e.target.value; state.page = 0; render(); });
+  $("fPosse").addEventListener("change", e => { state.posse = e.target.value; state.page = 0; render(); });
   $("fSet").addEventListener("change", e => { state.set = e.target.value; state.page = 0; render(); });
   $("fCat").addEventListener("change", e => { state.cat = e.target.value; state.page = 0; render(); });
 
@@ -533,14 +777,110 @@
   reset.addEventListener("click", () => {
     if (!armado) {
       armado = true;
-      reset.textContent = "Toque de novo para limpar tudo";
-      timer = setTimeout(() => { armado = false; reset.textContent = "Limpar fichário"; }, 3500);
+      reset.textContent = t("resetArm");
+      timer = setTimeout(() => { armado = false; reset.textContent = t("reset"); }, 3500);
     } else {
       clearTimeout(timer); armado = false;
-      reset.textContent = "Limpar fichário";
-      state.own.clear(); state.fav.clear(); salvar(); render();
+      reset.textContent = t("reset");
+      state.own.clear(); state.fav.clear(); state.langs = {}; salvar(); render();
     }
   });
+
+  /* ---------- Carta ampliada ---------- */
+  const zoom = $("zoom");
+  const zState = { ids: [], i: 0, origem: null };
+  const cartaPorId = id => CARTAS.find(c => c.id === id);
+
+  function desenharZoom() {
+    const c = cartaPorId(zState.ids[zState.i]);
+    const own = state.own.has(c.id), fav = state.fav.has(c.id);
+    const box = $("zImg");
+    box.innerHTML = "";
+    const img = new Image();
+    img.referrerPolicy = "no-referrer";
+    img.alt = `${c.n}, ${t("number")} ${c.num}, ${setLabel(c.set)}`;
+    img.addEventListener("error", () => {
+      box.innerHTML = `<div class="fallback"><span>${esc(c.n)}</span><small>#${c.num} · ${esc(setLabel(c.set))}</small></div>`;
+    });
+    img.src = imgUrl(c);
+    box.appendChild(img);
+    $("zNome").textContent = c.n;
+    $("zDet").textContent = `#${c.num} · ${setLabel(c.set)} · ${catLabel(c.cat)}`;
+    $("zPos").textContent = t("zPos", zState.i + 1, zState.ids.length);
+    const f = $("zFav"), o = $("zOwn");
+    f.setAttribute("aria-pressed", String(fav));
+    f.setAttribute("aria-label", t("favLabel") + ": " + c.n);
+    f.innerHTML = ICON.heart;
+    o.setAttribute("aria-pressed", String(own));
+    o.setAttribute("aria-label", t("haveLabel") + ": " + c.n);
+    o.innerHTML = (own ? ICON.check : ICON.plus) + `<span>${own ? t("btnOwned") : t("btnHave")}</span>`;
+    $("zFlags").setAttribute("aria-label", t("ownedIn"));
+    $("zFlags").innerHTML = flagsHTML(c, true);
+    $("zPrev").disabled = zState.i === 0;
+    $("zNext").disabled = zState.i >= zState.ids.length - 1;
+  }
+  function abrirZoom(id) {
+    const ids = (state.lista || []).map(c => c.id);
+    const i = ids.indexOf(id);
+    if (i < 0) return;
+    zState.ids = ids; zState.i = i;
+    zState.origem = id;
+    desenharZoom();
+    zoom.hidden = false;
+    wrap.inert = true;
+    $("zClose").focus();
+  }
+  function fecharZoom() {
+    if (zoom.hidden) return;
+    zoom.hidden = true;
+    wrap.inert = false;
+    // volta o foco para a carta que estava aberta, se ela ainda estiver na página
+    const atual = zState.ids[zState.i];
+    const alvo = grid.querySelector(`.cell[data-id="${atual}"] [data-act="zoom"]`) || grid.querySelector(`.cell[data-id="${zState.origem}"] [data-act="zoom"]`) || sideTab;
+    alvo.focus({ preventScroll: false });
+  }
+  function irZoom(d) {
+    const n = zState.i + d;
+    if (n < 0 || n >= zState.ids.length) return;
+    zState.i = n;
+    desenharZoom();
+  }
+  function marcarZoom(act) {
+    const id = zState.ids[zState.i];
+    if (act === "fav") { if (state.fav.has(id)) state.fav.delete(id); else state.fav.add(id); }
+    else toggleOwn(id);
+    salvar();
+    render();
+    desenharZoom();
+  }
+  function marcarFlagZoom(l) {
+    toggleLang(zState.ids[zState.i], l);
+    salvar();
+    render();
+    desenharZoom();
+    const b = $("zFlags").querySelector(`[data-l="${l}"]`); if (b) b.focus();
+  }
+  $("zFlags").addEventListener("click", e => { const b = e.target.closest("[data-l]"); if (b) marcarFlagZoom(b.dataset.l); });
+  $("zClose").addEventListener("click", fecharZoom);
+  $("zPrev").addEventListener("click", () => irZoom(-1));
+  $("zNext").addEventListener("click", () => irZoom(1));
+  $("zFav").addEventListener("click", () => marcarZoom("fav"));
+  $("zOwn").addEventListener("click", () => marcarZoom("own"));
+  zoom.addEventListener("click", e => { if (e.target === zoom) fecharZoom(); });
+  document.addEventListener("keydown", e => {
+    if (zoom.hidden) return;
+    if (e.key === "Escape") { e.preventDefault(); fecharZoom(); }
+    else if (e.key === "ArrowLeft") irZoom(-1);
+    else if (e.key === "ArrowRight") irZoom(1);
+  });
+  let toqueX = null;
+  $("zStage").addEventListener("touchstart", e => { toqueX = e.touches[0].clientX; }, { passive: true });
+  $("zStage").addEventListener("touchend", e => {
+    if (toqueX === null) return;
+    const dx = e.changedTouches[0].clientX - toqueX;
+    toqueX = null;
+    if (Math.abs(dx) > 50) irZoom(dx < 0 ? 1 : -1);
+  }, { passive: true });
 
   /* ---------- Painel lateral: cadastro e configurações ---------- */
   const wrap = $("wrap"), painel = $("painel"), scrim = $("scrim"), sideTab = $("sideTab");
@@ -568,24 +908,24 @@
           <span class="avatar" aria-hidden="true">${esc(p.nome.charAt(0).toUpperCase())}</span>
           <div><p class="nome">${esc(p.nome)}</p><p class="email">${esc(p.email)}</p></div>
         </div>
-        <p class="nota">Conta criada neste navegador. Login com senha e acesso de qualquer aparelho ficam para a próxima versão.</p>
-        <button type="button" class="btn-sec" id="btnSair">Sair da conta</button>`;
+        <p class="nota">${esc(t("acctDone"))}</p>
+        <button type="button" class="btn-sec" id="btnSair">${esc(t("signOut"))}</button>`;
     } else {
       contaBox.innerHTML = `
-        <p class="nota" style="margin-top:0">Crie sua conta para identificar o seu fichário.</p>
-        <div class="field"><label for="inNome">Nome de treinador</label><input id="inNome" type="text" autocomplete="nickname" maxlength="30"></div>
-        <div class="field"><label for="inEmail">E-mail</label><input id="inEmail" type="email" inputmode="email" autocomplete="email"></div>
+        <p class="nota" style="margin-top:0">${esc(t("acctIntro"))}</p>
+        <div class="field"><label for="inNome">${esc(t("name"))}</label><input id="inNome" type="text" autocomplete="nickname" maxlength="30"></div>
+        <div class="field"><label for="inEmail">${esc(t("email"))}</label><input id="inEmail" type="email" inputmode="email" autocomplete="email"></div>
         <p class="erro" id="erro" role="alert"></p>
-        <button type="button" class="btn-primary" id="btnCriar">Criar conta</button>
-        <p class="nota">Por enquanto, a conta fica salva só neste navegador.</p>`;
+        <button type="button" class="btn-primary" id="btnCriar">${esc(t("create"))}</button>
+        <p class="nota">${esc(t("acctNote"))}</p>`;
     }
   }
   function criarConta() {
     const nome = $("inNome").value.trim();
     const email = $("inEmail").value.trim();
     const erro = $("erro");
-    if (nome.length < 2) { erro.textContent = "Digite um nome de treinador com pelo menos 2 letras."; $("inNome").focus(); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { erro.textContent = "Digite um e-mail válido, como nome@exemplo.com."; $("inEmail").focus(); return; }
+    if (nome.length < 2) { erro.textContent = t("errName"); $("inNome").focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { erro.textContent = t("errEmail"); $("inEmail").focus(); return; }
     conta.perfil = { nome, email };
     salvarConta(); renderConta(); $("contaOk").focus();
   }
@@ -607,11 +947,53 @@
   $("cfgAnim").addEventListener("click", () => { conta.cfg.anim = !conta.cfg.anim; salvarConta(); aplicarCfg(); });
   $("cfgOrdem").addEventListener("change", e => { conta.cfg.ordem = e.target.value; state.page = 0; salvarConta(); render(); });
 
-  /* ---------- Filtros ---------- */
-  $("fSet").innerHTML = '<option value="">Todas as coleções</option>' + Object.entries(SETS).map(([k, v]) => `<option value="${k}">${v.label}</option>`).join("");
-  $("fCat").innerHTML = '<option value="">Todas as categorias</option>' + CATS.map((c, i) => `<option value="${i}">${c}</option>`).join("");
+  /* ---------- Idioma (bandeiras) ---------- */
+  const FLAGS = (() => {
+    let us = '<svg width="30" height="20" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FFFFFF"/>';
+    for (let i = 0; i < 13; i += 2) us += `<rect y="${(i * 20 / 13).toFixed(2)}" width="30" height="${(20 / 13).toFixed(2)}" fill="#B22234"/>`;
+    us += '<rect width="13" height="10.77" fill="#3C3B6E"/>';
+    for (let r = 0; r < 4; r++) for (let c = 0; c < 5; c++) us += `<circle cx="${(1.3 + c * 2.4 + (r % 2) * 1.2).toFixed(1)}" cy="${(1.4 + r * 2.4).toFixed(1)}" r="0.55" fill="#FFFFFF"/>`;
+    us += '</svg>';
+    const br = '<svg width="30" height="20" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#009C3B"/><path d="M15 2.2L27 10 15 17.8 3 10z" fill="#FFDF00"/><circle cx="15" cy="10" r="4.1" fill="#002776"/><path d="M11 9.2c2.6-.7 5.6-.3 8 1.2" stroke="#FFFFFF" stroke-width="0.9" fill="none"/></svg>';
+    const jp = '<svg width="30" height="20" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FFFFFF"/><circle cx="15" cy="10" r="6" fill="#BC002D"/></svg>';
+    return { us, br, jp };
+  })();
+  document.querySelectorAll("[data-flag]").forEach(el => { el.innerHTML = FLAGS[el.dataset.flag]; });
 
-  renderConta();
+  function preencherFiltros() {
+    const sel = (id, html, val) => { const el = $(id); el.innerHTML = html; el.value = val; };
+    sel("fPosse", `<option value="">${esc(t("sit"))}</option><option value="tenho">${esc(t("fOwn"))}</option><option value="faltam">${esc(t("fMissing"))}</option>`, state.posse);
+    sel("fSet", `<option value="">${esc(t("set"))}</option>` + SET_ID.map(k => `<option value="${k}">${esc(setLabel(k))}</option>`).join(""), state.set);
+    sel("fCat", `<option value="">${esc(t("cat"))}</option>` + t("cats").map((c, i) => `<option value="${i}">${esc(c)}</option>`).join(""), state.cat);
+    sel("cfgOrdem", `<option value="num">${esc(t("ordNum"))}</option><option value="nome">${esc(t("ordName"))}</option>`, conta.cfg.ordem);
+  }
+  function aplicarIdioma() {
+    const d = I18N[conta.cfg.lang];
+    document.documentElement.lang = d.htmlLang;
+    document.title = d.title;
+    document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
+    document.querySelectorAll("[data-i18n-aria]").forEach(el => el.setAttribute("aria-label", t(el.dataset.i18nAria)));
+    document.querySelectorAll("[data-i18n-ph]").forEach(el => el.setAttribute("placeholder", t(el.dataset.i18nPh)));
+    $("langNote").textContent = t("langNote");
+    document.querySelectorAll(".lang-btn").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === conta.cfg.lang)));
+    reset.textContent = t(armado ? "resetArm" : "reset");
+    preencherFiltros();
+    const tinhaForm = !conta.perfil && $("inNome") ? [$("inNome").value, $("inEmail").value] : null;
+    renderConta();
+    if (tinhaForm) { $("inNome").value = tinhaForm[0]; $("inEmail").value = tinhaForm[1]; }
+  }
+  document.querySelector(".langs").addEventListener("click", e => {
+    const b = e.target.closest(".lang-btn");
+    if (!b || b.dataset.lang === conta.cfg.lang) return;
+    conta.cfg.lang = b.dataset.lang;
+    salvarConta();
+    aplicarIdioma();
+    render();
+    if (!zoom.hidden) desenharZoom();
+  });
+
+  /* ---------- Filtros ---------- */
+  aplicarIdioma();
   aplicarCfg();
   render();
 })();
