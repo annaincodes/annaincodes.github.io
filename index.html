@@ -49,23 +49,14 @@
   html[data-modo="escuro"][data-tema="verde"] { --bg: #0F1C10; --cover: #244024; --surface: #1A2D1B; --text: #EDF5E9; --muted: #B9CEB1; --line: #5B8650; --seg-bg: #243B24; --seg-on-bg: #C8E1BE; --seg-on-fg: #1C3517; --stitch: rgba(200, 225, 190, 0.3); --field-fg: #EDF5E9; --field-muted: #B9CEB1; --page: #172818; --own: #7DBE6C; }
   html[data-modo="escuro"][data-tema="amarelo"] { --bg: #1B1503; --cover: #3E3210; --surface: #2C2408; --text: #FBF5E4; --muted: #D8CDAA; --line: #A3852A; --seg-bg: #3B3010; --seg-on-bg: #FFE599; --seg-on-fg: #3A2C00; --stitch: rgba(255, 229, 153, 0.3); --field-fg: #FBF5E4; --field-muted: #D8CDAA; --page: #2D2510; --own: #E0A800; }
   html[data-modo="escuro"][data-tema="cinza"] { --bg: #1A1A1A; --cover: #3A3A3A; --surface: #2A2A2A; --text: #F5F5F5; --muted: #CFCFCF; --line: #7A7A7A; --seg-bg: #333333; --seg-on-bg: #F5F5F5; --seg-on-fg: #262626; --stitch: rgba(255, 255, 255, 0.3); --field-fg: #F5F5F5; --field-muted: #CFCFCF; --page: #252525; --own: #E6E6E6; }
-  html[data-modo="escuro"] { color-scheme: dark; }
+  html[data-modo="escuro"] { color-scheme: dark; --erro: #FF9AAE; }
+  html[data-tema="cinza"] { --erro: #FFC2CE; }
   html[data-modo="escuro"] .hd { box-shadow: 0 10px 26px -18px rgba(0, 0, 0, 0.8); }
   html[data-modo="escuro"] .temas { background: rgba(34, 20, 28, 0.92); }
   html[data-modo="escuro"] .temas button i { box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.35); }
   html[data-modo="escuro"] .temas button[aria-pressed="true"] i { box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.35), 0 0 0 2px #22141C, 0 0 0 4px #F3E9EE; }
   html[data-modo="escuro"] .binder { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.12), 0 20px 36px -20px rgba(0, 0, 0, 0.8); }
-  html[data-modo="escuro"] .painel { --surface: #2A1722; --bg: #2A1722; --text: #FCE5EF; --muted: #E0B3C6; --line: #8C4A63; --seg-bg: #4A2538; --seg-on-bg: #F3BBD0; --seg-on-fg: #3A1626; box-shadow: 0 0 40px rgba(0, 0, 0, 0.7); }
-  html[data-modo="escuro"] .painel input[type="text"], html[data-modo="escuro"] .painel input[type="email"], html[data-modo="escuro"] .painel select, html[data-modo="escuro"] .lang-btn { background: #382030; color: #FCE5EF; }
-  html[data-modo="escuro"] .lang-btn[aria-pressed="true"] { background: #F3BBD0; border-color: #F3BBD0; color: #3A1626; }
-  html[data-modo="escuro"] .btn-primary { background: #F3BBD0; color: #3A1626; }
-  html[data-modo="escuro"] .avatar { color: #3A1626; background: #F3BBD0; }
-  html[data-modo="escuro"] .erro { color: #FF9AAE; }
-  html[data-modo="escuro"] .row { border-top-color: rgba(243, 187, 208, 0.2); }
-  html[data-modo="escuro"] .switch { background: #4A2538; border-color: #8C4A63; }
-  html[data-modo="escuro"] .switch[aria-checked="true"] { background: #B8607E; }
   html[data-modo="escuro"] .scrim { background: rgba(0, 0, 0, 0.6); }
-  html[data-modo="escuro"] .side-tab { background: #F3BBD0; color: #3A1626; }
   .temas .sep { align-self: center; width: 1.5px; height: 22px; margin: 0 3px; border-radius: 2px; background: rgba(58, 22, 38, 0.25); }
   html[data-modo="escuro"] .temas .sep { background: rgba(255, 255, 255, 0.3); }
   .temas .modo i { background: #3A1626; color: #FCE5EF; box-shadow: none; }
@@ -101,19 +92,18 @@
     position: fixed; left: env(safe-area-inset-left, 0px); top: 50%; transform: translateY(-50%); z-index: 10;
     display: inline-flex; align-items: center; gap: 10px; padding: 16px 9px;
     writing-mode: vertical-rl; border: 0; border-radius: 0 12px 12px 0;
-    background: #4A1B30; color: #FFFFFF; font: 600 14px "Figtree", system-ui, sans-serif; cursor: pointer;
+    background: var(--hd-bg); color: var(--hd-fg); font: 600 14px "Figtree", system-ui, sans-serif; cursor: pointer;
     box-shadow: 2px 4px 14px -4px rgba(58, 22, 38, 0.55);
   }
   .side-tab[aria-expanded="true"] { visibility: hidden; }
-  @media (hover: hover) { .side-tab:hover { background: #63284A; } }
+  @media (hover: hover) { .side-tab:hover { background: color-mix(in srgb, var(--hd-bg) 85%, var(--hd-fg)); } }
 
   .scrim { position: fixed; inset: 0; z-index: 20; background: rgba(58, 22, 38, 0.45); }
   .painel {
     position: fixed; top: 0; bottom: 0; left: 0; z-index: 30; width: min(340px, 88vw);
     overflow-y: auto; overscroll-behavior: contain;
     padding: calc(env(safe-area-inset-top, 0px) + 18px) 18px calc(env(safe-area-inset-bottom, 0px) + 24px);
-    --bg: #FCE5EF; --text: #3A1626; --muted: #7A3A52; --line: #B8607E; --seg-bg: #F3BBD0; --seg-on-bg: #4A1B30; --focus: #2338C8;
-    background: var(--surface); color: var(--text); box-shadow: 0 0 40px rgba(58, 22, 38, 0.4);
+    background: var(--bg); color: var(--text); box-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
     transform: translateX(-100%); visibility: hidden; transition: transform 0.25s ease, visibility 0s linear 0.25s;
   }
   .painel.open { transform: none; visibility: visible; transition: transform 0.25s ease; }
@@ -126,33 +116,33 @@
   .field label { font-weight: 600; font-size: 0.9rem; }
   .painel input[type="text"], .painel input[type="email"], .painel select {
     width: 100%; height: 44px; padding: 0 12px; border: 1px solid var(--line); border-radius: 10px;
-    background: #FFFFFF; color: var(--text); font: 500 16px "Figtree", system-ui, sans-serif;
+    background: var(--surface); color: var(--field-fg); font: 500 16px "Figtree", system-ui, sans-serif;
   }
-  .erro { min-height: 1.3em; margin: 8px 0 0; color: #A3112F; font-size: 0.86rem; font-weight: 600; }
+  .erro { min-height: 1.3em; margin: 8px 0 0; color: var(--erro, #A3112F); font-size: 0.86rem; font-weight: 600; }
   .btn-primary, .btn-sec { width: 100%; height: 44px; margin-top: 6px; border-radius: 12px; font: 700 15px "Figtree", system-ui, sans-serif; cursor: pointer; }
-  .btn-primary { border: 0; background: #4A1B30; color: #FFFFFF; }
+  .btn-primary { border: 0; background: var(--seg-on-bg); color: var(--seg-on-fg); }
   .btn-sec { border: 1px solid var(--line); background: transparent; color: var(--text); margin-top: 12px; }
-  @media (hover: hover) { .btn-primary:hover { background: #63284A; } .btn-sec:hover, .fechar:hover { background: var(--bg); } }
+  @media (hover: hover) { .btn-primary:hover { opacity: 0.9; } .btn-sec:hover, .fechar:hover { background: var(--bg); } }
   .conta-ok { display: flex; align-items: center; gap: 12px; padding: 4px 0; }
   .conta-ok:focus { outline: none; }
-  .avatar { flex: none; width: 46px; height: 46px; display: grid; place-items: center; border-radius: 50%; background: var(--seg-bg); color: #4A1B30; font: 800 1.25rem "Bricolage Grotesque", system-ui, sans-serif; }
+  .avatar { flex: none; width: 46px; height: 46px; display: grid; place-items: center; border-radius: 50%; background: var(--seg-on-bg); color: var(--seg-on-fg); font: 800 1.25rem "Bricolage Grotesque", system-ui, sans-serif; }
   .conta-ok p { margin: 0; min-width: 0; overflow-wrap: anywhere; }
   .conta-ok .nome { font-weight: 700; }
   .conta-ok .email { color: var(--muted); font-size: 0.88rem; }
-  .row { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 12px 0; border-top: 1px solid rgba(184, 96, 126, 0.3); }
+  .row { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 12px 0; border-top: 1px solid color-mix(in srgb, var(--line) 35%, transparent); }
   .row p { margin: 0; }
   .row-t { font-weight: 600; font-size: 0.93rem; }
   .row-d { color: var(--muted); font-size: 0.82rem; line-height: 1.4; }
   .row.col { display: block; }
   .row.col .field { margin-top: 0; }
-  .switch { position: relative; flex: none; width: 56px; height: 32px; padding: 0; border: 1.5px solid #B8607E; border-radius: 99px; background: #FBDFEA; cursor: pointer; transition: background 0.18s ease; }
+  .switch { position: relative; flex: none; width: 56px; height: 32px; padding: 0; border: 1.5px solid var(--line); border-radius: 99px; background: var(--seg-bg); cursor: pointer; transition: background 0.18s ease; }
   .switch .knob { position: absolute; top: 2px; left: 2px; width: 25px; height: 25px; display: block; transition: transform 0.18s ease; filter: drop-shadow(0 1px 2px rgba(90, 30, 55, 0.45)); }
   .switch .knob svg { display: block; width: 100%; height: 100%; }
-  .switch[aria-checked="true"] { background: #F6A3C0; }
+  .switch[aria-checked="true"] { background: var(--own); }
   .switch[aria-checked="true"] .knob { transform: translateX(24px); }
   .langs { display: grid; gap: 8px; margin-top: 8px; }
-  .lang-btn { display: flex; align-items: center; gap: 12px; width: 100%; height: 46px; padding: 0 12px; border: 1px solid var(--line); border-radius: 12px; background: #FFFFFF; color: var(--text); font: 600 15px "Figtree", system-ui, sans-serif; text-align: left; cursor: pointer; }
-  .lang-btn[aria-pressed="true"] { background: var(--seg-on-bg); border-color: var(--seg-on-bg); color: #FFFFFF; }
+  .lang-btn { display: flex; align-items: center; gap: 12px; width: 100%; height: 46px; padding: 0 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--field-fg); font: 600 15px "Figtree", system-ui, sans-serif; text-align: left; cursor: pointer; }
+  .lang-btn[aria-pressed="true"] { background: var(--seg-on-bg); border-color: var(--seg-on-bg); color: var(--seg-on-fg); }
   .lang-btn .flag { flex: none; display: block; width: 30px; height: 20px; }
   .lang-btn .flag svg { display: block; border-radius: 4px; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25); }
   .lang-btn .tick { margin-left: auto; opacity: 0; }
@@ -629,6 +619,16 @@
   .tc-pk-art img { width: 92%; height: 92%; object-fit: contain; }
   .tc-pk[aria-pressed="true"] { border-color: var(--tl-pri-bg); box-shadow: 0 0 0 3px var(--tl-pri-bg); }
   html[data-modo="escuro"] .tc-pk[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--hd-fg); border-color: var(--hd-fg); }
+  .tc-nota-top { margin: 0 0 8px; }
+  .tc-ins { list-style: none; margin: 0; padding: 6px 3px 3px; display: grid; grid-template-columns: repeat(auto-fill, minmax(48px, 1fr)); gap: 6px; max-height: 236px; overflow-y: auto; }
+  .tc-in { position: relative; width: 100%; aspect-ratio: 1; display: grid; place-items: center; padding: 4px; border: 1px solid var(--tl-line); border-radius: 12px; background: var(--tl-soft); cursor: pointer; }
+  .tc-in img { width: 100%; height: 100%; object-fit: contain; }
+  .tc-in[aria-pressed="false"] img { opacity: 0.55; filter: grayscale(0.6); }
+  .tc-in[aria-pressed="true"] { border-color: var(--tl-pri-bg); box-shadow: 0 0 0 2px var(--tl-pri-bg); background: var(--tl-bg); }
+  html[data-modo="escuro"] .tc-in[aria-pressed="true"] { border-color: var(--hd-fg); box-shadow: 0 0 0 2px var(--hd-fg); }
+  .tc-in:disabled { cursor: default; opacity: 0.45; }
+  .tc-in b { position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; display: grid; place-items: center; padding: 0 5px; border-radius: 99px; background: var(--tl-pri-bg); color: var(--tl-pri-fg); font: 800 11px "Figtree", system-ui, sans-serif; }
+  html[data-modo="escuro"] .tc-in b { background: var(--hd-fg); color: var(--hd-bg); }
   .tc-stage { position: relative; }
   .tc-sobre { position: absolute; left: 3.333%; top: 5.926%; width: 43.333%; height: 53.037%; border-radius: 2.5% / 4.4%; overflow: hidden; pointer-events: none; }
   .tc-ajuste { display: grid; gap: 4px; margin-top: 12px; font-size: 0.84rem; font-weight: 700; }
@@ -827,7 +827,7 @@
     <div class="tc-layout">
       <section class="tl-card tc-prev" aria-labelledby="tcT">
         <h2 id="tcT" class="visually-hidden" data-i18n="tlCardT">Trainer card</h2>
-        <div class="tc-stage"><img class="tl-cartao" id="tcImg" alt="" width="1200" height="675"><div class="tc-sobre" id="tcSobre" aria-hidden="true" hidden></div></div>
+        <div class="tc-stage"><img class="tl-cartao" id="tcImg" alt="" width="2400" height="1350"><div class="tc-sobre" id="tcSobre" aria-hidden="true" hidden></div></div>
         <div class="tl-acoes"><button type="button" class="tl-btn on" data-tc="dl" data-i18n="tlDl">Download image</button><button type="button" class="tl-btn" data-tc="share" id="tcShare" data-i18n="tlShare" hidden>Share</button></div>
         <p class="tl-erro" id="tcMsg" role="status"></p>
       </section>
@@ -836,6 +836,10 @@
         <label class="dt-campo"><span data-i18n="tcName">Name on the card</span><input id="tcNome" type="text" maxlength="24" autocomplete="off"></label>
         <h3 class="tl-h3" id="tcCorT" data-i18n="tcBg">Card background</h3>
         <div class="tc-cores" id="tcCores" role="group" aria-labelledby="tcCorT"></div>
+        <h3 class="tl-h3"><span data-i18n="tcInsT">Gym badges</span> <span class="tl-n" id="tcInsN">0</span></h3>
+        <p class="tl-nota tc-nota-top" data-i18n="tcInsHint"></p>
+        <ul class="tc-ins" id="tcIns"></ul>
+        <div class="tl-acoes"><button type="button" class="tl-btn" data-tc="insClear" data-i18n="tcInsClear">Clear badges</button></div>
         <h3 class="tl-h3" data-i18n="tcPkT">Favorite Pokémon</h3>
         <label class="tc-check"><input type="checkbox" id="tcPkOn"><span data-i18n="tcPkOn">Show my favorite Pokémon on the card</span></label>
         <div id="tcPkBox" hidden>
@@ -3052,7 +3056,7 @@
      ===================================================================== */
   const TL_TXT = {
     en: {
-      areaCard: "Trainer card", tcFav: "Favorite trainer", tcBg: "Card background", tcPkT: "Favorite Pokémon", tcPkOn: "Show my favorite Pokémon on the card", tcPkSearch: "Search Pokémon by name or number", tcPkLoading: "Loading the Pokédex…", tcPkNone: "No Pokémon found.", tcSearch: "Search trainer", tcNoTr: "No trainer found.", tcAdjust: "Adjust framing", tcCorsErr: "The image server didn't allow the trainer picture in the downloaded file. Try another trainer or upload your own photo.", leadCard: "Make your trainer card with your favorite trainer or your own photo, and share your progress.", tcCustom: "Customize", tcName: "Name on the card", tcPhoto: "Photo", tcNone: "No photo (silhouette)", tcYours: "Your photo", tcUpload: "Upload your photo", tcUploadBtn: "Upload a photo", tcRemove: "Remove my photo", tcCredit: "Trainer pictures come from full-art Supporter cards (images via TCGdex). Your photo stays only in this browser.", tcSaveErr: "This photo is too big to save. Try a smaller image.", tcReadErr: "This image couldn't be opened. Try a JPG or PNG.", areaTools: "Tools", leadTools: "Extras for your collection: value, trades, backups, achievements and more.",
+      areaCard: "Trainer card", tcFav: "Favorite trainer", tcBg: "Card background", tcInsT: "Gym badges", tcInsHint: "Choose up to 8 badges to show on your card. They appear in the order you pick them.", tcInsClear: "Clear badges", tcInsLbl: n => `Badge ${n}`, tcPkT: "Favorite Pokémon", tcPkOn: "Show my favorite Pokémon on the card", tcPkSearch: "Search Pokémon by name or number", tcPkLoading: "Loading the Pokédex…", tcPkNone: "No Pokémon found.", tcSearch: "Search trainer", tcNoTr: "No trainer found.", tcAdjust: "Adjust framing", tcCorsErr: "The image server didn't allow the trainer picture in the downloaded file. Try another trainer or upload your own photo.", leadCard: "Make your trainer card with your favorite trainer or your own photo, and share your progress.", tcCustom: "Customize", tcName: "Name on the card", tcPhoto: "Photo", tcNone: "No photo (silhouette)", tcYours: "Your photo", tcUpload: "Upload your photo", tcUploadBtn: "Upload a photo", tcRemove: "Remove my photo", tcCredit: "Trainer pictures come from full-art Supporter cards (images via TCGdex). Your photo stays only in this browser.", tcSaveErr: "This photo is too big to save. Try a smaller image.", tcReadErr: "This image couldn't be opened. Try a JPG or PNG.", areaTools: "Tools", leadTools: "Extras for your collection: value, trades, backups, achievements and more.",
       tlWait: "Cards are still loading…",
       tlValT: "Collection value", tlValD: "Estimated value of the cards you own, using TCGplayer (USD) and Cardmarket (EUR) prices.",
       tlValEmpty: "Mark some cards as owned to see what your collection is worth.",
@@ -3103,7 +3107,7 @@
       dtImpNone: "No cards from this list were found.", dtImpWait: "Cards are still loading. Try again in a moment.", dtImpDefault: "Imported deck"
     },
     pt: {
-      areaCard: "Cartão de treinador", tcFav: "Treinador favorito", tcBg: "Fundo do cartão", tcPkT: "Pokémon favorito", tcPkOn: "Mostrar meu Pokémon favorito no cartão", tcPkSearch: "Buscar Pokémon por nome ou número", tcPkLoading: "Carregando a Pokédex…", tcPkNone: "Nenhum Pokémon encontrado.", tcSearch: "Buscar treinador", tcNoTr: "Nenhum treinador encontrado.", tcAdjust: "Ajustar enquadramento", tcCorsErr: "O servidor da imagem não permitiu incluir o treinador no arquivo baixado. Tente outro treinador ou envie sua foto.", leadCard: "Monte seu cartão de treinador com seu treinador favorito ou com a sua foto, e compartilhe seu progresso.", tcCustom: "Personalizar", tcName: "Nome no cartão", tcPhoto: "Foto", tcNone: "Sem foto (silhueta)", tcYours: "Sua foto", tcUpload: "Enviar sua foto", tcUploadBtn: "Enviar uma foto", tcRemove: "Remover minha foto", tcCredit: "As imagens dos treinadores vêm das cartas de Apoiador full art (imagens da TCGdex). Sua foto fica salva só neste navegador.", tcSaveErr: "Esta foto é grande demais para salvar. Tente uma imagem menor.", tcReadErr: "Não foi possível abrir esta imagem. Tente um JPG ou PNG.", areaTools: "Ferramentas", leadTools: "Extras para a sua coleção: valor, trocas, backup, conquistas e mais.",
+      areaCard: "Cartão de treinador", tcFav: "Treinador favorito", tcBg: "Fundo do cartão", tcInsT: "Insígnias de ginásio", tcInsHint: "Escolha até 8 insígnias para mostrar no cartão. Elas aparecem na ordem em que você escolher.", tcInsClear: "Limpar insígnias", tcInsLbl: n => `Insígnia ${n}`, tcPkT: "Pokémon favorito", tcPkOn: "Mostrar meu Pokémon favorito no cartão", tcPkSearch: "Buscar Pokémon por nome ou número", tcPkLoading: "Carregando a Pokédex…", tcPkNone: "Nenhum Pokémon encontrado.", tcSearch: "Buscar treinador", tcNoTr: "Nenhum treinador encontrado.", tcAdjust: "Ajustar enquadramento", tcCorsErr: "O servidor da imagem não permitiu incluir o treinador no arquivo baixado. Tente outro treinador ou envie sua foto.", leadCard: "Monte seu cartão de treinador com seu treinador favorito ou com a sua foto, e compartilhe seu progresso.", tcCustom: "Personalizar", tcName: "Nome no cartão", tcPhoto: "Foto", tcNone: "Sem foto (silhueta)", tcYours: "Sua foto", tcUpload: "Enviar sua foto", tcUploadBtn: "Enviar uma foto", tcRemove: "Remover minha foto", tcCredit: "As imagens dos treinadores vêm das cartas de Apoiador full art (imagens da TCGdex). Sua foto fica salva só neste navegador.", tcSaveErr: "Esta foto é grande demais para salvar. Tente uma imagem menor.", tcReadErr: "Não foi possível abrir esta imagem. Tente um JPG ou PNG.", areaTools: "Ferramentas", leadTools: "Extras para a sua coleção: valor, trocas, backup, conquistas e mais.",
       tlWait: "As cartas ainda estão carregando…",
       tlValT: "Valor da coleção", tlValD: "Valor estimado das cartas que você tem, com preços do TCGplayer (USD) e do Cardmarket (EUR).",
       tlValEmpty: "Marque algumas cartas como suas para ver quanto vale a coleção.",
@@ -3154,7 +3158,7 @@
       dtImpNone: "Nenhuma carta desta lista foi encontrada.", dtImpWait: "As cartas ainda estão carregando. Tente de novo em instantes.", dtImpDefault: "Deck importado"
     },
     ja: {
-      areaCard: "トレーナーカード", tcFav: "お気に入りのトレーナー", tcBg: "カードの背景", tcPkT: "お気に入りのポケモン", tcPkOn: "お気に入りのポケモンをカードに表示", tcPkSearch: "名前か図鑑番号でポケモンを検索", tcPkLoading: "図鑑を読み込み中…", tcPkNone: "ポケモンが見つかりません。", tcSearch: "トレーナーを検索", tcNoTr: "トレーナーが見つかりません。", tcAdjust: "位置を調整", tcCorsErr: "画像サーバーの制限で、ダウンロードした画像にトレーナーを入れられませんでした。別のトレーナーか自分の写真をお試しください。", leadCard: "好きなトレーナーや自分の写真でトレーナーカードを作って、進み具合をシェアしよう。", tcCustom: "カスタマイズ", tcName: "カードの名前", tcPhoto: "写真", tcNone: "写真なし（シルエット）", tcYours: "あなたの写真", tcUpload: "写真をアップロード", tcUploadBtn: "写真をアップロード", tcRemove: "写真を削除", tcCredit: "トレーナーの画像はフルアートのサポートカードから（画像は TCGdex）。あなたの写真はこのブラウザにだけ保存されます。", tcSaveErr: "写真が大きすぎて保存できません。小さい画像でお試しください。", tcReadErr: "この画像を開けませんでした。JPG か PNG でお試しください。", areaTools: "ツール", leadTools: "コレクションのおまけ機能：価値、トレード、バックアップ、実績など。",
+      areaCard: "トレーナーカード", tcFav: "お気に入りのトレーナー", tcBg: "カードの背景", tcInsT: "ジムバッジ", tcInsHint: "カードに表示するバッジを8個まで選べます。選んだ順に並びます。", tcInsClear: "バッジをクリア", tcInsLbl: n => `バッジ ${n}`, tcPkT: "お気に入りのポケモン", tcPkOn: "お気に入りのポケモンをカードに表示", tcPkSearch: "名前か図鑑番号でポケモンを検索", tcPkLoading: "図鑑を読み込み中…", tcPkNone: "ポケモンが見つかりません。", tcSearch: "トレーナーを検索", tcNoTr: "トレーナーが見つかりません。", tcAdjust: "位置を調整", tcCorsErr: "画像サーバーの制限で、ダウンロードした画像にトレーナーを入れられませんでした。別のトレーナーか自分の写真をお試しください。", leadCard: "好きなトレーナーや自分の写真でトレーナーカードを作って、進み具合をシェアしよう。", tcCustom: "カスタマイズ", tcName: "カードの名前", tcPhoto: "写真", tcNone: "写真なし（シルエット）", tcYours: "あなたの写真", tcUpload: "写真をアップロード", tcUploadBtn: "写真をアップロード", tcRemove: "写真を削除", tcCredit: "トレーナーの画像はフルアートのサポートカードから（画像は TCGdex）。あなたの写真はこのブラウザにだけ保存されます。", tcSaveErr: "写真が大きすぎて保存できません。小さい画像でお試しください。", tcReadErr: "この画像を開けませんでした。JPG か PNG でお試しください。", areaTools: "ツール", leadTools: "コレクションのおまけ機能：価値、トレード、バックアップ、実績など。",
       tlWait: "カードを読み込み中…",
       tlValT: "コレクションの価値", tlValD: "持っているカードの推定価値（TCGplayer の米ドル価格と Cardmarket のユーロ価格）。",
       tlValEmpty: "カードを「持っている」にすると、コレクションの価値がわかります。",
@@ -3592,6 +3596,9 @@
     ["Shauna", "swsh8-263"], ["Agatha", "swsh6-186"], ["Bruno", "swsh5-158"], ["Thorton", "swsh11-195"], ["Fantina", "swsh11-191"], ["Brandon", "swsh12-188"]
   ];
   const TR_PADRAO = "c:sv02-254";
+  // insígnias de ginásio (sprites da PokeAPI); o cartão mostra até 8, na ordem escolhida
+  const TOTAL_INSIGNIAS = 77, MAX_INS = 8;
+  const urlInsignia = n => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/${n}.png`;
   // cores do fundo do cartão (as mesmas do binder)
   const CORES_CARTAO = {
     rosa: { bg: "#FCE5EF", fg: "#3A1626", sub: "#7A3A52", ac: "#D94F86" },
@@ -3606,7 +3613,7 @@
   // Quadro da foto (horizontal, no formato da ilustração da carta) e recorte da ilustração, em frações da carta:
   // a largura quase toda e, na altura, do fim do nome até antes do texto.
   const QUADRO = { x: 40, y: 40, w: 520, h: 358 };
-  const RECORTE = { x0: 0.05, w: 0.9, y0: 0.13 };
+  const RECORTE = { x0: 0.08, w: 0.84, y0: 0.15 };
   RECORTE.h = RECORTE.w * (63 / 88) * (QUADRO.h / QUADRO.w);
   function urlCartaTr(id, alta) {
     const c = POR_ID.get(id);
@@ -3629,10 +3636,11 @@
         const cor = CORES_CARTAO[o.cor] ? o.cor : conta.cfg.tema;
         const px = Number.isFinite(o.px) ? Math.max(0, Math.min(100, o.px)) : 50;
         const pk = Number.isInteger(o.pk) && o.pk > 0 ? o.pk : 25;
-        return { foto, nome: String(o.nome || "").slice(0, 24), img, alfa: !!o.alfa, px, cor, pk, pkOn: !!o.pkOn };
+        const ins = Array.isArray(o.ins) ? [...new Set(o.ins.filter(n => Number.isInteger(n) && n >= 1 && n <= TOTAL_INSIGNIAS))].slice(0, MAX_INS) : [1, 2, 3, 4, 5, 6, 7, 8];
+        return { foto, nome: String(o.nome || "").slice(0, 24), img, alfa: !!o.alfa, px, cor, pk, pkOn: !!o.pkOn, ins };
       }
     } catch (e) { /* começa com o treinador padrão */ }
-    return { foto: TR_PADRAO, nome: "", img: "", alfa: false, px: 50, cor: CORES_CARTAO[conta.cfg.tema] ? conta.cfg.tema : "rosa", pk: 25, pkOn: false };
+    return { foto: TR_PADRAO, nome: "", img: "", alfa: false, px: 50, cor: CORES_CARTAO[conta.cfg.tema] ? conta.cfg.tema : "rosa", pk: 25, pkOn: false, ins: [1, 2, 3, 4, 5, 6, 7, 8] };
   }
   const cartao = carregarCartao();
   function salvarCartaoDados() { try { localStorage.setItem(KEY_CARTAO, JSON.stringify(cartao)); return true; } catch (e) { return false; } }
@@ -3666,19 +3674,55 @@
     return null;
   }
 
+  // Nome do treinador sem reticências: diminui a letra para caber e, se ainda for longo, quebra em duas linhas equilibradas.
+  function desenharNome(g, nome, x, base, max, cor) {
+    const fonte = n => `800 ${n}px ${FONTE_T}`;
+    const largura = (txt, n) => { g.font = fonte(n); return g.measureText(txt).width; };
+    g.fillStyle = cor;
+    const MAIOR = 64, MENOR_1 = 40;
+    let n = MAIOR;
+    const w = largura(nome, MAIOR);
+    if (w > max) n = Math.floor(MAIOR * max / w);
+    const palavrasN = nome.split(/\s+/).filter(Boolean).length;
+    // uma palavra só: fica numa linha, só diminui a letra
+    if (n >= MENOR_1 || palavrasN < 2) { g.font = fonte(Math.max(26, n)); g.fillText(nome, x, base); return; }
+    // duas linhas: escolhe a quebra (entre palavras, ou no meio de um nome único) que deixa as linhas mais parecidas
+    const palavras = nome.split(/\s+/).filter(Boolean);
+    let linhas;
+    if (palavras.length > 1) {
+      let melhor = null;
+      for (let i = 1; i < palavras.length; i++) {
+        const a = palavras.slice(0, i).join(" "), b = palavras.slice(i).join(" ");
+        const m = Math.max(largura(a, 40), largura(b, 40));
+        if (!melhor || m < melhor.m) melhor = { m, a, b };
+      }
+      linhas = [melhor.a, melhor.b];
+    } else linhas = [nome, ""];
+    const maisLarga = Math.max(...linhas.map(l => largura(l, 50)));
+    const n2 = Math.max(24, Math.min(50, Math.floor(50 * max / maisLarga)));
+    g.font = fonte(n2);
+    // a 1ª linha começa logo abaixo do rótulo "Trainer card" (que fica 70 px acima da linha base)
+    const l1 = base - 70 + Math.round(n2 * 0.74) + 14;
+    g.fillText(linhas[0], x, l1);
+    g.fillText(linhas[1], x, l1 + Math.round(n2 * 1.08));
+  }
   async function desenharCartao() {
     if (document.fonts && document.fonts.ready) await document.fonts.ready;
     const W = 1200, H = 675;
-    const cv = document.createElement("canvas"); cv.width = W; cv.height = H;
+    // desenhado em dobro da resolução, para ficar nítido em telas de alta densidade e na imagem baixada
+    const S = 2;
+    const cv = document.createElement("canvas"); cv.width = W * S; cv.height = H * S;
     const g = cv.getContext("2d");
+    g.scale(S, S);
     g.imageSmoothingEnabled = true; g.imageSmoothingQuality = "high";
     const pal = CORES_CARTAO[cartao.cor] || CORES_CARTAO.rosa;
     const bg = pal.bg, fg = pal.fg, sub = pal.sub, ac = pal.ac;
     const tinta = a => { g.fillStyle = fg; g.globalAlpha = a; g.fill(); g.globalAlpha = 1; };
     g.fillStyle = bg; g.fillRect(0, 0, W, H);
     const { x: qx, y: qy, w: qw, h: qh } = QUADRO;
-    retRedondo(g, qx, qy, qw, qh, 30); tinta(0.08);
     const foto = await fotoAtual();
+    // fundo do quadro só quando não há foto (evita um contorno claro em volta da imagem)
+    if (!foto || foto.tipo === "carta" && !foto.img || foto.alfa) { retRedondo(g, qx, qy, qw, qh, 30); tinta(0.08); }
     const sil = await silhueta();
     let semFoto = false;
     g.save(); retRedondo(g, qx, qy, qw, qh, 30); g.clip();
@@ -3697,22 +3741,21 @@
         const k = Math.max(qw / iw, qh / ih), w = iw * k, h = ih * k;
         g.drawImage(foto.img, qx + (qw - w) / 2, qy + (qh - h) * 0.3, w, h);
       }
-    } else if (sil) g.drawImage(silPintada(sil, ac, 210, 234), qx + (qw - 210) / 2, qy + (qh - 234) / 2);
+    } else if (sil) g.drawImage(silPintada(sil, ac, 210 * S, 234 * S), qx + (qw - 210) / 2, qy + (qh - 234) / 2, 210, 234);
     g.restore();
     // nome do treinador, embaixo da foto
     g.textBaseline = "alphabetic";
     g.fillStyle = ac; g.font = `700 24px ${FONTE_C}`;
     g.fillText(t("cardTitle"), qx + 4, qy + qh + 62);
-    g.fillStyle = fg; g.font = `800 64px ${FONTE_T}`;
-    g.fillText(cortarTexto(g, nomeCartao().toUpperCase(), qw), qx, qy + qh + 132);
+    desenharNome(g, nomeCartao().toUpperCase(), qx, qy + qh + 132, qw, fg);
     g.fillStyle = sub; g.globalAlpha = 0.8; g.font = `500 19px ${FONTE_C}`;
     g.fillText(cortarTexto(g, t("title") + (location.host ? " · " + location.host : "") + " · " + hoje(), qw), qx + 4, H - 40);
     g.globalAlpha = 1;
     // coluna da direita: logo, Pokémon favorito e números
     const rx = 600, rw = W - 40 - rx;
-    if (sil) g.drawImage(silPintada(sil, ac, 72, 80), rx, 44);
+    if (sil) g.drawImage(silPintada(sil, ac, 72 * S, 80 * S), W - 40 - 72, 44, 72, 80);
     if (cartao.pkOn) {
-      const r = 92, cx = W - 40 - r, cy = 40 + r;
+      const r = 92, cx = rx + r, cy = 40 + r;
       g.beginPath(); g.arc(cx, cy, r, 0, Math.PI * 2); tinta(0.1);
       g.beginPath(); g.arc(cx, cy, r - 2, 0, Math.PI * 2); g.strokeStyle = ac; g.lineWidth = 4; g.globalAlpha = 0.55; g.stroke(); g.globalAlpha = 1;
       const pkImg = await carregarImg(ARTE(pidDe(cartao.pk)), true);
@@ -3722,13 +3765,26 @@
         g.drawImage(pkImg, cx - d / 2, cy - d / 2, d, d); g.restore();
       }
     }
-    const bw = (rw - 2 * 16) / 3, bh = 168;
+    const temIns = cartao.ins.length > 0;
+    const bw = (rw - 2 * 16) / 3, bh = temIns ? 128 : 168, y0 = temIns ? 236 : 263;
     numerosCartao().forEach(([rot, val], i) => {
-      const x = rx + (i % 3) * (bw + 16), y = 263 + Math.floor(i / 3) * (bh + 16);
-      retRedondo(g, x, y, bw, bh, 22); tinta(0.08);
-      g.fillStyle = fg; g.font = `800 ${val.length > 7 ? 32 : 46}px ${FONTE_T}`; g.fillText(cortarTexto(g, val, bw - 36), x + 20, y + 84);
-      g.fillStyle = sub; g.font = `600 20px ${FONTE_C}`; g.fillText(cortarTexto(g, rot, bw - 36), x + 20, y + 126);
+      const x = rx + (i % 3) * (bw + 16), y = y0 + Math.floor(i / 3) * (bh + (temIns ? 14 : 16));
+      retRedondo(g, x, y, bw, bh, 20); tinta(0.08);
+      g.fillStyle = fg; g.font = `800 ${val.length > 7 ? 30 : temIns ? 42 : 46}px ${FONTE_T}`; g.fillText(cortarTexto(g, val, bw - 36), x + 20, y + (temIns ? 66 : 84));
+      g.fillStyle = sub; g.font = `600 19px ${FONTE_C}`; g.fillText(cortarTexto(g, rot, bw - 36), x + 20, y + (temIns ? 102 : 126));
     });
+    // insígnias escolhidas (até 8), embaixo dos números
+    if (temIns) {
+      const ins = await Promise.all(cartao.ins.map(n => carregarImg(urlInsignia(n), true)));
+      const by = 548, bs = 54, gap = (rw - 8 * bs) / 7;
+      retRedondo(g, rx - 4, by - 10, rw + 8, bs + 20, 20); tinta(0.06);
+      ins.forEach((im, i) => {
+        if (!im) return;
+        const x = rx + i * (bs + gap);
+        const k = bs / Math.max(im.naturalWidth, im.naturalHeight), w = im.naturalWidth * k, h = im.naturalHeight * k;
+        g.drawImage(im, x + (bs - w) / 2, by + (bs - h) / 2, w, h);
+      });
+    }
     cv.semFoto = semFoto;
     return cv;
   }
@@ -3756,7 +3812,7 @@
     let html = "";
     html += bt("upload", cartao.img ? `<img src="${esc(cartao.img)}" alt="" class="tc-up">` : `<span class="tc-mais" aria-hidden="true">${ICON.plus}</span><small>${esc(t("tcYours"))}</small>`, cartao.img ? t("tcYours") : t("tcUpload"), "tc-esp");
     const q = norm(($("tcBusca").value || "").trim());
-    html += TREINADORES.filter(([nome]) => !q || norm(nome).includes(q)).map(([nome, id]) => bt("c:" + id, `<span class="tc-recorte"><img src="${esc(urlCartaTr(id, false))}" alt="" loading="lazy" referrerpolicy="no-referrer" style="${estiloRecorte(RECORTE.x0)}"></span><small>${esc(nome)}</small>`, nome)).join("");
+    html += TREINADORES.filter(([nome]) => !q || norm(nome).includes(q)).map(([nome, id]) => bt("c:" + id, `<span class="tc-recorte"><img src="${esc(urlCartaTr(id, false))}" srcset="${esc(urlCartaTr(id, false))} 1x, ${esc(urlCartaTr(id, true))} 2x" decoding="async" alt="" loading="lazy" referrerpolicy="no-referrer" style="${estiloRecorte(RECORTE.x0)}"></span><small>${esc(nome)}</small>`, nome)).join("");
     if (q && !TREINADORES.some(([nome]) => norm(nome).includes(q))) html += `<li class="tc-vazio">${esc(t("tcNoTr"))}</li>`;
     $("tcFotos").innerHTML = html;
     $("tcCores").innerHTML = TEMAS.map(k => `<button type="button" data-cor="${k}" aria-pressed="${k === cartao.cor}" aria-label="${esc(t("themes")[k])}" title="${esc(t("themes")[k])}"><i style="--sw:${CORES_CARTAO[k].bg}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="${CORES_CARTAO[k].fg}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>`).join("");
@@ -3784,7 +3840,18 @@
     $("tcPkLista").innerHTML = lista.length ? lista.map(p => `<li><button type="button" class="tc-pk" data-pk="${p.id}" aria-pressed="${p.id === cartao.pk}" title="${esc(nomeDex(p.id))}"><span class="tc-pk-art"><img src="${esc(ARTE(p.pid))}" alt="" loading="lazy" width="64" height="64"></span><small>#${pad4(p.sp)}</small><span>${esc(nomeDex(p.id))}</span></button></li>`).join("")
       : `<li class="tc-vazio">${esc(t("tcPkNone"))}</li>`;
   }
+  function renderIns() {
+    $("tcInsN").textContent = `${cartao.ins.length}/${MAX_INS}`;
+    const cheio = cartao.ins.length >= MAX_INS;
+    let html = "";
+    for (let n = 1; n <= TOTAL_INSIGNIAS; n++) {
+      const pos = cartao.ins.indexOf(n);
+      html += `<li><button type="button" class="tc-in" data-in="${n}" aria-pressed="${pos >= 0}" aria-label="${esc(t("tcInsLbl", n))}"${pos < 0 && cheio ? " disabled" : ""}><img src="${urlInsignia(n)}" alt="" loading="lazy" width="40" height="40">${pos >= 0 ? `<b>${pos + 1}</b>` : ""}</button></li>`;
+    }
+    $("tcIns").innerHTML = html;
+  }
   function renderCard() {
+    renderIns();
     renderPk();
     if (document.activeElement !== $("tcNome")) $("tcNome").value = cartao.nome;
     $("tcNome").placeholder = nomeTreinador() || t("trainer");
@@ -3849,9 +3916,18 @@
       const b = $("tcFotos").querySelector(`[data-foto="${CSS.escape(v)}"]`); if (b) b.focus();
       return;
     }
+    const ib = e.target.closest("[data-in]");
+    if (ib) {
+      const n = Number(ib.dataset.in), i = cartao.ins.indexOf(n);
+      if (i >= 0) cartao.ins.splice(i, 1); else if (cartao.ins.length < MAX_INS) cartao.ins.push(n);
+      salvarCartaoDados(); renderIns(); renderCartao();
+      const nb = $("tcIns").querySelector(`[data-in="${n}"]`); if (nb) nb.focus();
+      return;
+    }
     const b = e.target.closest("[data-tc]");
     if (!b) return;
     const a = b.dataset.tc;
+    if (a === "insClear") { cartao.ins = []; salvarCartaoDados(); renderIns(); renderCartao(); return; }
     if (a === "dl") baixarCartao();
     else if (a === "share") compartilharCartao();
     else if (a === "up") $("tcArquivo").click();
