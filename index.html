@@ -146,11 +146,30 @@
   .fallback { flex: 1; display: grid; place-content: center; gap: 4px; padding: 8px; border-radius: 3.5cqw; background: rgba(255, 255, 255, 0.08); color: var(--b-ink); text-align: center; font-weight: 700; font-size: 12px; font-size: max(12px, 7cqw); overflow-wrap: anywhere; }
   .fallback small { font-weight: 500; color: var(--b-muted); font-size: 11px; font-size: max(11px, 6cqw); }
   .cell.empty .pocket { border-style: dashed; background: transparent; opacity: 0.5; }
-  .cell.empty .ctrl, .cell.empty .cap { visibility: hidden; }
+  .cell.empty .ctrl, .cell.empty .cap, .cell.empty .flags { visibility: hidden; }
 
-  .cap { display: flex; justify-content: space-between; gap: 6px; color: var(--b-ink); font-size: 12px; line-height: 1.25; }
-  .cap .n { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
-  .cap .num { flex: none; color: var(--b-muted); font-variant-numeric: tabular-nums; }
+  .cap { display: flex; flex-direction: column; gap: 1px; min-width: 0; color: var(--b-ink); font-size: 12px; line-height: 1.3; }
+  .cap .l1 { display: flex; gap: 5px; min-width: 0; }
+  .cap .no { flex: none; color: #FFC9DA; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .cap .nm { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
+  .cap .st { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--b-muted); font-size: 11px; }
+  .pocket-wrap { position: relative; }
+  .qty-btn { position: absolute; top: 5px; right: 5px; z-index: 2; min-width: 40px; height: 30px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 0 8px; border: 1px solid rgba(255, 255, 255, 0.55); border-radius: 99px; background: rgba(30, 14, 22, 0.82); color: #FFF3F7; font: 700 13px "Figtree", system-ui, sans-serif; font-variant-numeric: tabular-nums; cursor: pointer; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35); }
+  .qty-btn.on { background: #F8B4CB; border-color: #FFE3EA; color: #4A1B30; }
+  .qty-btn[aria-expanded="true"] { box-shadow: 0 0 0 2px #FFE3EA, 0 2px 6px rgba(0, 0, 0, 0.35); }
+  .qty-pop { position: absolute; top: 40px; right: 5px; z-index: 3; display: flex; align-items: center; gap: 4px; padding: 5px; border-radius: 14px; background: #FFF3F7; color: #3A1626; box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45); --focus: #2338C8; }
+  .qty-pop button { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #B8607E; border-radius: 10px; background: #FFFFFF; color: #3A1626; cursor: pointer; }
+  .qty-pop button:disabled { opacity: 0.35; cursor: default; }
+  .qty-pop output { min-width: 28px; text-align: center; font: 800 16px "Figtree", system-ui, sans-serif; font-variant-numeric: tabular-nums; }
+  @media (hover: hover) { .qty-pop button:not(:disabled):hover { background: #FCE5EF; } }
+  .zoom-qty { align-items: center; justify-content: center; gap: 10px; color: #FFF3F7; font-weight: 600; }
+  .zoom-qty .z-step { width: 44px; flex: none; display: grid; place-items: center; }
+  .zoom-qty .z-step:disabled { opacity: 0.35; cursor: default; }
+  .zoom-qty output { min-width: 32px; text-align: center; font: 800 20px "Figtree", system-ui, sans-serif; font-variant-numeric: tabular-nums; }
+  .vazio { display: grid; place-content: center; justify-items: center; gap: 12px; }
+  .spin { width: 28px; height: 28px; border-radius: 50%; border: 3px solid rgba(255, 255, 255, 0.2); border-top-color: #F8B4CB; animation: girar 0.9s linear infinite; }
+  @keyframes girar { to { transform: rotate(360deg); } }
+  .btn-retry { height: 40px; padding: 0 18px; border: 0; border-radius: 12px; background: #F8B4CB; color: #4A1B30; font: 700 14px "Figtree", system-ui, sans-serif; cursor: pointer; }
 
   .ctrl { display: flex; gap: 6px; }
   .ctrl button { height: 36px; border: 1px solid var(--b-line); border-radius: 10px; background: rgba(255, 255, 255, 0.06); color: var(--b-ink); cursor: pointer; font: 600 13px "Figtree", system-ui, sans-serif; }
@@ -170,7 +189,7 @@
   .flags.big button { height: 44px; border-color: rgba(255, 255, 255, 0.3); }
   .flags.big button .fl svg { width: 30px; }
   @media (hover: hover) { .flags button[aria-pressed="false"]:hover { background: rgba(255, 255, 255, 0.14); } .flags button[aria-pressed="true"]:hover { background: #FBC8D9; } }
-  @container (max-width: 112px) { .btn-own .lbl { display: none; } .cap .num { display: none; } }
+  @container (max-width: 112px) { .btn-own .lbl { display: none; } }
   @media (hover: hover) {
     .ctrl button:hover { background: rgba(255, 255, 255, 0.13); }
     .btn-own[aria-pressed="true"]:hover { background: #FBC8D9; }
@@ -291,8 +310,8 @@
           <input id="busca" type="search" data-i18n-ph="searchPh" data-i18n-aria="searchAria" placeholder="Search by name" aria-label="Search cards by name" autocomplete="off">
         </label>
         <select id="fPosse" data-i18n-aria="sitAria" aria-label="Filter by ownership"></select>
+        <select id="fSerie" data-i18n-aria="serieAria" aria-label="Filter by series"></select>
         <select id="fSet" data-i18n-aria="setAria" aria-label="Filter by set"></select>
-        <select id="fCat" data-i18n-aria="catAria" aria-label="Filter by category"></select>
       </div>
     </div>
 
@@ -300,7 +319,7 @@
       <div class="spine" aria-hidden="true"><i></i><i></i><i></i></div>
       <div class="sheet">
         <ul id="grid" class="grid" tabindex="-1"></ul>
-        <p id="vazio" class="vazio" tabindex="-1" hidden></p>
+        <div id="vazio" class="vazio" tabindex="-1" role="status" hidden></div>
         <nav class="pager" data-i18n-aria="pagerAria" aria-label="Binder pages">
           <button type="button" id="prev" data-i18n-aria="prevPage" aria-label="Previous page">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -346,6 +365,12 @@
     <div class="zoom-ctrl">
       <button type="button" class="z-fav" id="zFav" aria-pressed="false" aria-label="Favorita"></button>
       <button type="button" class="z-own" id="zOwn" aria-pressed="false"></button>
+    </div>
+    <div class="zoom-ctrl zoom-qty">
+      <span id="zQtyLbl">Copies</span>
+      <button type="button" class="z-step" id="zDec" aria-label="Remove one copy"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button>
+      <output id="zQtyVal" aria-live="polite">0</output>
+      <button type="button" class="z-step" id="zInc" aria-label="Add one copy"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button>
     </div>
     <div class="zoom-ctrl"><div class="flags big" id="zFlags" role="group" style="width:100%"></div></div>
   </div>
@@ -401,17 +426,16 @@
 
 <script>
 (() => {
-  /* ---------- Dados das cartas (official Pokémon TCG gallery) ---------- */
+  /* ---------- Fonte dos dados: TCGdex (api.tcgdex.net), sempre em inglês ---------- */
+  const API = "https://api.tcgdex.net/v2/en";
   const CDN = "https://dz3we2x72f7ol.cloudfront.net/expansions/";
-
-  const DEX = "Bulbasaur,Ivysaur,Venusaur ex,Charmander,Charmeleon,Charizard ex,Squirtle,Wartortle,Blastoise ex,Caterpie,Metapod,Butterfree,Weedle,Kakuna,Beedrill,Pidgey,Pidgeotto,Pidgeot,Rattata,Raticate,Spearow,Fearow,Ekans,Arbok ex,Pikachu,Raichu,Sandshrew,Sandslash,Nidoran♀,Nidorina,Nidoqueen,Nidoran♂,Nidorino,Nidoking,Clefairy,Clefable,Vulpix,Ninetales ex,Jigglypuff,Wigglytuff ex,Zubat,Golbat,Oddish,Gloom,Vileplume,Paras,Parasect,Venonat,Venomoth,Diglett,Dugtrio,Meowth,Persian,Psyduck,Golduck,Mankey,Primeape,Growlithe,Arcanine,Poliwag,Poliwhirl,Poliwrath,Abra,Kadabra,Alakazam ex,Machop,Machoke,Machamp,Bellsprout,Weepinbell,Victreebel,Tentacool,Tentacruel,Geodude,Graveler,Golem ex,Ponyta,Rapidash,Slowpoke,Slowbro,Magnemite,Magneton,Farfetch'd,Doduo,Dodrio,Seel,Dewgong,Grimer,Muk,Shellder,Cloyster,Gastly,Haunter,Gengar,Onix,Drowzee,Hypno,Krabby,Kingler,Voltorb,Electrode,Exeggcute,Exeggutor,Cubone,Marowak,Hitmonlee,Hitmonchan,Lickitung,Koffing,Weezing,Rhyhorn,Rhydon,Chansey,Tangela,Kangaskhan ex,Horsea,Seadra,Goldeen,Seaking,Staryu,Starmie,Mr. Mime,Scyther,Jynx ex,Electabuzz,Magmar,Pinsir,Tauros,Magikarp,Gyarados,Lapras,Ditto,Eevee,Vaporeon,Jolteon,Flareon,Porygon,Omanyte,Omastar,Kabuto,Kabutops,Aerodactyl,Snorlax,Articuno,Zapdos ex,Moltres,Dratini,Dragonair,Dragonite,Mewtwo,Mew ex".split(",");
-  const S151_EXTRA = "Antique Dome Fossil,Antique Helix Fossil,Antique Old Amber,Big Air Balloon,Bill's Transfer,Cycling Road,Daisy's Help,Energy Sticker,Erika's Invitation,Giovanni's Charisma,Grabber,Leftovers,Protective Goggles,Rigid Band,Bulbasaur,Ivysaur,Charmander,Charmeleon,Squirtle,Wartortle,Caterpie,Pikachu,Nidoking,Psyduck,Poliwhirl,Machoke,Tangela,Mr. Mime,Omanyte,Dragonair,Venusaur ex,Charizard ex,Blastoise ex,Arbok ex,Ninetales ex,Wigglytuff ex,Alakazam ex,Golem ex,Kangaskhan ex,Jynx ex,Zapdos ex,Mew ex,Bill's Transfer,Daisy's Help,Erika's Invitation,Giovanni's Charisma,Venusaur ex,Charizard ex,Blastoise ex,Alakazam ex,Zapdos ex,Erika's Invitation,Giovanni's Charisma,Mew ex,Switch,Basic Psychic Energy".split(",");
-  const N151 = DEX.concat(S151_EXTRA); // 207 cartas, na ordem numérica da expansão
-
-  const C30 = "Exeggcute,Alolan Exeggutor,Volbeat,Illumise,Tropius,Cherubi,Cherrim,Vivillon,Vulpix,Ninetales,Moltres,Ho-Oh,Victini,Reshiram,Fuecoco ex,Slowpoke,Lapras,Articuno,Kyogre,Palkia,Greninja ex,Wishiwashi".split(",")
-    .concat(Array(30).fill("Pikachu"))
-    .concat("Pikachu ex,Pikachu ex,Zapdos,Zekrom,Zeraora,Toxel,Toxtricity,Toxtricity,Morpeko,Miraidon,Mewtwo,Mewtwo ex,Mew,Mew ex,Marill,Azumarill,Espeon,Espeon ex,Sylveon ex,Unown,Drifloon,Cresselia,Chandelure,Xerneas,Comfey,Cosmog,Cosmoem,Lunala,Gimmighoul,Groudon,Lucario,Seismitoad,Lycanroc,Koraidon,Nidoran♀,Nidorina,Alolan Meowth,Gengar ex,Umbreon,Umbreon ex,Murkrow,Scraggy,Zorua,Zoroark,Deino,Zweilous,Hydreigon,Yveltal,Galarian Meowth,Jirachi ex,Dialga,Ferrothorn,Solgaleo,Zacian,Zamazenta,Gholdengo,Salamence ex,Jangmo-o,Hakamo-o,Kommo-o,Meowth,Kangaskhan,Ditto,Eevee,Eevee,Eevee,Snorlax,Igglybuff,Lugia,Hisuian Zorua,Hisuian Zoroark,Minior,Maushold,Poké Pad,Switch,Ultra Ball,Alolan Exeggutor,Moltres,Lapras,Articuno,Zapdos,Toxtricity,Morpeko,Drifloon,Chandelure,Lycanroc,Alolan Meowth,Scraggy,Galarian Meowth,Gholdengo,Kommo-o,Meowth,Hisuian Zorua,Maushold,Fuecoco ex,Greninja ex,Pikachu ex,Pikachu ex,Mewtwo ex,Mew ex,Sylveon ex,Gengar ex,Jirachi ex,Salamence ex,Mewtwo ex,Mew ex".split(","));
-  const CL = "Charizard,Delcatty,Metagross δ,Genesect EX,Misty,Dark Tyranitar,Sneasel,Pikachu & Zekrom GX,Greninja BREAK,Uxie,Crobat,Raikou,Buzzwole GX,Pikachu,Erika's Jigglypuff,Rayquaza EX,Solgaleo GX,Gengar,Darkrai & Cresselia LEGEND (part 1),Darkrai & Cresselia LEGEND (part 2),N,Palkia LV.X,M Gardevoir EX,Shining Celebi,Scizor ex,Mew VMAX,Arceus VSTAR,Zacian V,Lugia,Magikarp".split(",");
+  const SKIP_SERIES = new Set(["tcgp"]); // Pokémon TCG Pocket é digital, fica de fora do fichário físico
+  // Imagens da galeria oficial (inglês) como reserva, caso a TCGdex ainda não tenha a imagem
+  const OFICIAL = {
+    "sv03.5": n => n >= 1 && n <= 207 ? CDN + "151/en-us/SV3pt5_EN_" + n + ".png" : "",
+    "30th": n => n >= 1 && n <= 158 ? CDN + "30th-celebration/en-us/2M6P_EN_" + n + ".png" : "",
+    "30th-c": n => n >= 1 && n <= 30 ? CDN + "30th-celebration/en-us/2M6P_Classic_EN_" + n + ".png" : ""
+  };
 
   const I18N = {
     en: {
@@ -419,99 +443,105 @@
       lead: "Mark the cards you own and keep your favorites.",
       stats: (n, tot) => `<strong>${n}</strong> of <span>${tot}</span> cards in your collection`,
       progress: "Collection progress", show: "Show", tabAll: "All", tabOwned: "Owned", tabFav: "Favorites",
-      searchPh: "Search by name", searchAria: "Search cards by name",
+      searchPh: "Search by name or number", searchAria: "Search cards by name or number, for example Pikachu or 25 or 025/165",
       sitAria: "Filter by ownership", sit: "Status", fOwn: "Owned", fMissing: "Not owned",
-      setAria: "Filter by set", set: "Set", catAria: "Filter by category", cat: "Category",
+      setAria: "Filter by set", set: "Set", serieAria: "Filter by series", serie: "Series",
       binderAria: "Card binder", pagerAria: "Binder pages", prevPage: "Previous page", nextPage: "Next page",
       page: "Page", of: n => "of " + n,
-      footer: "Card images and names from the Scarlet & Violet—151 and 30th Celebration sets, from the official Pokémon TCG gallery. Your collection and favorites are saved in this browser.",
+      footer: "Card data and images from TCGdex (tcgdex.dev), an open-source Pokémon TCG API, with the official Pokémon TCG gallery as a backup for some images. Pokémon TCG Pocket (digital) cards are not included. Your collection and favorites are saved in this browser.",
       reset: "Clear binder", resetArm: "Tap again to clear everything",
       zClose: "Close enlarged card", zPrev: "Previous card", zNext: "Next card", zPos: (i, n) => `${i} of ${n}`,
       panelTitle: "Account & settings", closePanel: "Close panel", account: "Account", siteSettings: "Site settings",
       dim: "Darken cards I don't own", dimD: "Turn off to see every card in full color.",
       anim: "Animations", animD: "Effects when turning pages and marking cards.",
-      order: "Card order", ordNum: "Card number", ordName: "Name (A to Z)",
+      order: "Card order", ordNum: "Set (newest first) and number", ordName: "Name (A to Z)",
       lang: "Language",
-      langNote: "Card images match the language's official gallery. Japanese has no official gallery there, so it shows the English cards.",
+      langNote: "Changes the site language. Card names and images always come in English. The flags on each card mark which language versions you own.",
       acctIntro: "Create your account to personalize your binder.", name: "Trainer name", email: "Email",
       create: "Create account", acctNote: "For now, the account is saved only in this browser.",
       acctDone: "Account created in this browser. Password login and access from any device are planned for a later version.",
       signOut: "Sign out", errName: "Enter a trainer name with at least 2 characters.", errEmail: "Enter a valid email, like name@example.com.",
       enlarge: "Enlarge card", number: "number", inColl: "owned", notInColl: "not owned", favLabel: "Favorite", haveLabel: "I own it",
       btnHave: "I own it", btnOwned: "Owned", ownedIn: "Owned in", langNames: { en: "English", pt: "Portuguese", ja: "Japanese" },
+      copies: "Copies", qtyBtn: (nm, q) => `Copies of ${nm}: ${q}. Change quantity`,
+      qtyDec: nm => `Remove one copy of ${nm}`, qtyInc: nm => `Add one copy of ${nm}`,
+      copiesTotal: n => n === 1 ? "1 copy in total" : `${n} copies in total`,
+      loading: "Loading every Pokémon TCG set from TCGdex…",
+      loadErr: "Couldn't load the cards from TCGdex. Check your internet connection and try again.", retry: "Try again",
       allOwned: "Congratulations, no card is missing! You marked them all as yours.",
       emptyOwned: "Your collection is empty. Under “All”, tap “I own it” on the cards you have.",
       emptyFav: "No favorites yet. Tap the heart on a card to keep it here.",
-      none: "No cards found. Try another name or clear the filters.",
-      sets: { s151: "151", s30: "30th Celebration", s30c: "30th Classics" },
-      shortSets: { s151: "151", s30: "30th", s30c: "Classics" },
-      cats: ["Main", "Trainers & items", "Illustration Rare", "Ultra Rare", "Special Illustration Rare", "Hyper Rare", "Futuristic Rare", "Classic"]
+      none: "No cards found. Try another name or number, or clear the filters."
     },
     pt: {
       htmlLang: "pt-BR", title: "Fichário Pokémon", h1: "Fichário Pokémon", sideTab: "Conta e configurações",
       lead: "Marque as cartas que você tem e guarde as favoritas.",
       stats: (n, tot) => `<strong>${n}</strong> de <span>${tot}</span> cartas na coleção`,
       progress: "Progresso da coleção", show: "Mostrar", tabAll: "Todas", tabOwned: "Na coleção", tabFav: "Favoritas",
-      searchPh: "Buscar pelo nome", searchAria: "Buscar carta pelo nome",
+      searchPh: "Buscar por nome ou número", searchAria: "Buscar carta por nome ou número, por exemplo Pikachu, 25 ou 025/165",
       sitAria: "Filtrar por situação na coleção", sit: "Situação", fOwn: "Tenho", fMissing: "Não tenho",
-      setAria: "Filtrar por coleção", set: "Coleção", catAria: "Filtrar por categoria", cat: "Categoria",
+      setAria: "Filtrar por coleção", set: "Coleção", serieAria: "Filtrar por série", serie: "Série",
       binderAria: "Fichário de cartas", pagerAria: "Páginas do fichário", prevPage: "Página anterior", nextPage: "Próxima página",
       page: "Página", of: n => "de " + n,
-      footer: "Imagens e nomes das cartas das coleções Escarlate e Violeta — 151 e Celebração de 30 Anos, da galeria oficial do Pokémon Estampas Ilustradas. Sua coleção e suas favoritas ficam salvas neste navegador.",
+      footer: "Dados e imagens das cartas da TCGdex (tcgdex.dev), uma API aberta de Pokémon Estampas Ilustradas, com a galeria oficial como reserva para algumas imagens. As cartas do Pokémon TCG Pocket (digital) não estão incluídas. Sua coleção e suas favoritas ficam salvas neste navegador.",
       reset: "Limpar fichário", resetArm: "Toque de novo para limpar tudo",
       zClose: "Fechar carta ampliada", zPrev: "Carta anterior", zNext: "Próxima carta", zPos: (i, n) => `${i} de ${n}`,
       panelTitle: "Conta e configurações", closePanel: "Fechar painel", account: "Cadastro", siteSettings: "Configurações do site",
       dim: "Escurecer cartas que não tenho", dimD: "Desligue para ver todas as cartas com a cor original.",
       anim: "Animações", animD: "Efeitos ao virar a página e ao marcar uma carta.",
-      order: "Ordem das cartas", ordNum: "Número da carta", ordName: "Nome (A a Z)",
+      order: "Ordem das cartas", ordNum: "Coleção (mais nova primeiro) e número", ordName: "Nome (A a Z)",
       lang: "Idioma",
-      langNote: "As imagens das cartas seguem a galeria oficial do idioma. O japonês não tem galeria oficial lá, então mostra as cartas em inglês.",
+      langNote: "Muda o idioma do site. Os nomes e as imagens das cartas ficam sempre em inglês. As bandeiras de cada carta marcam em quais idiomas você tem a carta.",
       acctIntro: "Crie sua conta para identificar o seu fichário.", name: "Nome de treinador", email: "E-mail",
       create: "Criar conta", acctNote: "Por enquanto, a conta fica salva só neste navegador.",
       acctDone: "Conta criada neste navegador. Login com senha e acesso de qualquer aparelho ficam para a próxima versão.",
       signOut: "Sair da conta", errName: "Digite um nome de treinador com pelo menos 2 letras.", errEmail: "Digite um e-mail válido, como nome@exemplo.com.",
       enlarge: "Ampliar carta", number: "número", inColl: "na coleção", notInColl: "fora da coleção", favLabel: "Favorita", haveLabel: "Tenho na coleção",
       btnHave: "Tenho", btnOwned: "Na coleção", ownedIn: "Tenho em", langNames: { en: "inglês", pt: "português", ja: "japonês" },
+      copies: "Cópias", qtyBtn: (nm, q) => `Cópias de ${nm}: ${q}. Alterar quantidade`,
+      qtyDec: nm => `Tirar uma cópia de ${nm}`, qtyInc: nm => `Adicionar uma cópia de ${nm}`,
+      copiesTotal: n => n === 1 ? "1 cópia no total" : `${n} cópias no total`,
+      loading: "Carregando todas as coleções de Pokémon TCG da TCGdex…",
+      loadErr: "Não foi possível carregar as cartas da TCGdex. Verifique sua internet e tente de novo.", retry: "Tentar de novo",
       allOwned: "Parabéns, nenhuma carta falta! Você marcou todas como suas.",
       emptyOwned: "Sua coleção está vazia. Em “Todas”, toque em “Tenho” nas cartas que você possui.",
       emptyFav: "Nenhuma favorita ainda. Toque no coração de uma carta para guardá-la aqui.",
-      none: "Nenhuma carta encontrada. Tente outro nome ou limpe os filtros.",
-      sets: { s151: "151", s30: "30 Anos", s30c: "30 Anos Clássicas" },
-      shortSets: { s151: "151", s30: "30 Anos", s30c: "Clássicas" },
-      cats: ["Principal", "Treinadores e itens", "Ilustração Rara", "Ultra Rara", "Ilustração Especial", "Hiper Rara", "Rara Futurista", "Clássica"]
+      none: "Nenhuma carta encontrada. Tente outro nome ou número, ou limpe os filtros."
     },
     ja: {
       htmlLang: "ja", title: "ポケモンバインダー", h1: "ポケモンバインダー", sideTab: "アカウントと設定",
       lead: "持っているカードをチェックして、お気に入りを保存しましょう。",
       stats: (n, tot) => `<strong>${n}</strong> / <span>${tot}</span> 枚を所持`,
       progress: "コレクションの進み具合", show: "表示", tabAll: "すべて", tabOwned: "所持", tabFav: "お気に入り",
-      searchPh: "名前で検索", searchAria: "カードを名前で検索",
+      searchPh: "名前または番号で検索", searchAria: "カードを名前または番号で検索（例：Pikachu、25、025/165）",
       sitAria: "所持状況で絞り込み", sit: "状況", fOwn: "持っている", fMissing: "持っていない",
-      setAria: "セットで絞り込み", set: "セット", catAria: "カテゴリで絞り込み", cat: "カテゴリ",
+      setAria: "セットで絞り込み", set: "セット", serieAria: "シリーズで絞り込み", serie: "シリーズ",
       binderAria: "カードバインダー", pagerAria: "バインダーのページ", prevPage: "前のページ", nextPage: "次のページ",
       page: "ページ", of: n => "/ " + n,
-      footer: "カード画像と名前は、公式ポケモンカードゲームギャラリーのスカーレット＆バイオレット「151」と30周年セレクションのものです。コレクションとお気に入りはこのブラウザに保存されます。",
+      footer: "カードのデータと画像は、オープンソースのポケモンカードAPI「TCGdex」（tcgdex.dev）のものです。一部の画像は公式ギャラリーを予備として使っています。ポケモンカードゲーム ポケット（デジタル）のカードは含まれません。コレクションとお気に入りはこのブラウザに保存されます。",
       reset: "バインダーをリセット", resetArm: "もう一度タップですべて削除",
       zClose: "拡大カードを閉じる", zPrev: "前のカード", zNext: "次のカード", zPos: (i, n) => `${i} / ${n}`,
       panelTitle: "アカウントと設定", closePanel: "パネルを閉じる", account: "アカウント", siteSettings: "サイト設定",
       dim: "持っていないカードを暗くする", dimD: "オフにすると、すべてのカードが元の色で表示されます。",
       anim: "アニメーション", animD: "ページをめくるときやカードをチェックするときの効果。",
-      order: "カードの並び順", ordNum: "カード番号", ordName: "名前（A〜Z）",
+      order: "カードの並び順", ordNum: "セット（新しい順）と番号", ordName: "名前（A〜Z）",
       lang: "言語",
-      langNote: "カード画像は各言語の公式ギャラリーに合わせます。日本語の公式ギャラリーはないため、英語版のカードを表示します。",
+      langNote: "サイトの言語を変更します。カード名と画像は常に英語です。各カードの旗で、どの言語版を持っているかを記録できます。",
       acctIntro: "アカウントを作成して、バインダーを自分用にしましょう。", name: "トレーナー名", email: "メールアドレス",
       create: "アカウントを作成", acctNote: "現在、アカウントはこのブラウザにのみ保存されます。",
       acctDone: "このブラウザにアカウントを作成しました。パスワードログインと他の端末からの利用は次のバージョンで対応予定です。",
       signOut: "ログアウト", errName: "トレーナー名を2文字以上で入力してください。", errEmail: "name@example.com のような有効なメールアドレスを入力してください。",
       enlarge: "カードを拡大", number: "番号", inColl: "所持", notInColl: "未所持", favLabel: "お気に入り", haveLabel: "持っている",
       btnHave: "持ってる", btnOwned: "所持", ownedIn: "所持している言語", langNames: { en: "英語", pt: "ポルトガル語", ja: "日本語" },
+      copies: "枚数", qtyBtn: (nm, q) => `${nm} の枚数：${q}。枚数を変更`,
+      qtyDec: nm => `${nm} を1枚減らす`, qtyInc: nm => `${nm} を1枚増やす`,
+      copiesTotal: n => `合計 ${n} 枚`,
+      loading: "TCGdex からすべてのセットを読み込み中…",
+      loadErr: "TCGdex からカードを読み込めませんでした。インターネット接続を確認して、もう一度お試しください。", retry: "再試行",
       allOwned: "おめでとう！すべてのカードを持っています。",
       emptyOwned: "コレクションは空です。「すべて」で持っているカードの「持ってる」をタップしてください。",
       emptyFav: "お気に入りはまだありません。カードのハートをタップするとここに保存されます。",
-      none: "カードが見つかりません。別の名前を試すか、絞り込みを解除してください。",
-      sets: { s151: "151", s30: "30周年", s30c: "30周年クラシック" },
-      shortSets: { s151: "151", s30: "30周年", s30c: "クラシック" },
-      cats: ["通常", "トレーナーズ・グッズ", "イラストレア", "ウルトラレア", "スペシャルイラストレア", "ハイパーレア", "フューチャーレア", "クラシック"]
+      none: "カードが見つかりません。別の名前や番号を試すか、絞り込みを解除してください。"
     }
   };
   const LANGS = ["en", "pt", "ja"];
@@ -520,57 +550,68 @@
     const v = d[k] !== undefined ? d[k] : I18N.en[k];
     return typeof v === "function" ? v(...a) : v;
   };
-  const setLabel = id => t("sets")[id];
-  const catLabel = i => t("cats")[i];
-
-  /* Imagens: inglês (EUA) por padrão; português usa a galeria do Brasil; japonês usa as inglesas (não existe galeria oficial em japonês) */
-  const LOC = { en: { dir: "en-us", tag: "EN" }, pt: { dir: "pt-br", tag: "PTBR" }, ja: { dir: "en-us", tag: "EN" } };
-  function imgUrl(c) {
-    const L = LOC[conta.cfg.lang] || LOC.en;
-    if (c.set === "s151") return CDN + `151/${L.dir}/SV3pt5_${L.tag}_${c.num}.png`;
-    if (c.set === "s30") return CDN + `30th-celebration/${L.dir}/2M6P_${L.tag}_${c.num}.png`;
-    return CDN + `30th-celebration/${L.dir}/2M6P_Classic_${L.tag}_${c.num}.png`;
-  }
-  const SET_ID = ["s151", "s30", "s30c"];
-
-  const cat151 = n => n <= 151 ? 0 : n <= 165 ? 1 : n <= 181 ? 2 : n <= 197 ? 3 : n <= 204 ? 4 : 5;
-  const cat30 = n => n <= 128 ? 0 : n <= 146 ? 2 : n <= 156 ? 4 : 6;
-
-  const CARTAS = [];
-  N151.forEach((nome, i) => { const n = i + 1; CARTAS.push({ id: "151-" + n, set: "s151", n: nome, num: n, cat: cat151(n) }); });
-  C30.forEach((nome, i) => { const n = i + 1; CARTAS.push({ id: "30-" + n, set: "s30", n: nome, num: n, cat: cat30(n) }); });
-  CL.forEach((nome, i) => { const n = i + 1; CARTAS.push({ id: "30c-" + n, set: "s30c", n: nome, num: n, cat: 7 }); });
-  const POR_SET = { s151: 207, s30: 158, s30c: 30 };
 
   const ICON = {
     heart: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.5C1.3 8.4 3.3 5 6.8 5c2 0 3.5 1.1 5.2 3.1C13.7 6.1 15.2 5 17.2 5c3.5 0 5.5 3.4 4.3 6.5C19.5 16.4 12 21 12 21z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
     check: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    plus:  '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>'
+    plus:  '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>',
+    minus: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>',
+    stack: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="7" y="3" width="12" height="16" rx="2" stroke="currentColor" stroke-width="2.2"/><path d="M4 7v12a2 2 0 0 0 2 2h9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>'
   };
   const esc = s => String(s).replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
   const $ = id => document.getElementById(id);
-  const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  const norm = s => String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  const pad3 = n => String(n).padStart(3, "0");
+  const collator = new Intl.Collator("en", { numeric: true, sensitivity: "base" });
+  // "006" -> "6", "TG01" -> "tg1", "025/165" -> "25"
+  const numKey = s => String(s).toLowerCase().replace(/^#/, "").split("/")[0].replace(/\d+/g, d => String(parseInt(d, 10)));
+  const ehNumero = tk => /^#?[a-z]{0,4}\d+[a-z]?(\/\d+)?$/.test(tk);
 
-  /* ---------- Coleção e favoritas (salvas no navegador) ---------- */
-  const KEY = "fichario-pokemon-v2";
-  const SEED_OWN = ["151-6", "151-25", "151-151", "30-23", "30-66", "30c-1", "30c-14"];
-  const SEED_FAV = ["151-6", "151-151", "30c-1"];
+  /* ---------- Coleção, quantidades, idiomas e favoritas (salvas no navegador) ---------- */
+  const KEY = "fichario-pokemon-v3";
+  const KEY_OLD = "fichario-pokemon-v2";
+  // ids antigos (versão com 151 e 30 anos fixos) -> ids da TCGdex
+  const migrar = id => {
+    let m;
+    if ((m = /^151-(\d+)$/.exec(id))) return "sv03.5-" + pad3(m[1]);
+    if ((m = /^30c-(\d+)$/.exec(id))) return "30th-c-" + pad3(m[1]);
+    if ((m = /^30-(\d+)$/.exec(id))) return "30th-" + pad3(m[1]);
+    return id;
+  };
+  const SEED_QTY = { "sv03.5-006": 1, "sv03.5-025": 2, "sv03.5-151": 1, "30th-023": 1, "30th-066": 1, "30th-c-001": 1, "30th-c-014": 1 };
+  const SEED_FAV = ["sv03.5-006", "sv03.5-151", "30th-c-001"];
   function carregar() {
     try {
       const raw = localStorage.getItem(KEY);
       if (raw) {
         const o = JSON.parse(raw);
-        const langs = {};
-        const src = o.langs || {};
-        (o.own || []).forEach(id => { langs[id] = Array.isArray(src[id]) && src[id].length ? src[id].filter(l => LANGS.includes(l)) : ["en"]; });
-        return { own: new Set(Object.keys(langs)), fav: new Set(o.fav || []), langs };
+        const qty = {}, langs = {};
+        Object.entries(o.qty || {}).forEach(([id, n]) => { n = parseInt(n, 10); if (n > 0) qty[id] = Math.min(999, n); });
+        Object.keys(qty).forEach(id => {
+          const l = Array.isArray((o.langs || {})[id]) ? o.langs[id].filter(x => LANGS.includes(x)) : [];
+          langs[id] = l.length ? l : ["en"];
+        });
+        return { qty, langs, fav: new Set(o.fav || []) };
+      }
+      const old = localStorage.getItem(KEY_OLD);
+      if (old) {
+        const o = JSON.parse(old);
+        const qty = {}, langs = {};
+        (o.own || []).forEach(id => {
+          const nid = migrar(id);
+          qty[nid] = 1;
+          const l = Array.isArray((o.langs || {})[id]) ? o.langs[id].filter(x => LANGS.includes(x)) : [];
+          langs[nid] = l.length ? l : ["en"];
+        });
+        return { qty, langs, fav: new Set((o.fav || []).map(migrar)) };
       }
     } catch (e) { /* usa os exemplos */ }
-    const langs = {}; SEED_OWN.forEach(id => { langs[id] = ["en"]; });
-    return { own: new Set(SEED_OWN), fav: new Set(SEED_FAV), langs };
+    const langs = {};
+    Object.keys(SEED_QTY).forEach(id => { langs[id] = ["en"]; });
+    return { qty: Object.assign({}, SEED_QTY), langs, fav: new Set(SEED_FAV) };
   }
   function salvar() {
-    try { localStorage.setItem(KEY, JSON.stringify({ own: [...state.own], fav: [...state.fav], langs: state.langs })); } catch (e) { /* segue sem salvar */ }
+    try { localStorage.setItem(KEY, JSON.stringify({ qty: state.qty, langs: state.langs, fav: [...state.fav] })); } catch (e) { /* segue sem salvar */ }
   }
 
   /* ---------- Conta e configurações (salvas no navegador) ---------- */
@@ -597,72 +638,171 @@
 
   const saved = carregar();
   const conta = carregarConta();
-  const state = { tab: "todas", q: "", posse: "", set: "", cat: "", page: 0, own: saved.own, fav: saved.fav, langs: saved.langs };
+  const state = {
+    tab: "todas", q: "", posse: "", serie: "", set: "", page: 0,
+    qty: saved.qty, langs: saved.langs, fav: saved.fav, own: new Set(Object.keys(saved.qty)),
+    status: "loading", qtyOpen: null, lista: []
+  };
 
+  /* ---------- Cartas vindas da API ---------- */
+  let CARTAS = [];
+  const POR_ID = new Map();
+  let SETS = {};      // id -> { id, name, serie, serieName, official, total }
+  let SERIES = [];    // [{ id, name, sets: [ids] }] da mais nova para a mais antiga
+
+  async function getJSON(url) {
+    const r = await fetch(url);
+    if (!r.ok) throw new Error("HTTP " + r.status + " " + url);
+    return r.json();
+  }
+  async function carregarDados() {
+    state.status = "loading";
+    render();
+    try {
+      const [lista, cards] = await Promise.all([getJSON(API + "/series"), getJSON(API + "/cards")]);
+      const detalhes = await Promise.all(lista.filter(s => !SKIP_SERIES.has(s.id))
+        .map(s => getJSON(API + "/series/" + encodeURIComponent(s.id)).catch(() => null)));
+      montar(detalhes.filter(Boolean), cards);
+      state.status = "ok";
+    } catch (e) {
+      console.error(e);
+      state.status = "error";
+    }
+    preencherFiltros();
+    render();
+  }
+
+  function montar(detalhes, cards) {
+    SETS = {}; SERIES = [];
+    detalhes.sort((a, b) => String(b.releaseDate || "").localeCompare(String(a.releaseDate || "")));
+    let ordem = 0;
+    const ordemSet = {};
+    detalhes.forEach(s => {
+      const ids = [];
+      (s.sets || []).slice().reverse().forEach(st => {
+        if (SETS[st.id]) return;
+        SETS[st.id] = { id: st.id, name: st.name, serie: s.id, serieName: s.name, official: (st.cardCount && st.cardCount.official) || 0, total: 0 };
+        ordemSet[st.id] = ordem++;
+        ids.push(st.id);
+      });
+      if (ids.length) SERIES.push({ id: s.id, name: s.name, sets: ids });
+    });
+    const achaSet = c => {
+      if (c.localId !== undefined && c.id.endsWith("-" + c.localId)) {
+        const sid = c.id.slice(0, c.id.length - String(c.localId).length - 1);
+        if (SETS[sid]) return sid;
+      }
+      let p = c.id.length;
+      while ((p = c.id.lastIndexOf("-", p - 1)) > 0) { const sid = c.id.slice(0, p); if (SETS[sid]) return sid; }
+      return null;
+    };
+    CARTAS = [];
+    POR_ID.clear();
+    cards.forEach(c => {
+      if (!c || !c.id || !c.name) return;
+      const sid = achaSet(c);
+      if (!sid) return;
+      const lid = c.localId !== undefined ? String(c.localId) : c.id.slice(sid.length + 1);
+      const num = /^\d+$/.test(lid) ? parseInt(lid, 10) : NaN;
+      const fb = OFICIAL[sid] && !isNaN(num) ? OFICIAL[sid](num) : "";
+      const carta = { id: c.id, set: sid, lid, n: c.name, nn: norm(c.name), key: numKey(lid), img: c.image || "", fb, ord: 0 };
+      CARTAS.push(carta);
+      SETS[sid].total++;
+    });
+    CARTAS.sort((a, b) => ordemSet[a.set] - ordemSet[b.set] || collator.compare(a.lid, b.lid));
+    CARTAS.forEach((c, i) => { c.ord = i; POR_ID.set(c.id, c); });
+  }
+
+  const imgPequena = c => c.img ? c.img + "/low.webp" : c.fb;
+  const imgGrande = c => c.img ? c.img + "/high.webp" : c.fb;
+  const numeroTxt = c => {
+    const s = SETS[c.set];
+    return /^\d+$/.test(c.lid) && s && s.official ? `${c.lid}/${String(s.official).padStart(c.lid.length, "0")}` : c.lid;
+  };
+  const setNome = c => (SETS[c.set] ? SETS[c.set].name : "");
+
+  /* ---------- Lista filtrada e desenho ---------- */
   const mq = window.matchMedia("(max-width: 479px)");
   let porPagina = mq.matches ? 6 : 9;
   const grid = $("grid"), vazio = $("vazio"), prev = $("prev"), next = $("next"), pgIn = $("pgIn");
 
-  /* ---------- Lista filtrada e desenho ---------- */
-  const SET_ORDEM = { s151: 0, s30: 1, s30c: 2 };
   const ORDENS = {
-    num: (a, b) => SET_ORDEM[a.set] - SET_ORDEM[b.set] || a.num - b.num,
-    nome: (a, b) => a.n.localeCompare(b.n, conta.cfg.lang === "pt" ? "pt-BR" : "en") || SET_ORDEM[a.set] - SET_ORDEM[b.set] || a.num - b.num
+    num: (a, b) => a.ord - b.ord,
+    nome: (a, b) => collator.compare(a.n, b.n) || a.ord - b.ord
   };
+  function casaBusca(c, tks) {
+    for (const tk of tks) {
+      if (ehNumero(tk)) { if (c.key !== numKey(tk) && !c.nn.includes(tk)) return false; }
+      else if (!c.nn.includes(tk)) return false;
+    }
+    return true;
+  }
   function filtradas() {
-    const q = norm(state.q.trim());
-    return CARTAS.filter(c => {
+    const tks = norm(state.q.trim()).split(/\s+/).filter(Boolean);
+    const lista = CARTAS.filter(c => {
       if (state.tab === "colecao" && !state.own.has(c.id)) return false;
       if (state.tab === "favoritas" && !state.fav.has(c.id)) return false;
       if (state.posse === "tenho" && !state.own.has(c.id)) return false;
       if (state.posse === "faltam" && state.own.has(c.id)) return false;
+      if (state.serie && SETS[c.set].serie !== state.serie) return false;
       if (state.set && c.set !== state.set) return false;
-      if (state.cat !== "" && c.cat !== Number(state.cat)) return false;
-      if (q && !norm(c.n).includes(q)) return false;
+      if (tks.length && !casaBusca(c, tks)) return false;
       return true;
-    }).sort(ORDENS[conta.cfg.ordem] || ORDENS.num);
+    });
+    return conta.cfg.ordem === "nome" ? lista.sort(ORDENS.nome) : lista;
   }
 
-  function cartaHTML(c) {
-    const own = state.own.has(c.id), fav = state.fav.has(c.id);
-    const cinza = !own && conta.cfg.cinza;
-    const rotulo = `${c.n}, ${t("number")} ${c.num}, ${setLabel(c.set)}, ${catLabel(c.cat)}, ${own ? t("inColl") : t("notInColl")}`;
-    return `<li class="cell" data-id="${c.id}">
-      <button type="button" class="pocket" data-act="zoom" aria-label="${esc(t("enlarge"))}: ${esc(rotulo)}">
-        <img class="${cinza ? "ghost" : ""}" src="${imgUrl(c)}" alt="" width="330" height="460" loading="lazy" decoding="async" referrerpolicy="no-referrer">
-      </button>
-      <div class="cap"><span class="n" title="${esc(c.n)}">${esc(c.n)}</span><span class="num">#${c.num}</span></div>
-      <div class="ctrl">
-        <button type="button" class="btn-fav" data-act="fav" aria-pressed="${fav}" aria-label="${esc(t("favLabel"))}: ${esc(c.n)}, ${t("number")} ${c.num}, ${esc(setLabel(c.set))}">${ICON.heart}</button>
-        <button type="button" class="btn-own" data-act="own" aria-pressed="${own}" aria-label="${esc(t("haveLabel"))}: ${esc(c.n)}, ${t("number")} ${c.num}, ${esc(setLabel(c.set))}">${own ? ICON.check : ICON.plus}<span class="lbl">${own ? t("btnOwned") : t("btnHave")}</span></button>
-      </div>
-      ${flagsHTML(c)}
-    </li>`;
-  }
   const LANG_FLAG = { en: "us", pt: "br", ja: "jp" };
   function flagsHTML(c, big) {
     const have = state.langs[c.id] || [];
     const nm = t("langNames");
-    return (big ? "" : `<div class="flags" role="group" aria-label="${esc(t("ownedIn"))}: ${esc(c.n)}, ${t("number")} ${c.num}, ${esc(setLabel(c.set))}">`) +
-      LANGS.map(l => `<button type="button" data-act="flag" data-l="${l}" aria-pressed="${have.includes(l)}" aria-label="${esc(t("ownedIn"))} ${esc(nm[l])}: ${esc(c.n)}, ${t("number")} ${c.num}"><span class="fl">${FLAGS[LANG_FLAG[l]]}</span></button>`).join("") +
+    return (big ? "" : `<div class="flags" role="group" aria-label="${esc(t("ownedIn"))}: ${esc(c.n)}, ${t("number")} ${esc(numeroTxt(c))}">`) +
+      LANGS.map(l => `<button type="button" data-act="flag" data-l="${l}" aria-pressed="${have.includes(l)}" aria-label="${esc(t("ownedIn"))} ${esc(nm[l])}: ${esc(c.n)}, ${t("number")} ${esc(numeroTxt(c))}"><span class="fl">${FLAGS[LANG_FLAG[l]]}</span></button>`).join("") +
       (big ? "" : "</div>");
   }
-  function toggleOwn(id) {
-    if (state.own.has(id)) { state.own.delete(id); delete state.langs[id]; }
-    else { state.own.add(id); state.langs[id] = [conta.cfg.lang]; }
+  function qtyPopHTML(c) {
+    const q = state.qty[c.id] || 0;
+    return `<div class="qty-pop" role="group" aria-label="${esc(t("copies"))}: ${esc(c.n)}">
+      <button type="button" data-act="dec" aria-label="${esc(t("qtyDec", c.n))}" ${q === 0 ? "disabled" : ""}>${ICON.minus}</button>
+      <output aria-live="polite">${q}</output>
+      <button type="button" data-act="inc" aria-label="${esc(t("qtyInc", c.n))}">${ICON.plus}</button>
+    </div>`;
   }
-  function toggleLang(id, l) {
-    const a = (state.langs[id] || []).slice();
-    const i = a.indexOf(l);
-    if (i >= 0) a.splice(i, 1); else a.push(l);
-    if (a.length) { state.langs[id] = LANGS.filter(x => a.includes(x)); state.own.add(id); }
-    else { delete state.langs[id]; state.own.delete(id); }
+
+  function cartaHTML(c) {
+    const own = state.own.has(c.id), fav = state.fav.has(c.id);
+    const q = state.qty[c.id] || 0;
+    const cinza = !own && conta.cfg.cinza;
+    const num = numeroTxt(c);
+    const rotulo = `${c.n}, ${t("number")} ${num}, ${setNome(c)}, ${own ? t("inColl") : t("notInColl")}`;
+    const src = imgPequena(c);
+    const aberto = state.qtyOpen === c.id;
+    return `<li class="cell" data-id="${esc(c.id)}">
+      <div class="pocket-wrap">
+        <button type="button" class="pocket" data-act="zoom" aria-label="${esc(t("enlarge"))}: ${esc(rotulo)}">
+          ${src ? `<img class="${cinza ? "ghost" : ""}" src="${esc(src)}" alt="" width="245" height="342" loading="lazy" decoding="async" referrerpolicy="no-referrer">` : fallbackHTML(c)}
+        </button>
+        <button type="button" class="qty-btn${q ? " on" : ""}" data-act="qty" aria-expanded="${aberto}" aria-label="${esc(t("qtyBtn", c.n, q))}">${ICON.stack}<span>${q}</span></button>
+        ${aberto ? qtyPopHTML(c) : ""}
+      </div>
+      <div class="cap" title="${esc(c.n)} #${esc(num)}">
+        <span class="l1"><span class="no">#${esc(num)}</span><span class="nm">${esc(c.n)}</span></span>
+        <span class="st">${esc(setNome(c))}</span>
+      </div>
+      <div class="ctrl">
+        <button type="button" class="btn-fav" data-act="fav" aria-pressed="${fav}" aria-label="${esc(t("favLabel"))}: ${esc(c.n)}, ${t("number")} ${esc(num)}, ${esc(setNome(c))}">${ICON.heart}</button>
+        <button type="button" class="btn-own" data-act="own" aria-pressed="${own}" aria-label="${esc(t("haveLabel"))}: ${esc(c.n)}, ${t("number")} ${esc(num)}, ${esc(setNome(c))}">${own ? ICON.check : ICON.plus}<span class="lbl">${own ? t("btnOwned") : t("btnHave")}</span></button>
+      </div>
+      ${flagsHTML(c)}
+    </li>`;
   }
-  const vagaHTML = () => `<li class="cell empty" aria-hidden="true"><div class="pocket"></div><div class="cap">&nbsp;</div><div class="ctrl"><button type="button" tabindex="-1"></button></div><div class="flags" style="visibility:hidden"><button type="button" tabindex="-1"></button></div></li>`;
+  const fallbackHTML = c => `<div class="fallback"><span>${esc(c.n)}</span><small>#${esc(numeroTxt(c))} · ${esc(setNome(c))}</small></div>`;
+  const vagaHTML = () => `<li class="cell empty" aria-hidden="true"><div class="pocket-wrap"><div class="pocket"></div></div><div class="cap"><span class="l1">&nbsp;</span><span class="st">&nbsp;</span></div><div class="ctrl"><button type="button" tabindex="-1"></button></div><div class="flags"><button type="button" tabindex="-1"></button></div></li>`;
 
   function mensagemVazia() {
-    if (!state.q.trim() && !state.set && state.cat === "" && state.posse === "faltam" && state.tab === "todas") return t("allOwned");
-    if (!state.q.trim() && !state.set && state.cat === "" && !state.posse) {
+    const semFiltro = !state.q.trim() && !state.set && !state.serie;
+    if (semFiltro && state.posse === "faltam" && state.tab === "todas") return t("allOwned");
+    if (semFiltro && !state.posse) {
       if (state.tab === "colecao") return t("emptyOwned");
       if (state.tab === "favoritas") return t("emptyFav");
     }
@@ -670,13 +810,20 @@
   }
 
   function render() {
-    const lista = filtradas();
+    const carregado = state.status === "ok";
+    const lista = carregado ? filtradas() : [];
     state.lista = lista;
     const paginas = Math.max(1, Math.ceil(lista.length / porPagina));
     state.page = Math.min(state.page, paginas - 1);
 
-    if (!lista.length) {
-      grid.hidden = true; vazio.hidden = false; vazio.textContent = mensagemVazia();
+    if (!carregado) {
+      grid.hidden = true; vazio.hidden = false;
+      vazio.setAttribute("aria-busy", String(state.status === "loading"));
+      vazio.innerHTML = state.status === "loading"
+        ? `<span class="spin" aria-hidden="true"></span><span>${esc(t("loading"))}</span>`
+        : `<span>${esc(t("loadErr"))}</span><button type="button" class="btn-retry" id="retry">${esc(t("retry"))}</button>`;
+    } else if (!lista.length) {
+      grid.hidden = true; vazio.hidden = false; vazio.removeAttribute("aria-busy"); vazio.textContent = mensagemVazia();
     } else {
       vazio.hidden = true; grid.hidden = false;
       const fatia = lista.slice(state.page * porPagina, state.page * porPagina + porPagina);
@@ -687,21 +834,28 @@
 
     pgIn.value = state.page + 1;
     pgIn.max = paginas;
+    pgIn.disabled = !carregado;
     $("pgDe").textContent = t("of", paginas);
-    prev.disabled = state.page === 0;
-    next.disabled = state.page >= paginas - 1;
+    prev.disabled = !carregado || state.page === 0;
+    next.disabled = !carregado || state.page >= paginas - 1;
 
     const total = CARTAS.length;
-    const tem = state.own.size;
-    $("statsLine").innerHTML = t("stats", tem, total);
-    $("barFill").style.width = (tem / total * 100) + "%";
-    $("bar").setAttribute("aria-valuenow", Math.round(tem / total * 100));
-    const cont = { s151: 0, s30: 0, s30c: 0 };
-    CARTAS.forEach(c => { if (state.own.has(c.id)) cont[c.set]++; });
-    $("porColecao").textContent = SET_ID.map(k => `${t("shortSets")[k]}: ${cont[k]}/${POR_SET[k]}`).join(" · ");
-    $("cTodas").textContent = total;
+    let tem = 0, copias = 0;
+    CARTAS.forEach(c => { if (state.own.has(c.id)) { tem++; copias += state.qty[c.id] || 0; } });
+    $("statsLine").innerHTML = t("stats", tem, total.toLocaleString());
+    const pct = total ? tem / total * 100 : 0;
+    $("barFill").style.width = pct + "%";
+    $("bar").setAttribute("aria-valuenow", Math.round(pct));
+    let extra = t("copiesTotal", copias);
+    if (carregado && state.set && SETS[state.set]) {
+      const s = SETS[state.set];
+      const noSet = CARTAS.reduce((n, c) => n + (c.set === s.id && state.own.has(c.id) ? 1 : 0), 0);
+      extra = `${s.name}: ${noSet}/${s.total} · ` + extra;
+    }
+    $("porColecao").textContent = extra;
+    $("cTodas").textContent = total.toLocaleString();
     $("cColecao").textContent = tem;
-    $("cFavoritas").textContent = state.fav.size;
+    $("cFavoritas").textContent = CARTAS.length ? CARTAS.reduce((n, c) => n + (state.fav.has(c.id) ? 1 : 0), 0) : state.fav.size;
     document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.tab === state.tab)));
   }
 
@@ -712,55 +866,111 @@
     grid.classList.add("flip");
   }
 
-  // Se a imagem oficial não carregar, mostra nome e número no lugar
+  // Se a imagem não carregar: tenta a da galeria oficial e, se não der, mostra nome e número
   grid.addEventListener("error", e => {
     const img = e.target;
     if (!(img instanceof HTMLImageElement)) return;
     const cell = img.closest(".cell");
-    const c = CARTAS.find(x => x.id === cell.dataset.id);
+    const c = POR_ID.get(cell.dataset.id);
+    if (!c) return;
+    if (c.fb && img.dataset.fb !== "1" && img.src !== c.fb) { img.dataset.fb = "1"; img.src = c.fb; return; }
     const div = document.createElement("div");
-    div.className = "fallback";
-    div.innerHTML = `<span>${esc(c.n)}</span><small>#${c.num} · ${esc(setLabel(c.set))}</small>`;
-    img.replaceWith(div);
+    div.innerHTML = fallbackHTML(c);
+    img.replaceWith(div.firstElementChild);
   }, true);
+
+  /* ---------- Quantidade, posse e idiomas ---------- */
+  function setQty(id, n) {
+    n = Math.max(0, Math.min(999, n));
+    if (n === 0) { delete state.qty[id]; delete state.langs[id]; state.own.delete(id); return; }
+    if (!state.qty[id] && !(state.langs[id] || []).length) state.langs[id] = [conta.cfg.lang];
+    state.qty[id] = n;
+    state.own.add(id);
+  }
+  function toggleOwn(id) { setQty(id, state.own.has(id) ? 0 : 1); }
+  function toggleLang(id, l) {
+    const a = (state.langs[id] || []).slice();
+    const i = a.indexOf(l);
+    if (i >= 0) a.splice(i, 1); else a.push(l);
+    if (!a.length) { setQty(id, 0); return; }
+    state.langs[id] = LANGS.filter(x => a.includes(x));
+    if (!state.qty[id]) state.qty[id] = 1;
+    state.own.add(id);
+  }
+
+  function focarNaCelula(id, seletor) {
+    const alvo = grid.querySelector(`.cell[data-id="${CSS.escape(id)}"] ${seletor}`);
+    if (alvo) { alvo.focus({ preventScroll: true }); return alvo; }
+    (grid.hidden ? vazio : grid).focus({ preventScroll: true });
+    return null;
+  }
 
   grid.addEventListener("click", e => {
     const b = e.target.closest("button[data-act]");
     if (!b) return;
     const id = b.closest(".cell").dataset.id;
     const act = b.dataset.act;
-    if (act === "zoom") { abrirZoom(id); return; }
+    if (act === "zoom") { state.qtyOpen = null; abrirZoom(id); return; }
+    if (act === "qty") {
+      state.qtyOpen = state.qtyOpen === id ? null : id;
+      render();
+      focarNaCelula(id, state.qtyOpen ? '[data-act="inc"]' : '[data-act="qty"]');
+      return;
+    }
     const lg = b.dataset.l;
     if (act === "fav") { if (state.fav.has(id)) state.fav.delete(id); else state.fav.add(id); }
     else if (act === "flag") toggleLang(id, lg);
+    else if (act === "inc") setQty(id, (state.qty[id] || 0) + 1);
+    else if (act === "dec") setQty(id, (state.qty[id] || 0) - 1);
     else toggleOwn(id);
     salvar();
     render();
-    const novo = grid.querySelector(`.cell[data-id="${id}"] ${act === "flag" ? `[data-l="${lg}"]` : `[data-act="${act}"]`}`);
-    if (novo) { novo.focus({ preventScroll: true }); novo.classList.add("pop"); }
-    else (grid.hidden ? vazio : grid).focus({ preventScroll: true });
+    let sel = `[data-act="${act}"]`;
+    if (act === "flag") sel = `[data-l="${lg}"]`;
+    if (act === "dec" && !state.qty[id]) sel = '[data-act="inc"]';
+    const novo = focarNaCelula(id, sel);
+    if (novo && (act === "fav" || act === "own")) novo.classList.add("pop");
   });
+  function fecharQty(focar) {
+    if (!state.qtyOpen) return;
+    const id = state.qtyOpen;
+    state.qtyOpen = null;
+    render();
+    if (focar) focarNaCelula(id, '[data-act="qty"]');
+  }
+  document.addEventListener("click", e => {
+    if (state.qtyOpen && !e.target.closest(".pocket-wrap")) fecharQty(false);
+  });
+  vazio.addEventListener("click", e => { if (e.target.closest("#retry")) carregarDados(); });
 
   document.querySelector(".tabs").addEventListener("click", e => {
     const b = e.target.closest("button[data-tab]");
     if (!b) return;
-    state.tab = b.dataset.tab; state.page = 0; render();
+    state.tab = b.dataset.tab; state.page = 0; state.qtyOpen = null; render();
   });
-  $("busca").addEventListener("input", e => { state.q = e.target.value; state.page = 0; render(); });
+  let buscaTimer;
+  $("busca").addEventListener("input", e => {
+    clearTimeout(buscaTimer);
+    buscaTimer = setTimeout(() => { state.q = e.target.value; state.page = 0; state.qtyOpen = null; render(); }, 120);
+  });
   $("fPosse").addEventListener("change", e => { state.posse = e.target.value; state.page = 0; render(); });
+  $("fSerie").addEventListener("change", e => {
+    state.serie = e.target.value;
+    if (state.set && SETS[state.set] && state.serie && SETS[state.set].serie !== state.serie) state.set = "";
+    state.page = 0; preencherFiltros(); render();
+  });
   $("fSet").addEventListener("change", e => { state.set = e.target.value; state.page = 0; render(); });
-  $("fCat").addEventListener("change", e => { state.cat = e.target.value; state.page = 0; render(); });
 
   prev.addEventListener("click", () => {
-    if (state.page > 0) { state.page--; render(); virarPagina(-1); if (prev.disabled) next.focus(); }
+    if (state.page > 0) { state.page--; state.qtyOpen = null; render(); virarPagina(-1); if (prev.disabled) next.focus(); }
   });
   next.addEventListener("click", () => {
-    state.page++; render(); virarPagina(1); if (next.disabled) prev.focus();
+    state.page++; state.qtyOpen = null; render(); virarPagina(1); if (next.disabled) prev.focus();
   });
   pgIn.addEventListener("change", () => {
     const max = Number(pgIn.max) || 1;
     const v = Math.min(max, Math.max(1, parseInt(pgIn.value, 10) || 1));
-    state.page = v - 1; render(); virarPagina(1);
+    state.page = v - 1; state.qtyOpen = null; render(); virarPagina(1);
   });
   pgIn.addEventListener("keydown", e => { if (e.key === "Enter") pgIn.blur(); });
 
@@ -782,30 +992,35 @@
     } else {
       clearTimeout(timer); armado = false;
       reset.textContent = t("reset");
-      state.own.clear(); state.fav.clear(); state.langs = {}; salvar(); render();
+      state.own.clear(); state.fav.clear(); state.langs = {}; state.qty = {}; state.qtyOpen = null; salvar(); render();
     }
   });
 
   /* ---------- Carta ampliada ---------- */
   const zoom = $("zoom");
   const zState = { ids: [], i: 0, origem: null };
-  const cartaPorId = id => CARTAS.find(c => c.id === id);
 
   function desenharZoom() {
-    const c = cartaPorId(zState.ids[zState.i]);
+    const c = POR_ID.get(zState.ids[zState.i]);
     const own = state.own.has(c.id), fav = state.fav.has(c.id);
+    const q = state.qty[c.id] || 0;
+    const num = numeroTxt(c);
     const box = $("zImg");
     box.innerHTML = "";
-    const img = new Image();
-    img.referrerPolicy = "no-referrer";
-    img.alt = `${c.n}, ${t("number")} ${c.num}, ${setLabel(c.set)}`;
-    img.addEventListener("error", () => {
-      box.innerHTML = `<div class="fallback"><span>${esc(c.n)}</span><small>#${c.num} · ${esc(setLabel(c.set))}</small></div>`;
-    });
-    img.src = imgUrl(c);
-    box.appendChild(img);
-    $("zNome").textContent = c.n;
-    $("zDet").textContent = `#${c.num} · ${setLabel(c.set)} · ${catLabel(c.cat)}`;
+    const src = imgGrande(c);
+    if (src) {
+      const img = new Image();
+      img.referrerPolicy = "no-referrer";
+      img.alt = `${c.n}, ${t("number")} ${num}, ${setNome(c)}`;
+      img.addEventListener("error", () => {
+        if (c.fb && img.dataset.fb !== "1" && img.src !== c.fb) { img.dataset.fb = "1"; img.src = c.fb; return; }
+        box.innerHTML = fallbackHTML(c);
+      });
+      img.src = src;
+      box.appendChild(img);
+    } else box.innerHTML = fallbackHTML(c);
+    $("zNome").textContent = `${c.n} #${num}`;
+    $("zDet").textContent = `${setNome(c)} · ${SETS[c.set] ? SETS[c.set].serieName : ""}`;
     $("zPos").textContent = t("zPos", zState.i + 1, zState.ids.length);
     const f = $("zFav"), o = $("zOwn");
     f.setAttribute("aria-pressed", String(fav));
@@ -814,13 +1029,18 @@
     o.setAttribute("aria-pressed", String(own));
     o.setAttribute("aria-label", t("haveLabel") + ": " + c.n);
     o.innerHTML = (own ? ICON.check : ICON.plus) + `<span>${own ? t("btnOwned") : t("btnHave")}</span>`;
+    $("zQtyLbl").textContent = t("copies");
+    $("zQtyVal").textContent = q;
+    $("zDec").disabled = q === 0;
+    $("zDec").setAttribute("aria-label", t("qtyDec", c.n));
+    $("zInc").setAttribute("aria-label", t("qtyInc", c.n));
     $("zFlags").setAttribute("aria-label", t("ownedIn"));
     $("zFlags").innerHTML = flagsHTML(c, true);
     $("zPrev").disabled = zState.i === 0;
     $("zNext").disabled = zState.i >= zState.ids.length - 1;
   }
   function abrirZoom(id) {
-    const ids = (state.lista || []).map(c => c.id);
+    const ids = state.lista.map(c => c.id);
     const i = ids.indexOf(id);
     if (i < 0) return;
     zState.ids = ids; zState.i = i;
@@ -834,9 +1054,11 @@
     if (zoom.hidden) return;
     zoom.hidden = true;
     wrap.inert = false;
-    // volta o foco para a carta que estava aberta, se ela ainda estiver na página
     const atual = zState.ids[zState.i];
-    const alvo = grid.querySelector(`.cell[data-id="${atual}"] [data-act="zoom"]`) || grid.querySelector(`.cell[data-id="${zState.origem}"] [data-act="zoom"]`) || sideTab;
+    // leva o fichário até a página da carta que estava aberta
+    const pos = state.lista.findIndex(c => c.id === atual);
+    if (pos >= 0 && Math.floor(pos / porPagina) !== state.page) { state.page = Math.floor(pos / porPagina); render(); }
+    const alvo = grid.querySelector(`.cell[data-id="${CSS.escape(atual)}"] [data-act="zoom"]`) || sideTab;
     alvo.focus({ preventScroll: false });
   }
   function irZoom(d) {
@@ -845,33 +1067,30 @@
     zState.i = n;
     desenharZoom();
   }
-  function marcarZoom(act) {
-    const id = zState.ids[zState.i];
-    if (act === "fav") { if (state.fav.has(id)) state.fav.delete(id); else state.fav.add(id); }
-    else toggleOwn(id);
-    salvar();
-    render();
-    desenharZoom();
-  }
-  function marcarFlagZoom(l) {
-    toggleLang(zState.ids[zState.i], l);
-    salvar();
-    render();
-    desenharZoom();
-    const b = $("zFlags").querySelector(`[data-l="${l}"]`); if (b) b.focus();
-  }
-  $("zFlags").addEventListener("click", e => { const b = e.target.closest("[data-l]"); if (b) marcarFlagZoom(b.dataset.l); });
+  function depoisZoom(foco) { salvar(); render(); desenharZoom(); if (foco) { const b = typeof foco === "string" ? $(foco) : foco(); if (b) b.focus(); } }
   $("zClose").addEventListener("click", fecharZoom);
   $("zPrev").addEventListener("click", () => irZoom(-1));
   $("zNext").addEventListener("click", () => irZoom(1));
-  $("zFav").addEventListener("click", () => marcarZoom("fav"));
-  $("zOwn").addEventListener("click", () => marcarZoom("own"));
+  $("zFav").addEventListener("click", () => { const id = zState.ids[zState.i]; if (state.fav.has(id)) state.fav.delete(id); else state.fav.add(id); depoisZoom(); });
+  $("zOwn").addEventListener("click", () => { toggleOwn(zState.ids[zState.i]); depoisZoom(); });
+  $("zInc").addEventListener("click", () => { const id = zState.ids[zState.i]; setQty(id, (state.qty[id] || 0) + 1); depoisZoom("zInc"); });
+  $("zDec").addEventListener("click", () => { const id = zState.ids[zState.i]; setQty(id, (state.qty[id] || 0) - 1); depoisZoom(state.qty[id] ? "zDec" : "zInc"); });
+  $("zFlags").addEventListener("click", e => {
+    const b = e.target.closest("[data-l]");
+    if (!b) return;
+    const l = b.dataset.l;
+    toggleLang(zState.ids[zState.i], l);
+    depoisZoom(() => $("zFlags").querySelector(`[data-l="${l}"]`));
+  });
   zoom.addEventListener("click", e => { if (e.target === zoom) fecharZoom(); });
   document.addEventListener("keydown", e => {
-    if (zoom.hidden) return;
-    if (e.key === "Escape") { e.preventDefault(); fecharZoom(); }
-    else if (e.key === "ArrowLeft") irZoom(-1);
-    else if (e.key === "ArrowRight") irZoom(1);
+    if (!zoom.hidden) {
+      if (e.key === "Escape") { e.preventDefault(); fecharZoom(); }
+      else if (e.key === "ArrowLeft") irZoom(-1);
+      else if (e.key === "ArrowRight") irZoom(1);
+      return;
+    }
+    if (e.key === "Escape" && state.qtyOpen) { e.preventDefault(); fecharQty(true); }
   });
   let toqueX = null;
   $("zStage").addEventListener("touchstart", e => { toqueX = e.touches[0].clientX; }, { passive: true });
@@ -961,10 +1180,14 @@
   document.querySelectorAll("[data-flag]").forEach(el => { el.innerHTML = FLAGS[el.dataset.flag]; });
 
   function preencherFiltros() {
-    const sel = (id, html, val) => { const el = $(id); el.innerHTML = html; el.value = val; };
+    const sel = (id, html, val) => { const el = $(id); el.innerHTML = html; el.value = val; if (el.value !== val) el.value = ""; };
     sel("fPosse", `<option value="">${esc(t("sit"))}</option><option value="tenho">${esc(t("fOwn"))}</option><option value="faltam">${esc(t("fMissing"))}</option>`, state.posse);
-    sel("fSet", `<option value="">${esc(t("set"))}</option>` + SET_ID.map(k => `<option value="${k}">${esc(setLabel(k))}</option>`).join(""), state.set);
-    sel("fCat", `<option value="">${esc(t("cat"))}</option>` + t("cats").map((c, i) => `<option value="${i}">${esc(c)}</option>`).join(""), state.cat);
+    sel("fSerie", `<option value="">${esc(t("serie"))}</option>` + SERIES.map(s => `<option value="${esc(s.id)}">${esc(s.name)}</option>`).join(""), state.serie);
+    const grupos = state.serie ? SERIES.filter(s => s.id === state.serie) : SERIES;
+    const opts = s => s.sets.map(id => `<option value="${esc(id)}">${esc(SETS[id].name)}</option>`).join("");
+    sel("fSet", `<option value="">${esc(t("set"))}</option>` + (state.serie
+      ? grupos.map(opts).join("")
+      : grupos.map(s => `<optgroup label="${esc(s.name)}">${opts(s)}</optgroup>`).join("")), state.set);
     sel("cfgOrdem", `<option value="num">${esc(t("ordNum"))}</option><option value="nome">${esc(t("ordName"))}</option>`, conta.cfg.ordem);
   }
   function aplicarIdioma() {
@@ -992,10 +1215,9 @@
     if (!zoom.hidden) desenharZoom();
   });
 
-  /* ---------- Filtros ---------- */
   aplicarIdioma();
   aplicarCfg();
-  render();
+  carregarDados();
 })();
 </script>
 </body>
