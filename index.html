@@ -658,6 +658,13 @@
   .zc-langs button[aria-pressed="false"] .fl { opacity: 0.45; filter: grayscale(0.5); }
   .zc-langs button[aria-pressed="true"] { background: var(--acc); border-color: var(--acc); }
   .zoom-copias .zc-grid { padding: 0; }
+  .zc-acoes { display: flex; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.14); }
+  .zc-acoes button { flex: 1; height: 44px; border-radius: 12px; font: 700 15px "Figtree", system-ui, sans-serif; cursor: pointer; }
+  .zc-salvar { border: 1px solid var(--acc); background: var(--acc); color: var(--acc-ink); }
+  .zc-fechar { border: 1px solid rgba(255, 255, 255, 0.3); background: rgba(255, 255, 255, 0.08); color: #FFF3F7; }
+  @media (hover: hover) { .zc-salvar:hover { background: var(--acc-hover); } .zc-fechar:hover { background: rgba(255, 255, 255, 0.18); } }
+  .zc-ok { margin: 8px 0 0; font-size: 0.86rem; font-weight: 700; text-align: center; color: #FFF3F7; }
+  .zc-ok:empty { display: none; }
 </style>
 </head>
 <body>
@@ -969,6 +976,11 @@
       <h3 id="zCopiasT"><span data-i18n="copiesTitle">My copies</span> <span class="zc-total" id="zCopiasN"></span></h3>
       <p class="zc-dica" data-i18n="copiesHint"></p>
       <ol class="zc-lista" id="zCopiasLista"></ol>
+      <div class="zc-acoes">
+        <button type="button" class="zc-salvar" id="zSalvar" data-i18n="copySave">Save</button>
+        <button type="button" class="zc-fechar" id="zFecharCad" data-i18n="copyClose">Close</button>
+      </div>
+      <p class="zc-ok" id="zSalvo" role="status"></p>
     </section>
     <section class="zoom-precos" id="zPrecos" aria-labelledby="zPrecosT">
       <h3 id="zPrecosT" data-i18n="prices">Prices</h3>
@@ -1349,7 +1361,8 @@
   const SEED_STAR = ["sv03.5-025"];
   // Cada cópia guarda idioma (l), estado (c), acabamento (f) e graduação (gc / gv)
   function limparCopia(x, lPadrao) {
-    const o = { l: x && LANGS.includes(x.l) ? x.l : lPadrao || "en" };
+    // idioma vazio = cópia ainda sem idioma escolhido
+    const o = { l: x && LANGS.includes(x.l) ? x.l : lPadrao || "" };
     ["c", "f", "gc", "gv"].forEach(k => { if (x && typeof x[k] === "string" && x[k].trim()) o[k] = x[k].trim().slice(0, 6); });
     return o;
   }
@@ -1818,7 +1831,8 @@
   function setQty(id, n) {
     n = Math.max(0, Math.min(999, n));
     const a = (state.cop[id] || []).slice(0, n);
-    while (a.length < n) a.push({ l: a.length ? a[a.length - 1].l : conta.cfg.lang });
+    // cada cópia nova começa limpa: sem idioma, estado ou graduação
+    while (a.length < n) a.push({ l: "" });
     state.cop[id] = a;
     sincronizar(id);
   }
@@ -1847,7 +1861,7 @@
       state.qtyOpen = null;
       if (!state.own.has(id)) { setQty(id, 1); salvar(); render(); }
       abrirZoom(id);
-      const alvo = $("zCopiasLista").querySelector('[data-cl][aria-pressed="true"]') || $("zClose");
+      const alvo = $("zCopiasLista").querySelector('[data-cl]') || $("zClose");
       alvo.focus();
       return;
     }
@@ -3166,7 +3180,7 @@
       tlInstall: "Install app", tlInstalled: "The app is installed on this device.",
       tlAppHow: "In Chrome or Edge, open the browser menu and choose “Install”. On iPhone or iPad: tap Share and then “Add to Home Screen”.",
       tlOffOk: "Offline mode is on.", tlOffNo: "Offline mode isn't available on this page.",
-      copyTitle: "My copy", copiesTitle: "My copies", copiesByLang: "Copies by language", copiesHint: "Choose the language and condition of each copy. Use + and − above to change how many you have.", copyN: n => `Copy ${n}`, copyLang: n => `Language of copy ${n}`, condLbl: "Condition", finLbl: "Finish", gradeLbl: "Graded by", gradeVal: "Grade", optNone: "—",
+      copyTitle: "My copy", copiesTitle: "My copies", copiesByLang: "Copies by language", copySave: "Save", copyClose: "Close", copySaved: "Saved ✓", copiesHint: "Choose the language and condition of each copy. Use + and − above to change how many you have.", copyN: n => `Copy ${n}`, copyLang: n => `Language of copy ${n}`, condLbl: "Condition", finLbl: "Finish", gradeLbl: "Graded by", gradeVal: "Grade", optNone: "—",
       conds: { NM: "Near Mint", LP: "Lightly Played", MP: "Moderately Played", HP: "Heavily Played", DMG: "Damaged" },
       fins: { normal: "Normal", holo: "Holo", reverse: "Reverse Holo" }, gradeOther: "Other",
       deckTools: "Deck tools", dtTitle: "Deck tools", dtStats: "Stats", dtHand: "Test hand", dtIO: "Export / Import", dtClose: "Close",
@@ -3217,7 +3231,7 @@
       tlInstall: "Instalar app", tlInstalled: "O app está instalado neste aparelho.",
       tlAppHow: "No Chrome ou no Edge, abra o menu do navegador e escolha “Instalar”. No iPhone ou iPad: toque em Compartilhar e depois em “Adicionar à Tela de Início”.",
       tlOffOk: "O modo offline está ativo.", tlOffNo: "O modo offline não está disponível nesta página.",
-      copyTitle: "Minha cópia", copiesTitle: "Minhas cópias", copiesByLang: "Cópias por idioma", copiesHint: "Escolha o idioma e o estado de cada cópia. Use + e − acima para mudar quantas você tem.", copyN: n => `Cópia ${n}`, copyLang: n => `Idioma da cópia ${n}`, condLbl: "Estado", finLbl: "Acabamento", gradeLbl: "Graduada por", gradeVal: "Nota", optNone: "—",
+      copyTitle: "Minha cópia", copiesTitle: "Minhas cópias", copiesByLang: "Cópias por idioma", copySave: "Salvar", copyClose: "Fechar", copySaved: "Salvo ✓", copiesHint: "Escolha o idioma e o estado de cada cópia. Use + e − acima para mudar quantas você tem.", copyN: n => `Cópia ${n}`, copyLang: n => `Idioma da cópia ${n}`, condLbl: "Estado", finLbl: "Acabamento", gradeLbl: "Graduada por", gradeVal: "Nota", optNone: "—",
       conds: { NM: "Near Mint (perfeita)", LP: "Pouco jogada", MP: "Jogada", HP: "Muito jogada", DMG: "Danificada" },
       fins: { normal: "Normal", holo: "Holo", reverse: "Reverse Holo" }, gradeOther: "Outra",
       deckTools: "Ferramentas do deck", dtTitle: "Ferramentas do deck", dtStats: "Estatísticas", dtHand: "Testar mão", dtIO: "Exportar / Importar", dtClose: "Fechar",
@@ -3268,7 +3282,7 @@
       tlInstall: "アプリをインストール", tlInstalled: "この端末にインストール済みです。",
       tlAppHow: "Chrome や Edge ではブラウザのメニューから「インストール」を選びます。iPhone・iPad では共有ボタンから「ホーム画面に追加」をタップします。",
       tlOffOk: "オフラインモードが有効です。", tlOffNo: "このページではオフラインモードを使えません。",
-      copyTitle: "わたしのカード", copiesTitle: "持っているカード", copiesByLang: "言語ごとの枚数", copiesHint: "1枚ずつ言語と状態を選べます。枚数は上の＋と−で変えられます。", copyN: n => `${n}枚目`, copyLang: n => `${n}枚目の言語`, condLbl: "状態", finLbl: "仕上げ", gradeLbl: "鑑定会社", gradeVal: "グレード", optNone: "—",
+      copyTitle: "わたしのカード", copiesTitle: "持っているカード", copiesByLang: "言語ごとの枚数", copySave: "保存", copyClose: "閉じる", copySaved: "保存しました ✓", copiesHint: "1枚ずつ言語と状態を選べます。枚数は上の＋と−で変えられます。", copyN: n => `${n}枚目`, copyLang: n => `${n}枚目の言語`, condLbl: "状態", finLbl: "仕上げ", gradeLbl: "鑑定会社", gradeVal: "グレード", optNone: "—",
       conds: { NM: "ニアミント（美品）", LP: "軽いプレイ跡", MP: "プレイ跡あり", HP: "強いプレイ跡", DMG: "ダメージあり" },
       fins: { normal: "ノーマル", holo: "ホロ", reverse: "リバースホロ" }, gradeOther: "その他",
       deckTools: "デッキツール", dtTitle: "デッキツール", dtStats: "統計", dtHand: "手札テスト", dtIO: "書き出し / 読み込み", dtClose: "閉じる",
@@ -3563,7 +3577,7 @@
       if (porCopia) {
         // uma linha por cópia (formato novo)
         const lang = val(l, "language");
-        if (LANGS.includes(lang)) it.cps.push(limparCopia(Object.assign({ l: lang }, det)));
+        if (LANGS.includes(lang) || parseInt(val(l, "copy"), 10) > 0) it.cps.push(limparCopia(Object.assign({ l: lang }, det)));
       } else {
         // formato antigo: quantidade + idiomas
         const q = Math.min(999, Math.max(0, parseInt(val(l, "quantity") || "0", 10) || 0));
@@ -4173,6 +4187,13 @@
     salvar(); atualizar(); desenharCopias(POR_ID.get(id));
     const nb = $("zCopiasLista").querySelector(`[data-i="${i}"] [data-cl="${cp.l}"]`); if (nb) nb.focus();
   });
+  // Salvar: grava (as mudanças já ficam salvas ao editar), confirma e fecha a carta. Fechar: só fecha.
+  $("zSalvar").addEventListener("click", () => {
+    salvar(); atualizar();
+    $("zSalvo").textContent = t("copySaved");
+    setTimeout(() => { $("zSalvo").textContent = ""; fecharZoom(); }, 650);
+  });
+  $("zFecharCad").addEventListener("click", fecharZoom);
   $("zCopiasLista").addEventListener("change", e => {
     const el = e.target.closest("[data-k]");
     if (!el) return;
