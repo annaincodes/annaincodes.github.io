@@ -380,6 +380,12 @@
   .flags button .fl svg { display: block; width: 22px; height: auto; border-radius: 3px; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3); }
   .flags button[aria-pressed="true"] { background: var(--acc); border-color: #FFFFFF; box-shadow: 0 0 0 1px #FFFFFF; }
   .flags button[aria-pressed="true"] .fl { opacity: 1; }
+  .flags-ind { gap: 4px; }
+  .fl-ind { flex: 1; min-width: 0; height: 30px; display: flex; align-items: center; justify-content: center; gap: 5px; border: 1px solid var(--b-line); border-radius: 10px; background: rgba(255, 255, 255, 0.04); color: var(--b-ink); font: 800 12.5px "Figtree", system-ui, sans-serif; font-variant-numeric: tabular-nums; }
+  .fl-ind .fl { display: block; line-height: 0; opacity: 0.35; filter: grayscale(0.7); }
+  .fl-ind .fl svg { display: block; width: 20px; height: auto; border-radius: 3px; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3); }
+  .fl-ind.on { background: var(--acc); border-color: var(--acc); color: var(--acc-ink); }
+  .fl-ind.on .fl { opacity: 1; filter: none; }
   .flags.big button { height: 44px; border-color: rgba(255, 255, 255, 0.3); }
   .flags.big button .fl svg { width: 30px; }
   @media (hover: hover) { .flags button[aria-pressed="false"]:hover { background: rgba(255, 255, 255, 0.14); } .flags button[aria-pressed="true"]:hover { background: var(--acc-hover); } }
@@ -1665,7 +1671,18 @@
   }
 
   const LANG_FLAG = { en: "us", pt: "br", ja: "jp" };
+  // Indicador (não clicável) de quantas cópias você tem em cada idioma
+  function bandeirasHTML(c) {
+    const cps = state.cop[c.id] || [];
+    const nm = t("langNames");
+    const itens = LANGS.map(l => {
+      const n = cps.filter(x => x.l === l).length;
+      return `<span class="fl-ind${n ? " on" : ""}" role="listitem" aria-label="${esc(nm[l])}: ${n}"><span class="fl" aria-hidden="true">${FLAGS[LANG_FLAG[l]]}</span>${n ? `<b aria-hidden="true">${n}</b>` : ""}</span>`;
+    }).join("");
+    return `<div class="flags flags-ind" role="list" aria-label="${esc(t("copiesByLang"))}: ${esc(c.n)}, ${t("number")} ${esc(numeroTxt(c))}">${itens}</div>`;
+  }
   function flagsHTML(c, big) {
+    if (!big) return bandeirasHTML(c);
     const have = state.langs[c.id] || [];
     const nm = t("langNames");
     return (big ? "" : `<div class="flags" role="group" aria-label="${esc(t("ownedIn"))}: ${esc(c.n)}, ${t("number")} ${esc(numeroTxt(c))}">`) +
@@ -1826,6 +1843,14 @@
     const id = b.closest(".cell").dataset.id;
     const act = b.dataset.act;
     if (act === "zoom") { state.qtyOpen = null; abrirZoom(id); return; }
+    if (act === "own") {
+      state.qtyOpen = null;
+      if (!state.own.has(id)) { setQty(id, 1); salvar(); render(); }
+      abrirZoom(id);
+      const alvo = $("zCopiasLista").querySelector('[data-cl][aria-pressed="true"]') || $("zClose");
+      alvo.focus();
+      return;
+    }
     if (act === "qty") {
       state.qtyOpen = state.qtyOpen === id ? null : id;
       render();
@@ -2013,9 +2038,9 @@
     box.innerHTML = html;
   }
   function abrirZoom(id, lista) {
-    const ids = lista || state.lista.map(c => c.id);
-    const i = ids.indexOf(id);
-    if (i < 0) return;
+    let ids = lista || state.lista.map(c => c.id);
+    let i = ids.indexOf(id);
+    if (i < 0) { if (!POR_ID.has(id)) return; ids = [id]; i = 0; }
     zState.ids = ids; zState.i = i;
     zState.origem = id;
     desenharZoom();
@@ -3141,7 +3166,7 @@
       tlInstall: "Install app", tlInstalled: "The app is installed on this device.",
       tlAppHow: "In Chrome or Edge, open the browser menu and choose “Install”. On iPhone or iPad: tap Share and then “Add to Home Screen”.",
       tlOffOk: "Offline mode is on.", tlOffNo: "Offline mode isn't available on this page.",
-      copyTitle: "My copy", copiesTitle: "My copies", copiesHint: "Choose the language and condition of each copy. Use + and − above to change how many you have.", copyN: n => `Copy ${n}`, copyLang: n => `Language of copy ${n}`, condLbl: "Condition", finLbl: "Finish", gradeLbl: "Graded by", gradeVal: "Grade", optNone: "—",
+      copyTitle: "My copy", copiesTitle: "My copies", copiesByLang: "Copies by language", copiesHint: "Choose the language and condition of each copy. Use + and − above to change how many you have.", copyN: n => `Copy ${n}`, copyLang: n => `Language of copy ${n}`, condLbl: "Condition", finLbl: "Finish", gradeLbl: "Graded by", gradeVal: "Grade", optNone: "—",
       conds: { NM: "Near Mint", LP: "Lightly Played", MP: "Moderately Played", HP: "Heavily Played", DMG: "Damaged" },
       fins: { normal: "Normal", holo: "Holo", reverse: "Reverse Holo" }, gradeOther: "Other",
       deckTools: "Deck tools", dtTitle: "Deck tools", dtStats: "Stats", dtHand: "Test hand", dtIO: "Export / Import", dtClose: "Close",
@@ -3192,7 +3217,7 @@
       tlInstall: "Instalar app", tlInstalled: "O app está instalado neste aparelho.",
       tlAppHow: "No Chrome ou no Edge, abra o menu do navegador e escolha “Instalar”. No iPhone ou iPad: toque em Compartilhar e depois em “Adicionar à Tela de Início”.",
       tlOffOk: "O modo offline está ativo.", tlOffNo: "O modo offline não está disponível nesta página.",
-      copyTitle: "Minha cópia", copiesTitle: "Minhas cópias", copiesHint: "Escolha o idioma e o estado de cada cópia. Use + e − acima para mudar quantas você tem.", copyN: n => `Cópia ${n}`, copyLang: n => `Idioma da cópia ${n}`, condLbl: "Estado", finLbl: "Acabamento", gradeLbl: "Graduada por", gradeVal: "Nota", optNone: "—",
+      copyTitle: "Minha cópia", copiesTitle: "Minhas cópias", copiesByLang: "Cópias por idioma", copiesHint: "Escolha o idioma e o estado de cada cópia. Use + e − acima para mudar quantas você tem.", copyN: n => `Cópia ${n}`, copyLang: n => `Idioma da cópia ${n}`, condLbl: "Estado", finLbl: "Acabamento", gradeLbl: "Graduada por", gradeVal: "Nota", optNone: "—",
       conds: { NM: "Near Mint (perfeita)", LP: "Pouco jogada", MP: "Jogada", HP: "Muito jogada", DMG: "Danificada" },
       fins: { normal: "Normal", holo: "Holo", reverse: "Reverse Holo" }, gradeOther: "Outra",
       deckTools: "Ferramentas do deck", dtTitle: "Ferramentas do deck", dtStats: "Estatísticas", dtHand: "Testar mão", dtIO: "Exportar / Importar", dtClose: "Fechar",
@@ -3243,7 +3268,7 @@
       tlInstall: "アプリをインストール", tlInstalled: "この端末にインストール済みです。",
       tlAppHow: "Chrome や Edge ではブラウザのメニューから「インストール」を選びます。iPhone・iPad では共有ボタンから「ホーム画面に追加」をタップします。",
       tlOffOk: "オフラインモードが有効です。", tlOffNo: "このページではオフラインモードを使えません。",
-      copyTitle: "わたしのカード", copiesTitle: "持っているカード", copiesHint: "1枚ずつ言語と状態を選べます。枚数は上の＋と−で変えられます。", copyN: n => `${n}枚目`, copyLang: n => `${n}枚目の言語`, condLbl: "状態", finLbl: "仕上げ", gradeLbl: "鑑定会社", gradeVal: "グレード", optNone: "—",
+      copyTitle: "わたしのカード", copiesTitle: "持っているカード", copiesByLang: "言語ごとの枚数", copiesHint: "1枚ずつ言語と状態を選べます。枚数は上の＋と−で変えられます。", copyN: n => `${n}枚目`, copyLang: n => `${n}枚目の言語`, condLbl: "状態", finLbl: "仕上げ", gradeLbl: "鑑定会社", gradeVal: "グレード", optNone: "—",
       conds: { NM: "ニアミント（美品）", LP: "軽いプレイ跡", MP: "プレイ跡あり", HP: "強いプレイ跡", DMG: "ダメージあり" },
       fins: { normal: "ノーマル", holo: "ホロ", reverse: "リバースホロ" }, gradeOther: "その他",
       deckTools: "デッキツール", dtTitle: "デッキツール", dtStats: "統計", dtHand: "手札テスト", dtIO: "書き出し / 読み込み", dtClose: "閉じる",
