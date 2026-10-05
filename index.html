@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script>try{var c0=JSON.parse(localStorage.getItem("fichario-pokemon-conta-v2")||"{}").cfg||{},d0=document.documentElement;if(c0.tema)d0.dataset.tema=c0.tema;d0.dataset.modo=c0.modo||(matchMedia("(prefers-color-scheme: dark)").matches?"escuro":"claro")}catch(e){}</script>
 <title>Virtual Pokémon Binder</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#3A1626">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Figtree:wght@400..700&display=swap" rel="stylesheet">
@@ -41,7 +44,7 @@
   :root { --sil: url("data:image/png;base64,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"); }
   /* Modo escuro: mesmas cores de destaque de cada binder, sobre fundos escuros */
   html[data-modo="escuro"][data-tema="rosa"] { --bg: #1F1017; --cover: #3A2030; --surface: #2E1A24; --text: #FCE5EF; --muted: #E0B3C6; --line: #8C4A63; --seg-bg: #3A2230; --seg-on-bg: #F3BBD0; --seg-on-fg: #3A1626; --stitch: rgba(243, 187, 208, 0.3); --field-fg: #FCE5EF; --field-muted: #E0B3C6; --page: #2A1822; --own: #F06AA0; }
-  html[data-modo="escuro"][data-tema="pastel"] { --bg: #22111A; --cover: #3C2231; --surface: #321B27; --text: #F8C8DC; --muted: #E6B0C8; --line: #98476B; --seg-bg: #402433; --seg-on-bg: #F8C8DC; --seg-on-fg: #3A1626; --stitch: rgba(248, 200, 220, 0.3); --field-fg: #F8C8DC; --field-muted: #E6B0C8; --page: #331A28; --own: #E65C9B; }
+  html[data-modo="escuro"][data-tema="pastel"] { --bg: #2B2128; --cover: #4D3B47; --surface: #3A2D36; --text: #F9DCE8; --muted: #D9BBCA; --line: #9C7489; --seg-bg: #4A3842; --seg-on-bg: #F8C8DC; --seg-on-fg: #3A1626; --stitch: rgba(248, 200, 220, 0.34); --field-fg: #F9DCE8; --field-muted: #D9BBCA; --page: #2F232B; --own: #F59BC2; --hd-bg: #4E3546; --hd-fg: #F8C8DC; --hd-sub: #FFF1F7; --zoom-bg: rgba(30, 20, 27, 0.95); }
   html[data-modo="escuro"][data-tema="azul"] { --bg: #0B1826; --cover: #1B3550; --surface: #14283C; --text: #E8F1FA; --muted: #B0C6DB; --line: #3D6990; --seg-bg: #1B3550; --seg-on-bg: #9FC5E8; --seg-on-fg: #102A43; --stitch: rgba(159, 197, 232, 0.3); --field-fg: #E8F1FA; --field-muted: #B0C6DB; --page: #13263A; --own: #5B9BD5; }
   html[data-modo="escuro"][data-tema="verde"] { --bg: #0F1C10; --cover: #244024; --surface: #1A2D1B; --text: #EDF5E9; --muted: #B9CEB1; --line: #5B8650; --seg-bg: #243B24; --seg-on-bg: #C8E1BE; --seg-on-fg: #1C3517; --stitch: rgba(200, 225, 190, 0.3); --field-fg: #EDF5E9; --field-muted: #B9CEB1; --page: #172818; --own: #7DBE6C; }
   html[data-modo="escuro"][data-tema="amarelo"] { --bg: #1B1503; --cover: #3E3210; --surface: #2C2408; --text: #FBF5E4; --muted: #D8CDAA; --line: #A3852A; --seg-bg: #3B3010; --seg-on-bg: #FFE599; --seg-on-fg: #3A2C00; --stitch: rgba(255, 229, 153, 0.3); --field-fg: #FBF5E4; --field-muted: #D8CDAA; --page: #2D2510; --own: #E0A800; }
@@ -485,6 +488,154 @@
     @keyframes pop { 40% { transform: scale(1.3); } }
   }
   .sem-anim *, .sem-anim *::before, .sem-anim *::after { animation: none !important; transition: none !important; }
+  /* Ferramentas (aba Tools) e ferramentas do deck */
+  .tl { --tl-fg: var(--field-fg); --tl-muted: var(--field-muted); --tl-bg: var(--surface); --tl-line: color-mix(in srgb, var(--line) 45%, transparent); --tl-pri-bg: var(--hd-bg); --tl-pri-fg: var(--hd-fg); --tl-soft: color-mix(in srgb, var(--seg-bg) 55%, var(--surface)); }
+  html[data-modo="escuro"] .tl { --tl-pri-bg: var(--hd-fg); --tl-pri-fg: var(--hd-bg); --tl-soft: color-mix(in srgb, var(--seg-bg) 70%, var(--surface)); }
+  .tl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 16px; align-items: start; }
+  .tl-card { min-width: 0; padding: 18px; border: 1px solid var(--tl-line); border-radius: 20px; background: var(--tl-bg); color: var(--tl-fg); box-shadow: 0 10px 24px -20px rgba(40, 10, 25, 0.5); }
+  .tl-cab { display: flex; align-items: center; gap: 10px; }
+  .tl-cab h2 { margin: 0; font: 800 1.12rem/1.2 "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif; letter-spacing: -0.01em; }
+  .tl-ic { flex: none; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 12px; background: var(--tl-pri-bg); color: var(--tl-pri-fg); }
+  .tl-desc { margin: 8px 0 12px; color: var(--tl-muted); font-size: 0.88rem; line-height: 1.45; }
+  .tl-nota { margin: 8px 0 0; color: var(--tl-muted); font-size: 0.82rem; line-height: 1.45; }
+  .tl-ok { min-height: 0; margin: 8px 0 0; font-size: 0.86rem; font-weight: 700; color: var(--tl-fg); }
+  .tl-ok:empty { display: none; }
+  .tl-erro { margin: 8px 0 0; font-size: 0.86rem; font-weight: 700; color: #B0123A; }
+  html[data-modo="escuro"] .tl-erro, html[data-tema="cinza"] .tl-erro { color: #FF9AAE; }
+  .tl-acoes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .tl-acoes.col { flex-direction: column; }
+  .tl-btn { min-height: 40px; padding: 0 16px; border: 1px solid var(--tl-line); border-radius: 12px; background: transparent; color: var(--tl-fg); font: 700 14px "Figtree", system-ui, sans-serif; cursor: pointer; }
+  .tl-btn.on { background: var(--tl-pri-bg); border-color: var(--tl-pri-bg); color: var(--tl-pri-fg); }
+  .tl-btn:disabled { opacity: 0.45; cursor: default; }
+  @media (hover: hover) { .tl-btn:not(:disabled):not(.on):hover { background: var(--tl-soft); } .tl-btn.on:not(:disabled):hover { opacity: 0.9; } .tl-link:hover { text-decoration: underline; } }
+  .tl-h3 { margin: 14px 0 6px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: var(--tl-muted); }
+  .tl-n { display: inline-block; min-width: 22px; padding: 0 6px; border-radius: 99px; background: var(--tl-soft); color: var(--tl-fg); text-align: center; letter-spacing: 0; }
+  .tl-prog { display: flex; align-items: center; gap: 12px; padding: 6px 0; }
+  .tl-prog p { margin: 0; font-weight: 600; font-size: 0.9rem; }
+  .tl .spin { flex: none; border-color: var(--tl-line); border-top-color: var(--tl-pri-bg); }
+  .tl-total { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .tl-total div { display: grid; gap: 2px; padding: 12px; border-radius: 14px; background: var(--tl-soft); }
+  .tl-total span { font-size: 0.78rem; font-weight: 700; color: var(--tl-muted); }
+  .tl-total strong { font: 800 1.35rem/1.15 "Bricolage Grotesque", system-ui, sans-serif; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+  .tl-lista, .tl-barras, .tl-mini { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .tl-lista li { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 0.9rem; }
+  .tl-lista strong { flex: none; font-variant-numeric: tabular-nums; }
+  .tl-link { display: grid; min-width: 0; padding: 0; border: 0; background: none; color: var(--tl-fg); font: 700 0.9rem/1.3 "Figtree", system-ui, sans-serif; text-align: left; cursor: pointer; text-underline-offset: 3px; }
+  .tl-link small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; font-size: 0.78rem; color: var(--tl-muted); }
+  .tl-barras li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; font-size: 0.86rem; }
+  .tl-barras span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tl-barras strong { font-variant-numeric: tabular-nums; }
+  .tl-barras i, .tl-prog-bar { grid-column: 1 / -1; display: block; height: 6px; border-radius: 99px; background: var(--tl-soft); overflow: hidden; }
+  .tl-barras b, .tl-prog-bar b { display: block; height: 100%; border-radius: inherit; background: var(--own); }
+  .tl-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .tl-col { min-width: 0; }
+  .tl-col .tl-h3 { margin-top: 0; }
+  .tl-mini li .tl-link { font-size: 0.86rem; }
+  .tl-confirma { margin-top: 12px; padding: 12px; border-radius: 14px; background: var(--tl-soft); }
+  .tl-confirma p { margin: 0; font-size: 0.88rem; }
+  .tl-badges { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; max-height: 360px; overflow-y: auto; }
+  .tl-badge { display: flex; gap: 8px; align-items: flex-start; padding: 10px; border-radius: 14px; background: var(--tl-soft); color: var(--tl-muted); }
+  .tl-badge .ic { flex: none; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; background: var(--tl-bg); }
+  .tl-badge .tx { display: grid; gap: 2px; min-width: 0; }
+  .tl-badge strong { font-size: 0.84rem; line-height: 1.2; }
+  .tl-badge small { font-size: 0.74rem; line-height: 1.3; }
+  .tl-badge .tl-prog-bar { margin-top: 4px; height: 4px; background: var(--tl-bg); }
+  .tl-badge .tl-num { font-variant-numeric: tabular-nums; font-weight: 700; }
+  .tl-badge.ok { background: var(--tl-pri-bg); color: var(--tl-pri-fg); }
+  .tl-badge.ok .ic { background: var(--tl-pri-fg); color: var(--tl-pri-bg); }
+  .tl-cartao { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 14px; background: var(--cover); }
+  @media (max-width: 420px) { .tl-cols, .tl-total { grid-template-columns: 1fr; } }
+
+  /* Minha cópia (carta ampliada) */
+  .zoom-copia { width: 100%; max-width: 340px; border-radius: 14px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.18); color: #FFF3F7; }
+  .zoom-copia summary { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; cursor: pointer; list-style: none; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: #E6C7D3; }
+  .zoom-copia summary::-webkit-details-marker { display: none; }
+  .zoom-copia summary::after { content: ""; width: 8px; height: 8px; margin-left: auto; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform 0.15s ease; }
+  .zoom-copia[open] summary::after { transform: rotate(-135deg) translateY(-2px); }
+  .zoom-copia summary small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.8rem; font-weight: 600; letter-spacing: 0; text-transform: none; color: #FFF3F7; }
+  .zc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 14px 14px; }
+  .zc-grid label { display: grid; gap: 4px; min-width: 0; font-size: 0.78rem; font-weight: 700; color: #E6C7D3; }
+  .zc-grid select, .zc-grid input { width: 100%; min-width: 0; height: 40px; padding: 0 8px; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 10px; background: rgba(0, 0, 0, 0.25); color: #FFF3F7; font: 600 15px "Figtree", system-ui, sans-serif; color-scheme: dark; }
+  .zc-grid input:disabled { opacity: 0.45; }
+
+  /* Janela de ferramentas do deck */
+  .dt-modal { position: fixed; inset: 0; z-index: 40; display: flex; align-items: flex-start; justify-content: center; padding: calc(env(safe-area-inset-top, 0px) + 16px) 12px calc(env(safe-area-inset-bottom, 0px) + 16px); background: rgba(20, 8, 14, 0.6); overflow-y: auto; overscroll-behavior: contain; }
+  .dt-box { position: relative; width: min(100%, 680px); margin: auto 0; padding: 18px; border-radius: 22px; background: var(--tl-bg); color: var(--tl-fg); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45); }
+  .dt-topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+  .dt-topo h2 { margin: 0; font: 800 1.3rem/1.15 "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif; }
+  .dt-box .fechar { border-color: var(--tl-line); color: var(--tl-fg); }
+  .dt-tabs { margin-bottom: 14px; }
+  .dt-tabs button { flex: 1; justify-content: center; }
+  .dt-corpo { min-height: 120px; }
+  .dt-seg { display: flex; gap: 3px; height: 14px; border-radius: 99px; overflow: hidden; }
+  .dt-seg i { display: block; min-width: 4px; }
+  .dt-leg { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 10px 0 0; padding: 0; font-size: 0.88rem; }
+  .dt-leg li { display: flex; align-items: center; gap: 6px; }
+  .dt-leg i { width: 10px; height: 10px; border-radius: 50%; }
+  .dt-tipos { display: flex; flex-wrap: wrap; gap: 6px; }
+  .dt-fatos { margin: 14px 0 0; padding-left: 18px; display: grid; gap: 4px; font-size: 0.9rem; }
+  .dt-mao { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px; }
+  .dt-carta { aspect-ratio: 63 / 88; border-radius: 7px; overflow: hidden; background: var(--page); }
+  .dt-carta img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .dt-carta .fallback { height: 100%; font-size: 11px; }
+  .dt-carta.verso { background: radial-gradient(circle at 50% 50%, var(--hd-fg) 0 14%, var(--hd-bg) 15% 24%, transparent 25%), linear-gradient(160deg, var(--hd-bg), color-mix(in srgb, var(--hd-bg) 70%, #000)); box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--hd-fg) 40%, transparent); }
+  .dt-sec + .dt-sec { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--tl-line); }
+  .dt-sec .tl-h3 { margin-top: 0; }
+  .dt-texto { display: block; width: 100%; margin-top: 8px; padding: 10px 12px; border: 1px solid var(--tl-line); border-radius: 12px; background: var(--tl-soft); color: var(--tl-fg); font: 500 13px/1.5 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; resize: vertical; }
+  .dt-campo { display: grid; gap: 4px; margin-top: 10px; font-size: 0.84rem; font-weight: 700; }
+  .dt-campo input { height: 42px; padding: 0 12px; border: 1px solid var(--tl-line); border-radius: 12px; background: var(--tl-bg); color: var(--tl-fg); font: 500 16px "Figtree", system-ui, sans-serif; }
+  .dt-faltas { margin: 6px 0 0; padding-left: 18px; font: 500 12.5px/1.5 ui-monospace, Menlo, Consolas, monospace; color: var(--tl-muted); }
+  @media (max-width: 520px) { .hd .areas { display: grid; grid-template-columns: 1fr 1fr; } }
+  .visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  /* Aba do cartão de treinador */
+  .tc-layout { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+  @media (max-width: 859px) { .tc-layout { grid-template-columns: 1fr; } }
+  .tc-prev { position: sticky; top: 16px; }
+  @media (max-width: 859px) { .tc-prev { position: static; } }
+  .tc-prev .tl-acoes { margin-top: 14px; }
+  .tc-fotos { list-style: none; margin: 0; padding: 3px; display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 10px; max-height: 420px; overflow-y: auto; }
+  .tc-foto { width: 100%; display: grid; gap: 4px; padding: 4px 4px 6px; border: 1px solid var(--tl-line); border-radius: 12px; background: var(--hd-bg); color: var(--hd-fg); cursor: pointer; font: 700 11.5px/1.2 "Figtree", system-ui, sans-serif; }
+  .tc-foto small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: inherit; }
+  .tc-recorte { position: relative; display: block; width: 100%; aspect-ratio: 360 / 595; border-radius: 8px; overflow: hidden; background: color-mix(in srgb, var(--hd-fg) 18%, transparent); }
+  .tc-recorte img, .tc-sobre img { position: absolute; display: block; height: auto; max-width: none; }
+  .tc-foto.tc-esp { align-content: center; justify-items: center; }
+  .tc-foto.tc-esp > .tc-sil, .tc-foto.tc-esp > .tc-mais, .tc-foto.tc-esp > img { margin: auto; }
+  .tc-foto.tc-esp { aspect-ratio: auto; min-height: 100%; }
+  .tc-foto img.tc-up { width: 100%; aspect-ratio: 360 / 595; object-fit: cover; border-radius: 8px; }
+  .tc-foto[aria-pressed="true"] { border-color: var(--tl-pri-bg); box-shadow: 0 0 0 3px var(--tl-pri-bg); }
+  html[data-modo="escuro"] .tc-foto[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--hd-fg); border-color: var(--hd-fg); }
+  .tc-sil { width: 62%; aspect-ratio: 158 / 176; background: var(--hd-fg); -webkit-mask: var(--sil) center / contain no-repeat; mask: var(--sil) center / contain no-repeat; }
+  .tc-mais { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: var(--hd-fg); color: var(--hd-bg); }
+  .tc-cores { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tc-cores button { width: 40px; height: 40px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; }
+  .tc-cores button i { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--sw); box-shadow: inset 0 0 0 1.5px rgba(0, 0, 0, 0.25); transition: transform 0.15s ease; }
+  .tc-cores button i svg { opacity: 0; }
+  .tc-cores button[aria-pressed="true"] i { box-shadow: inset 0 0 0 1.5px rgba(0, 0, 0, 0.25), 0 0 0 2px var(--tl-bg), 0 0 0 4px var(--tl-fg); }
+  .tc-cores button[aria-pressed="true"] i svg { opacity: 1; }
+  @media (hover: hover) { .tc-cores button:hover i { transform: scale(1.1); } }
+  .tc-busca { display: block; margin-bottom: 10px; }
+  .tc-vazio { grid-column: 2 / -1; align-self: center; color: var(--tl-muted); font-size: 0.86rem; }
+  .tc-busca input { width: 100%; height: 40px; padding: 0 12px 0 36px; border: 1px solid var(--tl-line); border-radius: 12px; background: var(--tl-bg); color: var(--tl-fg); font: 500 15px "Figtree", system-ui, sans-serif; }
+  .tc-busca svg { color: var(--tl-muted); }
+  .tc-check { display: flex; align-items: center; gap: 10px; min-height: 40px; font-size: 0.9rem; font-weight: 600; cursor: pointer; }
+  .tc-check input { width: 20px; height: 20px; flex: none; accent-color: var(--tl-pri-bg); }
+  html[data-modo="escuro"] .tc-check input { accent-color: var(--hd-fg); }
+  #tcPkBox { margin-top: 6px; }
+  .tc-pks { list-style: none; margin: 0; padding: 3px; display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 8px; max-height: 300px; overflow-y: auto; }
+  .tc-pk { width: 100%; display: grid; justify-items: center; gap: 1px; padding: 6px 4px 8px; border: 1px solid var(--tl-line); border-radius: 12px; background: var(--hd-bg); color: var(--hd-fg); cursor: pointer; font: 700 11.5px/1.2 "Figtree", system-ui, sans-serif; }
+  .tc-pk > span:last-child { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tc-pk small { font-size: 10px; opacity: 0.8; font-variant-numeric: tabular-nums; }
+  .tc-pk-art { display: grid; place-items: center; width: 100%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(255, 255, 255, 0.16) 0 55%, transparent 56%); }
+  .tc-pk-art img { width: 92%; height: 92%; object-fit: contain; }
+  .tc-pk[aria-pressed="true"] { border-color: var(--tl-pri-bg); box-shadow: 0 0 0 3px var(--tl-pri-bg); }
+  html[data-modo="escuro"] .tc-pk[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--hd-fg); border-color: var(--hd-fg); }
+  .tc-stage { position: relative; }
+  .tc-sobre { position: absolute; left: 3.333%; top: 5.926%; width: 30%; height: 88.148%; border-radius: 2.8% / 5%; overflow: hidden; pointer-events: none; }
+  .tc-ajuste { display: grid; gap: 4px; margin-top: 12px; font-size: 0.84rem; font-weight: 700; }
+  .tc-ajuste input { width: 100%; accent-color: var(--tl-pri-bg); }
+  html[data-modo="escuro"] .tc-ajuste input { accent-color: var(--hd-fg); }
+  @media (hover: hover) { .tc-foto:hover { filter: brightness(1.15); } }
+  @media (max-width: 520px) { .hd .areas { display: flex; flex-wrap: wrap; } .hd .areas button { flex: 1 1 auto; } }
 </style>
 </head>
 <body>
@@ -518,6 +669,8 @@
     <button type="button" data-area="binder" aria-pressed="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 3v18" stroke="currentColor" stroke-width="2"/></svg><span data-i18n="areaBinder">Binder</span></button>
     <button type="button" data-area="decks" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="8" y="3" width="11" height="15" rx="2" stroke="currentColor" stroke-width="2"/><path d="M5 7v11a3 3 0 0 0 3 3h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-i18n="areaDecks">Deck Builder</span></button>
     <button type="button" data-area="dex" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M3 12h6m6 0h6" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg><span data-i18n="areaDex">Pokédex</span></button>
+    <button type="button" data-area="card" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="11" r="2.2" stroke="currentColor" stroke-width="2"/><path d="M5.8 16.5c.6-1.6 1.8-2.4 3.2-2.4s2.6.8 3.2 2.4M14.5 10h3.5M14.5 13.5h3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-i18n="areaCard">Trainer card</span></button>
+    <button type="button" data-area="tools" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5l1.9 4.6 4.6 1.9-4.6 1.9L12 16.5l-1.9-4.6L5.5 10l4.6-1.9z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M18.5 15.5l.8 1.9 1.9.8-1.9.8-.8 1.9-.8-1.9-1.9-.8 1.9-.8z" fill="currentColor"/></svg><span data-i18n="areaTools">Tools</span></button>
   </nav>
   </div>
 </header>
@@ -589,6 +742,7 @@
       <button type="button" class="pill" id="deckNew" data-i18n="deckNew">+ New deck</button>
       <button type="button" class="pill" id="deckRen" data-i18n="deckRen">Rename</button>
       <button type="button" class="pill danger" id="deckDel">Delete deck</button>
+      <button type="button" class="pill" id="deckTools" data-i18n="deckTools">Deck tools</button>
     </div>
     <form class="deck-form" id="deckForm" hidden novalidate>
       <label for="deckNome" id="deckFormLbl">Deck name</label>
@@ -668,6 +822,73 @@
       </div>
     </section>
    </div>
+
+   <div id="areaCard" class="tl" hidden>
+    <div class="tc-layout">
+      <section class="tl-card tc-prev" aria-labelledby="tcT">
+        <h2 id="tcT" class="visually-hidden" data-i18n="tlCardT">Trainer card</h2>
+        <div class="tc-stage"><img class="tl-cartao" id="tcImg" alt="" width="1200" height="675"><div class="tc-sobre" id="tcSobre" aria-hidden="true" hidden></div></div>
+        <div class="tl-acoes"><button type="button" class="tl-btn on" data-tc="dl" data-i18n="tlDl">Download image</button><button type="button" class="tl-btn" data-tc="share" id="tcShare" data-i18n="tlShare" hidden>Share</button></div>
+        <p class="tl-erro" id="tcMsg" role="status"></p>
+      </section>
+      <section class="tl-card tc-ctrl" aria-labelledby="tcCustomT">
+        <header class="tl-cab"><span class="tl-ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 20h4L19 9l-4-4L4 16v4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M13.5 6.5l4 4" stroke="currentColor" stroke-width="2"/></svg></span><h2 id="tcCustomT" data-i18n="tcCustom">Customize</h2></header>
+        <label class="dt-campo"><span data-i18n="tcName">Name on the card</span><input id="tcNome" type="text" maxlength="24" autocomplete="off"></label>
+        <h3 class="tl-h3" id="tcCorT" data-i18n="tcBg">Card background</h3>
+        <div class="tc-cores" id="tcCores" role="group" aria-labelledby="tcCorT"></div>
+        <h3 class="tl-h3" data-i18n="tcPkT">Favorite Pokémon</h3>
+        <label class="tc-check"><input type="checkbox" id="tcPkOn"><span data-i18n="tcPkOn">Show my favorite Pokémon on the card</span></label>
+        <div id="tcPkBox" hidden>
+          <label class="search tc-busca"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="tcPkBusca" type="search" data-i18n-ph="tcPkSearch" data-i18n-aria="tcPkSearch" placeholder="Search Pokémon by name or number" aria-label="Search Pokémon by name or number" autocomplete="off"></label>
+          <ul class="tc-pks" id="tcPkLista"></ul>
+        </div>
+        <h3 class="tl-h3" id="tcFotoT" data-i18n="tcPhoto">Photo</h3>
+        <label class="search tc-busca"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="tcBusca" type="search" data-i18n-ph="tcSearch" data-i18n-aria="tcSearch" placeholder="Search trainer" aria-label="Search trainer" autocomplete="off"></label>
+        <ul class="tc-fotos" id="tcFotos" aria-labelledby="tcFotoT"></ul>
+        <label class="tc-ajuste" id="tcAjuste" hidden><span data-i18n="tcAdjust">Adjust framing</span><input type="range" id="tcPx" min="0" max="100" step="1" value="50"></label>
+        <div class="tl-acoes"><button type="button" class="tl-btn" data-tc="up" id="tcEnviar" data-i18n="tcUploadBtn">Upload a photo</button><button type="button" class="tl-btn" data-tc="rm" id="tcRemover" data-i18n="tcRemove" hidden>Remove my photo</button></div>
+        <input type="file" id="tcArquivo" accept="image/*" hidden>
+        <p class="tl-nota" data-i18n="tcCredit"></p>
+      </section>
+    </div>
+   </div>
+
+   <div id="areaTools" class="tl" hidden>
+    <div class="tl-grid">
+      <section class="tl-card" aria-labelledby="tlValT">
+        <header class="tl-cab"><span class="tl-ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 15.4 7.2 17.9l.9-5.4L4.2 8.7l5.4-.8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span><h2 id="tlValT" data-i18n="tlValT">Collection value</h2></header>
+        <p class="tl-desc" data-i18n="tlValD"></p>
+        <div id="tlValorCorpo" aria-live="polite"></div>
+      </section>
+      <section class="tl-card" aria-labelledby="tlTradeT">
+        <header class="tl-cab"><span class="tl-ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 8h13l-3.5-3.5M20 16H7l3.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h2 id="tlTradeT" data-i18n="tlTradeT">Trade list</h2></header>
+        <p class="tl-desc" data-i18n="tlTradeD"></p>
+        <div id="tlTrocaCorpo"></div>
+      </section>
+      <section class="tl-card" aria-labelledby="tlBdT">
+        <header class="tl-cab"><span class="tl-ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="14" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M8.5 8.2L6 2.5h4l2 4 2-4h4l-2.5 5.7" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span><h2 id="tlBdT" data-i18n="tlBdT">Achievements</h2></header>
+        <p class="tl-desc" id="tlBdResumo"></p>
+        <div id="tlBdCorpo"></div>
+      </section>
+      <section class="tl-card" aria-labelledby="tlBkT">
+        <header class="tl-cab"><span class="tl-ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 19h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h2 id="tlBkT" data-i18n="tlBkT">Backup and export</h2></header>
+        <p class="tl-desc" data-i18n="tlBkD"></p>
+        <div class="tl-acoes col">
+          <button type="button" class="tl-btn" data-tl="csv" data-i18n="tlCsv">Export collection (CSV)</button>
+          <button type="button" class="tl-btn" data-tl="backup" data-i18n="tlBk">Download full backup</button>
+          <button type="button" class="tl-btn on" data-tl="import" id="tlImpBtn" data-i18n="tlImp">Import file</button>
+        </div>
+        <input type="file" id="tlArquivo" accept=".csv,.json,text/csv,application/json" hidden>
+        <p class="tl-nota" data-i18n="tlImpHint"></p>
+        <div id="tlImpRes"></div>
+      </section>
+      <section class="tl-card" aria-labelledby="tlAppT">
+        <header class="tl-cab"><span class="tl-ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="7" y="2.5" width="10" height="19" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M10.5 18.5h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><h2 id="tlAppT" data-i18n="tlAppT">Install as an app</h2></header>
+        <p class="tl-desc" data-i18n="tlAppD"></p>
+        <div id="tlAppCorpo"></div>
+      </section>
+    </div>
+   </div>
   </main>
 
   <footer class="foot">
@@ -719,10 +940,34 @@
       <button type="button" class="z-step" id="zInc" aria-label="Add one copy"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button>
     </div>
     <div class="zoom-ctrl"><div class="flags big" id="zFlags" role="group" style="width:100%"></div></div>
+    <details class="zoom-copia" id="zCopia" hidden>
+      <summary><span data-i18n="copyTitle">My copy</span><small id="zCopiaResumo"></small></summary>
+      <div class="zc-grid">
+        <label><span data-i18n="condLbl">Condition</span><select id="zCond"></select></label>
+        <label><span data-i18n="finLbl">Finish</span><select id="zFin"></select></label>
+        <label><span data-i18n="gradeLbl">Graded by</span><select id="zGradeCo"></select></label>
+        <label><span data-i18n="gradeVal">Grade</span><input id="zGradeVal" type="text" inputmode="decimal" maxlength="4" autocomplete="off"></label>
+      </div>
+    </details>
     <section class="zoom-precos" id="zPrecos" aria-labelledby="zPrecosT">
       <h3 id="zPrecosT" data-i18n="prices">Prices</h3>
       <div id="zPrecosCorpo" aria-live="polite"></div>
     </section>
+  </div>
+</div>
+
+<div class="dt-modal" id="dtModal" role="dialog" aria-modal="true" aria-labelledby="dtTitulo" hidden>
+  <div class="dt-box tl">
+    <div class="dt-topo">
+      <h2 id="dtTitulo" data-i18n="dtTitle">Deck tools</h2>
+      <button type="button" class="fechar" id="dtFechar" data-i18n-aria="dtClose" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+    </div>
+    <div class="tabs dt-tabs" role="group" data-i18n-aria="dtTitle" aria-label="Deck tools">
+      <button type="button" data-dt="stats" aria-pressed="true" data-i18n="dtStats">Stats</button>
+      <button type="button" data-dt="hand" aria-pressed="false" data-i18n="dtHand">Test hand</button>
+      <button type="button" data-dt="io" aria-pressed="false" data-i18n="dtIO">Export / Import</button>
+    </div>
+    <div id="dtCorpo" class="dt-corpo"></div>
   </div>
 </div>
 
@@ -1092,7 +1337,9 @@
           const l = Array.isArray((o.langs || {})[id]) ? o.langs[id].filter(x => LANGS.includes(x)) : [];
           langs[id] = l.length ? l : ["en"];
         });
-        return { qty, langs, fav: new Set(o.fav || []), star: new Set(o.star || []) };
+        const meta = {};
+        Object.entries(o.meta || {}).forEach(([id, m]) => { if (m && typeof m === "object") meta[id] = { c: m.c, f: m.f, gc: m.gc, gv: m.gv }; Object.keys(meta[id] || {}).forEach(k => { if (!meta[id][k]) delete meta[id][k]; }); });
+        return { qty, langs, fav: new Set(o.fav || []), star: new Set(o.star || []), meta };
       }
       const old = localStorage.getItem(KEY_OLD);
       if (old) {
@@ -1112,7 +1359,7 @@
     return { qty: Object.assign({}, SEED_QTY), langs, fav: new Set(SEED_FAV), star: new Set(SEED_STAR) };
   }
   function salvar() {
-    try { localStorage.setItem(KEY, JSON.stringify({ qty: state.qty, langs: state.langs, fav: [...state.fav], star: [...state.star] })); } catch (e) { /* segue sem salvar */ }
+    try { localStorage.setItem(KEY, JSON.stringify({ qty: state.qty, langs: state.langs, fav: [...state.fav], star: [...state.star], meta: state.meta })); } catch (e) { /* segue sem salvar */ }
   }
 
   /* ---------- Conta e configurações (salvas no navegador) ---------- */
@@ -1130,7 +1377,7 @@
         if (!LANGS.includes(cfg.lang)) cfg.lang = "en";
         if (!TEMAS.includes(cfg.tema)) cfg.tema = "rosa";
         if (cfg.modo !== "claro" && cfg.modo !== "escuro") cfg.modo = null;
-        if (!["binder", "decks", "dex"].includes(cfg.area)) cfg.area = "binder";
+        if (!["binder", "decks", "dex", "tools", "card"].includes(cfg.area)) cfg.area = "binder";
         return { perfil, cfg };
       }
     } catch (e) { /* usa o padrão */ }
@@ -1144,7 +1391,7 @@
   const conta = carregarConta();
   const state = {
     tab: "todas", q: "", posse: "", serie: "", set: "", page: 0,
-    qty: saved.qty, langs: saved.langs, fav: saved.fav, star: saved.star, own: new Set(Object.keys(saved.qty)),
+    qty: saved.qty, langs: saved.langs, fav: saved.fav, star: saved.star, meta: saved.meta || {}, own: new Set(Object.keys(saved.qty)),
     status: "loading", qtyOpen: null, lista: []
   };
 
@@ -1613,7 +1860,7 @@
     } else {
       clearTimeout(timer); armado = false;
       reset.textContent = t("reset");
-      state.own.clear(); state.fav.clear(); state.star.clear(); state.langs = {}; state.qty = {}; state.qtyOpen = null; salvar(); render();
+      state.own.clear(); state.fav.clear(); state.star.clear(); state.langs = {}; state.qty = {}; state.meta = {}; state.qtyOpen = null; salvar(); render();
     }
   });
 
@@ -1661,6 +1908,7 @@
     $("zInc").setAttribute("aria-label", t("qtyInc", c.n));
     $("zFlags").setAttribute("aria-label", t("ownedIn"));
     $("zFlags").innerHTML = flagsHTML(c, true);
+    desenharCopia(c);
     desenharPrecos(c);
     $("zPrev").disabled = zState.i === 0;
     $("zNext").disabled = zState.i >= zState.ids.length - 1;
@@ -1727,6 +1975,11 @@
     zoom.hidden = true;
     wrap.inert = false;
     const atual = zState.ids[zState.i];
+    if (conta.cfg.area === "tools") {
+      const v = document.querySelector(`#areaTools [data-zoom="${CSS.escape(atual)}"]`) || document.querySelector(`#areaTools [data-zoom="${CSS.escape(zState.origem || "")}"]`);
+      (v || sideTab).focus();
+      return;
+    }
     const deck = conta.cfg.area === "decks";
     const lista = deck ? dState.lista : state.lista, st = deck ? dState : state, g = deck ? dGrid : grid;
     // leva o fichário até a página da carta que estava aberta
@@ -1777,17 +2030,19 @@
   }, { passive: true });
 
   /* ---------- Áreas: Binder e Deck Builder ---------- */
-  function atualizar() { if (conta.cfg.area === "decks") renderDeck(); else if (conta.cfg.area === "dex") { renderDex(); carregarDex(); } else render(); }
+  function atualizar() { if (conta.cfg.area === "card") renderCard(); else if (conta.cfg.area === "tools") renderTools(); else if (conta.cfg.area === "decks") renderDeck(); else if (conta.cfg.area === "dex") { renderDex(); carregarDex(); } else render(); }
   function aplicarArea() {
     const a = conta.cfg.area;
     $("areaBinder").hidden = a !== "binder";
     $("areaDecks").hidden = a !== "decks";
     $("areaDex").hidden = a !== "dex";
+    $("areaTools").hidden = a !== "tools";
+    $("areaCard").hidden = a !== "card";
     $("statsBinder").hidden = a !== "binder";
     $("statsDeck").hidden = a !== "decks";
     $("statsDex").hidden = a !== "dex";
     $("reset").hidden = a !== "binder";
-    $("lead").textContent = t(a === "decks" ? "leadDeck" : a === "dex" ? "leadDex" : "lead");
+    $("lead").textContent = t(a === "decks" ? "leadDeck" : a === "dex" ? "leadDex" : a === "tools" ? "leadTools" : a === "card" ? "leadCard" : "lead");
     document.querySelectorAll(".areas [data-area]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.area === conta.cfg.area)));
   }
   document.querySelector(".areas").addEventListener("click", e => {
@@ -2176,6 +2431,7 @@
     }
     renderDex();
     if (conta.cfg.ordem === "dex" && dexState.status === "ok") atualizar();
+    if (conta.cfg.area === "card") { renderPk(); renderCartao(); }
   }
   async function dadosTipo(nome) {
     if (TIPO_DADOS[nome]) return TIPO_DADOS[nome];
@@ -2791,6 +3047,1199 @@
     if (!zoom.hidden) desenharZoom();
     if (!dexModal.hidden) desenharFicha();
   });
+
+  /* =====================================================================
+     Ferramentas (aba Tools), detalhes da cópia e ferramentas de deck
+     ===================================================================== */
+  const TL_TXT = {
+    en: {
+      areaCard: "Trainer card", tcFav: "Favorite trainer", tcBg: "Card background", tcPkT: "Favorite Pokémon", tcPkOn: "Show my favorite Pokémon on the card", tcPkSearch: "Search Pokémon by name or number", tcPkLoading: "Loading the Pokédex…", tcPkNone: "No Pokémon found.", tcSearch: "Search trainer", tcNoTr: "No trainer found.", tcAdjust: "Adjust framing", tcCorsErr: "The image server didn't allow the trainer picture in the downloaded file. Try another trainer or upload your own photo.", leadCard: "Make your trainer card with your favorite trainer or your own photo, and share your progress.", tcCustom: "Customize", tcName: "Name on the card", tcPhoto: "Photo", tcNone: "No photo (silhouette)", tcYours: "Your photo", tcUpload: "Upload your photo", tcUploadBtn: "Upload a photo", tcRemove: "Remove my photo", tcCredit: "Trainer pictures come from full-art Supporter cards (images via TCGdex). Your photo stays only in this browser.", tcSaveErr: "This photo is too big to save. Try a smaller image.", tcReadErr: "This image couldn't be opened. Try a JPG or PNG.", areaTools: "Tools", leadTools: "Extras for your collection: value, trades, backups, achievements and more.",
+      tlWait: "Cards are still loading…",
+      tlValT: "Collection value", tlValD: "Estimated value of the cards you own, using TCGplayer (USD) and Cardmarket (EUR) prices.",
+      tlValEmpty: "Mark some cards as owned to see what your collection is worth.",
+      tlValNeed: n => `Prices to check: ${n} ${n === 1 ? "card" : "cards"}. The first time can take a moment.`,
+      tlValBtn: "Calculate value", tlValProg: (a, b) => `Checking prices… ${a} of ${b}`,
+      tlTop: "Most valuable cards", tlTopSets: "Most valuable sets (USD)",
+      tlValNote: n => `Prices for the English version, refreshed every few days.${n ? ` ${n} ${n === 1 ? "card has" : "cards have"} no price listed.` : ""}`,
+      tlValRefresh: "Update prices",
+      tlTradeT: "Trade list", tlTradeD: "Your duplicates (cards with 2+ copies) and your Wishlist, ready to share.",
+      tlForTrade: "For trade", tlLooking: "Looking for", tlMore: n => `+ ${n} more`,
+      tlNoneDup: "No duplicates yet. Cards with 2 or more copies show up here.", tlNoneWish: "Your Wishlist is empty.",
+      tlCopy: "Copy text", tlCopied: "Copied!", tlCopyErr: "Couldn't copy. Select the text and copy it yourself.", tlImg: "Save image", tlShare: "Share",
+      tlTradeHead: nome => `${nome ? nome + "'s trade list" : "Trade list"} · Virtual Pokémon Binder`,
+      tlBkT: "Backup and export", tlBkD: "Save a copy of your collection and decks, or bring them back from a file.",
+      tlCsv: "Export collection (CSV)", tlBk: "Download full backup", tlImp: "Import file",
+      tlImpHint: "A CSV adds or updates cards. A backup file (.json) replaces your collection and decks.",
+      tlImpCsv: (n, x) => `This CSV has ${n} ${n === 1 ? "card" : "cards"}${x ? ` (${x} ${x === 1 ? "line" : "lines"} ignored)` : ""}. They will be added to or updated in your collection.`,
+      tlImpJson: (n, d, data) => `Backup from ${data}: ${n} cards and ${d} decks. This replaces your current collection and decks.`,
+      tlImpOk: "Import", tlImpRestore: "Restore backup", tlImpDone: n => `Done! ${n} ${n === 1 ? "card" : "cards"} imported.`, tlImpRestored: "Backup restored.",
+      tlImpErr: "This file couldn't be read. Use a CSV exported here or a backup file.",
+      tlBdT: "Achievements", tlBdD: (a, b) => `${a} of ${b} unlocked`,
+      bd: {
+        first: ["First card", "Own your first card"], c50: ["Growing binder", "Own 50 different cards"], c250: ["Serious collector", "Own 250 different cards"],
+        c1000: ["Master collector", "Own 1,000 different cards"], dup10: ["Trader", "Have 10 cards with 2+ copies"], set: ["Set complete", "Complete any set"],
+        kanto: ["Kanto complete", "Complete the 151 set"], langs: ["Polyglot", "Own cards in English, Portuguese and Japanese"], wish10: ["Dreamer", "Add 10 cards to your Wishlist"],
+        star5: ["Favorites", "Mark 5 favorite cards"], deck: ["Deck builder", "Create your first deck"], deck60: ["Ready to battle", "Build a 60-card deck"],
+        deckOwn: ["All mine", "Own every card of a 60-card deck"], graded: ["Graded", "Register a graded card"], v100: ["Treasure", "A collection worth $100 or more"]
+      },
+      tlCardT: "Trainer card", tlCardD: "A picture of your progress to share with friends.", tlDl: "Download image",
+      cardTitle: "TRAINER CARD", cardCards: "Cards", cardCopies: "Copies", cardSets: "Sets complete", cardDecks: "Decks", cardBadges: "Achievements", cardValue: "Value", trainer: "Trainer",
+      tlAppT: "Install as an app", tlAppD: "Put the binder on your home screen and open it even without internet, with what you've already loaded.",
+      tlInstall: "Install app", tlInstalled: "The app is installed on this device.",
+      tlAppHow: "In Chrome or Edge, open the browser menu and choose “Install”. On iPhone or iPad: tap Share and then “Add to Home Screen”.",
+      tlOffOk: "Offline mode is on.", tlOffNo: "Offline mode isn't available on this page.",
+      copyTitle: "My copy", condLbl: "Condition", finLbl: "Finish", gradeLbl: "Graded by", gradeVal: "Grade", optNone: "—",
+      conds: { NM: "Near Mint", LP: "Lightly Played", MP: "Moderately Played", HP: "Heavily Played", DMG: "Damaged" },
+      fins: { normal: "Normal", holo: "Holo", reverse: "Reverse Holo" }, gradeOther: "Other",
+      deckTools: "Deck tools", dtTitle: "Deck tools", dtStats: "Stats", dtHand: "Test hand", dtIO: "Export / Import", dtClose: "Close",
+      dtNoDeck: "Create or choose a deck first.", dtLoading: "Loading card details…", dtEmptyDeck: "Add cards to this deck first.",
+      dtPok: "Pokémon", dtTr: "Trainer", dtEn: "Energy", dtUnk: "Unknown", dtTypes: "Pokémon types",
+      dtBasics: n => `${n} Basic Pokémon`, dtProb: p => `${p}% chance of a Basic Pokémon in the opening hand`,
+      dtMissing: (n, v) => n ? `${n} ${n === 1 ? "copy" : "copies"} missing${v ? ` · about ${v} to complete` : ""}` : "You own every card in this deck!",
+      dtHandNew: "New hand", dtDraw: "Draw a card", dtMull: "Mulligan", dtNoBasic: "No Basic Pokémon in this hand: take a mulligan.", dtOkHand: "Ready to play: you have a Basic Pokémon.",
+      dtLeft: (n, p) => `Deck: ${n} · Prizes: ${p}`, dtMullCount: n => `Mulligans: ${n}`, dtPrizes: "Show prize cards", dtPrizesHide: "Hide prize cards", dtHandLbl: "Hand", dtPrizeLbl: "Prize cards",
+      dtExport: "Export this deck", dtExportHint: "Same format as Pokémon TCG Live and most deck sites.", dtCopyList: "Copy list", dtTxt: "Download .txt",
+      dtImport: "Import a deck", dtImportHint: "Paste a deck list, one card per line (for example “4 Pikachu ex SSP 57”).", dtImportName: "Name of the new deck",
+      dtImportBtn: "Import as new deck", dtImpDone: (n, f) => `Imported ${n} ${n === 1 ? "card" : "cards"}.${f ? ` ${f} ${f === 1 ? "line wasn't" : "lines weren't"} found:` : ""}`,
+      dtImpNone: "No cards from this list were found.", dtImpWait: "Cards are still loading. Try again in a moment.", dtImpDefault: "Imported deck"
+    },
+    pt: {
+      areaCard: "Cartão de treinador", tcFav: "Treinador favorito", tcBg: "Fundo do cartão", tcPkT: "Pokémon favorito", tcPkOn: "Mostrar meu Pokémon favorito no cartão", tcPkSearch: "Buscar Pokémon por nome ou número", tcPkLoading: "Carregando a Pokédex…", tcPkNone: "Nenhum Pokémon encontrado.", tcSearch: "Buscar treinador", tcNoTr: "Nenhum treinador encontrado.", tcAdjust: "Ajustar enquadramento", tcCorsErr: "O servidor da imagem não permitiu incluir o treinador no arquivo baixado. Tente outro treinador ou envie sua foto.", leadCard: "Monte seu cartão de treinador com seu treinador favorito ou com a sua foto, e compartilhe seu progresso.", tcCustom: "Personalizar", tcName: "Nome no cartão", tcPhoto: "Foto", tcNone: "Sem foto (silhueta)", tcYours: "Sua foto", tcUpload: "Enviar sua foto", tcUploadBtn: "Enviar uma foto", tcRemove: "Remover minha foto", tcCredit: "As imagens dos treinadores vêm das cartas de Apoiador full art (imagens da TCGdex). Sua foto fica salva só neste navegador.", tcSaveErr: "Esta foto é grande demais para salvar. Tente uma imagem menor.", tcReadErr: "Não foi possível abrir esta imagem. Tente um JPG ou PNG.", areaTools: "Ferramentas", leadTools: "Extras para a sua coleção: valor, trocas, backup, conquistas e mais.",
+      tlWait: "As cartas ainda estão carregando…",
+      tlValT: "Valor da coleção", tlValD: "Valor estimado das cartas que você tem, com preços do TCGplayer (USD) e do Cardmarket (EUR).",
+      tlValEmpty: "Marque algumas cartas como suas para ver quanto vale a coleção.",
+      tlValNeed: n => `Preços a consultar: ${n} ${n === 1 ? "carta" : "cartas"}. Na primeira vez pode demorar um pouco.`,
+      tlValBtn: "Calcular valor", tlValProg: (a, b) => `Consultando preços… ${a} de ${b}`,
+      tlTop: "Cartas mais valiosas", tlTopSets: "Coleções mais valiosas (USD)",
+      tlValNote: n => `Preços da versão em inglês, atualizados a cada poucos dias.${n ? ` ${n} ${n === 1 ? "carta não tem" : "cartas não têm"} preço.` : ""}`,
+      tlValRefresh: "Atualizar preços",
+      tlTradeT: "Lista de troca", tlTradeD: "Suas repetidas (cartas com 2 ou mais cópias) e sua Wishlist, prontas para compartilhar.",
+      tlForTrade: "Para troca", tlLooking: "Procuro", tlMore: n => `+ ${n}`,
+      tlNoneDup: "Nenhuma repetida ainda. Cartas com 2 ou mais cópias aparecem aqui.", tlNoneWish: "Sua Wishlist está vazia.",
+      tlCopy: "Copiar texto", tlCopied: "Copiado!", tlCopyErr: "Não deu para copiar. Selecione o texto e copie manualmente.", tlImg: "Salvar imagem", tlShare: "Compartilhar",
+      tlTradeHead: nome => `Lista de troca${nome ? " de " + nome : ""} · Fichário Pokémon Virtual`,
+      tlBkT: "Backup e exportação", tlBkD: "Guarde uma cópia da sua coleção e dos decks, ou recupere tudo a partir de um arquivo.",
+      tlCsv: "Exportar coleção (CSV)", tlBk: "Baixar backup completo", tlImp: "Importar arquivo",
+      tlImpHint: "Um CSV adiciona ou atualiza cartas. Um arquivo de backup (.json) substitui a coleção e os decks.",
+      tlImpCsv: (n, x) => `Este CSV tem ${n} ${n === 1 ? "carta" : "cartas"}${x ? ` (${x} ${x === 1 ? "linha ignorada" : "linhas ignoradas"})` : ""}. Elas serão adicionadas ou atualizadas na sua coleção.`,
+      tlImpJson: (n, d, data) => `Backup de ${data}: ${n} cartas e ${d} decks. Isso substitui a coleção e os decks atuais.`,
+      tlImpOk: "Importar", tlImpRestore: "Restaurar backup", tlImpDone: n => `Pronto! ${n} ${n === 1 ? "carta importada" : "cartas importadas"}.`, tlImpRestored: "Backup restaurado.",
+      tlImpErr: "Não foi possível ler este arquivo. Use um CSV exportado aqui ou um arquivo de backup.",
+      tlBdT: "Conquistas", tlBdD: (a, b) => `${a} de ${b} desbloqueadas`,
+      bd: {
+        first: ["Primeira carta", "Tenha sua primeira carta"], c50: ["Fichário crescendo", "Tenha 50 cartas diferentes"], c250: ["Colecionador sério", "Tenha 250 cartas diferentes"],
+        c1000: ["Mestre colecionador", "Tenha 1.000 cartas diferentes"], dup10: ["Negociante", "Tenha 10 cartas com 2 ou mais cópias"], set: ["Coleção completa", "Complete qualquer coleção"],
+        kanto: ["Kanto completo", "Complete a coleção 151"], langs: ["Poliglota", "Tenha cartas em inglês, português e japonês"], wish10: ["Sonhador", "Coloque 10 cartas na Wishlist"],
+        star5: ["Favoritas", "Marque 5 cartas favoritas"], deck: ["Construtor de decks", "Crie seu primeiro deck"], deck60: ["Pronto para batalhar", "Monte um deck de 60 cartas"],
+        deckOwn: ["Tudo meu", "Tenha todas as cartas de um deck de 60"], graded: ["Graduada", "Registre uma carta graduada"], v100: ["Tesouro", "Uma coleção que vale US$ 100 ou mais"]
+      },
+      tlCardT: "Cartão de treinador", tlCardD: "Uma imagem do seu progresso para compartilhar com os amigos.", tlDl: "Baixar imagem",
+      cardTitle: "CARTÃO DE TREINADOR", cardCards: "Cartas", cardCopies: "Cópias", cardSets: "Coleções completas", cardDecks: "Decks", cardBadges: "Conquistas", cardValue: "Valor", trainer: "Treinador",
+      tlAppT: "Instalar como app", tlAppD: "Coloque o fichário na tela inicial e abra mesmo sem internet, com o que você já carregou.",
+      tlInstall: "Instalar app", tlInstalled: "O app está instalado neste aparelho.",
+      tlAppHow: "No Chrome ou no Edge, abra o menu do navegador e escolha “Instalar”. No iPhone ou iPad: toque em Compartilhar e depois em “Adicionar à Tela de Início”.",
+      tlOffOk: "O modo offline está ativo.", tlOffNo: "O modo offline não está disponível nesta página.",
+      copyTitle: "Minha cópia", condLbl: "Estado", finLbl: "Acabamento", gradeLbl: "Graduada por", gradeVal: "Nota", optNone: "—",
+      conds: { NM: "Near Mint (perfeita)", LP: "Pouco jogada", MP: "Jogada", HP: "Muito jogada", DMG: "Danificada" },
+      fins: { normal: "Normal", holo: "Holo", reverse: "Reverse Holo" }, gradeOther: "Outra",
+      deckTools: "Ferramentas do deck", dtTitle: "Ferramentas do deck", dtStats: "Estatísticas", dtHand: "Testar mão", dtIO: "Exportar / Importar", dtClose: "Fechar",
+      dtNoDeck: "Crie ou escolha um deck primeiro.", dtLoading: "Carregando detalhes das cartas…", dtEmptyDeck: "Adicione cartas a este deck primeiro.",
+      dtPok: "Pokémon", dtTr: "Treinador", dtEn: "Energia", dtUnk: "Desconhecido", dtTypes: "Tipos de Pokémon",
+      dtBasics: n => `${n} ${n === 1 ? "Pokémon Básico" : "Pokémon Básicos"}`, dtProb: p => `${p}% de chance de ter um Pokémon Básico na mão inicial`,
+      dtMissing: (n, v) => n ? `${n} ${n === 1 ? "cópia faltando" : "cópias faltando"}${v ? ` · cerca de ${v} para completar` : ""}` : "Você tem todas as cartas deste deck!",
+      dtHandNew: "Nova mão", dtDraw: "Comprar carta", dtMull: "Mulligan", dtNoBasic: "Nenhum Pokémon Básico nesta mão: faça um mulligan.", dtOkHand: "Pronta para jogar: você tem um Pokémon Básico.",
+      dtLeft: (n, p) => `Deck: ${n} · Prêmios: ${p}`, dtMullCount: n => `Mulligans: ${n}`, dtPrizes: "Mostrar cartas de prêmio", dtPrizesHide: "Esconder cartas de prêmio", dtHandLbl: "Mão", dtPrizeLbl: "Cartas de prêmio",
+      dtExport: "Exportar este deck", dtExportHint: "Mesmo formato do Pokémon TCG Live e da maioria dos sites de deck.", dtCopyList: "Copiar lista", dtTxt: "Baixar .txt",
+      dtImport: "Importar um deck", dtImportHint: "Cole uma lista de deck, uma carta por linha (por exemplo “4 Pikachu ex SSP 57”).", dtImportName: "Nome do novo deck",
+      dtImportBtn: "Importar como novo deck", dtImpDone: (n, f) => `${n} ${n === 1 ? "carta importada" : "cartas importadas"}.${f ? ` ${f} ${f === 1 ? "linha não encontrada" : "linhas não encontradas"}:` : ""}`,
+      dtImpNone: "Nenhuma carta desta lista foi encontrada.", dtImpWait: "As cartas ainda estão carregando. Tente de novo em instantes.", dtImpDefault: "Deck importado"
+    },
+    ja: {
+      areaCard: "トレーナーカード", tcFav: "お気に入りのトレーナー", tcBg: "カードの背景", tcPkT: "お気に入りのポケモン", tcPkOn: "お気に入りのポケモンをカードに表示", tcPkSearch: "名前か図鑑番号でポケモンを検索", tcPkLoading: "図鑑を読み込み中…", tcPkNone: "ポケモンが見つかりません。", tcSearch: "トレーナーを検索", tcNoTr: "トレーナーが見つかりません。", tcAdjust: "位置を調整", tcCorsErr: "画像サーバーの制限で、ダウンロードした画像にトレーナーを入れられませんでした。別のトレーナーか自分の写真をお試しください。", leadCard: "好きなトレーナーや自分の写真でトレーナーカードを作って、進み具合をシェアしよう。", tcCustom: "カスタマイズ", tcName: "カードの名前", tcPhoto: "写真", tcNone: "写真なし（シルエット）", tcYours: "あなたの写真", tcUpload: "写真をアップロード", tcUploadBtn: "写真をアップロード", tcRemove: "写真を削除", tcCredit: "トレーナーの画像はフルアートのサポートカードから（画像は TCGdex）。あなたの写真はこのブラウザにだけ保存されます。", tcSaveErr: "写真が大きすぎて保存できません。小さい画像でお試しください。", tcReadErr: "この画像を開けませんでした。JPG か PNG でお試しください。", areaTools: "ツール", leadTools: "コレクションのおまけ機能：価値、トレード、バックアップ、実績など。",
+      tlWait: "カードを読み込み中…",
+      tlValT: "コレクションの価値", tlValD: "持っているカードの推定価値（TCGplayer の米ドル価格と Cardmarket のユーロ価格）。",
+      tlValEmpty: "カードを「持っている」にすると、コレクションの価値がわかります。",
+      tlValNeed: n => `価格を確認するカード：${n}枚。初回は少し時間がかかります。`,
+      tlValBtn: "価値を計算", tlValProg: (a, b) => `価格を確認中… ${a} / ${b}`,
+      tlTop: "高価なカード", tlTopSets: "価値の高いセット（米ドル）",
+      tlValNote: n => `英語版の価格で、数日ごとに更新されます。${n ? `${n}枚は価格情報がありません。` : ""}`,
+      tlValRefresh: "価格を更新",
+      tlTradeT: "トレードリスト", tlTradeD: "ダブり（2枚以上のカード）とほしいものリストを、そのままシェアできます。",
+      tlForTrade: "トレード可", tlLooking: "さがしています", tlMore: n => `ほか${n}枚`,
+      tlNoneDup: "ダブりはまだありません。2枚以上あるカードがここに表示されます。", tlNoneWish: "ほしいものリストは空です。",
+      tlCopy: "テキストをコピー", tlCopied: "コピーしました！", tlCopyErr: "コピーできませんでした。テキストを選択してコピーしてください。", tlImg: "画像を保存", tlShare: "シェア",
+      tlTradeHead: nome => `${nome ? nome + "の" : ""}トレードリスト · バーチャルポケモンバインダー`,
+      tlBkT: "バックアップと書き出し", tlBkD: "コレクションとデッキのコピーを保存したり、ファイルから戻したりできます。",
+      tlCsv: "コレクションを書き出す（CSV）", tlBk: "バックアップをダウンロード", tlImp: "ファイルを読み込む",
+      tlImpHint: "CSV はカードを追加・更新します。バックアップ（.json）はコレクションとデッキを置き換えます。",
+      tlImpCsv: (n, x) => `この CSV には ${n}枚のカードがあります${x ? `（${x}行はスキップ）` : ""}。コレクションに追加・更新されます。`,
+      tlImpJson: (n, d, data) => `${data} のバックアップ：カード ${n}枚、デッキ ${d}個。今のコレクションとデッキが置き換えられます。`,
+      tlImpOk: "読み込む", tlImpRestore: "バックアップを復元", tlImpDone: n => `完了！${n}枚を読み込みました。`, tlImpRestored: "バックアップを復元しました。",
+      tlImpErr: "このファイルは読み込めませんでした。ここで書き出した CSV かバックアップを使ってください。",
+      tlBdT: "実績", tlBdD: (a, b) => `${b}個中 ${a}個を達成`,
+      bd: {
+        first: ["はじめの1枚", "最初のカードを手に入れる"], c50: ["育つバインダー", "50種類のカードを持つ"], c250: ["本気のコレクター", "250種類のカードを持つ"],
+        c1000: ["マスターコレクター", "1,000種類のカードを持つ"], dup10: ["トレーダー", "2枚以上あるカードを10種類持つ"], set: ["セットコンプリート", "どれかのセットをコンプリート"],
+        kanto: ["カントーコンプリート", "151 のセットをコンプリート"], langs: ["マルチリンガル", "英語・ポルトガル語・日本語のカードを持つ"], wish10: ["夢見るトレーナー", "ほしいものリストに10枚追加"],
+        star5: ["お気に入り", "お気に入りを5枚つける"], deck: ["デッキビルダー", "はじめてのデッキを作る"], deck60: ["バトルの準備OK", "60枚のデッキを組む"],
+        deckOwn: ["ぜんぶ自分のもの", "60枚デッキのカードをすべて持つ"], graded: ["鑑定品", "鑑定済みカードを登録する"], v100: ["お宝", "価値100ドル以上のコレクション"]
+      },
+      tlCardT: "トレーナーカード", tlCardD: "友だちにシェアできる、あなたの進み具合の画像です。", tlDl: "画像をダウンロード",
+      cardTitle: "トレーナーカード", cardCards: "カード", cardCopies: "枚数", cardSets: "コンプリート", cardDecks: "デッキ", cardBadges: "実績", cardValue: "価値", trainer: "トレーナー",
+      tlAppT: "アプリとしてインストール", tlAppD: "ホーム画面に追加すると、読み込み済みのデータならオフラインでも開けます。",
+      tlInstall: "アプリをインストール", tlInstalled: "この端末にインストール済みです。",
+      tlAppHow: "Chrome や Edge ではブラウザのメニューから「インストール」を選びます。iPhone・iPad では共有ボタンから「ホーム画面に追加」をタップします。",
+      tlOffOk: "オフラインモードが有効です。", tlOffNo: "このページではオフラインモードを使えません。",
+      copyTitle: "わたしのカード", condLbl: "状態", finLbl: "仕上げ", gradeLbl: "鑑定会社", gradeVal: "グレード", optNone: "—",
+      conds: { NM: "ニアミント（美品）", LP: "軽いプレイ跡", MP: "プレイ跡あり", HP: "強いプレイ跡", DMG: "ダメージあり" },
+      fins: { normal: "ノーマル", holo: "ホロ", reverse: "リバースホロ" }, gradeOther: "その他",
+      deckTools: "デッキツール", dtTitle: "デッキツール", dtStats: "統計", dtHand: "手札テスト", dtIO: "書き出し / 読み込み", dtClose: "閉じる",
+      dtNoDeck: "先にデッキを作るか選んでください。", dtLoading: "カードの詳細を読み込み中…", dtEmptyDeck: "先にこのデッキにカードを入れてください。",
+      dtPok: "ポケモン", dtTr: "トレーナーズ", dtEn: "エネルギー", dtUnk: "不明", dtTypes: "ポケモンのタイプ",
+      dtBasics: n => `たねポケモン ${n}枚`, dtProb: p => `最初の手札にたねポケモンが来る確率 ${p}%`,
+      dtMissing: (n, v) => n ? `足りないカード ${n}枚${v ? `・完成まで約 ${v}` : ""}` : "このデッキのカードはすべて持っています！",
+      dtHandNew: "新しい手札", dtDraw: "1枚引く", dtMull: "マリガン", dtNoBasic: "この手札にたねポケモンがいません。マリガンしましょう。", dtOkHand: "準備OK：たねポケモンがいます。",
+      dtLeft: (n, p) => `山札：${n}・サイド：${p}`, dtMullCount: n => `マリガン：${n}回`, dtPrizes: "サイドを見る", dtPrizesHide: "サイドを隠す", dtHandLbl: "手札", dtPrizeLbl: "サイド",
+      dtExport: "このデッキを書き出す", dtExportHint: "ポケモンカードゲーム Live や多くのデッキサイトと同じ形式です。", dtCopyList: "リストをコピー", dtTxt: ".txt をダウンロード",
+      dtImport: "デッキを読み込む", dtImportHint: "デッキリストを貼り付けてください。1行に1種類（例：「4 Pikachu ex SSP 57」）。", dtImportName: "新しいデッキの名前",
+      dtImportBtn: "新しいデッキとして読み込む", dtImpDone: (n, f) => `${n}枚を読み込みました。${f ? `${f}行が見つかりませんでした：` : ""}`,
+      dtImpNone: "このリストのカードは見つかりませんでした。", dtImpWait: "カードを読み込み中です。少ししてからもう一度お試しください。", dtImpDefault: "読み込んだデッキ"
+    }
+  };
+  Object.keys(TL_TXT).forEach(l => Object.assign(I18N[l], TL_TXT[l]));
+
+  /* ---------- Detalhes das cartas (categoria, estágio, tipos, preços), com cópia local ---------- */
+  const DET_KEY = "det-v1", DET_DIAS = 3;
+  let DETS = null;
+  let detTimer = 0;
+  async function carregarDets() {
+    if (DETS) return DETS;
+    const m = new Map();
+    try {
+      const db = await abrirDB();
+      const v = await new Promise(ok => { const r = db.transaction("dados").objectStore("dados").get(DET_KEY); r.onsuccess = () => ok(r.result || null); r.onerror = () => ok(null); });
+      if (v && typeof v === "object") Object.entries(v).forEach(([id, d]) => { if (d && Date.now() - d.q < DET_DIAS * 864e5) m.set(id, d); });
+    } catch (e) { /* sem cópia local */ }
+    if (!DETS) DETS = m;
+    return DETS;
+  }
+  function gravarDets() {
+    clearTimeout(detTimer);
+    detTimer = setTimeout(async () => {
+      try { const db = await abrirDB(); db.transaction("dados", "readwrite").objectStore("dados").put(Object.fromEntries(DETS), DET_KEY); } catch (e) { /* segue */ }
+    }, 800);
+  }
+  function resumoDet(raw) {
+    const pr = raw.pricing || {}, tp = pr.tcgplayer || {}, cm = pr.cardmarket || {};
+    const usd = {};
+    Object.entries(tp).forEach(([k, v]) => { if (v && typeof v === "object") { const x = v.marketPrice || v.midPrice || v.lowPrice; if (x) usd[k] = x; } });
+    return { q: Date.now(), cat: raw.category || "", st: raw.stage || "", ty: raw.types || [], usd, eur: cm.trend || cm.avg || 0, eurH: cm["trend-holo"] || cm["avg-holo"] || 0 };
+  }
+  async function detalhe(id) {
+    await carregarDets();
+    if (DETS.has(id)) return DETS.get(id);
+    let raw = PRECOS.get(id);
+    if (!raw) { raw = await getJSON(API + "/cards/" + encodeURIComponent(id)); PRECOS.set(id, raw); }
+    const r = resumoDet(raw);
+    DETS.set(id, r);
+    gravarDets();
+    return r;
+  }
+  async function emLotes(lista, fn, n, aoAvancar) {
+    let i = 0, feitos = 0;
+    const trabalho = async () => {
+      while (i < lista.length) {
+        const x = lista[i++];
+        try { await fn(x); } catch (e) { /* segue com as outras */ }
+        feitos++;
+        if (aoAvancar) aoAvancar(feitos, lista.length);
+      }
+    };
+    await Promise.all(Array.from({ length: Math.min(n, lista.length) }, trabalho));
+  }
+  const VAR_ORDEM = ["normal", "holofoil", "reverse-holofoil", "1st-edition-holofoil", "unlimited-holofoil", "1st-edition", "unlimited"];
+  function precoUSD(id, d) {
+    const u = d.usd || {}, fin = (state.meta[id] || {}).f;
+    const pref = fin === "reverse" ? ["reverse-holofoil"] : fin === "holo" ? ["holofoil", "1st-edition-holofoil", "unlimited-holofoil"] : fin === "normal" ? ["normal", "unlimited", "1st-edition"] : [];
+    for (const k of pref.concat(VAR_ORDEM)) if (u[k]) return u[k];
+    const v = Object.values(u);
+    return v.length ? v[0] : 0;
+  }
+  const precoEUR = (id, d) => { const fin = (state.meta[id] || {}).f; return (fin === "holo" || fin === "reverse") && d.eurH ? d.eurH : d.eur || 0; };
+
+  /* ---------- Pequenas ajudas ---------- */
+  const corVar = nome => getComputedStyle(document.documentElement).getPropertyValue(nome).trim();
+  function baixar(nome, conteudo, tipo) {
+    const blob = conteudo instanceof Blob ? conteudo : new Blob([conteudo], { type: tipo });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = nome; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+  }
+  async function copiar(texto) {
+    try { await navigator.clipboard.writeText(texto); return true; }
+    catch (e) {
+      const ta = document.createElement("textarea");
+      ta.value = texto; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      let ok = false; try { ok = document.execCommand("copy"); } catch (e2) { ok = false; }
+      ta.remove();
+      return ok;
+    }
+  }
+  function avisar(el, texto) { if (!el) return; el.textContent = texto; clearTimeout(el._t); el._t = setTimeout(() => { el.textContent = ""; }, 3500); }
+  const hoje = () => new Date().toISOString().slice(0, 10);
+  const nomeTreinador = () => (conta.perfil && conta.perfil.nome) || "";
+  let imgSil = null;
+  function silhueta() {
+    if (imgSil) return imgSil;
+    imgSil = new Promise(ok => {
+      const m = /url\(["']?(data:[^"')]+)["']?\)/.exec(corVar("--sil"));
+      if (!m) return ok(null);
+      const i = new Image(); i.onload = () => ok(i); i.onerror = () => ok(null); i.src = m[1];
+    });
+    return imgSil;
+  }
+  function silPintada(img, cor, w, h) {
+    const c = document.createElement("canvas"); c.width = w; c.height = h;
+    const g = c.getContext("2d");
+    g.drawImage(img, 0, 0, w, h); g.globalCompositeOperation = "source-in"; g.fillStyle = cor; g.fillRect(0, 0, w, h);
+    return c;
+  }
+  function retRedondo(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+  function cortarTexto(g, s, max) { if (g.measureText(s).width <= max) return s; while (s.length > 1 && g.measureText(s + "…").width > max) s = s.slice(0, -1); return s + "…"; }
+  const FONTE_T = '"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif', FONTE_C = '"Figtree", system-ui, sans-serif';
+
+  /* ---------- Valor da coleção ---------- */
+  const tl = { calc: false, prog: "", imp: null, cartaoUrl: "", instalar: null, sw: null };
+  function valorCalc() {
+    const ids = [...state.own];
+    let falta = 0, usd = 0, eur = 0, semPreco = 0;
+    const itens = [], porSet = {};
+    ids.forEach(id => {
+      const d = DETS && DETS.get(id);
+      if (!d) { falta++; return; }
+      const q = state.qty[id] || 1, u = precoUSD(id, d), e = precoEUR(id, d);
+      if (!u && !e) semPreco++;
+      usd += u * q; eur += e * q;
+      const c = POR_ID.get(id);
+      if (u || e) itens.push({ id, c, u, e, q });
+      if (c && u) porSet[c.set] = (porSet[c.set] || 0) + u * q;
+    });
+    itens.sort((a, b) => (b.u || b.e) - (a.u || a.e));
+    return { falta, usd, eur, semPreco, top: itens.slice(0, 5), sets: Object.entries(porSet).sort((a, b) => b[1] - a[1]).slice(0, 5) };
+  }
+  function renderValor() {
+    const box = $("tlValorCorpo");
+    if (state.status !== "ok") { box.innerHTML = `<p class="tl-nota">${esc(t("tlWait"))}</p>`; return; }
+    if (!state.own.size) { box.innerHTML = `<p class="tl-nota">${esc(t("tlValEmpty"))}</p>`; return; }
+    if (tl.calc) { box.innerHTML = `<div class="tl-prog"><span class="spin" aria-hidden="true"></span><p role="status">${esc(tl.prog)}</p></div>`; return; }
+    const v = DETS ? valorCalc() : null;
+    if (!v || v.falta) {
+      box.innerHTML = `<p class="tl-nota">${esc(t("tlValNeed", v ? v.falta : state.own.size))}</p><div class="tl-acoes"><button type="button" class="tl-btn on" data-tl="calc">${esc(t("tlValBtn"))}</button></div>`;
+      return;
+    }
+    const nomeC = x => x.c ? x.c.n : x.id;
+    box.innerHTML = `
+      <div class="tl-total"><div><span>TCGplayer</span><strong>${esc(moeda(v.usd, "USD"))}</strong></div><div><span>Cardmarket</span><strong>${esc(moeda(v.eur, "EUR"))}</strong></div></div>
+      ${v.top.length ? `<h3 class="tl-h3">${esc(t("tlTop"))}</h3><ol class="tl-lista">${v.top.map(x => `<li><button type="button" class="tl-link" data-zoom="${esc(x.id)}">${esc(nomeC(x))}<small>${x.c ? "#" + esc(numeroTxt(x.c)) + " · " + esc(setNome(x.c)) : ""}${x.q > 1 ? " · ×" + x.q : ""}</small></button><strong>${esc(x.u ? moeda(x.u, "USD") : moeda(x.e, "EUR"))}</strong></li>`).join("")}</ol>` : ""}
+      ${v.sets.length ? `<h3 class="tl-h3">${esc(t("tlTopSets"))}</h3><ul class="tl-barras">${v.sets.map(([sid, val]) => `<li><span>${esc(SETS[sid] ? SETS[sid].name : sid)}</span><strong>${esc(moeda(val, "USD"))}</strong><i aria-hidden="true"><b style="width:${(val / v.sets[0][1] * 100).toFixed(1)}%"></b></i></li>`).join("")}</ul>` : ""}
+      <p class="tl-nota">${esc(t("tlValNote", v.semPreco))}</p>
+      <div class="tl-acoes"><button type="button" class="tl-btn" data-tl="recalc">${esc(t("tlValRefresh"))}</button></div>`;
+  }
+  async function calcularValor(forcar) {
+    if (tl.calc) return;
+    tl.calc = true;
+    await carregarDets();
+    if (forcar) state.own.forEach(id => { DETS.delete(id); PRECOS.delete(id); });
+    const ids = [...state.own].filter(id => !DETS.has(id));
+    tl.prog = t("tlValProg", 0, ids.length);
+    renderValor();
+    await emLotes(ids, detalhe, 6, (a, b) => {
+      tl.prog = t("tlValProg", a, b);
+      const p = document.querySelector("#tlValorCorpo .tl-prog p");
+      if (p) p.textContent = tl.prog;
+    });
+    tl.calc = false;
+    if (conta.cfg.area === "tools") { renderTools(); const b = document.querySelector('#tlValorCorpo [data-tl]'); if (b) b.focus(); }
+  }
+
+  /* ---------- Lista de troca ---------- */
+  function listaTroca() {
+    const ord = (a, b) => a.c.ord - b.c.ord;
+    const troca = [...state.own].map(id => ({ id, c: POR_ID.get(id), n: (state.qty[id] || 0) - 1 })).filter(x => x.c && x.n > 0).sort(ord);
+    const busca = [...state.fav].filter(id => !state.own.has(id)).map(id => ({ id, c: POR_ID.get(id), n: 1 })).filter(x => x.c).sort(ord);
+    return { troca, busca };
+  }
+  const linhaCarta = x => `${x.c.n} #${numeroTxt(x.c)} · ${setNome(x.c)}${x.n > 1 ? " (×" + x.n + ")" : ""}`;
+  function textoTroca() {
+    const { troca, busca } = listaTroca();
+    return t("tlTradeHead", nomeTreinador()) + "\n\n" +
+      "🔁 " + t("tlForTrade") + ` (${troca.length})\n` + (troca.length ? troca.map(x => "• " + linhaCarta(x)).join("\n") : "—") + "\n\n" +
+      "🔎 " + t("tlLooking") + ` (${busca.length})\n` + (busca.length ? busca.map(x => "• " + linhaCarta(x)).join("\n") : "—");
+  }
+  function renderTroca() {
+    const box = $("tlTrocaCorpo");
+    if (state.status !== "ok") { box.innerHTML = `<p class="tl-nota">${esc(t("tlWait"))}</p>`; return; }
+    const { troca, busca } = listaTroca();
+    const col = (titulo, arr, vazio) => `<div class="tl-col"><h3 class="tl-h3">${esc(titulo)} <span class="tl-n">${arr.length}</span></h3>${arr.length
+      ? `<ul class="tl-mini">${arr.slice(0, 6).map(x => `<li><button type="button" class="tl-link" data-zoom="${esc(x.id)}">${esc(x.c.n)}<small>#${esc(numeroTxt(x.c))}${x.n > 1 ? " · ×" + x.n : ""}</small></button></li>`).join("")}</ul>${arr.length > 6 ? `<p class="tl-nota">${esc(t("tlMore", arr.length - 6))}</p>` : ""}`
+      : `<p class="tl-nota">${esc(vazio)}</p>`}</div>`;
+    const tem = troca.length || busca.length;
+    box.innerHTML = `<div class="tl-cols">${col(t("tlForTrade"), troca, t("tlNoneDup"))}${col(t("tlLooking"), busca, t("tlNoneWish"))}</div>
+      <div class="tl-acoes"><button type="button" class="tl-btn on" data-tl="copyTrade" ${tem ? "" : "disabled"}>${esc(t("tlCopy"))}</button><button type="button" class="tl-btn" data-tl="imgTrade" ${tem ? "" : "disabled"}>${esc(t("tlImg"))}</button>${navigator.share ? `<button type="button" class="tl-btn" data-tl="shareTrade" ${tem ? "" : "disabled"}>${esc(t("tlShare"))}</button>` : ""}</div>
+      <p class="tl-ok" id="tlTrocaMsg" role="status"></p>`;
+  }
+  async function imagemTroca() {
+    const { troca, busca } = listaTroca();
+    if (document.fonts && document.fonts.ready) await document.fonts.ready;
+    const W = 1080, MAX = 22, LH = 40;
+    const linhasCol = Math.min(MAX, Math.max(troca.length, busca.length, 5)) + (Math.max(troca.length, busca.length) > MAX ? 1 : 0);
+    const H = 250 + linhasCol * LH + 90;
+    const cv = document.createElement("canvas"); cv.width = W; cv.height = H;
+    const g = cv.getContext("2d");
+    const bg = corVar("--hd-bg"), fg = corVar("--hd-fg"), sub = corVar("--hd-sub");
+    g.fillStyle = bg; g.fillRect(0, 0, W, H);
+    const sil = await silhueta();
+    if (sil) g.drawImage(silPintada(sil, fg, 92, 102), 60, 50);
+    g.fillStyle = fg; g.font = `800 46px ${FONTE_T}`; g.textBaseline = "alphabetic";
+    g.fillText(cortarTexto(g, t("tlTradeT").toUpperCase(), W - 260), 180, 104);
+    g.fillStyle = sub; g.font = `500 26px ${FONTE_C}`;
+    g.fillText(cortarTexto(g, nomeTreinador() || t("trainer"), W - 260), 182, 144);
+    const coluna = (x, titulo, arr) => {
+      retRedondo(g, x, 190, 460, H - 250, 24); g.fillStyle = "rgba(255,255,255,0.07)"; g.fill();
+      g.fillStyle = fg; g.font = `800 30px ${FONTE_T}`; g.fillText(`${titulo} (${arr.length})`, x + 26, 238);
+      g.font = `500 22px ${FONTE_C}`; g.fillStyle = sub;
+      arr.slice(0, MAX).forEach((it, i) => g.fillText(cortarTexto(g, "• " + it.c.n + " #" + numeroTxt(it.c) + (it.n > 1 ? " ×" + it.n : ""), 410), x + 26, 284 + i * LH));
+      if (arr.length > MAX) g.fillText(t("tlMore", arr.length - MAX), x + 26, 284 + MAX * LH);
+      if (!arr.length) g.fillText("—", x + 26, 284);
+    };
+    coluna(60, t("tlForTrade"), troca);
+    coluna(560, t("tlLooking"), busca);
+    g.fillStyle = sub; g.globalAlpha = 0.7; g.font = `500 20px ${FONTE_C}`;
+    g.fillText(t("title") + (location.host ? " · " + location.host : ""), 60, H - 28);
+    g.globalAlpha = 1;
+    return new Promise(ok => cv.toBlob(ok, "image/png"));
+  }
+
+  /* ---------- Backup, CSV e importação ---------- */
+  const csvCampo = v => { const s = String(v == null ? "" : v); return /[",\n;]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+  const CSV_COLS = ["id", "name", "set", "number", "quantity", "languages", "wishlist", "favorite", "condition", "finish", "grading"];
+  function gerarCSV() {
+    const ids = [...new Set([...state.own, ...state.fav, ...state.star])];
+    const linhas = [CSV_COLS.join(",")];
+    ids.forEach(id => {
+      const c = POR_ID.get(id), m = state.meta[id] || {};
+      linhas.push([id, c ? c.n : "", c ? setNome(c) : "", c ? c.lid : "", state.qty[id] || 0, (state.langs[id] || []).join("|"),
+        state.fav.has(id) ? 1 : 0, state.star.has(id) ? 1 : 0, m.c || "", m.f || "", m.gc ? (m.gc + " " + (m.gv || "")).trim() : ""].map(csvCampo).join(","));
+    });
+    return "﻿" + linhas.join("\n");
+  }
+  function lerCSV(txt) {
+    const linhas = []; let campo = "", linha = [], aspas = false;
+    txt = txt.replace(/^﻿/, "");
+    const sep = (txt.split("\n")[0].match(/;/g) || []).length > (txt.split("\n")[0].match(/,/g) || []).length ? ";" : ",";
+    for (let i = 0; i < txt.length; i++) {
+      const ch = txt[i];
+      if (aspas) { if (ch === '"') { if (txt[i + 1] === '"') { campo += '"'; i++; } else aspas = false; } else campo += ch; }
+      else if (ch === '"') aspas = true;
+      else if (ch === sep) { linha.push(campo); campo = ""; }
+      else if (ch === "\n" || ch === "\r") { if (ch === "\r" && txt[i + 1] === "\n") i++; linha.push(campo); linhas.push(linha); linha = []; campo = ""; }
+      else campo += ch;
+    }
+    if (campo || linha.length) { linha.push(campo); linhas.push(linha); }
+    return linhas.filter(l => l.some(x => x.trim()));
+  }
+  function analisarArquivo(nome, txt) {
+    if (/\.json$/i.test(nome) || /^\s*\{/.test(txt)) {
+      const o = JSON.parse(txt);
+      if (!o || o.app !== "virtual-pokemon-binder" || !o.collection) throw new Error("formato");
+      return { tipo: "json", o, n: Object.keys(o.collection.qty || {}).length, d: (o.decks && o.decks.decks || []).length, data: String(o.date || "").slice(0, 10) };
+    }
+    const linhas = lerCSV(txt);
+    if (linhas.length < 2) throw new Error("vazio");
+    const cab = linhas[0].map(x => norm(x.trim()));
+    const col = k => cab.indexOf(k);
+    if (col("id") < 0) throw new Error("sem id");
+    const itens = []; let ign = 0;
+    linhas.slice(1).forEach(l => {
+      const id = migrar((l[col("id")] || "").trim());
+      if (!id) { ign++; return; }
+      const q = parseInt(l[col("quantity")] || "0", 10) || 0;
+      const langs = (l[col("languages")] || "").split(/[|/ ]+/).filter(x => LANGS.includes(x));
+      const g = (l[col("grading")] || "").trim().split(/\s+/);
+      itens.push({ id, q: Math.min(999, Math.max(0, q)), langs, wish: (l[col("wishlist")] || "").trim() === "1", star: (l[col("favorite")] || "").trim() === "1",
+        c: (l[col("condition")] || "").trim(), f: (l[col("finish")] || "").trim(), gc: g[0] || "", gv: g[1] || "" });
+    });
+    if (!itens.length) throw new Error("vazio");
+    return { tipo: "csv", itens, n: itens.length, ign };
+  }
+  function aplicarImport(imp) {
+    if (imp.tipo === "json") {
+      const c = imp.o.collection;
+      state.qty = {}; state.langs = {}; state.meta = {};
+      Object.entries(c.qty || {}).forEach(([id, n]) => { n = parseInt(n, 10); if (n > 0) state.qty[id] = Math.min(999, n); });
+      Object.keys(state.qty).forEach(id => { const l = ((c.langs || {})[id] || []).filter(x => LANGS.includes(x)); state.langs[id] = l.length ? l : ["en"]; });
+      Object.entries(c.meta || {}).forEach(([id, m]) => { if (m && typeof m === "object") state.meta[id] = m; });
+      state.own = new Set(Object.keys(state.qty));
+      state.fav = new Set(c.fav || []); state.star = new Set(c.star || []);
+      if (imp.o.decks && Array.isArray(imp.o.decks.decks)) {
+        dk.decks = imp.o.decks.decks.filter(d => d && d.id).map(d => ({ id: String(d.id), name: String(d.name || "Deck").slice(0, 40), cards: Object.fromEntries(Object.entries(d.cards || {}).map(([k, v]) => [k, Math.min(99, parseInt(v, 10) || 0)]).filter(x => x[1] > 0)) }));
+        dk.atual = imp.o.decks.atual;
+        salvarDecks();
+      }
+      if (imp.o.profile && imp.o.profile.nome) { conta.perfil = { nome: String(imp.o.profile.nome), email: String(imp.o.profile.email || "") }; salvarConta(); renderConta(); }
+    } else {
+      imp.itens.forEach(x => {
+        if (x.q > 0) { state.qty[x.id] = x.q; state.own.add(x.id); state.langs[x.id] = x.langs.length ? x.langs : (state.langs[x.id] || ["en"]); }
+        if (x.wish) state.fav.add(x.id);
+        if (x.star) state.star.add(x.id);
+        const m = {};
+        if (CONDS.includes(x.c)) m.c = x.c;
+        if (["normal", "holo", "reverse"].includes(x.f)) m.f = x.f;
+        if (x.gc) { m.gc = x.gc; if (x.gv) m.gv = x.gv; }
+        if (Object.keys(m).length) state.meta[x.id] = Object.assign(state.meta[x.id] || {}, m);
+      });
+    }
+    salvar();
+  }
+  function backupJSON() {
+    return JSON.stringify({ app: "virtual-pokemon-binder", version: 1, date: new Date().toISOString(),
+      collection: { qty: state.qty, langs: state.langs, fav: [...state.fav], star: [...state.star], meta: state.meta },
+      decks: dk, profile: conta.perfil, settings: conta.cfg }, null, 1);
+  }
+  function renderImport() {
+    const box = $("tlImpRes"), imp = tl.imp;
+    if (!imp) { box.innerHTML = ""; return; }
+    if (imp.erro) { box.innerHTML = `<p class="tl-erro" role="alert">${esc(imp.erro)}</p>`; return; }
+    if (imp.feito) { box.innerHTML = `<p class="tl-ok" role="status">${esc(imp.feito)}</p>`; return; }
+    box.innerHTML = `<div class="tl-confirma" role="group"><p>${esc(imp.tipo === "json" ? t("tlImpJson", imp.n, imp.d, imp.data) : t("tlImpCsv", imp.n, imp.ign))}</p>
+      <div class="tl-acoes"><button type="button" class="tl-btn on" data-tl="impOk">${esc(t(imp.tipo === "json" ? "tlImpRestore" : "tlImpOk"))}</button><button type="button" class="tl-btn" data-tl="impCancel">${esc(t("cancel"))}</button></div></div>`;
+    const b = box.querySelector('[data-tl="impOk"]'); if (b) b.focus();
+  }
+
+  /* ---------- Conquistas ---------- */
+  function conquistas() {
+    const own = state.own;
+    const porSet = {};
+    own.forEach(id => { const c = POR_ID.get(id); if (c) porSet[c.set] = (porSet[c.set] || 0) + 1; });
+    const setsCompletos = Object.entries(porSet).filter(([sid, n]) => SETS[sid] && SETS[sid].official && n >= SETS[sid].official).length;
+    const melhorSet = Object.entries(porSet).reduce((m, [sid, n]) => SETS[sid] && SETS[sid].official ? Math.max(m, n / SETS[sid].official) : m, 0);
+    const linguas = new Set(); Object.values(state.langs).forEach(a => a.forEach(l => linguas.add(l)));
+    const dup = [...own].filter(id => (state.qty[id] || 0) >= 2).length;
+    const d60 = dk.decks.filter(d => totalDeck(d) === DECK_MAX);
+    const d60own = d60.some(d => Object.entries(d.cards).every(([id, n]) => (state.qty[id] || 0) >= n));
+    const graduadas = Object.values(state.meta).some(m => m && m.gc);
+    const v = DETS && own.size ? valorCalc() : null;
+    const usd = v && !v.falta ? v.usd : 0;
+    const k151 = porSet["sv03.5"] || 0;
+    const lista = [
+      ["first", own.size, 1], ["c50", own.size, 50], ["c250", own.size, 250], ["c1000", own.size, 1000], ["dup10", dup, 10],
+      ["set", setsCompletos ? 1 : Math.floor(melhorSet * 100), setsCompletos ? 1 : 100, setsCompletos ? null : "%"], ["kanto", k151, 165], ["langs", linguas.size, 3],
+      ["wish10", state.fav.size, 10], ["star5", state.star.size, 5], ["deck", dk.decks.length, 1], ["deck60", d60.length, 1], ["deckOwn", d60own ? 1 : 0, 1],
+      ["graded", graduadas ? 1 : 0, 1], ["v100", Math.floor(usd), 100]
+    ];
+    return lista.map(([k, cur, max, un]) => ({ k, cur: Math.min(cur, max), max, ok: cur >= max && !(k === "set" && !setsCompletos), un }));
+  }
+  const ICON_MEDALHA = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="14" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M8.5 8.2L6 2.5h4l2 4 2-4h4l-2.5 5.7" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 11l1 2 2.1.3-1.5 1.5.4 2.1-2-1-2 1 .4-2.1-1.5-1.5L11 13z" fill="currentColor"/></svg>';
+  const ICON_CADEADO = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" stroke="currentColor" stroke-width="2"/></svg>';
+  function renderConquistas() {
+    const lista = conquistas(), feitas = lista.filter(x => x.ok).length, bd = t("bd");
+    $("tlBdResumo").textContent = t("tlBdD", feitas, lista.length);
+    $("tlBdCorpo").innerHTML = `<ul class="tl-badges">${lista.map(x => `<li class="tl-badge ${x.ok ? "ok" : ""}">
+      <span class="ic">${x.ok ? ICON_MEDALHA : ICON_CADEADO}</span>
+      <span class="tx"><strong>${esc(bd[x.k][0])}</strong><small>${esc(bd[x.k][1])}</small>
+      ${!x.ok && x.max > 1 ? `<span class="tl-prog-bar" aria-hidden="true"><b style="width:${(x.cur / x.max * 100).toFixed(1)}%"></b></span><small class="tl-num">${x.cur}${x.un || " / " + x.max}</small>` : ""}</span></li>`).join("")}</ul>`;
+  }
+
+  /* ---------- Cartão de treinador ---------- */
+  function numerosCartao() {
+    const own = state.own;
+    const copias = [...own].reduce((a, id) => a + (state.qty[id] || 0), 0);
+    const lista = conquistas();
+    const porSet = {};
+    own.forEach(id => { const c = POR_ID.get(id); if (c) porSet[c.set] = (porSet[c.set] || 0) + 1; });
+    const completos = Object.entries(porSet).filter(([sid, n]) => SETS[sid] && SETS[sid].official && n >= SETS[sid].official).length;
+    const v = DETS && own.size ? valorCalc() : null;
+    return [
+      [t("cardCards"), String(own.size)], [t("cardCopies"), String(copias)], [t("cardSets"), String(completos)],
+      [t("cardDecks"), String(dk.decks.length)], [t("cardBadges"), `${lista.filter(x => x.ok).length}/${lista.length}`],
+      [t("cardValue"), v && !v.falta ? moeda(v.usd, "USD") : "—"]
+    ];
+  }
+  /* ---------- Aba do Cartão de treinador ---------- */
+  const KEY_CARTAO = "fichario-pokemon-cartao-v1";
+  // Cartas de Apoiador "full art" (TCGdex). Mostramos só a ilustração: o recorte fica abaixo do nome e acima do texto.
+  const TREINADORES = [
+    ["Iono", "sv02-254"], ["Marnie", "swsh1-200"], ["Arven", "sv01-235"], ["Penny", "sv01-239"], ["Nemona", "sv04.5-229"], ["Miriam", "sv01-238"],
+    ["Jacq", "sv01-236"], ["Katy", "sv01-237"], ["Geeta", "sv03-218"], ["Poppy", "sv03-220"], ["Grusha", "sv02-253"], ["Giacomo", "sv02-252"],
+    ["Larry", "sv04-235"], ["Mela", "sv04-236"], ["Rika", "sv04-241"], ["Tulip", "sv04-244"], ["Kieran", "sv06-206"], ["Carmine", "sv06-204"],
+    ["Lacey", "sv07-166"], ["Briar", "sv07-163"], ["Drayton", "sv08-232"], ["Lisia", "sv08-234"], ["Jasmine", "sv08-233"], ["Erika", "sv03.5-196"],
+    ["Giovanni", "sv03.5-197"], ["Bianca", "sv05-197"], ["Morty", "sv05-201"], ["Ethan", "sv10-221"], ["Hilda", "sv10.5w-164"], ["N", "sv10.5b-163"],
+    ["Dawn", "me02-118"], ["Lillie", "me01-169"], ["Acerola", "me01-165"], ["Misty", "me05-111"], ["Gladion", "me05-108"], ["Cynthia", "swsh9-169"],
+    ["Leon", "swsh4-182"], ["Bea", "swsh4-180"], ["Nessa", "swsh4-183"], ["Raihan", "swsh7-202"], ["Piers", "swsh3-187"], ["Bede", "swsh1-199"],
+    ["Hop", "swsh3.5-73"], ["Sonia", "swsh2-192"], ["Gloria", "swsh9tg-TG26"], ["Serena", "swsh12-193"], ["Irida", "swsh10-186"], ["Elesa", "swsh8-260"],
+    ["Korrina", "swsh5-160"], ["Skyla", "swsh4.5-72"], ["Klara", "swsh6-194"], ["Opal", "swsh4-184"], ["Melony", "swsh6-195"], ["Wallace", "swsh12-194"],
+    ["Lance", "swsh12-192"], ["Prof. Oak", "cel25-24"],
+    ["Rosa", "me03-114"], ["Iris", "sv09-180"], ["Clemont", "sv08-229"], ["Wally", "me01-176"], ["Roxie", "me04-112"], ["Emma", "me04-107"],
+    ["AZ", "me04-106"], ["Canari", "me02.5-257"], ["Cheren", "me02.5-258"], ["Jacinthe", "me03-110"], ["Sada", "sv04-239"], ["Turo", "sv04-240"],
+    ["Clavell", "sv02-249"], ["Dendra", "sv02-250"], ["Saguaro", "sv02-255"], ["Crispin", "sv07-164"], ["Kofu", "sv07-165"], ["Perrin", "sv06-209"],
+    ["Lana", "sv06-207"], ["Eri", "sv05-199"], ["Salvatore", "sv05-202"], ["Atticus", "sv08.5-133"], ["Ortega", "sv03-219"], ["Ryme", "sv03-221"],
+    ["Shauntal", "sv04-243"], ["Lucian", "sv06-208"], ["Cyrano", "sv08-230"], ["Drasna", "sv08-231"], ["Ariana", "sv10-224"], ["Archer", "sv10-223"],
+    ["Allister", "swsh4-179"], ["Gordie", "swsh7-201"], ["Kabu", "swsh3-186"], ["Milo", "swsh2-190"], ["Oleana", "swsh2-191"], ["Rose", "swsh3-189"],
+    ["Peony", "swsh6-197"], ["Avery", "swsh6-187"], ["Volo", "swsh11-196"], ["Adaman", "swsh10-181"], ["Cyllene", "swsh10-183"], ["Kamado", "swsh10-187"],
+    ["Zisu", "swsh10-189"], ["Arezu", "swsh11-189"], ["Candice", "swsh12-189"], ["Roxanne", "swsh10-188"], ["Grant", "swsh10-185"], ["Zinnia", "swsh7-203"],
+    ["Phoebe", "swsh5-161"], ["Caitlin", "swsh6-189"], ["Flannery", "swsh6-191"], ["Brawly", "swsh6-188"], ["Siebold", "swsh6-198"], ["Sidney", "swsh8-264"],
+    ["Shauna", "swsh8-263"], ["Agatha", "swsh6-186"], ["Bruno", "swsh5-158"], ["Thorton", "swsh11-195"], ["Fantina", "swsh11-191"], ["Brandon", "swsh12-188"]
+  ];
+  const TR_PADRAO = "c:sv02-254";
+  // cores do fundo do cartão (as mesmas do binder)
+  const CORES_CARTAO = {
+    rosa: { bg: "#FCE5EF", fg: "#3A1626", sub: "#7A3A52", ac: "#D94F86" },
+    pastel: { bg: "#F8C8DC", fg: "#3A1626", sub: "#6B2A45", ac: "#C93C77" },
+    azul: { bg: "#9FC5E8", fg: "#102A43", sub: "#1F4466", ac: "#2F6FAD" },
+    verde: { bg: "#C8E1BE", fg: "#1C3517", sub: "#36552D", ac: "#4B873C" },
+    amarelo: { bg: "#FFE599", fg: "#3A2C00", sub: "#5C470A", ac: "#B07F00" },
+    cinza: { bg: "#5B5B5B", fg: "#F5F5F5", sub: "#DADADA", ac: "#E6E6E6" }
+  };
+  const TR_NOME = new Map(TREINADORES.map(x => [x[1], x[0]]));
+  // Quadro da foto no cartão: 360 × 440. Recorte da ilustração dentro da carta, em frações da carta.
+  const QUADRO = { w: 360, h: 595 };
+  const RECORTE = { y0: 0.125, h: 0.44 };
+  RECORTE.w = (QUADRO.w / QUADRO.h) * RECORTE.h * (88 / 63);
+  function urlCartaTr(id, alta) {
+    const c = POR_ID.get(id);
+    let base = c && c.img;
+    if (!base) {
+      const i = id.lastIndexOf("-"), sid = id.slice(0, i), lid = id.slice(i + 1);
+      base = `https://assets.tcgdex.net/en/${sid.startsWith("sv") ? "sv" : sid.startsWith("me") ? "me" : "swsh"}/${sid}/${lid}`;
+    }
+    return base + (alta ? "/high.webp" : "/low.webp");
+  }
+  function carregarCartao() {
+    try {
+      const o = JSON.parse(localStorage.getItem(KEY_CARTAO) || "null");
+      if (o && typeof o === "object") {
+        const img = typeof o.img === "string" && /^data:image\//.test(o.img) ? o.img : "";
+        let foto = typeof o.foto === "string" ? o.foto : "none";
+        if (foto === "upload" && !img) foto = TR_PADRAO;
+        if (foto.startsWith("c:") && !TR_NOME.has(foto.slice(2))) foto = TR_PADRAO;
+        if (foto !== "upload" && !foto.startsWith("c:")) foto = TR_PADRAO;
+        const cor = CORES_CARTAO[o.cor] ? o.cor : conta.cfg.tema;
+        const px = Number.isFinite(o.px) ? Math.max(0, Math.min(100, o.px)) : 50;
+        const pk = Number.isInteger(o.pk) && o.pk > 0 ? o.pk : 25;
+        return { foto, nome: String(o.nome || "").slice(0, 24), img, alfa: !!o.alfa, px, cor, pk, pkOn: !!o.pkOn };
+      }
+    } catch (e) { /* começa com o treinador padrão */ }
+    return { foto: TR_PADRAO, nome: "", img: "", alfa: false, px: 50, cor: CORES_CARTAO[conta.cfg.tema] ? conta.cfg.tema : "rosa", pk: 25, pkOn: false };
+  }
+  const cartao = carregarCartao();
+  function salvarCartaoDados() { try { localStorage.setItem(KEY_CARTAO, JSON.stringify(cartao)); return true; } catch (e) { return false; } }
+  const nomeCartao = () => cartao.nome.trim() || nomeTreinador() || t("trainer");
+  const recorteX = () => (1 - RECORTE.w) * cartao.px / 100;
+  // posição da ilustração dentro de um quadro (galeria e prévia), em % do quadro
+  const estiloRecorte = x0 => `width:${(100 / RECORTE.w).toFixed(3)}%;left:${(-x0 / RECORTE.w * 100).toFixed(3)}%;top:${(-RECORTE.y0 / RECORTE.h * 100).toFixed(3)}%`;
+
+  const IMGS = new Map();
+  function carregarImg(src, cors) {
+    const k = (cors ? "c|" : "n|") + src;
+    if (IMGS.has(k)) return IMGS.get(k);
+    const p = new Promise(ok => {
+      const i = new Image();
+      if (cors) i.crossOrigin = "anonymous";
+      i.referrerPolicy = "no-referrer";
+      i.onload = () => ok(i); i.onerror = () => { IMGS.delete(k); ok(null); };
+      i.src = src;
+    });
+    IMGS.set(k, p);
+    return p;
+  }
+  // foto escolhida, pronta para desenhar no canvas (null se não houver ou se o servidor não permitir)
+  async function fotoAtual() {
+    if (cartao.foto === "upload" && cartao.img) { const img = await carregarImg(cartao.img, false); return img ? { tipo: "upload", img, alfa: cartao.alfa } : null; }
+    if (cartao.foto.startsWith("c:")) {
+      const id = cartao.foto.slice(2);
+      const img = await carregarImg(urlCartaTr(id, true), true) || await carregarImg(urlCartaTr(id, false), true);
+      return img ? { tipo: "carta", img, id } : { tipo: "carta", img: null, id };
+    }
+    return null;
+  }
+
+  async function desenharCartao() {
+    if (document.fonts && document.fonts.ready) await document.fonts.ready;
+    const W = 1200, H = 675;
+    const cv = document.createElement("canvas"); cv.width = W; cv.height = H;
+    const g = cv.getContext("2d");
+    const pal = CORES_CARTAO[cartao.cor] || CORES_CARTAO.rosa;
+    const bg = pal.bg, fg = pal.fg, sub = pal.sub, ac = pal.ac;
+    const tinta = (a) => { g.fillStyle = fg; g.globalAlpha = a; g.fill(); g.globalAlpha = 1; };
+    g.fillStyle = bg; g.fillRect(0, 0, W, H);
+    const px = 40, py = 40, pw = 360, ph = H - 80;
+    retRedondo(g, px, py, pw, ph, 34); tinta(0.08);
+    const foto = await fotoAtual();
+    const sil = await silhueta();
+    let semFoto = false;
+    if (foto && foto.tipo === "carta") {
+      // ilustração da carta no quadro de cima e o nome do treinador embaixo
+      if (foto.img) {
+        const iw = foto.img.naturalWidth, ih = foto.img.naturalHeight;
+        g.save(); retRedondo(g, px, py, QUADRO.w, QUADRO.h, 34); g.clip();
+        g.drawImage(foto.img, recorteX() * iw, RECORTE.y0 * ih, RECORTE.w * iw, RECORTE.h * ih, px, py, QUADRO.w, QUADRO.h);
+        g.restore();
+      } else semFoto = true;
+    } else if (foto && foto.tipo === "upload") {
+      const iw = foto.img.naturalWidth, ih = foto.img.naturalHeight;
+      g.save(); retRedondo(g, px, py, pw, ph, 34); g.clip();
+      if (foto.alfa) {
+        const k = Math.min((pw - 40) / iw, (ph - 50) / ih), w = iw * k, h = ih * k;
+        g.drawImage(foto.img, px + (pw - w) / 2, py + ph - 25 - h, w, h);
+      } else {
+        const k = Math.max(pw / iw, ph / ih), w = iw * k, h = ih * k;
+        g.drawImage(foto.img, px - (w - pw) * cartao.px / 100, py + (ph - h) / 2, w, h);
+      }
+      g.restore();
+    }
+    const pkImg = cartao.pkOn ? await carregarImg(ARTE(pidDe(cartao.pk)), true) : null;
+    if (cartao.pkOn) {
+      const cx = W - 120, cy = 128, r = 84;
+      g.beginPath(); g.arc(cx, cy, r, 0, Math.PI * 2); tinta(0.1);
+      g.beginPath(); g.arc(cx, cy, r, 0, Math.PI * 2); g.strokeStyle = ac; g.lineWidth = 4; g.globalAlpha = 0.55; g.stroke(); g.globalAlpha = 1;
+      if (pkImg) {
+        const d = r * 2 * 0.94;
+        g.save(); g.shadowColor = "rgba(0,0,0,0.25)"; g.shadowBlur = 14; g.shadowOffsetY = 6;
+        g.drawImage(pkImg, cx - d / 2, cy - d / 2, d, d); g.restore();
+      }
+    } else if (foto && !semFoto) { if (sil) g.drawImage(silPintada(sil, ac, 54, 60), W - 104, 56); }
+    else if (!foto && sil) g.drawImage(silPintada(sil, ac, 240, 267), 100, 150);
+    g.fillStyle = ac; g.font = `700 24px ${FONTE_C}`; g.textBaseline = "alphabetic";
+    g.fillText(t("cardTitle"), 450, 110);
+    g.fillStyle = fg; g.font = `800 64px ${FONTE_T}`;
+    g.fillText(cortarTexto(g, nomeCartao().toUpperCase(), cartao.pkOn ? W - 680 : W - 580), 448, 180);
+    numerosCartao().forEach(([rot, val], i) => {
+      const x = 450 + (i % 3) * 240, y = 240 + Math.floor(i / 3) * 170;
+      retRedondo(g, x, y, 220, 146, 22); tinta(0.08);
+      g.fillStyle = fg; g.font = `800 ${val.length > 7 ? 34 : 46}px ${FONTE_T}`; g.fillText(cortarTexto(g, val, 190), x + 20, y + 72);
+      g.fillStyle = sub; g.font = `600 20px ${FONTE_C}`; g.fillText(cortarTexto(g, rot, 190), x + 20, y + 112);
+    });
+    g.fillStyle = sub; g.globalAlpha = 0.75; g.font = `500 20px ${FONTE_C}`;
+    g.fillText(t("title") + (location.host ? " · " + location.host : "") + " · " + hoje(), 450, H - 50);
+    g.globalAlpha = 1;
+    cv.semFoto = semFoto;
+    return cv;
+  }
+
+  let cartaoPedido = 0;
+  async function renderCartao() {
+    const meu = ++cartaoPedido;
+    const cv = await desenharCartao();
+    if (meu !== cartaoPedido) return;
+    let url = "";
+    try { url = cv.toDataURL("image/png"); } catch (e) { /* segue */ }
+    if (url) $("tcImg").src = url;
+    $("tcImg").alt = t("tlCardT") + ": " + nomeCartao() + ", " + numerosCartao().map(x => x[0] + " " + x[1]).join(", ");
+    // se o servidor da imagem não deixar desenhar a carta, mostramos a ilustração por cima da prévia
+    const sob = $("tcSobre");
+    if (cv.semFoto && cartao.foto.startsWith("c:")) {
+      sob.hidden = false;
+      sob.innerHTML = `<img src="${esc(urlCartaTr(cartao.foto.slice(2), true))}" alt="" referrerpolicy="no-referrer" style="${estiloRecorte(recorteX())}">`;
+    } else { sob.hidden = true; sob.innerHTML = ""; }
+    tcState.semFoto = cv.semFoto;
+  }
+  const tcState = { semFoto: false };
+  function renderFotos() {
+    const sel = cartao.foto;
+    const bt = (val, conteudo, rotulo, cls) => `<li><button type="button" class="tc-foto ${cls || ""}" data-foto="${esc(val)}" aria-pressed="${val === sel}" aria-label="${esc(rotulo)}" title="${esc(rotulo)}">${conteudo}</button></li>`;
+    let html = "";
+    html += bt("upload", cartao.img ? `<img src="${esc(cartao.img)}" alt="" class="tc-up">` : `<span class="tc-mais" aria-hidden="true">${ICON.plus}</span><small>${esc(t("tcYours"))}</small>`, cartao.img ? t("tcYours") : t("tcUpload"), "tc-esp");
+    const q = norm(($("tcBusca").value || "").trim());
+    html += TREINADORES.filter(([nome]) => !q || norm(nome).includes(q)).map(([nome, id]) => bt("c:" + id, `<span class="tc-recorte"><img src="${esc(urlCartaTr(id, false))}" alt="" loading="lazy" referrerpolicy="no-referrer" style="${estiloRecorte((1 - RECORTE.w) / 2)}"></span><small>${esc(nome)}</small>`, nome)).join("");
+    if (q && !TREINADORES.some(([nome]) => norm(nome).includes(q))) html += `<li class="tc-vazio">${esc(t("tcNoTr"))}</li>`;
+    $("tcFotos").innerHTML = html;
+    $("tcCores").innerHTML = TEMAS.map(k => `<button type="button" data-cor="${k}" aria-pressed="${k === cartao.cor}" aria-label="${esc(t("themes")[k])}" title="${esc(t("themes")[k])}"><i style="--sw:${CORES_CARTAO[k].bg}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="${CORES_CARTAO[k].fg}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>`).join("");
+    $("tcRemover").hidden = !cartao.img;
+    const ajusta = sel.startsWith("c:") || (sel === "upload" && !cartao.alfa);
+    $("tcAjuste").hidden = !ajusta;
+    $("tcPx").value = cartao.px;
+  }
+  const PK_SUGESTOES = [25, 6, 150, 151, 133, 94, 448, 700, 197, 282, 445, 658, 1, 4, 7, 39];
+  function renderPk() {
+    $("tcPkOn").checked = cartao.pkOn;
+    $("tcPkBox").hidden = !cartao.pkOn;
+    if (!cartao.pkOn) return;
+    if (dexState.status !== "ok") {
+      if (dexState.status === "idle" || dexState.status === "error") carregarDex();
+      $("tcPkLista").innerHTML = `<li class="tc-vazio">${esc(t("tcPkLoading"))}</li>`;
+      return;
+    }
+    const q = norm(($("tcPkBusca").value || "").trim()).replace(/^#/, "");
+    let lista;
+    if (!q) lista = [cartao.pk, ...PK_SUGESTOES.filter(id => id !== cartao.pk)].map(id => DEX_POR_ID.get(id)).filter(Boolean);
+    else {
+      const num = /^\d+$/.test(q) ? parseInt(q, 10) : 0;
+      lista = DEX.concat(FORMAS).filter(p => num ? p.sp === num || p.id === num : norm(nomeDex(p.id)).includes(q) || p.nn.includes(q));
+    }
+    lista = lista.slice(0, 16);
+    $("tcPkLista").innerHTML = lista.length ? lista.map(p => `<li><button type="button" class="tc-pk" data-pk="${p.id}" aria-pressed="${p.id === cartao.pk}" title="${esc(nomeDex(p.id))}"><span class="tc-pk-art"><img src="${esc(ARTE(p.pid))}" alt="" loading="lazy" width="64" height="64"></span><small>#${pad4(p.sp)}</small><span>${esc(nomeDex(p.id))}</span></button></li>`).join("")
+      : `<li class="tc-vazio">${esc(t("tcPkNone"))}</li>`;
+  }
+  function renderCard() {
+    renderPk();
+    if (document.activeElement !== $("tcNome")) $("tcNome").value = cartao.nome;
+    $("tcNome").placeholder = nomeTreinador() || t("trainer");
+    renderFotos();
+    renderCartao();
+  }
+  async function baixarCartao() {
+    const cv = await desenharCartao();
+    if (cv.semFoto) avisar($("tcMsg"), t("tcCorsErr"));
+    cv.toBlob(blob => blob && baixar("trainer-card-" + hoje() + ".png", blob), "image/png");
+  }
+  async function compartilharCartao() {
+    const cv = await desenharCartao();
+    if (cv.semFoto) avisar($("tcMsg"), t("tcCorsErr"));
+    cv.toBlob(async blob => {
+      if (!blob) return;
+      const arq = new File([blob], "trainer-card.png", { type: "image/png" });
+      try {
+        if (navigator.canShare && navigator.canShare({ files: [arq] })) await navigator.share({ files: [arq], title: t("tlCardT") });
+        else baixar("trainer-card-" + hoje() + ".png", blob);
+      } catch (err) { /* cancelado */ }
+    }, "image/png");
+  }
+  // reduz a foto enviada para caber no navegador (máx. 720 px)
+  async function prepararFoto(arquivo) {
+    const url = URL.createObjectURL(arquivo);
+    try {
+      const img = await carregarImg(url, false);
+      IMGS.delete("n|" + url);
+      if (!img) throw new Error("img");
+      const k = Math.min(1, 720 / Math.max(img.naturalWidth, img.naturalHeight));
+      const w = Math.max(1, Math.round(img.naturalWidth * k)), h = Math.max(1, Math.round(img.naturalHeight * k));
+      const c = document.createElement("canvas"); c.width = w; c.height = h;
+      const g = c.getContext("2d");
+      g.drawImage(img, 0, 0, w, h);
+      const d = g.getImageData(0, 0, w, h).data;
+      let alfa = false;
+      for (let i = 3; i < d.length; i += 4 * 37) if (d[i] < 240) { alfa = true; break; }
+      let dados = alfa ? c.toDataURL("image/webp", 0.9) : c.toDataURL("image/jpeg", 0.86);
+      if (alfa && !dados.startsWith("data:image/webp")) dados = c.toDataURL("image/png");
+      return { dados, alfa };
+    } finally { URL.revokeObjectURL(url); }
+  }
+  $("areaCard").addEventListener("click", e => {
+    const cb = e.target.closest("[data-cor]");
+    if (cb) {
+      cartao.cor = cb.dataset.cor;
+      salvarCartaoDados();
+      renderFotos();
+      renderCartao();
+      const nb = $("tcCores").querySelector(`[data-cor="${cartao.cor}"]`); if (nb) nb.focus();
+      return;
+    }
+    const f = e.target.closest("[data-foto]");
+    if (f) {
+      const v = f.dataset.foto;
+      if (v === "upload" && !cartao.img) { $("tcArquivo").click(); return; }
+      if (v !== cartao.foto) cartao.px = 50;
+      cartao.foto = v;
+      salvarCartaoDados();
+      renderCard();
+      const b = $("tcFotos").querySelector(`[data-foto="${CSS.escape(v)}"]`); if (b) b.focus();
+      return;
+    }
+    const b = e.target.closest("[data-tc]");
+    if (!b) return;
+    const a = b.dataset.tc;
+    if (a === "dl") baixarCartao();
+    else if (a === "share") compartilharCartao();
+    else if (a === "up") $("tcArquivo").click();
+    else if (a === "rm") { cartao.img = ""; cartao.alfa = false; if (cartao.foto === "upload") cartao.foto = TR_PADRAO; salvarCartaoDados(); renderCard(); $("tcEnviar").focus(); }
+  });
+  $("tcArquivo").addEventListener("change", async e => {
+    const arq = e.target.files && e.target.files[0];
+    e.target.value = "";
+    if (!arq) return;
+    try {
+      const r = await prepararFoto(arq);
+      const antes = { img: cartao.img, alfa: cartao.alfa, foto: cartao.foto, px: cartao.px };
+      Object.assign(cartao, { img: r.dados, alfa: r.alfa, foto: "upload", px: 50 });
+      if (!salvarCartaoDados()) { Object.assign(cartao, antes); avisar($("tcMsg"), t("tcSaveErr")); return; }
+      renderCard();
+      const b = $("tcFotos").querySelector('[data-foto="upload"]'); if (b) b.focus();
+    } catch (err) { avisar($("tcMsg"), t("tcReadErr")); }
+  });
+  let nomeTimer = 0, pxTimer = 0;
+  $("tcNome").addEventListener("input", e => {
+    cartao.nome = e.target.value.slice(0, 24);
+    salvarCartaoDados();
+    clearTimeout(nomeTimer);
+    nomeTimer = setTimeout(renderCartao, 200);
+  });
+  $("tcPx").addEventListener("input", e => {
+    cartao.px = Math.max(0, Math.min(100, Number(e.target.value) || 0));
+    const im = $("tcSobre").querySelector("img");
+    if (im) im.setAttribute("style", estiloRecorte(recorteX()));
+    clearTimeout(pxTimer);
+    pxTimer = setTimeout(() => { salvarCartaoDados(); renderCartao(); }, 120);
+  });
+  $("tcBusca").addEventListener("input", renderFotos);
+  $("tcPkOn").addEventListener("change", e => { cartao.pkOn = e.target.checked; salvarCartaoDados(); renderPk(); renderCartao(); });
+  $("tcPkBusca").addEventListener("input", renderPk);
+  $("tcPkLista").addEventListener("click", e => {
+    const b = e.target.closest("[data-pk]");
+    if (!b) return;
+    cartao.pk = Number(b.dataset.pk);
+    salvarCartaoDados();
+    renderPk(); renderCartao();
+    const nb = $("tcPkLista").querySelector(`[data-pk="${cartao.pk}"]`); if (nb) nb.focus();
+  });
+  if (navigator.canShare) $("tcShare").hidden = false;
+
+  /* ---------- App (PWA) ---------- */
+  const ehApp = () => window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+  window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); tl.instalar = e; if (conta.cfg.area === "tools") renderApp(); });
+  window.addEventListener("appinstalled", () => { tl.instalar = null; if (conta.cfg.area === "tools") renderApp(); });
+  if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
+    navigator.serviceWorker.register("sw.js").then(() => { tl.sw = true; }).catch(() => { tl.sw = false; }).finally(() => { if (conta.cfg.area === "tools") renderApp(); });
+  } else tl.sw = false;
+  function renderApp() {
+    const box = $("tlAppCorpo");
+    let html = "";
+    if (ehApp()) html += `<p class="tl-ok">${esc(t("tlInstalled"))}</p>`;
+    else if (tl.instalar) html += `<div class="tl-acoes"><button type="button" class="tl-btn on" data-tl="install">${esc(t("tlInstall"))}</button></div>`;
+    else html += `<p class="tl-nota">${esc(t("tlAppHow"))}</p>`;
+    if (tl.sw !== null) html += `<p class="tl-nota">${esc(t(tl.sw ? "tlOffOk" : "tlOffNo"))}</p>`;
+    box.innerHTML = html;
+  }
+
+  /* ---------- Aba Tools ---------- */
+  function renderTools() {
+    if (state.status === "ok" && !DETS) { carregarDets().then(() => { if (conta.cfg.area === "tools") renderTools(); }); }
+    renderValor();
+    renderTroca();
+    renderConquistas();
+    renderApp();
+    renderImport();
+  }
+  $("areaTools").addEventListener("click", async e => {
+    const z = e.target.closest("[data-zoom]");
+    if (z) {
+      const ids = [...z.closest("ol, ul").querySelectorAll("[data-zoom]")].map(b => b.dataset.zoom).filter(id => POR_ID.has(id));
+      zState.volta = z;
+      abrirZoom(z.dataset.zoom, ids);
+      return;
+    }
+    const b = e.target.closest("[data-tl]");
+    if (!b) return;
+    const acao = b.dataset.tl;
+    if (acao === "calc") calcularValor(false);
+    else if (acao === "recalc") calcularValor(true);
+    else if (acao === "copyTrade") avisar($("tlTrocaMsg"), (await copiar(textoTroca())) ? t("tlCopied") : t("tlCopyErr"));
+    else if (acao === "shareTrade") { try { await navigator.share({ title: t("tlTradeT"), text: textoTroca() }); } catch (err) { /* cancelado */ } }
+    else if (acao === "imgTrade") { const blob = await imagemTroca(); if (blob) baixar("trade-list-" + hoje() + ".png", blob); }
+    else if (acao === "csv") baixar("pokemon-collection-" + hoje() + ".csv", gerarCSV(), "text/csv;charset=utf-8");
+    else if (acao === "backup") baixar("pokemon-binder-backup-" + hoje() + ".json", backupJSON(), "application/json");
+    else if (acao === "import") $("tlArquivo").click();
+    else if (acao === "impCancel") { tl.imp = null; renderImport(); $("tlImpBtn").focus(); }
+    else if (acao === "impOk") {
+      const imp = tl.imp;
+      aplicarImport(imp);
+      tl.imp = { feito: imp.tipo === "json" ? t("tlImpRestored") : t("tlImpDone", imp.n) };
+      renderTools();
+      $("tlImpBtn").focus();
+    }
+    else if (acao === "install" && tl.instalar) { tl.instalar.prompt(); try { await tl.instalar.userChoice; } catch (err) { /* segue */ } tl.instalar = null; renderApp(); }
+  });
+  $("tlArquivo").addEventListener("change", async e => {
+    const f = e.target.files && e.target.files[0];
+    e.target.value = "";
+    if (!f) return;
+    try { tl.imp = analisarArquivo(f.name, await f.text()); }
+    catch (err) { tl.imp = { erro: t("tlImpErr") }; }
+    renderImport();
+  });
+
+  /* ---------- Detalhes da minha cópia (na carta ampliada) ---------- */
+  const CONDS = ["NM", "LP", "MP", "HP", "DMG"];
+  const GRADERS = ["PSA", "BGS", "CGC", "TAG", "SGC", "other"];
+  function desenharCopia(c) {
+    const box = $("zCopia");
+    const own = state.own.has(c.id);
+    box.hidden = !own;
+    if (!own) return;
+    const m = state.meta[c.id] || {};
+    const op = (v, txt, sel) => `<option value="${esc(v)}"${v === sel ? " selected" : ""}>${esc(txt)}</option>`;
+    $("zCond").innerHTML = op("", t("optNone"), m.c || "") + CONDS.map(k => op(k, k + " · " + t("conds")[k], m.c)).join("");
+    $("zFin").innerHTML = op("", t("optNone"), m.f || "") + ["normal", "holo", "reverse"].map(k => op(k, t("fins")[k], m.f)).join("");
+    $("zGradeCo").innerHTML = op("", t("optNone"), m.gc || "") + GRADERS.map(k => op(k, k === "other" ? t("gradeOther") : k, m.gc)).join("");
+    $("zGradeVal").value = m.gv || "";
+    $("zGradeVal").disabled = !m.gc;
+    resumoCopia(m);
+  }
+  function resumoCopia(m) {
+    const partes = [];
+    if (m.c) partes.push(m.c);
+    if (m.f) partes.push(t("fins")[m.f]);
+    if (m.gc) partes.push((m.gc === "other" ? t("gradeOther") : m.gc) + (m.gv ? " " + m.gv : ""));
+    $("zCopiaResumo").textContent = partes.join(" · ");
+  }
+  function salvarCopia() {
+    const id = zState.ids[zState.i];
+    const m = { c: $("zCond").value, f: $("zFin").value, gc: $("zGradeCo").value, gv: $("zGradeVal").value.trim().replace(",", ".").slice(0, 4) };
+    if (!m.gc) m.gv = "";
+    Object.keys(m).forEach(k => { if (!m[k]) delete m[k]; });
+    if (Object.keys(m).length) state.meta[id] = m; else delete state.meta[id];
+    $("zGradeVal").disabled = !m.gc;
+    resumoCopia(m);
+    salvar();
+  }
+  ["zCond", "zFin", "zGradeCo"].forEach(id => $(id).addEventListener("change", salvarCopia));
+  $("zGradeVal").addEventListener("change", salvarCopia);
+
+  /* ---------- Ferramentas do deck: estatísticas, mão de teste, exportar e importar ---------- */
+  const dtModal = $("dtModal");
+  const dt = { aba: "stats", pilha: [], mao: [], premios: [], verPremios: false, mull: 0, deckId: null, impMsg: null };
+  const TIPO_TCG = { Grass: "grass", Fire: "fire", Water: "water", Lightning: "electric", Psychic: "psychic", Fighting: "fighting", Darkness: "dark", Metal: "steel", Fairy: "fairy", Dragon: "dragon", Colorless: "normal" };
+  const categoria = (id, d) => {
+    if (d && d.cat) return /pok/i.test(d.cat) ? "p" : /trainer/i.test(d.cat) ? "t" : /energy/i.test(d.cat) ? "e" : "u";
+    const c = POR_ID.get(id);
+    return c && / energy$/i.test(c.n) ? "e" : "u";
+  };
+  const ehBasico = id => { const d = DETS && DETS.get(id); return !!(d && categoria(id, d) === "p" && /^basic$/i.test(d.st)); };
+  function abrirDT() {
+    dt.aba = deckAtual() ? (dt.aba || "stats") : "io";
+    dtModal.hidden = false;
+    wrap.inert = true;
+    renderDT();
+    $("dtFechar").focus();
+  }
+  function fecharDT() {
+    if (dtModal.hidden) return;
+    dtModal.hidden = true;
+    wrap.inert = false;
+    renderDeck();
+    $("deckTools").focus();
+  }
+  $("deckTools").addEventListener("click", abrirDT);
+  $("dtFechar").addEventListener("click", fecharDT);
+  dtModal.addEventListener("click", e => { if (e.target === dtModal) fecharDT(); });
+  dtModal.addEventListener("keydown", e => { if (e.key === "Escape") { e.preventDefault(); fecharDT(); } });
+  async function garantirDets(d) {
+    const ids = Object.keys(d.cards);
+    await carregarDets();
+    const faltam = ids.filter(id => !DETS.has(id));
+    if (faltam.length) await emLotes(faltam, detalhe, 6);
+  }
+  function renderDT() {
+    document.querySelectorAll("[data-dt]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.dt === dt.aba)));
+    const d = deckAtual();
+    const corpo = $("dtCorpo");
+    if (dt.aba !== "io" && !d) { corpo.innerHTML = `<p class="tl-nota">${esc(t("dtNoDeck"))}</p>`; return; }
+    if (dt.aba !== "io" && !totalDeck(d)) { corpo.innerHTML = `<p class="tl-nota">${esc(t("dtEmptyDeck"))}</p>`; return; }
+    if (dt.aba === "stats") dtStats(d);
+    else if (dt.aba === "hand") dtMao(d);
+    else dtIO(d);
+  }
+  document.querySelector(".dt-tabs").addEventListener("click", e => {
+    const b = e.target.closest("[data-dt]");
+    if (!b || b.dataset.dt === dt.aba) return;
+    dt.aba = b.dataset.dt;
+    renderDT();
+  });
+  async function dtStats(d) {
+    const corpo = $("dtCorpo");
+    corpo.innerHTML = `<div class="tl-prog"><span class="spin" aria-hidden="true"></span><p role="status">${esc(t("dtLoading"))}</p></div>`;
+    await garantirDets(d);
+    if (dt.aba !== "stats" || dtModal.hidden) return;
+    const cont = { p: 0, t: 0, e: 0, u: 0 }, tipos = {};
+    let basicos = 0, faltam = 0, custo = 0;
+    Object.entries(d.cards).forEach(([id, n]) => {
+      const det = DETS.get(id), cat = categoria(id, det);
+      cont[cat] += n;
+      if (cat === "p" && det) (det.ty || []).forEach(ty => { tipos[ty] = (tipos[ty] || 0) + n; });
+      if (ehBasico(id)) basicos += n;
+      const falta = Math.max(0, n - (state.qty[id] || 0));
+      faltam += falta;
+      if (falta && det) custo += falta * precoUSD(id, det);
+    });
+    const total = totalDeck(d);
+    const pBasico = total >= 7 && basicos ? Math.round((1 - comb(total - basicos, 7) / comb(total, 7)) * 100) : 0;
+    const seg = [["p", t("dtPok"), "var(--own)"], ["t", t("dtTr"), "#7E8CA0"], ["e", t("dtEn"), "#F2B33D"], ["u", t("dtUnk"), "#BDB3B8"]].filter(x => cont[x[0]]);
+    corpo.innerHTML = `
+      <div class="dt-seg" role="img" aria-label="${esc(seg.map(x => x[1] + " " + cont[x[0]]).join(", "))}">${seg.map(x => `<i style="flex:${cont[x[0]]};background:${x[2]}"></i>`).join("")}</div>
+      <ul class="dt-leg">${seg.map(x => `<li><i style="background:${x[2]}"></i>${esc(x[1])} <strong>${cont[x[0]]}</strong></li>`).join("")}</ul>
+      ${Object.keys(tipos).length ? `<h3 class="tl-h3">${esc(t("dtTypes"))}</h3><div class="dt-tipos">${Object.entries(tipos).sort((a, b) => b[1] - a[1]).map(([ty, n]) => chipTipo(TIPO_TCG[ty] || "normal", String(n))).join("")}</div>` : ""}
+      <ul class="dt-fatos">
+        <li>${esc(t("dtBasics", basicos))}${pBasico ? ` · ${esc(t("dtProb", pBasico))}` : ""}</li>
+        <li>${esc(t("dtMissing", faltam, custo ? moeda(custo, "USD") : ""))}</li>
+      </ul>`;
+  }
+  function comb(n, k) { if (k < 0 || k > n) return 0; let r = 1; for (let i = 1; i <= k; i++) r = r * (n - k + i) / i; return r; }
+  function embaralhar(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+  function novaMao(d, mulligan) {
+    const pilha = [];
+    Object.entries(d.cards).forEach(([id, n]) => { for (let i = 0; i < n; i++) pilha.push(id); });
+    embaralhar(pilha);
+    dt.mao = pilha.splice(0, 7);
+    dt.premios = pilha.splice(0, 6);
+    dt.pilha = pilha;
+    dt.verPremios = false;
+    dt.mull = mulligan ? dt.mull + 1 : 0;
+    dt.deckId = d.id;
+  }
+  const miniCarta = id => {
+    const c = POR_ID.get(id);
+    if (!c) return `<li class="dt-carta"><span class="fallback"><span>${esc(id)}</span></span></li>`;
+    const src = imgPequena(c);
+    return `<li class="dt-carta">${src ? `<img src="${esc(src)}" alt="${esc(c.n)}" width="122" height="170" loading="lazy" referrerpolicy="no-referrer">` : fallbackHTML(c)}</li>`;
+  };
+  async function dtMao(d) {
+    if (dt.deckId !== d.id || !dt.mao.length) novaMao(d, false);
+    desenharMao();
+    await garantirDets(d);
+    if (dt.aba === "hand" && !dtModal.hidden) desenharMao();
+  }
+  function desenharMao() {
+    const temBasico = dt.mao.some(ehBasico);
+    const sabe = dt.mao.every(id => DETS && DETS.has(id));
+    $("dtCorpo").innerHTML = `
+      <div class="tl-acoes"><button type="button" class="tl-btn on" data-mao="nova">${esc(t("dtHandNew"))}</button><button type="button" class="tl-btn" data-mao="comprar" ${dt.pilha.length ? "" : "disabled"}>${esc(t("dtDraw"))}</button>${sabe && !temBasico ? `<button type="button" class="tl-btn" data-mao="mull">${esc(t("dtMull"))}</button>` : ""}</div>
+      <p class="tl-nota" role="status">${esc(t("dtLeft", dt.pilha.length, dt.premios.length))}${dt.mull ? " · " + esc(t("dtMullCount", dt.mull)) : ""}${sabe ? " · " + esc(t(temBasico ? "dtOkHand" : "dtNoBasic")) : ""}</p>
+      <h3 class="tl-h3">${esc(t("dtHandLbl"))} (${dt.mao.length})</h3>
+      <ul class="dt-mao">${dt.mao.map(miniCarta).join("")}</ul>
+      <h3 class="tl-h3">${esc(t("dtPrizeLbl"))} (${dt.premios.length})</h3>
+      ${dt.verPremios ? `<ul class="dt-mao">${dt.premios.map(miniCarta).join("")}</ul>` : `<ul class="dt-mao">${dt.premios.map(() => `<li class="dt-carta verso" aria-hidden="true"></li>`).join("")}</ul>`}
+      <div class="tl-acoes"><button type="button" class="tl-btn" data-mao="premios">${esc(t(dt.verPremios ? "dtPrizesHide" : "dtPrizes"))}</button></div>`;
+  }
+  $("dtCorpo").addEventListener("click", async e => {
+    const b = e.target.closest("[data-mao], [data-io]");
+    if (!b) return;
+    const d = deckAtual();
+    if (b.dataset.mao) {
+      if (!d) return;
+      const a = b.dataset.mao;
+      if (a === "nova") novaMao(d, false);
+      else if (a === "mull") novaMao(d, true);
+      else if (a === "comprar" && dt.pilha.length) dt.mao.push(dt.pilha.shift());
+      else if (a === "premios") dt.verPremios = !dt.verPremios;
+      desenharMao();
+      const alvo = $("dtCorpo").querySelector(`[data-mao="${a}"]`) || $("dtCorpo").querySelector('[data-mao="nova"]');
+      if (alvo) alvo.focus();
+      return;
+    }
+    const a = b.dataset.io;
+    if (a === "copy") avisar($("dtIOMsg"), (await copiar($("dtTexto").value)) ? t("tlCopied") : t("tlCopyErr"));
+    else if (a === "txt" && d) baixar((d.name || "deck").replace(/[^\w\- ]+/g, "").trim().replace(/\s+/g, "-") + ".txt", $("dtTexto").value, "text/plain;charset=utf-8");
+    else if (a === "import") importarDeck();
+  });
+
+  // exportar no formato do Pokémon TCG Live
+  const SIGLAS = {};
+  async function siglaSet(sid) {
+    if (SIGLAS[sid] !== undefined) return SIGLAS[sid];
+    try { const s = await getJSON(API + "/sets/" + encodeURIComponent(sid)); SIGLAS[sid] = (s.abbreviation && (s.abbreviation.official || s.abbreviation.localized)) || ""; }
+    catch (e) { SIGLAS[sid] = ""; }
+    return SIGLAS[sid];
+  }
+  const numeroExport = lid => /^\d+$/.test(lid) ? String(parseInt(lid, 10)) : lid;
+  async function textoDeck(d) {
+    await garantirDets(d);
+    const sets = [...new Set(Object.keys(d.cards).map(id => (POR_ID.get(id) || {}).set).filter(Boolean))];
+    await emLotes(sets, siglaSet, 4);
+    const grupos = { p: [], t: [], e: [] };
+    Object.entries(d.cards).forEach(([id, n]) => {
+      const c = POR_ID.get(id);
+      if (!c) return;
+      let cat = categoria(id, DETS.get(id));
+      if (cat === "u") cat = "p";
+      grupos[cat].push(`${n} ${c.n} ${SIGLAS[c.set] || c.set} ${numeroExport(c.lid)}`);
+    });
+    const soma = arr => arr.reduce((a, l) => a + parseInt(l, 10), 0);
+    const bloco = (titulo, arr) => arr.length ? `${titulo}: ${soma(arr)}\n${arr.join("\n")}\n\n` : "";
+    return bloco("Pokémon", grupos.p) + bloco("Trainer", grupos.t) + bloco("Energy", grupos.e) + `Total Cards: ${totalDeck(d)}`;
+  }
+  async function dtIO(d) {
+    const corpo = $("dtCorpo");
+    const msg = dt.impMsg;
+    corpo.innerHTML = `
+      ${d ? `<section class="dt-sec"><h3 class="tl-h3">${esc(t("dtExport"))}</h3><p class="tl-nota">${esc(t("dtExportHint"))}</p>
+        <textarea id="dtTexto" class="dt-texto" rows="8" readonly aria-label="${esc(t("dtExport"))}">${esc(t("dtLoading"))}</textarea>
+        <div class="tl-acoes"><button type="button" class="tl-btn on" data-io="copy" disabled>${esc(t("dtCopyList"))}</button><button type="button" class="tl-btn" data-io="txt" disabled>${esc(t("dtTxt"))}</button></div>
+        <p class="tl-ok" id="dtIOMsg" role="status"></p></section>` : ""}
+      <section class="dt-sec"><h3 class="tl-h3">${esc(t("dtImport"))}</h3><p class="tl-nota" id="dtImpHint">${esc(t("dtImportHint"))}</p>
+        <textarea id="dtImpTexto" class="dt-texto" rows="7" aria-describedby="dtImpHint" aria-label="${esc(t("dtImport"))}" spellcheck="false"></textarea>
+        <label class="dt-campo"><span>${esc(t("dtImportName"))}</span><input id="dtImpNome" type="text" maxlength="40" autocomplete="off" placeholder="${esc(t("dtImpDefault"))}"></label>
+        <div class="tl-acoes"><button type="button" class="tl-btn on" data-io="import">${esc(t("dtImportBtn"))}</button></div>
+        <div id="dtImpRes" role="status">${msg ? msg : ""}</div></section>`;
+    dt.impMsg = null;
+    if (!d || !totalDeck(d)) { if (d) { $("dtTexto").value = ""; } return; }
+    const txt = await textoDeck(d);
+    if (dt.aba !== "io" || dtModal.hidden || !$("dtTexto")) return;
+    $("dtTexto").value = txt;
+    corpo.querySelectorAll('[data-io="copy"], [data-io="txt"]').forEach(b => { b.disabled = false; });
+  }
+  let IDX_NOME = null;
+  function indiceNomes() {
+    if (IDX_NOME && IDX_NOME.size) return IDX_NOME;
+    IDX_NOME = new Map();
+    CARTAS.forEach(c => { const k = compacto(c.n); if (!IDX_NOME.has(k)) IDX_NOME.set(k, []); IDX_NOME.get(k).push(c); });
+    return IDX_NOME;
+  }
+  async function acharCarta(nome, cod, num) {
+    const idx = indiceNomes();
+    const variantes = [nome, nome.replace(/^basic\s+/i, ""), "Basic " + nome, nome.replace(/\s+energy\s+energy$/i, " Energy"), nome.replace(/\s*\{[A-Z]\}\s*/g, " ").trim()];
+    let cands = [];
+    for (const v of variantes) { const a = idx.get(compacto(v)); if (a && a.length) { cands = a; break; } }
+    if (!cands.length) return null;
+    if (num) {
+      const porNum = cands.filter(c => numKey(c.lid) === numKey(num));
+      if (porNum.length === 1) return porNum[0];
+      if (porNum.length > 1) {
+        if (cod) {
+          const direto = porNum.find(c => c.set.toLowerCase() === cod.toLowerCase());
+          if (direto) return direto;
+          await emLotes([...new Set(porNum.map(c => c.set))], siglaSet, 4);
+          const porSigla = porNum.find(c => (SIGLAS[c.set] || "").toLowerCase() === cod.toLowerCase());
+          if (porSigla) return porSigla;
+        }
+        return porNum[0];
+      }
+      if (cod) {
+        const doSet = cands.find(c => c.set.toLowerCase() === cod.toLowerCase());
+        if (doSet) return doSet;
+      }
+    }
+    return cands[0];
+  }
+  async function importarDeck() {
+    const res = $("dtImpRes");
+    if (state.status !== "ok") { res.innerHTML = `<p class="tl-erro">${esc(t("dtImpWait"))}</p>`; return; }
+    const linhas = $("dtImpTexto").value.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+    const cards = {}, faltas = [];
+    let total = 0;
+    for (const l of linhas) {
+      if (/^(pok[eé]mon|trainer|trainers|energy|energies|total cards)\b.*:?\s*\d*\s*$/i.test(l) && !/^\d/.test(l)) continue;
+      let m = /^(\d+)x?\s+(.+?)\s+([A-Za-z0-9][A-Za-z0-9.\-]{1,9})\s+(#?[A-Za-z]*\d+[a-zA-Z]?)$/.exec(l);
+      let q, nome, cod = "", num = "";
+      if (m) { q = +m[1]; nome = m[2]; cod = m[3]; num = m[4].replace(/^#/, ""); }
+      else if ((m = /^(\d+)x?\s+(.+)$/.exec(l))) { q = +m[1]; nome = m[2]; }
+      else { faltas.push(l); continue; }
+      let c = await acharCarta(nome, cod, num);
+      if (!c && cod) c = await acharCarta(nome + " " + cod, "", num);
+      if (!c) { faltas.push(l); continue; }
+      cards[c.id] = Math.min(99, (cards[c.id] || 0) + q);
+      total += q;
+    }
+    if (!total) { res.innerHTML = `<p class="tl-erro">${esc(t("dtImpNone"))}</p>`; return; }
+    const novo = { id: "d" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), name: ($("dtImpNome").value.trim() || t("dtImpDefault")).slice(0, 40), cards };
+    dk.decks.push(novo);
+    dk.atual = novo.id;
+    dState.tab = "deck"; dState.page = 0;
+    salvarDecks();
+    renderDeck();
+    dt.impMsg = `<p class="tl-ok">${esc(t("dtImpDone", total, faltas.length))}</p>${faltas.length ? `<ul class="dt-faltas">${faltas.slice(0, 12).map(l => `<li>${esc(l)}</li>`).join("")}</ul>` : ""}`;
+    dtIO(novo);
+  }
 
   aplicarIdioma();
   aplicarCfg();
