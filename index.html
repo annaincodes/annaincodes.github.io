@@ -20,23 +20,43 @@
     --focus: #2338C8;
     --own: #D94F86;
     --page: #2A1822;
+    --acc: #F8B4CB; --acc-hover: #FBC8D9; --acc-ink: #4A1B30; --acc-soft: #FFC9DA;
+    --b-ink: #F3E9EE; --b-muted: #D9BFCB; --zoom-bg: rgba(24, 8, 16, 0.95);
+    --cover: #FCE5EF;
+    --stitch: rgba(122, 58, 82, 0.45);
+    --field-fg: #3A1626;
+    --field-muted: #7A3A52;
     color-scheme: light;
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
+  /* Cores do fichário (escolhidas nas bolinhas do canto inferior direito) */
+  html[data-tema="pastel"] { --bg: #F8C8DC; --cover: #F8C8DC; --text: #3A1626; --muted: #6B2A45; --line: #A24D72; --seg-bg: #FBDDE9; --seg-on-bg: #4A1B30; --seg-on-fg: #FFFFFF; --stitch: rgba(106, 40, 70, 0.5); --field-fg: #3A1626; --field-muted: #6B2A45; --page: #331A28; --acc: #F6A9C6; --acc-hover: #F9C3D8; --acc-ink: #4A1B30; --acc-soft: #FFBFD7; --b-ink: #F7E6EE; --b-muted: #DDB8C9; --zoom-bg: rgba(28, 9, 18, 0.95); --own: #C93C77; }
+  html[data-tema="azul"] { --bg: #9FC5E8; --cover: #9FC5E8; --text: #102A43; --muted: #1F4466; --line: #3D6990; --seg-bg: #C6DDF2; --seg-on-bg: #102A43; --seg-on-fg: #FFFFFF; --stitch: rgba(16, 42, 67, 0.4); --field-fg: #102A43; --field-muted: #1F4466; --page: #13263A; --acc: #9FC5E8; --acc-hover: #B9D7F1; --acc-ink: #102A43; --acc-soft: #BCD9F3; --b-ink: #E8F1FA; --b-muted: #B0C6DB; --zoom-bg: rgba(7, 17, 28, 0.95); --own: #2F6FAD; }
+  html[data-tema="verde"] { --bg: #C8E1BE; --cover: #C8E1BE; --text: #1C3517; --muted: #36552D; --line: #5B8650; --seg-bg: #E0EFD9; --seg-on-bg: #1C3517; --seg-on-fg: #FFFFFF; --stitch: rgba(28, 53, 23, 0.4); --field-fg: #1C3517; --field-muted: #36552D; --page: #172818; --acc: #C8E1BE; --acc-hover: #D9EBD1; --acc-ink: #1C3517; --acc-soft: #D2EAC8; --b-ink: #EDF5E9; --b-muted: #B9CEB1; --zoom-bg: rgba(9, 19, 9, 0.95); --own: #4B873C; }
+  html[data-tema="amarelo"] { --bg: #FFE599; --cover: #FFE599; --text: #3A2C00; --muted: #5C470A; --line: #A3852A; --seg-bg: #FFF0C4; --seg-on-bg: #3A2C00; --seg-on-fg: #FFFFFF; --stitch: rgba(58, 44, 0, 0.4); --field-fg: #3A2C00; --field-muted: #5C470A; --page: #2D2510; --acc: #FFE599; --acc-hover: #FFEDB8; --acc-ink: #3A2C00; --acc-soft: #FFE9A8; --b-ink: #FBF5E4; --b-muted: #D8CDAA; --zoom-bg: rgba(22, 17, 4, 0.95); --own: #B07F00; }
+  html[data-tema="cinza"] { --bg: #5B5B5B; --cover: #5B5B5B; --text: #F5F5F5; --muted: #DADADA; --line: #A8A8A8; --seg-bg: #6F6F6F; --seg-on-bg: #F5F5F5; --seg-on-fg: #262626; --stitch: rgba(255, 255, 255, 0.4); --focus: #FFE3EA; --own: #E6E6E6; --field-fg: #262626; --field-muted: #555555; --page: #252525; --acc: #D9D9D9; --acc-hover: #E8E8E8; --acc-ink: #262626; --acc-soft: #E2E2E2; --b-ink: #F2F2F2; --b-muted: #C2C2C2; --zoom-bg: rgba(16, 16, 16, 0.95); }
   *, *::before, *::after { box-sizing: border-box; }
   [hidden] { display: none !important; }
   html { background: var(--bg); }
   body {
     margin: 0;
     background: var(--bg);
+    transition: background 0.25s ease, color 0.25s ease;
     color: var(--text);
     font-family: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     line-height: 1.5;
   }
   :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
-  .wrap { max-width: 760px; margin: 0 auto; padding: clamp(18px, 4vw, 40px) clamp(14px, 4vw, 24px) 48px 52px; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: clamp(18px, 4vw, 40px) clamp(14px, 4vw, 24px) 96px 52px; }
+  .temas { position: fixed; right: calc(env(safe-area-inset-right, 0px) + 14px); bottom: calc(env(safe-area-inset-bottom, 0px) + 14px); z-index: 15; display: flex; gap: 4px; padding: 5px; border-radius: 99px; background: rgba(255, 255, 255, 0.92); box-shadow: 0 6px 20px -6px rgba(0, 0, 0, 0.45); --focus: #2338C8; }
+  .temas button { width: 36px; height: 36px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; }
+  .temas button i { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--sw); box-shadow: inset 0 0 0 1.5px rgba(0, 0, 0, 0.28); transition: transform 0.15s ease; }
+  .temas button i svg { opacity: 0; }
+  .temas button[aria-pressed="true"] i { box-shadow: inset 0 0 0 1.5px rgba(0, 0, 0, 0.28), 0 0 0 2px #FFFFFF, 0 0 0 4px #3A1626; }
+  .temas button[aria-pressed="true"] i svg { opacity: 1; }
+  @media (hover: hover) { .temas button:hover i { transform: scale(1.1); } }
 
   /* Aba vertical na lateral esquerda */
   .side-tab {
@@ -54,6 +74,7 @@
     position: fixed; top: 0; bottom: 0; left: 0; z-index: 30; width: min(340px, 88vw);
     overflow-y: auto; overscroll-behavior: contain;
     padding: calc(env(safe-area-inset-top, 0px) + 18px) 18px calc(env(safe-area-inset-bottom, 0px) + 24px);
+    --bg: #FCE5EF; --text: #3A1626; --muted: #7A3A52; --line: #B8607E; --seg-bg: #F3BBD0; --seg-on-bg: #4A1B30; --focus: #2338C8;
     background: var(--surface); color: var(--text); box-shadow: 0 0 40px rgba(58, 22, 38, 0.4);
     transform: translateX(-100%); visibility: hidden; transition: transform 0.25s ease, visibility 0s linear 0.25s;
   }
@@ -119,18 +140,18 @@
   .tabs .count { font-weight: 500; opacity: 0.85; font-variant-numeric: tabular-nums; }
   .filters { display: flex; flex-wrap: wrap; gap: 8px; flex: 1 1 100%; }
   .search { position: relative; flex: 2 1 180px; min-width: 0; }
-  .search svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
-  .search input, .filters select { height: 42px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--text); font: 500 14px "Figtree", system-ui, sans-serif; }
+  .search svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--field-muted); pointer-events: none; }
+  .search input, .filters select { height: 42px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--field-fg); font: 500 14px "Figtree", system-ui, sans-serif; }
   .search input { width: 100%; padding: 0 12px 0 36px; }
   .filters select { flex: 1 1 140px; min-width: 0; padding: 0 10px; }
 
   /* Fichário */
   .binder {
-    --b-fav: #FF8FA9; --b-own: #F8B4CB; --b-ink: #F3E9EE; --b-muted: #D9BFCB; --b-line: rgba(255, 255, 255, 0.2); --focus: #FFE3EA;
-    position: relative; display: flex; padding: 14px 14px 14px 0; border-radius: 20px; background: #FCE5EF;
+    --b-fav: #FF8FA9; --b-own: var(--acc); --b-line: rgba(255, 255, 255, 0.2); --focus: #FFE3EA;
+    position: relative; display: flex; padding: 14px 14px 14px 0; border-radius: 20px; background: var(--cover); transition: background 0.25s ease;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), 0 0 0 1px rgba(122, 58, 82, 0.4), 0 20px 36px -20px rgba(90, 30, 55, 0.65);
   }
-  .binder::before { content: ""; position: absolute; inset: 6px; border: 1.5px dashed rgba(122, 58, 82, 0.45); border-radius: 15px; pointer-events: none; }
+  .binder::before { content: ""; position: absolute; inset: 6px; border: 1.5px dashed var(--stitch); border-radius: 15px; pointer-events: none; }
   .spine { flex: none; width: 44px; display: flex; flex-direction: column; justify-content: space-evenly; align-items: center; }
   .spine i { width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #F4F6F9, #8E98A8 55%, #5A6474); box-shadow: 0 2px 4px rgba(90, 30, 55, 0.5); }
   .sheet { flex: 1; min-width: 0; padding: clamp(10px, 2.4vw, 22px); border-radius: 12px; background: var(--page); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 2px 8px rgba(58, 22, 38, 0.45); }
@@ -150,12 +171,12 @@
 
   .cap { display: flex; flex-direction: column; gap: 1px; min-width: 0; color: var(--b-ink); font-size: 12px; line-height: 1.3; }
   .cap .l1 { display: flex; gap: 5px; min-width: 0; }
-  .cap .no { flex: none; color: #FFC9DA; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .cap .no { flex: none; color: var(--acc-soft); font-weight: 700; font-variant-numeric: tabular-nums; }
   .cap .nm { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
   .cap .st { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--b-muted); font-size: 11px; }
   .pocket-wrap { position: relative; }
   .qty-btn { position: absolute; top: 5px; right: 5px; z-index: 2; min-width: 40px; height: 30px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 0 8px; border: 1px solid rgba(255, 255, 255, 0.55); border-radius: 99px; background: rgba(30, 14, 22, 0.82); color: #FFF3F7; font: 700 13px "Figtree", system-ui, sans-serif; font-variant-numeric: tabular-nums; cursor: pointer; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35); }
-  .qty-btn.on { background: #F8B4CB; border-color: #FFE3EA; color: #4A1B30; }
+  .qty-btn.on { background: var(--acc); border-color: #FFFFFF; color: var(--acc-ink); }
   .qty-btn[aria-expanded="true"] { box-shadow: 0 0 0 2px #FFE3EA, 0 2px 6px rgba(0, 0, 0, 0.35); }
   .qty-pop { position: absolute; top: 40px; right: 5px; z-index: 3; display: flex; align-items: center; gap: 4px; padding: 5px; border-radius: 14px; background: #FFF3F7; color: #3A1626; box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45); --focus: #2338C8; }
   .qty-pop button { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #B8607E; border-radius: 10px; background: #FFFFFF; color: #3A1626; cursor: pointer; }
@@ -167,9 +188,9 @@
   .zoom-qty .z-step:disabled { opacity: 0.35; cursor: default; }
   .zoom-qty output { min-width: 32px; text-align: center; font: 800 20px "Figtree", system-ui, sans-serif; font-variant-numeric: tabular-nums; }
   .vazio { display: grid; place-content: center; justify-items: center; gap: 12px; }
-  .spin { width: 28px; height: 28px; border-radius: 50%; border: 3px solid rgba(255, 255, 255, 0.2); border-top-color: #F8B4CB; animation: girar 0.9s linear infinite; }
+  .spin { width: 28px; height: 28px; border-radius: 50%; border: 3px solid rgba(255, 255, 255, 0.2); border-top-color: var(--acc); animation: girar 0.9s linear infinite; }
   @keyframes girar { to { transform: rotate(360deg); } }
-  .btn-retry { height: 40px; padding: 0 18px; border: 0; border-radius: 12px; background: #F8B4CB; color: #4A1B30; font: 700 14px "Figtree", system-ui, sans-serif; cursor: pointer; }
+  .btn-retry { height: 40px; padding: 0 18px; border: 0; border-radius: 12px; background: var(--acc); color: var(--acc-ink); font: 700 14px "Figtree", system-ui, sans-serif; cursor: pointer; }
 
   .ctrl { display: flex; gap: 6px; }
   .ctrl button { height: 36px; border: 1px solid var(--b-line); border-radius: 10px; background: rgba(255, 255, 255, 0.06); color: var(--b-ink); cursor: pointer; font: 600 13px "Figtree", system-ui, sans-serif; }
@@ -177,29 +198,34 @@
   .btn-fav svg path { fill: none; }
   .btn-fav[aria-pressed="true"] { color: var(--b-fav); background: rgba(255, 143, 169, 0.16); border-color: rgba(255, 143, 169, 0.55); }
   .btn-fav[aria-pressed="true"] svg path { fill: currentColor; }
+  .btn-star { flex: none; width: 38px; display: grid; place-items: center; }
+  .btn-star svg path { fill: none; }
+  .btn-star[aria-pressed="true"] { color: #FFD66B; background: rgba(255, 214, 107, 0.16); border-color: rgba(255, 214, 107, 0.6); }
+  .btn-star[aria-pressed="true"] svg path { fill: currentColor; }
   .btn-own { flex: 1; min-width: 0; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 8px; white-space: nowrap; }
-  .btn-own[aria-pressed="true"] { background: var(--b-own); border-color: var(--b-own); color: #4A1B30; }
+  .btn-own[aria-pressed="true"] { background: var(--b-own); border-color: var(--b-own); color: var(--acc-ink); }
   .ctrl svg { display: block; }
   .flags { display: flex; gap: 6px; }
   .flags button { flex: 1; min-width: 0; height: 34px; display: grid; place-items: center; padding: 0; border: 1px solid var(--b-line); border-radius: 10px; background: rgba(255, 255, 255, 0.06); cursor: pointer; }
   .flags button .fl { display: block; line-height: 0; opacity: 0.8; }
   .flags button .fl svg { display: block; width: 22px; height: auto; border-radius: 3px; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3); }
-  .flags button[aria-pressed="true"] { background: #F8B4CB; border-color: #FFE3EA; box-shadow: 0 0 0 1px #FFE3EA; }
+  .flags button[aria-pressed="true"] { background: var(--acc); border-color: #FFFFFF; box-shadow: 0 0 0 1px #FFFFFF; }
   .flags button[aria-pressed="true"] .fl { opacity: 1; }
   .flags.big button { height: 44px; border-color: rgba(255, 255, 255, 0.3); }
   .flags.big button .fl svg { width: 30px; }
-  @media (hover: hover) { .flags button[aria-pressed="false"]:hover { background: rgba(255, 255, 255, 0.14); } .flags button[aria-pressed="true"]:hover { background: #FBC8D9; } }
-  @container (max-width: 112px) { .btn-own .lbl { display: none; } }
+  @media (hover: hover) { .flags button[aria-pressed="false"]:hover { background: rgba(255, 255, 255, 0.14); } .flags button[aria-pressed="true"]:hover { background: var(--acc-hover); } }
+  @container (max-width: 180px) { .btn-own .lbl { display: none; } .ctrl .btn-fav, .ctrl .btn-star { width: 36px; } }
   @media (hover: hover) {
     .ctrl button:hover { background: rgba(255, 255, 255, 0.13); }
-    .btn-own[aria-pressed="true"]:hover { background: #FBC8D9; }
+    .btn-own[aria-pressed="true"]:hover { background: var(--acc-hover); }
     .btn-fav[aria-pressed="true"]:hover { background: rgba(255, 143, 169, 0.26); }
+    .btn-star[aria-pressed="true"]:hover { background: rgba(255, 214, 107, 0.26); }
     .pager button:not(:disabled):hover { background: rgba(255, 255, 255, 0.14); }
     .tabs button[aria-pressed="false"]:hover { color: var(--text); }
   }
 
   /* Carta ampliada */
-  .zoom { position: fixed; inset: 0; z-index: 40; display: flex; align-items: center; justify-content: center; padding: calc(env(safe-area-inset-top, 0px) + 16px) 16px calc(env(safe-area-inset-bottom, 0px) + 16px); background: rgba(24, 8, 16, 0.95); overflow-y: auto; }
+  .zoom { position: fixed; inset: 0; z-index: 40; display: flex; align-items: center; justify-content: center; padding: calc(env(safe-area-inset-top, 0px) + 16px) 16px calc(env(safe-area-inset-bottom, 0px) + 16px); background: var(--zoom-bg); overflow-y: auto; }
   .zoom-box { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; width: min(100%, 420px); margin: auto; color: #FFF3F7; }
   .zoom-close { position: absolute; top: -4px; right: -4px; z-index: 2; width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 50%; background: rgba(24, 8, 16, 0.7); color: #FFF3F7; cursor: pointer; }
   .zoom-stage { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; touch-action: pan-y; }
@@ -218,10 +244,14 @@
   .zoom-ctrl .z-fav svg path { fill: none; }
   .zoom-ctrl .z-fav[aria-pressed="true"] { color: #FF8FA9; background: rgba(255, 143, 169, 0.18); border-color: rgba(255, 143, 169, 0.6); }
   .zoom-ctrl .z-fav[aria-pressed="true"] svg path { fill: currentColor; }
+  .zoom-ctrl .z-star { flex: none; width: 48px; display: grid; place-items: center; }
+  .zoom-ctrl .z-star svg path { fill: none; }
+  .zoom-ctrl .z-star[aria-pressed="true"] { color: #FFD66B; background: rgba(255, 214, 107, 0.18); border-color: rgba(255, 214, 107, 0.6); }
+  .zoom-ctrl .z-star[aria-pressed="true"] svg path { fill: currentColor; }
   .zoom-ctrl .z-own { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
-  .zoom-ctrl .z-own[aria-pressed="true"] { background: #F8B4CB; border-color: #F8B4CB; color: #4A1B30; }
+  .zoom-ctrl .z-own[aria-pressed="true"] { background: var(--acc); border-color: var(--acc); color: var(--acc-ink); }
   .zoom :focus-visible { outline-color: #FFE3EA; }
-  @media (hover: hover) { .zoom-close:hover, .zoom-nav:not(:disabled):hover, .zoom-ctrl button:hover { background: rgba(255, 255, 255, 0.18); } .zoom-ctrl .z-own[aria-pressed="true"]:hover { background: #FBC8D9; } }
+  @media (hover: hover) { .zoom-close:hover, .zoom-nav:not(:disabled):hover, .zoom-ctrl button:hover { background: rgba(255, 255, 255, 0.18); } .zoom-ctrl .z-own[aria-pressed="true"]:hover { background: var(--acc-hover); } }
   @media (max-width: 420px) { .zoom-stage { gap: 4px; } .zoom-nav { width: 38px; height: 38px; } }
   @media (prefers-reduced-motion: no-preference) {
     .zoom { animation: zfade 0.18s ease-out; }
@@ -302,7 +332,8 @@
       <div class="tabs" role="group" data-i18n-aria="show" aria-label="Show">
         <button type="button" data-tab="todas" aria-pressed="true"><span data-i18n="tabAll">All</span> <span class="count" id="cTodas">0</span></button>
         <button type="button" data-tab="colecao" aria-pressed="false"><span data-i18n="tabOwned">Owned</span> <span class="count" id="cColecao">0</span></button>
-        <button type="button" data-tab="favoritas" aria-pressed="false"><span data-i18n="tabFav">Favorites</span> <span class="count" id="cFavoritas">0</span></button>
+        <button type="button" data-tab="favoritas" aria-pressed="false"><span data-i18n="tabWish">Wishlist</span> <span class="count" id="cFavoritas">0</span></button>
+        <button type="button" data-tab="estrelas" aria-pressed="false"><span data-i18n="tabStar">Favorites</span> <span class="count" id="cEstrelas">0</span></button>
       </div>
       <div class="filters">
         <label class="search">
@@ -343,6 +374,15 @@
   </footer>
 </div>
 
+<div class="temas" id="temas" role="group" data-i18n-aria="themeGroup" aria-label="Binder color">
+  <button type="button" data-tema="rosa" aria-pressed="true" aria-label="Pink"><i style="--sw:#FCE5EF"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#3A1626" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>
+  <button type="button" data-tema="pastel" aria-pressed="false" aria-label="Pastel pink"><i style="--sw:#F8C8DC"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#3A1626" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>
+  <button type="button" data-tema="azul" aria-pressed="false" aria-label="Blue"><i style="--sw:#9FC5E8"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#102A43" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>
+  <button type="button" data-tema="verde" aria-pressed="false" aria-label="Green"><i style="--sw:#C8E1BE"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#1C3517" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>
+  <button type="button" data-tema="amarelo" aria-pressed="false" aria-label="Yellow"><i style="--sw:#FFE599"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#3A2C00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>
+  <button type="button" data-tema="cinza" aria-pressed="false" aria-label="Gray"><i style="--sw:#5B5B5B"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>
+</div>
+
 <div class="zoom" id="zoom" role="dialog" aria-modal="true" aria-labelledby="zNome" hidden>
   <div class="zoom-box" id="zoomBox">
     <button type="button" class="zoom-close" id="zClose" data-i18n-aria="zClose" aria-label="Close enlarged card">
@@ -363,7 +403,8 @@
       <p class="pos" id="zPos" aria-live="polite"></p>
     </div>
     <div class="zoom-ctrl">
-      <button type="button" class="z-fav" id="zFav" aria-pressed="false" aria-label="Favorita"></button>
+      <button type="button" class="z-fav" id="zFav" aria-pressed="false" aria-label="Wishlist"></button>
+      <button type="button" class="z-star" id="zStar" aria-pressed="false" aria-label="Favorite card"></button>
       <button type="button" class="z-own" id="zOwn" aria-pressed="false"></button>
     </div>
     <div class="zoom-ctrl zoom-qty">
@@ -442,7 +483,8 @@
       htmlLang: "en", title: "Pokémon Binder", h1: "Pokémon Binder", sideTab: "Account & settings",
       lead: "Mark the cards you own and keep your favorites.",
       stats: (n, tot) => `<strong>${n}</strong> of <span>${tot}</span> cards in your collection`,
-      progress: "Collection progress", show: "Show", tabAll: "All", tabOwned: "Owned", tabFav: "Favorites",
+      progress: "Collection progress", show: "Show", tabAll: "All", tabOwned: "Owned", tabWish: "Wishlist", tabStar: "Favorites",
+      wishLabel: "Wishlist", starLabel: "Favorite card", themeGroup: "Binder color", themes: { rosa: "Light pink", pastel: "Pastel pink", azul: "Blue", verde: "Green", amarelo: "Yellow", cinza: "Gray" },
       searchPh: "Search by name or number", searchAria: "Search cards by name or number, for example Pikachu or 25 or 025/165",
       sitAria: "Filter by ownership", sit: "Status", fOwn: "Owned", fMissing: "Not owned",
       setAria: "Filter by set", set: "Set", serieAria: "Filter by series", serie: "Series",
@@ -470,14 +512,16 @@
       loadErr: "Couldn't load the cards from TCGdex. Check your internet connection and try again.", retry: "Try again",
       allOwned: "Congratulations, no card is missing! You marked them all as yours.",
       emptyOwned: "Your collection is empty. Under “All”, tap “I own it” on the cards you have.",
-      emptyFav: "No favorites yet. Tap the heart on a card to keep it here.",
+      emptyFav: "Your wishlist is empty. Tap the heart on a card you want to get.",
+      emptyStar: "No favorite cards yet. Tap the star on a card you love.",
       none: "No cards found. Try another name or number, or clear the filters."
     },
     pt: {
       htmlLang: "pt-BR", title: "Fichário Pokémon", h1: "Fichário Pokémon", sideTab: "Conta e configurações",
       lead: "Marque as cartas que você tem e guarde as favoritas.",
       stats: (n, tot) => `<strong>${n}</strong> de <span>${tot}</span> cartas na coleção`,
-      progress: "Progresso da coleção", show: "Mostrar", tabAll: "Todas", tabOwned: "Na coleção", tabFav: "Favoritas",
+      progress: "Progresso da coleção", show: "Mostrar", tabAll: "Todas", tabOwned: "Na coleção", tabWish: "Lista de desejos", tabStar: "Favoritas",
+      wishLabel: "Lista de desejos", starLabel: "Carta favorita", themeGroup: "Cor do fichário", themes: { rosa: "Rosa claro", pastel: "Rosa pastel", azul: "Azul", verde: "Verde", amarelo: "Amarelo", cinza: "Cinza" },
       searchPh: "Buscar por nome ou número", searchAria: "Buscar carta por nome ou número, por exemplo Pikachu, 25 ou 025/165",
       sitAria: "Filtrar por situação na coleção", sit: "Situação", fOwn: "Tenho", fMissing: "Não tenho",
       setAria: "Filtrar por coleção", set: "Coleção", serieAria: "Filtrar por série", serie: "Série",
@@ -505,14 +549,16 @@
       loadErr: "Não foi possível carregar as cartas da TCGdex. Verifique sua internet e tente de novo.", retry: "Tentar de novo",
       allOwned: "Parabéns, nenhuma carta falta! Você marcou todas como suas.",
       emptyOwned: "Sua coleção está vazia. Em “Todas”, toque em “Tenho” nas cartas que você possui.",
-      emptyFav: "Nenhuma favorita ainda. Toque no coração de uma carta para guardá-la aqui.",
+      emptyFav: "Sua lista de desejos está vazia. Toque no coração de uma carta que você quer conseguir.",
+      emptyStar: "Nenhuma carta favorita ainda. Toque na estrela de uma carta que você ama.",
       none: "Nenhuma carta encontrada. Tente outro nome ou número, ou limpe os filtros."
     },
     ja: {
       htmlLang: "ja", title: "ポケモンバインダー", h1: "ポケモンバインダー", sideTab: "アカウントと設定",
       lead: "持っているカードをチェックして、お気に入りを保存しましょう。",
       stats: (n, tot) => `<strong>${n}</strong> / <span>${tot}</span> 枚を所持`,
-      progress: "コレクションの進み具合", show: "表示", tabAll: "すべて", tabOwned: "所持", tabFav: "お気に入り",
+      progress: "コレクションの進み具合", show: "表示", tabAll: "すべて", tabOwned: "所持", tabWish: "ほしいもの", tabStar: "お気に入り",
+      wishLabel: "ほしいものリスト", starLabel: "お気に入りカード", themeGroup: "バインダーの色", themes: { rosa: "ライトピンク", pastel: "パステルピンク", azul: "ブルー", verde: "グリーン", amarelo: "イエロー", cinza: "グレー" },
       searchPh: "名前または番号で検索", searchAria: "カードを名前または番号で検索（例：Pikachu、25、025/165）",
       sitAria: "所持状況で絞り込み", sit: "状況", fOwn: "持っている", fMissing: "持っていない",
       setAria: "セットで絞り込み", set: "セット", serieAria: "シリーズで絞り込み", serie: "シリーズ",
@@ -540,11 +586,13 @@
       loadErr: "TCGdex からカードを読み込めませんでした。インターネット接続を確認して、もう一度お試しください。", retry: "再試行",
       allOwned: "おめでとう！すべてのカードを持っています。",
       emptyOwned: "コレクションは空です。「すべて」で持っているカードの「持ってる」をタップしてください。",
-      emptyFav: "お気に入りはまだありません。カードのハートをタップするとここに保存されます。",
+      emptyFav: "ほしいものリストは空です。欲しいカードのハートをタップしてください。",
+      emptyStar: "お気に入りカードはまだありません。好きなカードの星をタップしてください。",
       none: "カードが見つかりません。別の名前や番号を試すか、絞り込みを解除してください。"
     }
   };
   const LANGS = ["en", "pt", "ja"];
+  const TEMAS = ["rosa", "pastel", "azul", "verde", "amarelo", "cinza"];
   const t = (k, ...a) => {
     const d = I18N[conta.cfg.lang] || I18N.en;
     const v = d[k] !== undefined ? d[k] : I18N.en[k];
@@ -554,6 +602,7 @@
   const ICON = {
     heart: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.5C1.3 8.4 3.3 5 6.8 5c2 0 3.5 1.1 5.2 3.1C13.7 6.1 15.2 5 17.2 5c3.5 0 5.5 3.4 4.3 6.5C19.5 16.4 12 21 12 21z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
     check: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    star: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.6l2.6 5.3 5.8.85-4.2 4.1 1 5.8L12 16.9l-5.2 2.75 1-5.8-4.2-4.1 5.8-.85z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
     plus:  '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>',
     minus: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>',
     stack: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="7" y="3" width="12" height="16" rx="2" stroke="currentColor" stroke-width="2.2"/><path d="M4 7v12a2 2 0 0 0 2 2h9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>'
@@ -580,6 +629,7 @@
   };
   const SEED_QTY = { "sv03.5-006": 1, "sv03.5-025": 2, "sv03.5-151": 1, "30th-023": 1, "30th-066": 1, "30th-c-001": 1, "30th-c-014": 1 };
   const SEED_FAV = ["sv03.5-006", "sv03.5-151", "30th-c-001"];
+  const SEED_STAR = ["sv03.5-025"];
   function carregar() {
     try {
       const raw = localStorage.getItem(KEY);
@@ -591,7 +641,7 @@
           const l = Array.isArray((o.langs || {})[id]) ? o.langs[id].filter(x => LANGS.includes(x)) : [];
           langs[id] = l.length ? l : ["en"];
         });
-        return { qty, langs, fav: new Set(o.fav || []) };
+        return { qty, langs, fav: new Set(o.fav || []), star: new Set(o.star || []) };
       }
       const old = localStorage.getItem(KEY_OLD);
       if (old) {
@@ -603,22 +653,22 @@
           const l = Array.isArray((o.langs || {})[id]) ? o.langs[id].filter(x => LANGS.includes(x)) : [];
           langs[nid] = l.length ? l : ["en"];
         });
-        return { qty, langs, fav: new Set((o.fav || []).map(migrar)) };
+        return { qty, langs, fav: new Set((o.fav || []).map(migrar)), star: new Set() };
       }
     } catch (e) { /* usa os exemplos */ }
     const langs = {};
     Object.keys(SEED_QTY).forEach(id => { langs[id] = ["en"]; });
-    return { qty: Object.assign({}, SEED_QTY), langs, fav: new Set(SEED_FAV) };
+    return { qty: Object.assign({}, SEED_QTY), langs, fav: new Set(SEED_FAV), star: new Set(SEED_STAR) };
   }
   function salvar() {
-    try { localStorage.setItem(KEY, JSON.stringify({ qty: state.qty, langs: state.langs, fav: [...state.fav] })); } catch (e) { /* segue sem salvar */ }
+    try { localStorage.setItem(KEY, JSON.stringify({ qty: state.qty, langs: state.langs, fav: [...state.fav], star: [...state.star] })); } catch (e) { /* segue sem salvar */ }
   }
 
   /* ---------- Conta e configurações (salvas no navegador) ---------- */
   const KEY_CONTA = "fichario-pokemon-conta-v2";
   const reduzir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   function carregarConta() {
-    const padrao = { perfil: null, cfg: { cinza: true, anim: !reduzir, ordem: "num", lang: "en" } };
+    const padrao = { perfil: null, cfg: { cinza: true, anim: !reduzir, ordem: "num", lang: "en", tema: "rosa" } };
     try {
       const raw = localStorage.getItem(KEY_CONTA);
       if (raw) {
@@ -627,6 +677,7 @@
         const cfg = Object.assign(padrao.cfg, o.cfg || {});
         if (cfg.ordem !== "nome") cfg.ordem = "num";
         if (!LANGS.includes(cfg.lang)) cfg.lang = "en";
+        if (!TEMAS.includes(cfg.tema)) cfg.tema = "rosa";
         return { perfil, cfg };
       }
     } catch (e) { /* usa o padrão */ }
@@ -640,7 +691,7 @@
   const conta = carregarConta();
   const state = {
     tab: "todas", q: "", posse: "", serie: "", set: "", page: 0,
-    qty: saved.qty, langs: saved.langs, fav: saved.fav, own: new Set(Object.keys(saved.qty)),
+    qty: saved.qty, langs: saved.langs, fav: saved.fav, star: saved.star, own: new Set(Object.keys(saved.qty)),
     status: "loading", qtyOpen: null, lista: []
   };
 
@@ -742,6 +793,7 @@
     const lista = CARTAS.filter(c => {
       if (state.tab === "colecao" && !state.own.has(c.id)) return false;
       if (state.tab === "favoritas" && !state.fav.has(c.id)) return false;
+      if (state.tab === "estrelas" && !state.star.has(c.id)) return false;
       if (state.posse === "tenho" && !state.own.has(c.id)) return false;
       if (state.posse === "faltam" && state.own.has(c.id)) return false;
       if (state.serie && SETS[c.set].serie !== state.serie) return false;
@@ -770,7 +822,7 @@
   }
 
   function cartaHTML(c) {
-    const own = state.own.has(c.id), fav = state.fav.has(c.id);
+    const own = state.own.has(c.id), fav = state.fav.has(c.id), star = state.star.has(c.id);
     const q = state.qty[c.id] || 0;
     const cinza = !own && conta.cfg.cinza;
     const num = numeroTxt(c);
@@ -790,7 +842,8 @@
         <span class="st">${esc(setNome(c))}</span>
       </div>
       <div class="ctrl">
-        <button type="button" class="btn-fav" data-act="fav" aria-pressed="${fav}" aria-label="${esc(t("favLabel"))}: ${esc(c.n)}, ${t("number")} ${esc(num)}, ${esc(setNome(c))}">${ICON.heart}</button>
+        <button type="button" class="btn-fav" data-act="fav" aria-pressed="${fav}" aria-label="${esc(t("wishLabel"))}: ${esc(c.n)}, ${t("number")} ${esc(num)}, ${esc(setNome(c))}">${ICON.heart}</button>
+        <button type="button" class="btn-star" data-act="star" aria-pressed="${star}" aria-label="${esc(t("starLabel"))}: ${esc(c.n)}, ${t("number")} ${esc(num)}, ${esc(setNome(c))}">${ICON.star}</button>
         <button type="button" class="btn-own" data-act="own" aria-pressed="${own}" aria-label="${esc(t("haveLabel"))}: ${esc(c.n)}, ${t("number")} ${esc(num)}, ${esc(setNome(c))}">${own ? ICON.check : ICON.plus}<span class="lbl">${own ? t("btnOwned") : t("btnHave")}</span></button>
       </div>
       ${flagsHTML(c)}
@@ -805,6 +858,7 @@
     if (semFiltro && !state.posse) {
       if (state.tab === "colecao") return t("emptyOwned");
       if (state.tab === "favoritas") return t("emptyFav");
+      if (state.tab === "estrelas") return t("emptyStar");
     }
     return t("none");
   }
@@ -856,6 +910,7 @@
     $("cTodas").textContent = total.toLocaleString();
     $("cColecao").textContent = tem;
     $("cFavoritas").textContent = CARTAS.length ? CARTAS.reduce((n, c) => n + (state.fav.has(c.id) ? 1 : 0), 0) : state.fav.size;
+    $("cEstrelas").textContent = CARTAS.length ? CARTAS.reduce((n, c) => n + (state.star.has(c.id) ? 1 : 0), 0) : state.star.size;
     document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.tab === state.tab)));
   }
 
@@ -919,6 +974,7 @@
     }
     const lg = b.dataset.l;
     if (act === "fav") { if (state.fav.has(id)) state.fav.delete(id); else state.fav.add(id); }
+    else if (act === "star") { if (state.star.has(id)) state.star.delete(id); else state.star.add(id); }
     else if (act === "flag") toggleLang(id, lg);
     else if (act === "inc") setQty(id, (state.qty[id] || 0) + 1);
     else if (act === "dec") setQty(id, (state.qty[id] || 0) - 1);
@@ -929,7 +985,7 @@
     if (act === "flag") sel = `[data-l="${lg}"]`;
     if (act === "dec" && !state.qty[id]) sel = '[data-act="inc"]';
     const novo = focarNaCelula(id, sel);
-    if (novo && (act === "fav" || act === "own")) novo.classList.add("pop");
+    if (novo && (act === "fav" || act === "star" || act === "own")) novo.classList.add("pop");
   });
   function fecharQty(focar) {
     if (!state.qtyOpen) return;
@@ -992,7 +1048,7 @@
     } else {
       clearTimeout(timer); armado = false;
       reset.textContent = t("reset");
-      state.own.clear(); state.fav.clear(); state.langs = {}; state.qty = {}; state.qtyOpen = null; salvar(); render();
+      state.own.clear(); state.fav.clear(); state.star.clear(); state.langs = {}; state.qty = {}; state.qtyOpen = null; salvar(); render();
     }
   });
 
@@ -1024,8 +1080,12 @@
     $("zPos").textContent = t("zPos", zState.i + 1, zState.ids.length);
     const f = $("zFav"), o = $("zOwn");
     f.setAttribute("aria-pressed", String(fav));
-    f.setAttribute("aria-label", t("favLabel") + ": " + c.n);
+    f.setAttribute("aria-label", t("wishLabel") + ": " + c.n);
     f.innerHTML = ICON.heart;
+    const sb = $("zStar");
+    sb.setAttribute("aria-pressed", String(state.star.has(c.id)));
+    sb.setAttribute("aria-label", t("starLabel") + ": " + c.n);
+    sb.innerHTML = ICON.star;
     o.setAttribute("aria-pressed", String(own));
     o.setAttribute("aria-label", t("haveLabel") + ": " + c.n);
     o.innerHTML = (own ? ICON.check : ICON.plus) + `<span>${own ? t("btnOwned") : t("btnHave")}</span>`;
@@ -1072,6 +1132,7 @@
   $("zPrev").addEventListener("click", () => irZoom(-1));
   $("zNext").addEventListener("click", () => irZoom(1));
   $("zFav").addEventListener("click", () => { const id = zState.ids[zState.i]; if (state.fav.has(id)) state.fav.delete(id); else state.fav.add(id); depoisZoom(); });
+  $("zStar").addEventListener("click", () => { const id = zState.ids[zState.i]; if (state.star.has(id)) state.star.delete(id); else state.star.add(id); depoisZoom(); });
   $("zOwn").addEventListener("click", () => { toggleOwn(zState.ids[zState.i]); depoisZoom(); });
   $("zInc").addEventListener("click", () => { const id = zState.ids[zState.i]; setQty(id, (state.qty[id] || 0) + 1); depoisZoom("zInc"); });
   $("zDec").addEventListener("click", () => { const id = zState.ids[zState.i]; setQty(id, (state.qty[id] || 0) - 1); depoisZoom(state.qty[id] ? "zDec" : "zInc"); });
@@ -1161,7 +1222,16 @@
     $("cfgCinza").setAttribute("aria-checked", String(conta.cfg.cinza));
     $("cfgAnim").setAttribute("aria-checked", String(conta.cfg.anim));
     $("cfgOrdem").value = conta.cfg.ordem;
+    document.documentElement.dataset.tema = conta.cfg.tema;
+    document.querySelectorAll("#temas [data-tema]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.tema === conta.cfg.tema)));
   }
+  $("temas").addEventListener("click", e => {
+    const b = e.target.closest("[data-tema]");
+    if (!b) return;
+    conta.cfg.tema = b.dataset.tema;
+    salvarConta();
+    aplicarCfg();
+  });
   $("cfgCinza").addEventListener("click", () => { conta.cfg.cinza = !conta.cfg.cinza; salvarConta(); aplicarCfg(); render(); });
   $("cfgAnim").addEventListener("click", () => { conta.cfg.anim = !conta.cfg.anim; salvarConta(); aplicarCfg(); });
   $("cfgOrdem").addEventListener("change", e => { conta.cfg.ordem = e.target.value; state.page = 0; salvarConta(); render(); });
@@ -1199,6 +1269,7 @@
     document.querySelectorAll("[data-i18n-ph]").forEach(el => el.setAttribute("placeholder", t(el.dataset.i18nPh)));
     $("langNote").textContent = t("langNote");
     document.querySelectorAll(".lang-btn").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === conta.cfg.lang)));
+    document.querySelectorAll("#temas [data-tema]").forEach(b => b.setAttribute("aria-label", t("themes")[b.dataset.tema]));
     reset.textContent = t(armado ? "resetArm" : "reset");
     preencherFiltros();
     const tinhaForm = !conta.perfil && $("inNome") ? [$("inNome").value, $("inEmail").value] : null;
