@@ -171,6 +171,74 @@
   @media (hover: hover) { .dctl button:not(:disabled):hover, .btn-step:not(:disabled):hover { background: rgba(255, 255, 255, 0.14); } .btn-add.on:hover { background: var(--acc-hover); } }
   .cell.empty .dctl, .cell.empty .dstatus, .cell.empty .dinfo { visibility: hidden; }
 
+  /* Pokédex */
+  .dex-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(8px, 1.6vw, 14px); }
+  @media (max-width: 859px) { .dex-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  @media (max-width: 479px) { .dex-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .dex-tile { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 6px 10px; border: 1px solid var(--b-line); border-radius: 14px; background: rgba(255, 255, 255, 0.07); color: var(--b-ink); font: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; }
+  .dex-art { display: grid; place-items: center; width: 100%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(255, 255, 255, 0.16) 0 55%, transparent 56%); }
+  .dex-art img { display: block; width: 92%; height: 92%; object-fit: contain; }
+  .dex-sem-img { font: 800 1.6rem "Bricolage Grotesque", system-ui, sans-serif; color: var(--b-muted); }
+  .dex-no { font-size: 11px; font-weight: 700; color: var(--acc-soft); font-variant-numeric: tabular-nums; }
+  .dex-nm { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; font-weight: 700; }
+  @media (hover: hover) { .dex-tile:hover { background: rgba(255, 255, 255, 0.14); transform: translateY(-2px); } }
+  .dex-modal { position: fixed; inset: 0; z-index: 40; display: flex; align-items: flex-start; justify-content: center; padding: calc(env(safe-area-inset-top, 0px) + 16px) 12px calc(env(safe-area-inset-bottom, 0px) + 16px); background: var(--zoom-bg); overflow-y: auto; }
+  .ficha { position: relative; width: min(100%, 860px); margin: auto 0; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); border-radius: 22px; background: #FFFFFF; color: #2A1C22; overflow: hidden; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5); --focus: #2338C8; }
+  .ficha-topo { --tc: #E9DDE3; position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 14px 14px 20px; background: linear-gradient(160deg, color-mix(in srgb, var(--tc) 85%, #FFFFFF) 0%, var(--tc) 100%); }
+  .ficha-barra { display: flex; align-items: center; gap: 6px; width: 100%; }
+  .ficha-pos { flex: 1; text-align: center; font-size: 0.85rem; font-weight: 700; color: rgba(0, 0, 0, 0.7); font-variant-numeric: tabular-nums; }
+  .ficha-btn { flex: none; width: 40px; height: 40px; display: grid; place-items: center; border: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.75); color: #2A1C22; cursor: pointer; }
+  .ficha-btn:disabled { opacity: 0.35; cursor: default; }
+  .ficha-art { display: grid; place-items: center; width: min(100%, 300px); aspect-ratio: 1; }
+  .ficha-art img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.28)); }
+  .ficha-shiny { height: 36px; padding: 0 16px; border: 0; border-radius: 99px; background: rgba(255, 255, 255, 0.85); color: #2A1C22; font: 700 13px "Figtree", system-ui, sans-serif; cursor: pointer; }
+  .ficha-shiny[aria-pressed="true"] { background: #2A1C22; color: #FFFFFF; }
+  .ficha-info { min-width: 0; padding: 20px 22px 24px; }
+  .ficha-num { margin: 0; font-weight: 800; color: #7A5A68; font-variant-numeric: tabular-nums; }
+  .ficha-info h2 { margin: 0 0 2px; font: 800 clamp(1.6rem, 4vw, 2.2rem)/1.1 "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif; letter-spacing: -0.02em; }
+  .ficha-info h3 { margin: 20px 0 8px; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; color: #7A5A68; }
+  .ficha-genus { margin: 0 0 10px; color: #5C4651; font-weight: 600; }
+  .ficha-tipos { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tipo { display: inline-flex; align-items: center; gap: 4px; height: 28px; padding: 0 12px; border-radius: 99px; font-weight: 800; font-size: 13px; }
+  .tipo b { font-weight: 800; opacity: 0.85; }
+  .tag { display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 99px; background: #F2E8EC; color: #4A1B30; font-weight: 700; font-size: 13px; }
+  .ficha-flavor { margin: 14px 0 0; line-height: 1.55; }
+  .ficha-medidas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 14px 0 0; }
+  .ficha-medidas div { padding: 10px 12px; border-radius: 12px; background: #F7F1F4; }
+  .ficha-medidas dt { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #7A5A68; }
+  .ficha-medidas dd { margin: 2px 0 0; font-weight: 800; overflow-wrap: anywhere; }
+  .ficha-medidas small { font-weight: 600; color: #5C4651; }
+  .ficha-acoes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .ficha .pill { border-color: #B8607E; color: #3A1626; }
+  @media (hover: hover) { .ficha .pill:hover { background: #F7F1F4; } .ficha-btn:not(:disabled):hover, .ficha-shiny:hover { background: #FFFFFF; } .ficha-shiny[aria-pressed="true"]:hover { background: #3E2A33; } }
+  .ficha-habs { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .ficha-habs li { display: grid; gap: 2px; padding: 10px 12px; border-radius: 12px; background: #F7F1F4; }
+  .ficha-habs span { font-size: 0.88rem; color: #5C4651; }
+  .ficha-habs .hab-oculta { display: inline; font-size: 0.75rem; font-weight: 700; color: #7A3A52; }
+  .ficha-stats { display: grid; gap: 6px; }
+  .stat { display: grid; grid-template-columns: 7.5em 2.6em 1fr; align-items: center; gap: 8px; font-size: 0.9rem; }
+  .stat-nm { color: #5C4651; font-weight: 600; }
+  .stat-v { font-weight: 800; text-align: right; font-variant-numeric: tabular-nums; }
+  .stat-bar { height: 8px; border-radius: 99px; background: #EFE4E9; overflow: hidden; }
+  .stat-bar i { display: block; height: 100%; border-radius: inherit; }
+  .stat.total { padding-top: 6px; border-top: 1px solid #EFE4E9; }
+  .evo { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .evo-filhos { display: flex; flex-direction: column; gap: 6px; }
+  .evo-ramo { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .evo-seta { color: #7A5A68; font-weight: 800; }
+  .evo-etapa { display: grid; justify-items: center; gap: 1px; width: 104px; padding: 8px 6px; border: 1px solid #E6D6DE; border-radius: 14px; background: #FFFFFF; color: #2A1C22; font: inherit; cursor: pointer; }
+  .evo-etapa.atual { border-color: #4A1B30; box-shadow: 0 0 0 1px #4A1B30; background: #FBF5F8; }
+  .evo-etapa img { width: 64px; height: 64px; object-fit: contain; }
+  .evo-nm { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12.5px; font-weight: 800; }
+  .evo-no { font-size: 11px; color: #7A5A68; }
+  .evo-cond { margin-top: 2px; font-size: 11px; font-weight: 700; color: #7A3A52; text-align: center; }
+  @media (hover: hover) { .evo-etapa:not(.atual):hover { background: #F7F1F4; } }
+  .ficha-nota { margin: 0; color: #5C4651; }
+  .ficha-carregando { display: flex; align-items: center; gap: 10px; color: #5C4651; }
+  .ficha-carregando .spin { border-color: #EFE4E9; border-top-color: #B8607E; }
+  @media (max-width: 720px) { .ficha { grid-template-columns: 1fr; } .ficha-art { width: min(70vw, 260px); } }
+  @media (prefers-reduced-motion: no-preference) { .dex-modal { animation: zfade 0.18s ease-out; } }
+
   /* Controles */
   .controls { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
   .tabs { display: flex; gap: 2px; padding: 4px; background: var(--seg-bg); border-radius: 12px; flex: 0 1 auto; overflow-x: auto; }
@@ -366,6 +434,10 @@
       <div class="bar" id="dBar" role="progressbar" data-i18n-aria="deckProgress" aria-label="Deck cards owned" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="dBarFill"></i></div>
       <p class="por-colecao" id="deckSub"></p>
     </div>
+    <div class="stats" id="statsDex" hidden>
+      <p id="dexLine"></p>
+      <p class="por-colecao" id="dexSub"></p>
+    </div>
     <div class="stats" id="statsBinder">
       <p id="statsLine"></p>
       <div class="bar" id="bar" role="progressbar" data-i18n-aria="progress" aria-label="Collection progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="barFill"></i></div>
@@ -376,6 +448,7 @@
   <nav class="areas" data-i18n-aria="areasAria" aria-label="Sections">
     <button type="button" data-area="binder" aria-pressed="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 3v18" stroke="currentColor" stroke-width="2"/></svg><span data-i18n="areaBinder">Binder</span></button>
     <button type="button" data-area="decks" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="8" y="3" width="11" height="15" rx="2" stroke="currentColor" stroke-width="2"/><path d="M5 7v11a3 3 0 0 0 3 3h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-i18n="areaDecks">Deck Builder</span></button>
+    <button type="button" data-area="dex" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M3 12h6m6 0h6" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg><span data-i18n="areaDex">Pokédex</span></button>
   </nav>
 
   <main>
@@ -475,6 +548,35 @@
       </section>
     </div>
    </div>
+
+   <div id="areaDex" hidden>
+    <div class="controls">
+      <div class="filters">
+        <label class="search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <input id="xBusca" type="search" data-i18n-ph="dexSearchPh" data-i18n-aria="dexSearchAria" placeholder="Search Pokémon by name or number" aria-label="Search Pokémon by name or Pokédex number" autocomplete="off">
+        </label>
+        <select id="xGen" data-i18n-aria="dexGenAria" aria-label="Filter by generation"></select>
+        <select id="xTipo" data-i18n-aria="dexTypeAria" aria-label="Filter by type"></select>
+      </div>
+    </div>
+    <section class="binder" data-i18n-aria="dexAria" aria-label="Pokédex">
+      <div class="spine" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="sheet">
+        <ul id="xGrid" class="dex-grid"></ul>
+        <div id="xVazio" class="vazio" tabindex="-1" role="status" hidden></div>
+        <nav class="pager" data-i18n-aria="dexPagerAria" aria-label="Pokédex pages">
+          <button type="button" id="xPrev" data-i18n-aria="prevPage" aria-label="Previous page"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <span class="pg" aria-live="polite">
+            <label for="xPgIn" data-i18n="page">Page</label>
+            <input id="xPgIn" type="number" inputmode="numeric" min="1" value="1">
+            <span id="xPgDe">of 1</span>
+          </span>
+          <button type="button" id="xNext" data-i18n-aria="nextPage" aria-label="Next page"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </nav>
+      </div>
+    </section>
+   </div>
   </main>
 
   <footer class="foot">
@@ -523,6 +625,26 @@
       <button type="button" class="z-step" id="zInc" aria-label="Add one copy"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button>
     </div>
     <div class="zoom-ctrl"><div class="flags big" id="zFlags" role="group" style="width:100%"></div></div>
+  </div>
+</div>
+
+<div class="dex-modal" id="dexModal" role="dialog" aria-modal="true" aria-labelledby="xNome" hidden>
+  <div class="ficha" id="xCaixa">
+    <div class="ficha-topo" id="xTopo">
+      <div class="ficha-barra">
+        <button type="button" class="ficha-btn" id="xPrevP" data-i18n-aria="dexPrev" aria-label="Previous Pokémon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <span class="ficha-pos" id="xPos" aria-live="polite"></span>
+        <button type="button" class="ficha-btn" id="xNextP" data-i18n-aria="dexNext" aria-label="Next Pokémon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" class="ficha-btn" id="xFechar" data-i18n-aria="dexClose" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+      </div>
+      <div class="ficha-art" id="xArt"></div>
+      <button type="button" class="ficha-shiny" id="xShiny" aria-pressed="false">Shiny</button>
+    </div>
+    <div class="ficha-info">
+      <p class="ficha-num" id="xNum"></p>
+      <h2 id="xNome"></h2>
+      <div id="xCorpo"></div>
+    </div>
   </div>
 </div>
 
@@ -607,6 +729,22 @@
       dMais: nm => `Add one ${nm} to the deck`, dMenos: nm => `Remove one ${nm} from the deck`, dTirar: nm => `Remove ${nm} from the deck`,
       oMais: nm => `Add one owned copy of ${nm}`, oMenos: nm => `Remove one owned copy of ${nm}`,
       deckGroup: nm => `Copies in the deck: ${nm}`, ownGroup: nm => `Copies you own: ${nm}`,
+      areaDex: "Pokédex", leadDex: "Every Pokémon with height, weight, types, stats and evolutions. Tap one to see everything about it.",
+      dexAria: "Pokédex", dexPagerAria: "Pokédex pages", dexSearchPh: "Search Pokémon by name or number", dexSearchAria: "Search Pokémon by name or Pokédex number",
+      dexGen: "Generation", dexGenAria: "Filter by generation", dexGenN: r => `Generation ${r}`, dexType: "Type", dexTypeAria: "Filter by type",
+      dexCount: n => `<strong>${n}</strong> Pokémon in the Pokédex`, dexShown: n => `${n} shown`,
+      dexLoading: "Loading the Pokédex from PokéAPI…", dexErr: "Couldn't load the Pokédex from PokéAPI. Check your internet connection and try again.",
+      dexNone: "No Pokémon found. Try another name or number, or clear the filters.", dexOpen: (nm, no) => `${nm}, number ${no}. Open details`,
+      dexPrev: "Previous Pokémon", dexNext: "Next Pokémon", dexClose: "Close", detailLoading: "Loading details…", detailErr: "Couldn't load this Pokémon's details.",
+      shiny: "Shiny", normalArt: "Normal colors", cry: "Play cry", seeCards: "See cards in the Binder",
+      height: "Height", weight: "Weight", generation: "Generation", habitat: "Habitat", abilities: "Abilities", hiddenAb: "Hidden ability",
+      baseStats: "Base stats", total: "Total", weakTo: "Weak to", evolution: "Evolution", evoNone: "This Pokémon does not evolve.",
+      breeding: "Breeding and training", gender: "Gender", genderless: "Genderless", eggGroups: "Egg groups", catchRate: "Catch rate",
+      happiness: "Base friendship", growth: "Growth rate", baseExp: "Base experience", forms: "Other forms",
+      legendary: "Legendary", mythical: "Mythical", baby: "Baby",
+      evoLv: n => `Level ${n}`, evoItem: i => `Use ${i}`, evoTrade: "Trade", evoTradeItem: i => `Trade holding ${i}`, evoFriend: "High friendship", evoMove: m => `Knows ${m}`,
+      statNames: { hp: "HP", attack: "Attack", defense: "Defense", "special-attack": "Sp. Atk", "special-defense": "Sp. Def", speed: "Speed" },
+      tipos: { normal: "Normal", fire: "Fire", water: "Water", grass: "Grass", electric: "Electric", ice: "Ice", fighting: "Fighting", poison: "Poison", ground: "Ground", flying: "Flying", psychic: "Psychic", bug: "Bug", rock: "Rock", ghost: "Ghost", dragon: "Dragon", dark: "Dark", steel: "Steel", fairy: "Fairy" },
       htmlLang: "en", title: "Pokémon Binder", h1: "Pokémon Binder", sideTab: "Account & settings",
       lead: "Mark the cards you own and keep your favorites.",
       stats: (n, tot) => `<strong>${n}</strong> of <span>${tot}</span> cards in your collection`,
@@ -617,7 +755,7 @@
       setAria: "Filter by set", set: "Set", serieAria: "Filter by series", serie: "Series",
       binderAria: "Card binder", pagerAria: "Binder pages", prevPage: "Previous page", nextPage: "Next page",
       page: "Page", of: n => "of " + n,
-      footer: "Card data and images from TCGdex (tcgdex.dev), an open-source Pokémon TCG API, with the official Pokémon TCG gallery as a backup for some images. Pokémon TCG Pocket (digital) cards are not included. Your collection and favorites are saved in this browser.",
+      footer: "Card data and images from TCGdex (tcgdex.dev), an open-source Pokémon TCG API, with the official Pokémon TCG gallery as a backup for some images. Pokémon TCG Pocket (digital) cards are not included. Pokédex data from PokéAPI (pokeapi.co). Your collection and favorites are saved in this browser.",
       reset: "Clear binder", resetArm: "Tap again to clear everything",
       zClose: "Close enlarged card", zPrev: "Previous card", zNext: "Next card", zPos: (i, n) => `${i} of ${n}`,
       panelTitle: "Account & settings", closePanel: "Close panel", account: "Account", siteSettings: "Site settings",
@@ -662,6 +800,22 @@
       dMais: nm => `Adicionar uma ${nm} ao deck`, dMenos: nm => `Tirar uma ${nm} do deck`, dTirar: nm => `Remover ${nm} do deck`,
       oMais: nm => `Adicionar uma cópia de ${nm} que você tem`, oMenos: nm => `Tirar uma cópia de ${nm} que você tem`,
       deckGroup: nm => `Cópias no deck: ${nm}`, ownGroup: nm => `Cópias que você tem: ${nm}`,
+      areaDex: "Pokédex", leadDex: "Todos os Pokémon com altura, peso, tipos, atributos e evoluções. Toque em um para ver tudo sobre ele.",
+      dexAria: "Pokédex", dexPagerAria: "Páginas da Pokédex", dexSearchPh: "Buscar Pokémon por nome ou número", dexSearchAria: "Buscar Pokémon por nome ou número da Pokédex",
+      dexGen: "Geração", dexGenAria: "Filtrar por geração", dexGenN: r => `Geração ${r}`, dexType: "Tipo", dexTypeAria: "Filtrar por tipo",
+      dexCount: n => `<strong>${n}</strong> Pokémon na Pokédex`, dexShown: n => `${n} mostrados`,
+      dexLoading: "Carregando a Pokédex da PokéAPI…", dexErr: "Não foi possível carregar a Pokédex da PokéAPI. Verifique sua internet e tente de novo.",
+      dexNone: "Nenhum Pokémon encontrado. Tente outro nome ou número, ou limpe os filtros.", dexOpen: (nm, no) => `${nm}, número ${no}. Abrir detalhes`,
+      dexPrev: "Pokémon anterior", dexNext: "Próximo Pokémon", dexClose: "Fechar", detailLoading: "Carregando detalhes…", detailErr: "Não foi possível carregar os detalhes deste Pokémon.",
+      shiny: "Shiny", normalArt: "Cores normais", cry: "Ouvir o grito", seeCards: "Ver cartas no Fichário",
+      height: "Altura", weight: "Peso", generation: "Geração", habitat: "Habitat", abilities: "Habilidades", hiddenAb: "Habilidade oculta",
+      baseStats: "Atributos base", total: "Total", weakTo: "Fraco contra", evolution: "Evolução", evoNone: "Este Pokémon não evolui.",
+      breeding: "Criação e treino", gender: "Gênero", genderless: "Sem gênero", eggGroups: "Grupos de ovo", catchRate: "Taxa de captura",
+      happiness: "Amizade inicial", growth: "Ritmo de crescimento", baseExp: "Experiência base", forms: "Outras formas",
+      legendary: "Lendário", mythical: "Mítico", baby: "Bebê",
+      evoLv: n => `Nível ${n}`, evoItem: i => `Usar ${i}`, evoTrade: "Troca", evoTradeItem: i => `Troca segurando ${i}`, evoFriend: "Muita amizade", evoMove: m => `Sabe ${m}`,
+      statNames: { hp: "PS", attack: "Ataque", defense: "Defesa", "special-attack": "Atq. Esp.", "special-defense": "Def. Esp.", speed: "Velocidade" },
+      tipos: { normal: "Normal", fire: "Fogo", water: "Água", grass: "Planta", electric: "Elétrico", ice: "Gelo", fighting: "Lutador", poison: "Venenoso", ground: "Terrestre", flying: "Voador", psychic: "Psíquico", bug: "Inseto", rock: "Pedra", ghost: "Fantasma", dragon: "Dragão", dark: "Sombrio", steel: "Aço", fairy: "Fada" },
       htmlLang: "pt-BR", title: "Fichário Pokémon", h1: "Fichário Pokémon", sideTab: "Conta e configurações",
       lead: "Marque as cartas que você tem e guarde as favoritas.",
       stats: (n, tot) => `<strong>${n}</strong> de <span>${tot}</span> cartas na coleção`,
@@ -672,7 +826,7 @@
       setAria: "Filtrar por coleção", set: "Coleção", serieAria: "Filtrar por série", serie: "Série",
       binderAria: "Fichário de cartas", pagerAria: "Páginas do fichário", prevPage: "Página anterior", nextPage: "Próxima página",
       page: "Página", of: n => "de " + n,
-      footer: "Dados e imagens das cartas da TCGdex (tcgdex.dev), uma API aberta de Pokémon Estampas Ilustradas, com a galeria oficial como reserva para algumas imagens. As cartas do Pokémon TCG Pocket (digital) não estão incluídas. Sua coleção e suas favoritas ficam salvas neste navegador.",
+      footer: "Dados e imagens das cartas da TCGdex (tcgdex.dev), uma API aberta de Pokémon Estampas Ilustradas, com a galeria oficial como reserva para algumas imagens. As cartas do Pokémon TCG Pocket (digital) não estão incluídas. Dados da Pokédex da PokéAPI (pokeapi.co). Sua coleção e suas favoritas ficam salvas neste navegador.",
       reset: "Limpar fichário", resetArm: "Toque de novo para limpar tudo",
       zClose: "Fechar carta ampliada", zPrev: "Carta anterior", zNext: "Próxima carta", zPos: (i, n) => `${i} de ${n}`,
       panelTitle: "Conta e configurações", closePanel: "Fechar painel", account: "Cadastro", siteSettings: "Configurações do site",
@@ -717,6 +871,22 @@
       dMais: nm => `${nm} をデッキに1枚追加`, dMenos: nm => `${nm} をデッキから1枚減らす`, dTirar: nm => `${nm} をデッキから外す`,
       oMais: nm => `${nm} の所持枚数を1増やす`, oMenos: nm => `${nm} の所持枚数を1減らす`,
       deckGroup: nm => `デッキ内の枚数：${nm}`, ownGroup: nm => `所持枚数：${nm}`,
+      areaDex: "ポケモン図鑑", leadDex: "すべてのポケモンの高さ、重さ、タイプ、能力、進化。タップするとくわしく見られます。",
+      dexAria: "ポケモン図鑑", dexPagerAria: "図鑑のページ", dexSearchPh: "名前または番号でポケモンを検索", dexSearchAria: "名前または図鑑番号でポケモンを検索",
+      dexGen: "世代", dexGenAria: "世代で絞り込み", dexGenN: r => `第${r}世代`, dexType: "タイプ", dexTypeAria: "タイプで絞り込み",
+      dexCount: n => `図鑑のポケモン：<strong>${n}</strong>`, dexShown: n => `${n} 匹を表示`,
+      dexLoading: "PokéAPI から図鑑を読み込み中…", dexErr: "PokéAPI から図鑑を読み込めませんでした。インターネット接続を確認して、もう一度お試しください。",
+      dexNone: "ポケモンが見つかりません。別の名前や番号を試すか、絞り込みを解除してください。", dexOpen: (nm, no) => `${nm}、番号 ${no}。くわしく見る`,
+      dexPrev: "前のポケモン", dexNext: "次のポケモン", dexClose: "閉じる", detailLoading: "くわしい情報を読み込み中…", detailErr: "このポケモンの情報を読み込めませんでした。",
+      shiny: "色違い", normalArt: "通常の色", cry: "鳴き声を再生", seeCards: "バインダーでカードを見る",
+      height: "高さ", weight: "重さ", generation: "世代", habitat: "生息地", abilities: "特性", hiddenAb: "隠れ特性",
+      baseStats: "種族値", total: "合計", weakTo: "弱点", evolution: "進化", evoNone: "このポケモンは進化しません。",
+      breeding: "育成", gender: "性別", genderless: "性別不明", eggGroups: "タマゴグループ", catchRate: "捕獲率",
+      happiness: "初期なつき度", growth: "成長速度", baseExp: "基礎経験値", forms: "ほかのすがた",
+      legendary: "伝説", mythical: "幻", baby: "ベイビィ",
+      evoLv: n => `レベル ${n}`, evoItem: i => `${i} を使う`, evoTrade: "通信交換", evoTradeItem: i => `${i} を持たせて通信交換`, evoFriend: "なつき度が高い", evoMove: m => `${m} を覚えている`,
+      statNames: { hp: "HP", attack: "こうげき", defense: "ぼうぎょ", "special-attack": "とくこう", "special-defense": "とくぼう", speed: "すばやさ" },
+      tipos: { normal: "ノーマル", fire: "ほのお", water: "みず", grass: "くさ", electric: "でんき", ice: "こおり", fighting: "かくとう", poison: "どく", ground: "じめん", flying: "ひこう", psychic: "エスパー", bug: "むし", rock: "いわ", ghost: "ゴースト", dragon: "ドラゴン", dark: "あく", steel: "はがね", fairy: "フェアリー" },
       htmlLang: "ja", title: "ポケモンバインダー", h1: "ポケモンバインダー", sideTab: "アカウントと設定",
       lead: "持っているカードをチェックして、お気に入りを保存しましょう。",
       stats: (n, tot) => `<strong>${n}</strong> / <span>${tot}</span> 枚を所持`,
@@ -727,7 +897,7 @@
       setAria: "セットで絞り込み", set: "セット", serieAria: "シリーズで絞り込み", serie: "シリーズ",
       binderAria: "カードバインダー", pagerAria: "バインダーのページ", prevPage: "前のページ", nextPage: "次のページ",
       page: "ページ", of: n => "/ " + n,
-      footer: "カードのデータと画像は、オープンソースのポケモンカードAPI「TCGdex」（tcgdex.dev）のものです。一部の画像は公式ギャラリーを予備として使っています。ポケモンカードゲーム ポケット（デジタル）のカードは含まれません。コレクションとお気に入りはこのブラウザに保存されます。",
+      footer: "カードのデータと画像は、オープンソースのポケモンカードAPI「TCGdex」（tcgdex.dev）のものです。一部の画像は公式ギャラリーを予備として使っています。ポケモンカードゲーム ポケット（デジタル）のカードは含まれません。図鑑のデータは PokéAPI（pokeapi.co）のものです。コレクションとお気に入りはこのブラウザに保存されます。",
       reset: "バインダーをリセット", resetArm: "もう一度タップですべて削除",
       zClose: "拡大カードを閉じる", zPrev: "前のカード", zNext: "次のカード", zPos: (i, n) => `${i} / ${n}`,
       panelTitle: "アカウントと設定", closePanel: "パネルを閉じる", account: "アカウント", siteSettings: "サイト設定",
@@ -841,7 +1011,7 @@
         if (cfg.ordem !== "nome") cfg.ordem = "num";
         if (!LANGS.includes(cfg.lang)) cfg.lang = "en";
         if (!TEMAS.includes(cfg.tema)) cfg.tema = "rosa";
-        if (cfg.area !== "decks") cfg.area = "binder";
+        if (!["binder", "decks", "dex"].includes(cfg.area)) cfg.area = "binder";
         return { perfil, cfg };
       }
     } catch (e) { /* usa o padrão */ }
@@ -1413,15 +1583,17 @@
   }, { passive: true });
 
   /* ---------- Áreas: Binder e Deck Builder ---------- */
-  function atualizar() { if (conta.cfg.area === "decks") renderDeck(); else render(); }
+  function atualizar() { if (conta.cfg.area === "decks") renderDeck(); else if (conta.cfg.area === "dex") { renderDex(); carregarDex(); } else render(); }
   function aplicarArea() {
-    const deck = conta.cfg.area === "decks";
-    $("areaBinder").hidden = deck;
-    $("areaDecks").hidden = !deck;
-    $("statsBinder").hidden = deck;
-    $("statsDeck").hidden = !deck;
-    $("reset").hidden = deck;
-    $("lead").textContent = t(deck ? "leadDeck" : "lead");
+    const a = conta.cfg.area;
+    $("areaBinder").hidden = a !== "binder";
+    $("areaDecks").hidden = a !== "decks";
+    $("areaDex").hidden = a !== "dex";
+    $("statsBinder").hidden = a !== "binder";
+    $("statsDeck").hidden = a !== "decks";
+    $("statsDex").hidden = a !== "dex";
+    $("reset").hidden = a !== "binder";
+    $("lead").textContent = t(a === "decks" ? "leadDeck" : a === "dex" ? "leadDex" : "lead");
     document.querySelectorAll(".areas [data-area]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.area === conta.cfg.area)));
   }
   document.querySelector(".areas").addEventListener("click", e => {
@@ -1717,6 +1889,383 @@
     (dk.decks.length ? $("deckSel") : $("deckPrimeiro")).focus();
   });
 
+  /* ---------- Pokédex (dados da PokéAPI, pokeapi.co) ---------- */
+  const PAPI = "https://pokeapi.co/api/v2";
+  const ARTE = id => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+  const ARTE_SHINY = id => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${id}.png`;
+  const GERACOES = [[1, 151], [152, 251], [252, 386], [387, 493], [494, 649], [650, 721], [722, 809], [810, 905], [906, 1025]];
+  const ROMANOS = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
+  const TIPOS = ["normal", "fire", "water", "grass", "electric", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"];
+  const COR_TIPO = { normal: "#A8A77A", fire: "#EE8130", water: "#6390F0", grass: "#7AC74C", electric: "#F7D02C", ice: "#96D9D6", fighting: "#C22E28", poison: "#A33EA1", ground: "#E2BF65", flying: "#A98FF3", psychic: "#F95587", bug: "#A6B91A", rock: "#B6A136", ghost: "#735797", dragon: "#6F35FC", dark: "#705746", steel: "#B7B7CE", fairy: "#D685AD" };
+  const TINTA_TIPO = { normal: "#1A1A1A", fire: "#1A1A1A", water: "#1A1A1A", grass: "#1A1A1A", electric: "#1A1A1A", ice: "#1A1A1A", fighting: "#FFFFFF", poison: "#FFFFFF", ground: "#1A1A1A", flying: "#1A1A1A", psychic: "#1A1A1A", bug: "#1A1A1A", rock: "#1A1A1A", ghost: "#FFFFFF", dragon: "#FFFFFF", dark: "#FFFFFF", steel: "#1A1A1A", fairy: "#1A1A1A" };
+  const NOMES_ESPECIAIS = {
+    "nidoran-f": "Nidoran♀", "nidoran-m": "Nidoran♂", "mr-mime": "Mr. Mime", "mime-jr": "Mime Jr.", "mr-rime": "Mr. Rime",
+    "farfetchd": "Farfetch’d", "sirfetchd": "Sirfetch’d", "type-null": "Type: Null", "flabebe": "Flabébé",
+    "ho-oh": "Ho-Oh", "porygon-z": "Porygon-Z", "jangmo-o": "Jangmo-o", "hakamo-o": "Hakamo-o", "kommo-o": "Kommo-o",
+    "wo-chien": "Wo-Chien", "chien-pao": "Chien-Pao", "ting-lu": "Ting-Lu", "chi-yu": "Chi-Yu"
+  };
+  const nomeBonito = slug => NOMES_ESPECIAIS[slug] || slug.split("-").map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(" ");
+  const textoBonito = slug => String(slug || "").split("-").map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(" ");
+  const idDaUrl = u => { const m = /\/(\d+)\/?$/.exec(u || ""); return m ? parseInt(m[1], 10) : 0; };
+  const pad4 = n => String(n).padStart(4, "0");
+
+  let DEX = [];
+  const dexState = { q: "", gen: "", tipo: "", page: 0, lista: [], status: "idle", erro: "", tipoCarregando: false };
+  const TIPO_DADOS = {}; // nome -> { ids: Set, rel: damage_relations }
+  const DETALHES = new Map();
+  const xGrid = $("xGrid"), xVazio = $("xVazio"), xPrev = $("xPrev"), xNext = $("xNext"), xPgIn = $("xPgIn");
+  const mqDexLarga = window.matchMedia("(min-width: 860px)"), mqDexEstreita = window.matchMedia("(max-width: 479px)");
+  const dexPorPagina = () => mqDexLarga.matches ? 24 : mqDexEstreita.matches ? 12 : 16;
+
+  async function papi(path) {
+    return getJSON(path.startsWith("http") ? path : PAPI + path);
+  }
+  async function carregarDex() {
+    if (dexState.status === "ok" || dexState.status === "loading") return;
+    dexState.status = "loading"; dexState.erro = "";
+    renderDex();
+    try {
+      let lista = null;
+      try {
+        const db = await abrirDB();
+        const c = await new Promise(ok => { const r = db.transaction("dados").objectStore("dados").get("dex-list-v1"); r.onsuccess = () => ok(r.result || null); r.onerror = () => ok(null); });
+        if (c && Date.now() - c.quando < 7 * 24 * 3600e3) lista = c.lista;
+      } catch (e) { /* sem cache */ }
+      if (!lista) {
+        const r = await papi("/pokemon-species?limit=2000");
+        lista = (r.results || []).map(x => ({ id: idDaUrl(x.url), slug: x.name })).filter(x => x.id);
+        try { const db = await abrirDB(); db.transaction("dados", "readwrite").objectStore("dados").put({ quando: Date.now(), lista }, "dex-list-v1"); } catch (e) { /* segue */ }
+      }
+      DEX = lista.sort((a, b) => a.id - b.id).map(x => ({ id: x.id, slug: x.slug, n: nomeBonito(x.slug), nn: norm(nomeBonito(x.slug)) }));
+      dexState.status = "ok";
+    } catch (e) {
+      console.error(e);
+      dexState.status = "error"; dexState.erro = (e && e.message) || String(e);
+    }
+    renderDex();
+  }
+  async function dadosTipo(nome) {
+    if (TIPO_DADOS[nome]) return TIPO_DADOS[nome];
+    const r = await papi("/type/" + nome);
+    const ids = new Set((r.pokemon || []).map(p => idDaUrl(p.pokemon.url)).filter(id => id && id < 10000));
+    TIPO_DADOS[nome] = { ids, rel: r.damage_relations || {} };
+    return TIPO_DADOS[nome];
+  }
+
+  function dexFiltrados() {
+    const tks = norm(dexState.q.trim()).replace(/#/g, "").split(/\s+/).filter(Boolean);
+    const g = dexState.gen ? GERACOES[Number(dexState.gen)] : null;
+    const tipoIds = dexState.tipo && TIPO_DADOS[dexState.tipo] ? TIPO_DADOS[dexState.tipo].ids : null;
+    return DEX.filter(p => {
+      if (g && (p.id < g[0] || p.id > g[1])) return false;
+      if (tipoIds && !tipoIds.has(p.id)) return false;
+      for (const tk of tks) {
+        if (/^\d+$/.test(tk)) { if (p.id !== parseInt(tk, 10) && !p.nn.includes(tk)) return false; }
+        else if (!p.nn.includes(tk)) return false;
+      }
+      return true;
+    });
+  }
+
+  function renderDex() {
+    $("dexLine").innerHTML = t("dexCount", DEX.length ? DEX.length.toLocaleString() : "…");
+    const ok = dexState.status === "ok" && !dexState.tipoCarregando;
+    const lista = ok ? dexFiltrados() : [];
+    dexState.lista = lista;
+    const pp = dexPorPagina();
+    const paginas = Math.max(1, Math.ceil(lista.length / pp));
+    dexState.page = Math.min(dexState.page, paginas - 1);
+    $("dexSub").textContent = ok && (dexState.q || dexState.gen || dexState.tipo) ? t("dexShown", lista.length) : "";
+    if (!ok) {
+      xGrid.hidden = true; xVazio.hidden = false;
+      xVazio.innerHTML = dexState.status === "error"
+        ? `<span>${esc(t("dexErr"))}</span>${dexState.erro ? `<small class="erro-tec">${esc(t("techDetail"))}: ${esc(dexState.erro)}</small>` : ""}<button type="button" class="btn-retry" data-dex-retry="1">${esc(t("retry"))}</button>`
+        : `<span class="spin" aria-hidden="true"></span><span>${esc(t("dexLoading"))}</span>`;
+    } else if (!lista.length) {
+      xGrid.hidden = true; xVazio.hidden = false; xVazio.textContent = t("dexNone");
+    } else {
+      xVazio.hidden = true; xGrid.hidden = false;
+      const fatia = lista.slice(dexState.page * pp, dexState.page * pp + pp);
+      xGrid.innerHTML = fatia.map(p => `<li><button type="button" class="dex-tile" data-dex="${p.id}" aria-label="${esc(t("dexOpen", p.n, pad4(p.id)))}">
+          <span class="dex-art"><img src="${ARTE(p.id)}" alt="" width="120" height="120" loading="lazy" decoding="async"></span>
+          <span class="dex-no">#${pad4(p.id)}</span><span class="dex-nm">${esc(p.n)}</span>
+        </button></li>`).join("");
+    }
+    xPgIn.value = dexState.page + 1;
+    xPgIn.max = paginas;
+    xPgIn.disabled = !ok;
+    $("xPgDe").textContent = t("of", paginas);
+    xPrev.disabled = !ok || dexState.page === 0;
+    xNext.disabled = !ok || dexState.page >= paginas - 1;
+  }
+  xGrid.addEventListener("error", e => {
+    const img = e.target;
+    if (!(img instanceof HTMLImageElement)) return;
+    const span = document.createElement("span");
+    span.className = "dex-sem-img";
+    span.textContent = "?";
+    img.replaceWith(span);
+  }, true);
+
+  function preencherFiltrosDex() {
+    const g = $("xGen"), tp = $("xTipo");
+    g.innerHTML = `<option value="">${esc(t("dexGen"))}</option>` + GERACOES.map((r, i) => `<option value="${i}">${esc(t("dexGenN", ROMANOS[i]))} (${r[0]}–${r[1]})</option>`).join("");
+    g.value = dexState.gen;
+    tp.innerHTML = `<option value="">${esc(t("dexType"))}</option>` + TIPOS.map(x => `<option value="${x}">${esc(t("tipos")[x])}</option>`).join("");
+    tp.value = dexState.tipo;
+  }
+  let xBuscaTimer;
+  $("xBusca").addEventListener("input", e => {
+    clearTimeout(xBuscaTimer);
+    xBuscaTimer = setTimeout(() => { dexState.q = e.target.value; dexState.page = 0; renderDex(); }, 120);
+  });
+  $("xGen").addEventListener("change", e => { dexState.gen = e.target.value; dexState.page = 0; renderDex(); });
+  $("xTipo").addEventListener("change", async e => {
+    dexState.tipo = e.target.value; dexState.page = 0;
+    if (dexState.tipo && !TIPO_DADOS[dexState.tipo]) {
+      dexState.tipoCarregando = true; renderDex();
+      try { await dadosTipo(dexState.tipo); }
+      catch (err) { console.error(err); dexState.tipo = ""; $("xTipo").value = ""; }
+      dexState.tipoCarregando = false;
+    }
+    renderDex();
+  });
+  xVazio.addEventListener("click", e => { if (e.target.closest("[data-dex-retry]")) { dexState.status = "idle"; carregarDex(); } });
+  xPrev.addEventListener("click", () => { if (dexState.page > 0) { dexState.page--; renderDex(); if (xPrev.disabled) xNext.focus(); } });
+  xNext.addEventListener("click", () => { dexState.page++; renderDex(); if (xNext.disabled) xPrev.focus(); });
+  xPgIn.addEventListener("change", () => { const max = Number(xPgIn.max) || 1; dexState.page = Math.min(max, Math.max(1, parseInt(xPgIn.value, 10) || 1)) - 1; renderDex(); });
+  xPgIn.addEventListener("keydown", e => { if (e.key === "Enter") xPgIn.blur(); });
+  [mqDexLarga, mqDexEstreita].forEach(m => m.addEventListener("change", () => { if (conta.cfg.area === "dex") renderDex(); }));
+
+  /* ---------- Ficha do Pokémon ---------- */
+  const dexModal = $("dexModal");
+  const xState = { ids: [], i: 0, origem: null, shiny: false, pedido: 0 };
+  async function carregarDetalhe(id) {
+    if (DETALHES.has(id)) return DETALHES.get(id);
+    const [pk, sp] = await Promise.all([papi("/pokemon/" + id), papi("/pokemon-species/" + id)]);
+    const extras = await Promise.all([
+      sp.evolution_chain && sp.evolution_chain.url ? papi(sp.evolution_chain.url).catch(() => null) : null,
+      Promise.all((pk.types || []).map(x => dadosTipo(x.type.name).catch(() => null))),
+      Promise.all((pk.abilities || []).map(a => papi(a.ability.url).catch(() => null)))
+    ]);
+    const d = { pk, sp, evo: extras[0], tipos: extras[1], habs: extras[2] };
+    DETALHES.set(id, d);
+    return d;
+  }
+  const emIngles = arr => (arr || []).filter(x => x.language && x.language.name === "en");
+  function condicaoEvo(det) {
+    if (!det) return "";
+    if (det.min_level) return t("evoLv", det.min_level);
+    if (det.item) return t("evoItem", textoBonito(det.item.name));
+    if (det.trigger && det.trigger.name === "trade") return det.held_item ? t("evoTradeItem", textoBonito(det.held_item.name)) : t("evoTrade");
+    if (det.min_happiness || det.min_affection) return t("evoFriend");
+    if (det.known_move) return t("evoMove", textoBonito(det.known_move.name));
+    if (det.trigger) return textoBonito(det.trigger.name);
+    return "";
+  }
+  function evoHTML(evo, atual) {
+    if (!evo || !evo.chain) return "";
+    const etapa = (no, det) => {
+      const id = idDaUrl(no.species.url);
+      const nome = nomeBonito(no.species.name);
+      const cond = condicaoEvo(det);
+      return `<button type="button" class="evo-etapa${id === atual ? " atual" : ""}" data-evo="${id}" ${id === atual ? 'aria-current="true"' : ""}>
+          <img src="${ARTE(id)}" alt="" width="72" height="72" loading="lazy">
+          <span class="evo-nm">${esc(nome)}</span><span class="evo-no">#${pad4(id)}</span>
+          ${cond ? `<span class="evo-cond">${esc(cond)}</span>` : ""}
+        </button>`;
+    };
+    const ramo = (no, det) => {
+      let h = etapa(no, det);
+      if (no.evolves_to && no.evolves_to.length) {
+        h += `<span class="evo-seta" aria-hidden="true">→</span><div class="evo-filhos">` +
+          no.evolves_to.map(f => `<div class="evo-ramo">${ramo(f, (f.evolution_details || [])[0])}</div>`).join("") + `</div>`;
+      }
+      return h;
+    };
+    if (!evo.chain.evolves_to || !evo.chain.evolves_to.length) return `<p class="ficha-nota">${esc(t("evoNone"))}</p>`;
+    return `<div class="evo">${ramo(evo.chain, null)}</div>`;
+  }
+  function fraquezas(tipos) {
+    const res = [];
+    TIPOS.forEach(atk => {
+      let m = 1;
+      tipos.forEach(td => {
+        if (!td) return;
+        const r = td.rel;
+        if ((r.double_damage_from || []).some(x => x.name === atk)) m *= 2;
+        if ((r.half_damage_from || []).some(x => x.name === atk)) m *= 0.5;
+        if ((r.no_damage_from || []).some(x => x.name === atk)) m *= 0;
+      });
+      if (m > 1) res.push([atk, m]);
+    });
+    return res.sort((a, b) => b[1] - a[1]);
+  }
+  const chipTipo = (nome, extra) => `<span class="tipo" style="background:${COR_TIPO[nome] || "#999"};color:${TINTA_TIPO[nome] || "#111"}">${esc(t("tipos")[nome] || textoBonito(nome))}${extra ? ` <b>${extra}</b>` : ""}</span>`;
+
+  async function desenharFicha() {
+    const id = xState.ids[xState.i];
+    const base = DEX.find(p => p.id === id) || { id, n: "#" + id };
+    const pedido = ++xState.pedido;
+    $("xNome").textContent = base.n;
+    $("xNum").textContent = "#" + pad4(id);
+    $("xPos").textContent = t("zPos", xState.i + 1, xState.ids.length);
+    $("xPrevP").disabled = xState.i === 0;
+    $("xNextP").disabled = xState.i >= xState.ids.length - 1;
+    $("xArt").innerHTML = `<img src="${xState.shiny ? ARTE_SHINY(id) : ARTE(id)}" alt="${esc(base.n)}${xState.shiny ? " (" + esc(t("shiny")) + ")" : ""}" width="300" height="300">`;
+    $("xShiny").setAttribute("aria-pressed", String(xState.shiny));
+    $("xShiny").textContent = xState.shiny ? t("normalArt") : t("shiny");
+    $("xCorpo").innerHTML = `<p class="ficha-carregando"><span class="spin" aria-hidden="true"></span>${esc(t("detailLoading"))}</p>`;
+    $("xTopo").style.setProperty("--tc", "#E9DDE3");
+    let d;
+    try { d = await carregarDetalhe(id); }
+    catch (e) {
+      if (pedido !== xState.pedido) return;
+      console.error(e);
+      $("xCorpo").innerHTML = `<p class="ficha-nota">${esc(t("detailErr"))}</p><button type="button" class="btn-retry" data-ficha-retry="1">${esc(t("retry"))}</button>`;
+      return;
+    }
+    if (pedido !== xState.pedido) return;
+    const { pk, sp, evo, tipos, habs } = d;
+    const nomeEn = (emIngles(sp.names)[0] || {}).name || base.n;
+    const nomeJa = ((sp.names || []).find(x => x.language.name === "ja") || {}).name || "";
+    const genus = (emIngles(sp.genera)[0] || {}).genus || "";
+    const flavor = (emIngles(sp.flavor_text_entries).slice(-1)[0] || {}).flavor_text || "";
+    const tiposPk = (pk.types || []).sort((a, b) => a.slot - b.slot).map(x => x.type.name);
+    $("xNome").textContent = nomeEn;
+    $("xTopo").style.setProperty("--tc", COR_TIPO[tiposPk[0]] || "#E9DDE3");
+    const m = pk.height / 10, kg = pk.weight / 10;
+    const pol = Math.round(m * 39.3701), pes = Math.floor(pol / 12), polR = pol % 12;
+    const lb = (kg * 2.20462).toFixed(1);
+    const tags = [];
+    if (sp.is_legendary) tags.push(t("legendary"));
+    if (sp.is_mythical) tags.push(t("mythical"));
+    if (sp.is_baby) tags.push(t("baby"));
+    const habsHTML = (pk.abilities || []).sort((a, b) => a.slot - b.slot).map((a, i) => {
+      const info = habs[i];
+      const nome = info ? ((emIngles(info.names)[0] || {}).name || textoBonito(a.ability.name)) : textoBonito(a.ability.name);
+      const desc = info ? ((emIngles(info.effect_entries)[0] || {}).short_effect || (emIngles(info.flavor_text_entries).slice(-1)[0] || {}).flavor_text || "") : "";
+      return `<li><strong>${esc(nome)}</strong>${a.is_hidden ? ` <span class="hab-oculta">${esc(t("hiddenAb"))}</span>` : ""}${desc ? `<span>${esc(desc.replace(/\s+/g, " "))}</span>` : ""}</li>`;
+    }).join("");
+    const nomesStat = t("statNames");
+    const totalStats = (pk.stats || []).reduce((a, s) => a + s.base_stat, 0);
+    const statsHTML = (pk.stats || []).map(s => {
+      const v = s.base_stat;
+      const cor = v >= 120 ? "#2E9E6A" : v >= 90 ? "#7BBF3B" : v >= 60 ? "#E8B923" : "#E0703A";
+      return `<div class="stat"><span class="stat-nm">${esc(nomesStat[s.stat.name] || textoBonito(s.stat.name))}</span><span class="stat-v">${v}</span><span class="stat-bar"><i style="width:${Math.min(100, v / 255 * 100)}%;background:${cor}"></i></span></div>`;
+    }).join("") + `<div class="stat total"><span class="stat-nm">${esc(t("total"))}</span><span class="stat-v">${totalStats}</span><span></span></div>`;
+    const fr = fraquezas(tipos);
+    const genero = sp.gender_rate < 0 ? t("genderless") : `♂ ${((8 - sp.gender_rate) / 8 * 100).toFixed(1).replace(".0", "")}% · ♀ ${(sp.gender_rate / 8 * 100).toFixed(1).replace(".0", "")}%`;
+    const formas = (sp.varieties || []).filter(v => !v.is_default).map(v => textoBonito(v.pokemon.name.replace(sp.name + "-", "")));
+    const geracao = sp.generation ? t("dexGenN", ROMANOS[idDaUrl(sp.generation.url) - 1] || "?") : "—";
+    const grito = pk.cries && (pk.cries.latest || pk.cries.legacy);
+    $("xCorpo").innerHTML = `
+      <p class="ficha-genus">${esc(genus)}${nomeJa ? ` <span lang="ja">· ${esc(nomeJa)}</span>` : ""}</p>
+      <div class="ficha-tipos">${tiposPk.map(x => chipTipo(x)).join("")}${tags.map(x => `<span class="tag">${esc(x)}</span>`).join("")}</div>
+      ${flavor ? `<p class="ficha-flavor">${esc(flavor.replace(/[\f\n\r]+/g, " "))}</p>` : ""}
+      <dl class="ficha-medidas">
+        <div><dt>${esc(t("height"))}</dt><dd>${m.toLocaleString(undefined, { maximumFractionDigits: 1 })} m <small>(${pes}′${String(polR).padStart(2, "0")}″)</small></dd></div>
+        <div><dt>${esc(t("weight"))}</dt><dd>${kg.toLocaleString(undefined, { maximumFractionDigits: 1 })} kg <small>(${lb} lb)</small></dd></div>
+        <div><dt>${esc(t("generation"))}</dt><dd>${esc(geracao)}</dd></div>
+        <div><dt>${esc(t("habitat"))}</dt><dd>${esc(sp.habitat ? textoBonito(sp.habitat.name) : "—")}</dd></div>
+      </dl>
+      <div class="ficha-acoes">
+        ${grito ? `<button type="button" class="pill" data-grito="${esc(grito)}">▶ ${esc(t("cry"))}</button>` : ""}
+        <button type="button" class="pill" data-ver-cartas="${esc(nomeEn)}">${esc(t("seeCards"))}</button>
+      </div>
+      <h3>${esc(t("abilities"))}</h3>
+      <ul class="ficha-habs">${habsHTML}</ul>
+      <h3>${esc(t("baseStats"))}</h3>
+      <div class="ficha-stats">${statsHTML}</div>
+      ${fr.length ? `<h3>${esc(t("weakTo"))}</h3><div class="ficha-tipos">${fr.map(([x, mult]) => chipTipo(x, "×" + mult)).join("")}</div>` : ""}
+      <h3>${esc(t("evolution"))}</h3>
+      ${evoHTML(evo, id) || `<p class="ficha-nota">${esc(t("evoNone"))}</p>`}
+      <h3>${esc(t("breeding"))}</h3>
+      <dl class="ficha-medidas">
+        <div><dt>${esc(t("gender"))}</dt><dd>${esc(genero)}</dd></div>
+        <div><dt>${esc(t("eggGroups"))}</dt><dd>${esc((sp.egg_groups || []).map(x => textoBonito(x.name)).join(", ") || "—")}</dd></div>
+        <div><dt>${esc(t("catchRate"))}</dt><dd>${sp.capture_rate}</dd></div>
+        <div><dt>${esc(t("happiness"))}</dt><dd>${sp.base_happiness ?? "—"}</dd></div>
+        <div><dt>${esc(t("growth"))}</dt><dd>${esc(sp.growth_rate ? textoBonito(sp.growth_rate.name) : "—")}</dd></div>
+        <div><dt>${esc(t("baseExp"))}</dt><dd>${pk.base_experience ?? "—"}</dd></div>
+      </dl>
+      ${formas.length ? `<h3>${esc(t("forms"))}</h3><div class="ficha-tipos">${formas.map(f => `<span class="tag">${esc(f)}</span>`).join("")}</div>` : ""}`;
+  }
+  function abrirFicha(id, ids) {
+    xState.ids = ids && ids.length ? ids : [id];
+    xState.i = Math.max(0, xState.ids.indexOf(id));
+    xState.origem = id;
+    xState.shiny = false;
+    dexModal.hidden = false;
+    wrap.inert = true;
+    $("xFechar").focus();
+    $("xCaixa").scrollTop = 0;
+    desenharFicha();
+  }
+  function fecharFicha() {
+    if (dexModal.hidden) return;
+    dexModal.hidden = true;
+    wrap.inert = false;
+    const atual = xState.ids[xState.i];
+    const pos = dexState.lista.findIndex(p => p.id === atual);
+    const pp = dexPorPagina();
+    if (conta.cfg.area === "dex" && pos >= 0 && Math.floor(pos / pp) !== dexState.page) { dexState.page = Math.floor(pos / pp); renderDex(); }
+    const alvo = xGrid.querySelector(`[data-dex="${atual}"]`) || xGrid.querySelector(`[data-dex="${xState.origem}"]`) || sideTab;
+    alvo.focus();
+  }
+  function irFicha(d) {
+    const n = xState.i + d;
+    if (n < 0 || n >= xState.ids.length) return;
+    xState.i = n; xState.shiny = false;
+    $("xCaixa").scrollTop = 0;
+    desenharFicha();
+  }
+  xGrid.addEventListener("click", e => {
+    const b = e.target.closest("[data-dex]");
+    if (b) abrirFicha(Number(b.dataset.dex), dexState.lista.map(p => p.id));
+  });
+  $("xFechar").addEventListener("click", fecharFicha);
+  $("xPrevP").addEventListener("click", () => irFicha(-1));
+  $("xNextP").addEventListener("click", () => irFicha(1));
+  $("xShiny").addEventListener("click", () => {
+    xState.shiny = !xState.shiny;
+    const id = xState.ids[xState.i];
+    const nome = $("xNome").textContent;
+    $("xArt").innerHTML = `<img src="${xState.shiny ? ARTE_SHINY(id) : ARTE(id)}" alt="${esc(nome)}${xState.shiny ? " (" + esc(t("shiny")) + ")" : ""}" width="300" height="300">`;
+    $("xShiny").setAttribute("aria-pressed", String(xState.shiny));
+    $("xShiny").textContent = xState.shiny ? t("normalArt") : t("shiny");
+  });
+  dexModal.addEventListener("click", e => {
+    if (e.target === dexModal) { fecharFicha(); return; }
+    const evo = e.target.closest("[data-evo]");
+    if (evo) {
+      const id = Number(evo.dataset.evo);
+      if (id === xState.ids[xState.i]) return;
+      const i = xState.ids.indexOf(id);
+      if (i >= 0) xState.i = i; else { xState.ids = [id]; xState.i = 0; }
+      xState.shiny = false; $("xCaixa").scrollTop = 0; desenharFicha(); $("xFechar").focus();
+      return;
+    }
+    const gr = e.target.closest("[data-grito]");
+    if (gr) { try { const a = new Audio(gr.dataset.grito); a.volume = 0.5; a.play().catch(() => {}); } catch (err) { /* sem som */ } return; }
+    const vc = e.target.closest("[data-ver-cartas]");
+    if (vc) {
+      dexModal.hidden = true; wrap.inert = false;
+      conta.cfg.area = "binder"; salvarConta(); aplicarArea();
+      state.q = vc.dataset.verCartas; state.tab = "todas"; state.posse = ""; state.serie = ""; state.set = ""; state.page = 0;
+      $("busca").value = state.q; preencherFiltros(); render();
+      $("busca").focus();
+      return;
+    }
+    if (e.target.closest("[data-ficha-retry]")) desenharFicha();
+  });
+  document.addEventListener("keydown", e => {
+    if (dexModal.hidden) return;
+    if (e.key === "Escape") { e.preventDefault(); fecharFicha(); }
+    else if (e.key === "ArrowLeft" && !e.target.closest("input, select")) irFicha(-1);
+    else if (e.key === "ArrowRight" && !e.target.closest("input, select")) irFicha(1);
+  });
+
   /* ---------- Painel lateral: cadastro e configurações ---------- */
   const wrap = $("wrap"), painel = $("painel"), scrim = $("scrim"), sideTab = $("sideTab");
   function abrirPainel() {
@@ -1836,6 +2385,7 @@
     if (dState.form) $("deckFormLbl").textContent = t(dState.form === "new" ? "deckNewLbl" : "deckRenLbl");
     aplicarArea();
     preencherFiltros();
+    preencherFiltrosDex();
     const tinhaForm = !conta.perfil && $("inNome") ? [$("inNome").value, $("inEmail").value] : null;
     renderConta();
     if (tinhaForm) { $("inNome").value = tinhaForm[0]; $("inEmail").value = tinhaForm[1]; }
@@ -1848,6 +2398,7 @@
     aplicarIdioma();
     atualizar();
     if (!zoom.hidden) desenharZoom();
+    if (!dexModal.hidden) desenharFicha();
   });
 
   aplicarIdioma();
