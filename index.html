@@ -1167,6 +1167,14 @@
       acctIntro: "Create your account to personalize your binder.", name: "Trainer name", email: "Email",
       create: "Create account", acctNote: "For now, the account is saved only in this browser.",
       acctDone: "Account created in this browser. Password login and access from any device are planned for a later version.",
+      sbIntroUp: "Create your account to keep your collection safe online.", sbForgot: "Forgot my password", sbBack: "Back to sign in", sbSendLink: "Send reset link",
+      sbRecIntro: "Enter your email and we will send a link to create a new password.", sbRecSent: "Link sent! Check your email (and spam).",
+      sbNewIntro: "Choose your new password.", sbNewPass: "New password", sbSave: "Save password", acctTitle: "Account",
+      sbIntro: "Sign in to save your collection online and open it on any device.", sbPass: "Password", sbIn: "Sign in", sbUp: "Create account",
+      sbNote: "Your collection stays in this browser and is copied to your account after you sign in.", sbErrPass: "Use a password with at least 6 characters.",
+      sbConfirm: "Almost there! Check your email to confirm the account, then sign in.", sbSyncing: "Please wait…", sbOk: "Collection saved to your account.",
+      sbErr: m => "Could not connect: " + m, sbNow: "Sync now", sbConflict: "This browser and your account both have a collection. Which one do you want to keep?",
+      sbUseCloud: "Use the account's collection", sbUseLocal: "Keep this browser's and upload it",
       signOut: "Sign out", errName: "Enter a trainer name with at least 2 characters.", errEmail: "Enter a valid email, like name@example.com.",
       enlarge: "Enlarge card", number: "number", inColl: "owned", notInColl: "not owned", favLabel: "Favorite", haveLabel: "I own it",
       btnHave: "I own it", btnOwned: "Owned", ownedIn: "Owned in", langNames: { en: "English", pt: "Portuguese", ja: "Japanese" },
@@ -1243,6 +1251,14 @@
       acctIntro: "Crie sua conta para identificar o seu fichário.", name: "Nome de treinador", email: "E-mail",
       create: "Criar conta", acctNote: "Por enquanto, a conta fica salva só neste navegador.",
       acctDone: "Conta criada neste navegador. Login com senha e acesso de qualquer aparelho ficam para a próxima versão.",
+      sbIntroUp: "Crie sua conta para manter a coleção segura online.", sbForgot: "Esqueci minha senha", sbBack: "Voltar para entrar", sbSendLink: "Enviar link",
+      sbRecIntro: "Digite seu e-mail e enviaremos um link para criar uma nova senha.", sbRecSent: "Link enviado! Veja seu e-mail (e o spam).",
+      sbNewIntro: "Escolha a sua nova senha.", sbNewPass: "Nova senha", sbSave: "Salvar senha", acctTitle: "Conta",
+      sbIntro: "Entre para salvar sua coleção online e abrir em qualquer aparelho.", sbPass: "Senha", sbIn: "Entrar", sbUp: "Criar conta",
+      sbNote: "Sua coleção continua neste navegador e é copiada para a sua conta depois que você entrar.", sbErrPass: "Use uma senha com pelo menos 6 caracteres.",
+      sbConfirm: "Quase lá! Confirme a conta pelo link enviado ao seu e-mail e depois entre.", sbSyncing: "Aguarde…", sbOk: "Coleção salva na sua conta.",
+      sbErr: m => "Não foi possível conectar: " + m, sbNow: "Sincronizar agora", sbConflict: "Este navegador e a sua conta têm coleções diferentes. Qual você quer manter?",
+      sbUseCloud: "Usar a coleção da conta", sbUseLocal: "Manter a deste navegador e enviar",
       signOut: "Sair da conta", errName: "Digite um nome de treinador com pelo menos 2 letras.", errEmail: "Digite um e-mail válido, como nome@exemplo.com.",
       enlarge: "Ampliar carta", number: "número", inColl: "na coleção", notInColl: "fora da coleção", favLabel: "Favorita", haveLabel: "Tenho na coleção",
       btnHave: "Tenho", btnOwned: "Na coleção", ownedIn: "Tenho em", langNames: { en: "inglês", pt: "português", ja: "japonês" },
@@ -3047,42 +3063,193 @@
   document.addEventListener("keydown", e => { if (e.key === "Escape" && painel.classList.contains("open")) fecharPainel(); });
 
   const contaBox = $("contaBox");
+
+  /* ---------- Login e sincronização (Supabase, via REST) ---------- */
+  const SB_URL = "https://umzxvfqssqvlhrxcnusx.supabase.co";
+  const SB_KEY = "sb_publishable_JDZ_R4DUsrnH9n03zfbkDA_JZVRRG65";
+  const KEY_SB = "fichario-pokemon-sb-v1";
+  const ehSync = k => /^fichario-pokemon-(v3|binders-v1|decks-v1|cartao-v1)/.test(k);
+  const lsSet = Storage.prototype.setItem;
+  let sbModo = "entrar", sb = null, sbMsg = "", sbOcupado = false, sbConflito = null, sbAplicando = false, sbTimer = 0;
+  try { sb = JSON.parse(localStorage.getItem(KEY_SB) || "null"); } catch (e) { sb = null; }
+  const sbGuardar = () => { try { if (sb) lsSet.call(localStorage, KEY_SB, JSON.stringify(sb)); else localStorage.removeItem(KEY_SB); } catch (e) { /* segue */ } };
+  async function sbReq(caminho, opc = {}, comToken = true) {
+    if (comToken && sb && sb.exp < Date.now() / 1000 + 60) await sbRenovar();
+    const h = Object.assign({ apikey: SB_KEY, "Content-Type": "application/json" }, opc.headers || {});
+    h.Authorization = "Bearer " + (comToken && sb ? sb.access : SB_KEY);
+    const r = await fetch(SB_URL + caminho, Object.assign({}, opc, { headers: h }));
+    let j = null; try { j = await r.json(); } catch (e) { /* vazio */ }
+    if (!r.ok) throw new Error((j && (j.msg || j.error_description || j.message || j.error)) || ("HTTP " + r.status));
+    return j;
+  }
+  async function sbRenovar() {
+    const j = await sbReq("/auth/v1/token?grant_type=refresh_token", { method: "POST", body: JSON.stringify({ refresh_token: sb.refresh }) }, false);
+    sbSessao(j);
+  }
+  function sbSessao(j) {
+    const u = j.user || {};
+    sb = Object.assign(sb || {}, { access: j.access_token, refresh: j.refresh_token, exp: Date.now() / 1000 + (j.expires_in || 3600),
+      id: u.id || (sb && sb.id), email: u.email || (sb && sb.email), nome: (u.user_metadata && u.user_metadata.nome) || (sb && sb.nome) || "" });
+    conta.perfil = { nome: sb.nome || (sb.email || "?").split("@")[0], email: sb.email || "" };
+    salvarConta(); sbGuardar();
+  }
+  function sbSnapshot() {
+    const o = {};
+    for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (ehSync(k)) o[k] = localStorage.getItem(k); }
+    return o;
+  }
+  async function sbEnviar() {
+    if (!sb || sbConflito) return;
+    const agora = Date.now();
+    await sbReq("/rest/v1/colecoes?on_conflict=user_id", { method: "POST", headers: { Prefer: "resolution=merge-duplicates,return=minimal" },
+      body: JSON.stringify({ user_id: sb.id, dados: sbSnapshot(), atualizado: new Date(agora).toISOString() }) });
+    sb.ultimo = agora; sb.sujo = false; sbGuardar();
+  }
+  async function sbBuscar() {
+    const j = await sbReq("/rest/v1/colecoes?user_id=eq." + encodeURIComponent(sb.id) + "&select=dados,atualizado");
+    return j && j[0] ? { dados: j[0].dados || {}, em: Date.parse(j[0].atualizado) || 0 } : null;
+  }
+  function sbAplicar(rem) {
+    sbAplicando = true;
+    try {
+      Object.keys(sbSnapshot()).forEach(k => localStorage.removeItem(k));
+      Object.keys(rem.dados).forEach(k => { if (ehSync(k)) lsSet.call(localStorage, k, rem.dados[k]); });
+      sb.ultimo = rem.em; sb.sujo = false; sbGuardar();
+    } finally { sbAplicando = false; }
+    location.reload();
+  }
+  const temDadosLocais = () => Object.keys(sbSnapshot()).some(k => { try { const v = JSON.parse(localStorage.getItem(k)); return v && Object.keys(v.cop || v.qty || v).length > 0 && k !== KEY_BINDERS; } catch (e) { return true; } });
+  async function sbSincronizar(inicial) {
+    if (!sb) return;
+    sbOcupado = true; sbMsg = t("sbSyncing"); renderConta();
+    try {
+      const rem = await sbBuscar();
+      if (!rem) { await sbEnviar(); sbMsg = t("sbOk"); }
+      else if (rem.em > (sb.ultimo || 0)) {
+        if (!sb.sujo && (!temDadosLocais() || inicial === "load")) { sbAplicar(rem); return; }
+        if (!temDadosLocais()) { sbAplicar(rem); return; }
+        sbConflito = rem; sbMsg = "";
+      } else { if (sb.sujo || inicial === "manual") await sbEnviar(); sbMsg = t("sbOk"); }
+    } catch (e) { sbMsg = t("sbErr", e.message); }
+    sbOcupado = false; renderConta();
+  }
+  Storage.prototype.setItem = function (k, v) {
+    lsSet.call(this, k, v);
+    if (this === localStorage && sb && !sbAplicando && ehSync(k)) {
+      sb.sujo = true; sbGuardar();
+      if (sbConflito) return;
+      clearTimeout(sbTimer);
+      sbTimer = setTimeout(() => sbEnviar().then(() => { sbMsg = t("sbOk"); if (painel.classList.contains("open")) renderConta(); }).catch(e => { sbMsg = t("sbErr", e.message); }), 4000);
+    }
+  };
+
   function renderConta() {
-    if (conta.perfil) {
-      const p = conta.perfil;
+    if (sb && sbModo !== "nova") {
+      const p = conta.perfil || { nome: "?", email: sb.email || "" };
       contaBox.innerHTML = `
         <div class="conta-ok" id="contaOk" tabindex="-1">
           <span class="avatar" aria-hidden="true">${esc(p.nome.charAt(0).toUpperCase())}</span>
           <div><p class="nome">${esc(p.nome)}</p><p class="email">${esc(p.email)}</p></div>
         </div>
-        <p class="nota">${esc(t("acctDone"))}</p>
+        ${sbConflito ? `<p class="nota">${esc(t("sbConflict"))}</p>
+          <button type="button" class="btn-primary" id="btnNuvem">${esc(t("sbUseCloud"))}</button>
+          <button type="button" class="btn-sec" id="btnLocal">${esc(t("sbUseLocal"))}</button>`
+        : `<p class="nota" role="status">${esc(sbMsg || t("sbOk"))}</p>
+          <button type="button" class="btn-sec" id="btnSync"${sbOcupado ? " disabled" : ""}>${esc(t("sbNow"))}</button>`}
         <button type="button" class="btn-sec" id="btnSair">${esc(t("signOut"))}</button>`;
-    } else {
+    } else if (sbModo === "nova") {
       contaBox.innerHTML = `
-        <p class="nota" style="margin-top:0">${esc(t("acctIntro"))}</p>
-        <div class="field"><label for="inNome">${esc(t("name"))}</label><input id="inNome" type="text" autocomplete="nickname" maxlength="30"></div>
+        <p class="nota" style="margin-top:0">${esc(t("sbNewIntro"))}</p>
+        <div class="field"><label for="inSenha">${esc(t("sbNewPass"))}</label><input id="inSenha" type="password" autocomplete="new-password" minlength="6"></div>
+        <p class="erro" id="erro" role="alert">${esc(sbMsg)}</p>
+        <button type="button" class="btn-primary" id="btnNova"${sbOcupado ? " disabled" : ""}>${esc(t("sbSave"))}</button>`;
+    } else {
+      const m = sbModo, ent = m === "entrar", cri = m === "criar", rec = m === "recuperar";
+      contaBox.innerHTML = `
+        <div class="tabs" role="group" aria-label="${esc(t("acctTitle"))}" style="margin-bottom:12px">
+          <button type="button" data-sbm="entrar" aria-pressed="${ent}">${esc(t("sbIn"))}</button>
+          <button type="button" data-sbm="criar" aria-pressed="${cri}">${esc(t("sbUp"))}</button>
+        </div>
+        <p class="nota" style="margin-top:0">${esc(rec ? t("sbRecIntro") : cri ? t("sbIntroUp") : t("sbIntro"))}</p>
+        ${cri ? `<div class="field"><label for="inNome">${esc(t("name"))}</label><input id="inNome" type="text" autocomplete="nickname" maxlength="30"></div>` : ""}
         <div class="field"><label for="inEmail">${esc(t("email"))}</label><input id="inEmail" type="email" inputmode="email" autocomplete="email"></div>
-        <p class="erro" id="erro" role="alert"></p>
-        <button type="button" class="btn-primary" id="btnCriar">${esc(t("create"))}</button>
-        <p class="nota">${esc(t("acctNote"))}</p>`;
+        ${rec ? "" : `<div class="field"><label for="inSenha">${esc(t("sbPass"))}</label><input id="inSenha" type="password" autocomplete="${cri ? "new-password" : "current-password"}" minlength="6"></div>`}
+        <p class="erro" id="erro" role="alert">${esc(sbMsg)}</p>
+        <button type="button" class="btn-primary" id="${rec ? "btnRec" : cri ? "btnCriar" : "btnEntrar"}"${sbOcupado ? " disabled" : ""}>${esc(rec ? t("sbSendLink") : cri ? t("sbUp") : t("sbIn"))}</button>
+        ${ent ? `<button type="button" class="btn-sec" data-sbm="recuperar">${esc(t("sbForgot"))}</button>` : ""}
+        ${rec ? `<button type="button" class="btn-sec" data-sbm="entrar">${esc(t("sbBack"))}</button>` : ""}
+        <p class="nota">${esc(t("sbNote"))}</p>`;
     }
   }
-  function criarConta() {
-    const nome = $("inNome").value.trim();
-    const email = $("inEmail").value.trim();
-    const erro = $("erro");
-    if (nome.length < 2) { erro.textContent = t("errName"); $("inNome").focus(); return; }
+  async function recuperar() {
+    const email = $("inEmail").value.trim(), erro = $("erro");
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { erro.textContent = t("errEmail"); $("inEmail").focus(); return; }
-    conta.perfil = { nome, email };
-    salvarConta(); renderConta(); $("contaOk").focus();
+    sbOcupado = true; erro.textContent = t("sbSyncing");
+    try { await sbReq("/auth/v1/recover", { method: "POST", body: JSON.stringify({ email }) }, false); sbMsg = t("sbRecSent"); }
+    catch (e) { sbMsg = t("sbErr", e.message); }
+    sbOcupado = false; renderConta();
+  }
+  async function novaSenha() {
+    const senha = $("inSenha").value, erro = $("erro");
+    if (senha.length < 6) { erro.textContent = t("sbErrPass"); return; }
+    sbOcupado = true; erro.textContent = t("sbSyncing");
+    try { await sbReq("/auth/v1/user", { method: "PUT", body: JSON.stringify({ password: senha }) }); sbModo = "entrar"; sbMsg = ""; sbOcupado = false; await sbSincronizar("login"); return; }
+    catch (e) { sbMsg = t("sbErr", e.message); }
+    sbOcupado = false; renderConta();
+  }
+  /* Link de e-mail (confirmação de conta ou recuperação de senha) volta ao site com a sessão no endereço */
+  async function sbLerLink() {
+    const h = new URLSearchParams(location.hash.replace(/^#/, ""));
+    if (!h.get("access_token")) return;
+    const tipo = h.get("type");
+    try {
+      sb = { ultimo: 0, sujo: false, access: h.get("access_token"), refresh: h.get("refresh_token"), exp: Date.now() / 1000 + (+h.get("expires_in") || 3600) };
+      const u = await sbReq("/auth/v1/user");
+      sbSessao({ access_token: sb.access, refresh_token: sb.refresh, expires_in: +h.get("expires_in") || 3600, user: u });
+      history.replaceState(null, "", location.pathname + location.search);
+      abrirPainel();
+      if (tipo === "recovery") { sbModo = "nova"; sbMsg = ""; sb.sujo = false; renderConta(); }
+      else await sbSincronizar("login");
+    } catch (e) { sb = null; sbGuardar(); sbMsg = t("sbErr", e.message); renderConta(); }
+  }
+  async function autenticar(novo) {
+    const nome = novo ? $("inNome").value.trim() : "", email = $("inEmail").value.trim(), senha = $("inSenha").value;
+    const erro = $("erro");
+    if (novo && nome.length < 2) { erro.textContent = t("errName"); $("inNome").focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { erro.textContent = t("errEmail"); $("inEmail").focus(); return; }
+    if (senha.length < 6) { erro.textContent = t("sbErrPass"); $("inSenha").focus(); return; }
+    sbOcupado = true; erro.textContent = t("sbSyncing"); Array.from(contaBox.querySelectorAll(".btn-primary,.btn-sec")).forEach(x => x.disabled = true);
+    try {
+      let j;
+      if (novo) {
+        j = await sbReq("/auth/v1/signup", { method: "POST", body: JSON.stringify({ email, password: senha, data: { nome } }) }, false);
+        if (!j.access_token) { sbOcupado = false; sbMsg = t("sbConfirm"); renderConta(); return; }
+      } else {
+        j = await sbReq("/auth/v1/token?grant_type=password", { method: "POST", body: JSON.stringify({ email, password: senha }) }, false);
+      }
+      sb = { ultimo: 0, sujo: false }; sbSessao(j); sbMsg = "";
+      sbOcupado = false; await sbSincronizar("login");
+    } catch (e) { sbOcupado = false; sbMsg = t("sbErr", e.message); renderConta(); }
   }
   contaBox.addEventListener("click", e => {
-    if (e.target.closest("#btnCriar")) criarConta();
-    if (e.target.closest("#btnSair")) { conta.perfil = null; salvarConta(); renderConta(); $("inNome").focus(); }
+    if (e.target.closest("#btnEntrar")) autenticar(false);
+    if (e.target.closest("#btnCriar")) autenticar(true);
+    const mo = e.target.closest("[data-sbm]"); if (mo) { sbModo = mo.dataset.sbm; sbMsg = ""; renderConta(); }
+    if (e.target.closest("#btnRec")) recuperar();
+    if (e.target.closest("#btnNova")) novaSenha();
+    if (e.target.closest("#btnSync")) sbSincronizar("manual");
+    if (e.target.closest("#btnNuvem")) sbAplicar(sbConflito);
+    if (e.target.closest("#btnLocal")) { const r = sbConflito; sbConflito = null; sb.ultimo = r.em; sbEnviar().then(() => { sbMsg = t("sbOk"); renderConta(); }).catch(er => { sbMsg = t("sbErr", er.message); renderConta(); }); }
+    if (e.target.closest("#btnSair")) {
+      try { if (sb) sbReq("/auth/v1/logout", { method: "POST" }).catch(() => {}); } catch (er) { /* segue */ }
+      sb = null; sbConflito = null; sbMsg = ""; sbGuardar(); conta.perfil = null; salvarConta(); renderConta();
+    }
   });
   contaBox.addEventListener("keydown", e => {
-    if (e.key === "Enter" && e.target.matches("#inNome, #inEmail")) { e.preventDefault(); criarConta(); }
+    if (e.key === "Enter" && e.target.matches("#inNome, #inEmail, #inSenha")) { e.preventDefault(); sbModo === "nova" ? novaSenha() : sbModo === "recuperar" ? recuperar() : autenticar(sbModo === "criar"); }
   });
+  if (/access_token=/.test(location.hash)) setTimeout(sbLerLink, 300);
+  else if (sb) setTimeout(() => sbSincronizar("load"), 800);
 
   function aplicarCfg() {
     document.documentElement.classList.toggle("sem-anim", !conta.cfg.anim);
