@@ -118,6 +118,8 @@
     width: 100%; height: 44px; padding: 0 12px; border: 1px solid var(--line); border-radius: 10px;
     background: var(--surface); color: var(--field-fg); font: 500 16px "Figtree", system-ui, sans-serif;
   }
+  .mg-h { margin: 22px 0 0; padding-top: 16px; border-top: 1px solid var(--line); font-size: 1rem; }
+  .mg-h.perigo { color: var(--erro, #A3112F); }
   .erro { min-height: 1.3em; margin: 8px 0 0; color: var(--erro, #A3112F); font-size: 0.86rem; font-weight: 600; }
   .btn-primary, .btn-sec { width: 100%; height: 44px; margin-top: 6px; border-radius: 12px; font: 700 15px "Figtree", system-ui, sans-serif; cursor: pointer; }
   .btn-primary { border: 0; background: var(--seg-on-bg); color: var(--seg-on-fg); }
@@ -1167,6 +1169,16 @@
       acctIntro: "Create your account to personalize your binder.", name: "Trainer name", email: "Email",
       create: "Create account", acctNote: "For now, the account is saved only in this browser.",
       acctDone: "Account created in this browser. Password login and access from any device are planned for a later version.",
+      mgOpen: "Account settings", mgBack: "Back", mgName: "Trainer name", sbSave2: "Save", mgSaved: "Saved!", mgEmail: "Email", mgEmailNow: e => "Current email: " + e,
+      mgNewEmail: "New email", mgCurPass: "Current password", mgChangeEmail: "Change email", mgEmailSent: e => "We sent a confirmation link to " + e + ". The email only changes after you click it.",
+      mgPass: "Password", mgRepeat: "Repeat new password", mgChangePass: "Change password", mgNoMatch: "The two new passwords are different.", mgPassDone: "Password changed.",
+      mgWrong: "Current password is wrong.", mgNeedPass: "Enter your current password.", mgSync: "Sync", mgSyncD: "Choose how your collection is saved to your account.",
+      mgAutoOn: "Automatic sync: on", mgAutoOff: "Automatic sync: off (use Sync now)", mgClearCloud: "Delete my collection from the cloud",
+      mgClearAsk: "Delete the collection saved in your account? The copy in this browser is kept.", mgCleared: "Cloud copy deleted. This browser's collection was kept.",
+      mgSessions: "Devices", mgSessionsD: "Sign out of every other browser or device where you are logged in.", mgOthers: "Sign out of other devices", mgOthersDone: "Other devices were signed out.",
+      mgDanger: "Delete account", mgDelD: "Permanently deletes your account and cloud collection. The collection in this browser is kept.", mgDelete: "Delete my account permanently",
+      mgDelAsk: "Delete your account permanently? This cannot be undone.", mgDelMissing: "Account deletion is not set up yet in Supabase (missing excluir_conta function).", mgDeleted: "Account deleted.",
+      sbNet: "the server could not be reached. Check your connection, ad blockers or private mode, and that the project is not paused in Supabase.",
       sbIntroUp: "Create your account to keep your collection safe online.", sbForgot: "Forgot my password", sbBack: "Back to sign in", sbSendLink: "Send reset link",
       sbRecIntro: "Enter your email and we will send a link to create a new password.", sbRecSent: "Link sent! Check your email (and spam).",
       sbNewIntro: "Choose your new password.", sbNewPass: "New password", sbSave: "Save password", acctTitle: "Account",
@@ -1251,6 +1263,16 @@
       acctIntro: "Crie sua conta para identificar o seu fichário.", name: "Nome de treinador", email: "E-mail",
       create: "Criar conta", acctNote: "Por enquanto, a conta fica salva só neste navegador.",
       acctDone: "Conta criada neste navegador. Login com senha e acesso de qualquer aparelho ficam para a próxima versão.",
+      mgOpen: "Configurações da conta", mgBack: "Voltar", mgName: "Nome de treinador", sbSave2: "Salvar", mgSaved: "Salvo!", mgEmail: "E-mail", mgEmailNow: e => "E-mail atual: " + e,
+      mgNewEmail: "Novo e-mail", mgCurPass: "Senha atual", mgChangeEmail: "Alterar e-mail", mgEmailSent: e => "Enviamos um link de confirmação para " + e + ". O e-mail só muda depois que você clicar nele.",
+      mgPass: "Senha", mgRepeat: "Repita a nova senha", mgChangePass: "Alterar senha", mgNoMatch: "As duas senhas novas são diferentes.", mgPassDone: "Senha alterada.",
+      mgWrong: "A senha atual está incorreta.", mgNeedPass: "Digite sua senha atual.", mgSync: "Sincronização", mgSyncD: "Escolha como a coleção é salva na sua conta.",
+      mgAutoOn: "Sincronização automática: ligada", mgAutoOff: "Sincronização automática: desligada (use Sincronizar agora)", mgClearCloud: "Apagar minha coleção da nuvem",
+      mgClearAsk: "Apagar a coleção salva na sua conta? A cópia deste navegador é mantida.", mgCleared: "Cópia da nuvem apagada. A coleção deste navegador foi mantida.",
+      mgSessions: "Aparelhos", mgSessionsD: "Sai da conta em todos os outros navegadores ou aparelhos em que você está logada.", mgOthers: "Sair dos outros aparelhos", mgOthersDone: "Os outros aparelhos foram desconectados.",
+      mgDanger: "Excluir conta", mgDelD: "Apaga para sempre a sua conta e a coleção na nuvem. A coleção deste navegador é mantida.", mgDelete: "Excluir minha conta para sempre",
+      mgDelAsk: "Excluir sua conta para sempre? Isso não pode ser desfeito.", mgDelMissing: "A exclusão de conta ainda não foi configurada no Supabase (falta a função excluir_conta).", mgDeleted: "Conta excluída.",
+      sbNet: "não foi possível alcançar o servidor. Verifique a conexão, bloqueadores de anúncios ou aba privada, e se o projeto não está pausado no Supabase.",
       sbIntroUp: "Crie sua conta para manter a coleção segura online.", sbForgot: "Esqueci minha senha", sbBack: "Voltar para entrar", sbSendLink: "Enviar link",
       sbRecIntro: "Digite seu e-mail e enviaremos um link para criar uma nova senha.", sbRecSent: "Link enviado! Veja seu e-mail (e o spam).",
       sbNewIntro: "Escolha a sua nova senha.", sbNewPass: "Nova senha", sbSave: "Salvar senha", acctTitle: "Conta",
@@ -3077,7 +3099,9 @@
     if (comToken && sb && sb.exp < Date.now() / 1000 + 60) await sbRenovar();
     const h = Object.assign({ apikey: SB_KEY, "Content-Type": "application/json" }, opc.headers || {});
     h.Authorization = "Bearer " + (comToken && sb ? sb.access : SB_KEY);
-    const r = await fetch(SB_URL + caminho, Object.assign({}, opc, { headers: h }));
+    let r;
+    try { r = await fetch(SB_URL + caminho, Object.assign({}, opc, { headers: h })); }
+    catch (e) { throw new Error(t("sbNet")); }
     let j = null; try { j = await r.json(); } catch (e) { /* vazio */ }
     if (!r.ok) throw new Error((j && (j.msg || j.error_description || j.message || j.error)) || ("HTTP " + r.status));
     return j;
@@ -3137,13 +3161,14 @@
     lsSet.call(this, k, v);
     if (this === localStorage && sb && !sbAplicando && ehSync(k)) {
       sb.sujo = true; sbGuardar();
-      if (sbConflito) return;
+      if (sbConflito || sb.auto === false) return;
       clearTimeout(sbTimer);
       sbTimer = setTimeout(() => sbEnviar().then(() => { sbMsg = t("sbOk"); if (painel.classList.contains("open")) renderConta(); }).catch(e => { sbMsg = t("sbErr", e.message); }), 4000);
     }
   };
 
   function renderConta() {
+    if (sb && sbModo === "gerenciar") { contaBox.innerHTML = gerenciarHTML(); return; }
     if (sb && sbModo !== "nova") {
       const p = conta.perfil || { nome: "?", email: sb.email || "" };
       contaBox.innerHTML = `
@@ -3156,6 +3181,7 @@
           <button type="button" class="btn-sec" id="btnLocal">${esc(t("sbUseLocal"))}</button>`
         : `<p class="nota" role="status">${esc(sbMsg || t("sbOk"))}</p>
           <button type="button" class="btn-sec" id="btnSync"${sbOcupado ? " disabled" : ""}>${esc(t("sbNow"))}</button>`}
+        <button type="button" class="btn-sec" data-sbm="gerenciar">${esc(t("mgOpen"))}</button>
         <button type="button" class="btn-sec" id="btnSair">${esc(t("signOut"))}</button>`;
     } else if (sbModo === "nova") {
       contaBox.innerHTML = `
@@ -3212,6 +3238,92 @@
       else await sbSincronizar("login");
     } catch (e) { sb = null; sbGuardar(); sbMsg = t("sbErr", e.message); renderConta(); }
   }
+
+  /* ---------- Configurações da conta (depois de logado) ---------- */
+  let sbSec = null;
+  const mgMsg = sec => sbSec && sbSec.sec === sec ? `<p class="${sbSec.ok ? "nota" : "erro"}" role="status" style="margin-top:8px">${esc(sbSec.txt)}</p>` : "";
+  const mgCampo = (id, rot, tipo, val, auto) => `<div class="field"><label for="${id}">${esc(rot)}</label><input id="${id}" type="${tipo}"${val !== undefined ? ` value="${esc(val)}"` : ""} autocomplete="${auto || "off"}"${tipo === "text" ? ' maxlength="30"' : ""}></div>`;
+  function gerenciarHTML() {
+    const p = conta.perfil || { nome: "", email: sb.email };
+    const auto = sb.auto !== false, d = sbOcupado ? " disabled" : "";
+    return `
+      <button type="button" class="btn-sec" data-sbm="entrar" style="margin-top:0">← ${esc(t("mgBack"))}</button>
+      <h3 class="mg-h">${esc(t("mgName"))}</h3>
+      ${mgCampo("mgNome", t("name"), "text", p.nome, "nickname")}
+      ${mgMsg("nome")}<button type="button" class="btn-primary" data-mg="nome"${d}>${esc(t("sbSave2"))}</button>
+      <h3 class="mg-h">${esc(t("mgEmail"))}</h3>
+      <p class="nota" style="margin:6px 0 0">${esc(t("mgEmailNow", sb.email || ""))}</p>
+      ${mgCampo("mgEmailNovo", t("mgNewEmail"), "email", undefined, "email")}
+      ${mgCampo("mgEmailSenha", t("mgCurPass"), "password", undefined, "current-password")}
+      ${mgMsg("email")}<button type="button" class="btn-primary" data-mg="email"${d}>${esc(t("mgChangeEmail"))}</button>
+      <h3 class="mg-h">${esc(t("mgPass"))}</h3>
+      ${mgCampo("mgSenhaAtual", t("mgCurPass"), "password", undefined, "current-password")}
+      ${mgCampo("mgSenhaNova", t("sbNewPass"), "password", undefined, "new-password")}
+      ${mgCampo("mgSenhaNova2", t("mgRepeat"), "password", undefined, "new-password")}
+      ${mgMsg("senha")}<button type="button" class="btn-primary" data-mg="senha"${d}>${esc(t("mgChangePass"))}</button>
+      <h3 class="mg-h">${esc(t("mgSync"))}</h3>
+      <p class="nota" style="margin:6px 0 0">${esc(t("mgSyncD"))}</p>
+      <button type="button" class="btn-sec" data-mg="auto" aria-pressed="${auto}">${esc(t(auto ? "mgAutoOn" : "mgAutoOff"))}</button>
+      <button type="button" class="btn-sec" data-mg="nuvem"${d}>${esc(t("mgClearCloud"))}</button>
+      ${mgMsg("sync")}
+      <h3 class="mg-h">${esc(t("mgSessions"))}</h3>
+      <p class="nota" style="margin:6px 0 0">${esc(t("mgSessionsD"))}</p>
+      <button type="button" class="btn-sec" data-mg="outros"${d}>${esc(t("mgOthers"))}</button>
+      ${mgMsg("sessao")}
+      <h3 class="mg-h perigo">${esc(t("mgDanger"))}</h3>
+      <p class="nota" style="margin:6px 0 0">${esc(t("mgDelD"))}</p>
+      ${mgCampo("mgDelSenha", t("mgCurPass"), "password", undefined, "current-password")}
+      ${mgMsg("del")}<button type="button" class="btn-sec" data-mg="apagar"${d} style="border-color:var(--erro,#A3112F);color:var(--erro,#A3112F)">${esc(t("mgDelete"))}</button>`;
+  }
+  async function mgReauth(senha) {
+    if (!senha) throw new Error(t("mgNeedPass"));
+    try { sbSessao(await sbReq("/auth/v1/token?grant_type=password", { method: "POST", body: JSON.stringify({ email: sb.email, password: senha }) }, false)); }
+    catch (e) { throw new Error(t("mgWrong")); }
+  }
+  async function mgRun(sec, fn) {
+    sbOcupado = true; sbSec = { sec, txt: t("sbSyncing"), ok: true }; renderConta();
+    try { sbSec = { sec, txt: await fn(), ok: true }; }
+    catch (e) { sbSec = { sec, txt: e.message, ok: false }; }
+    sbOcupado = false; renderConta();
+  }
+  const mgVal = id => ($(id) ? $(id).value : "");
+  function mgAcao(a) {
+    if (a === "nome") {
+      const nome = mgVal("mgNome").trim();
+      if (nome.length < 2) { sbSec = { sec: "nome", txt: t("errName"), ok: false }; return renderConta(); }
+      return mgRun("nome", async () => {
+        await sbReq("/auth/v1/user", { method: "PUT", body: JSON.stringify({ data: { nome } }) });
+        sb.nome = nome; conta.perfil = { nome, email: sb.email }; salvarConta(); sbGuardar(); return t("mgSaved");
+      });
+    }
+    if (a === "email") {
+      const novo = mgVal("mgEmailNovo").trim(), sen = mgVal("mgEmailSenha");
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(novo)) { sbSec = { sec: "email", txt: t("errEmail"), ok: false }; return renderConta(); }
+      return mgRun("email", async () => { await mgReauth(sen); await sbReq("/auth/v1/user", { method: "PUT", body: JSON.stringify({ email: novo }) }); return t("mgEmailSent", novo); });
+    }
+    if (a === "senha") {
+      const at = mgVal("mgSenhaAtual"), n1 = mgVal("mgSenhaNova"), n2 = mgVal("mgSenhaNova2");
+      if (n1.length < 6) { sbSec = { sec: "senha", txt: t("sbErrPass"), ok: false }; return renderConta(); }
+      if (n1 !== n2) { sbSec = { sec: "senha", txt: t("mgNoMatch"), ok: false }; return renderConta(); }
+      return mgRun("senha", async () => { await mgReauth(at); await sbReq("/auth/v1/user", { method: "PUT", body: JSON.stringify({ password: n1 }) }); return t("mgPassDone"); });
+    }
+    if (a === "auto") { sb.auto = sb.auto === false; sbGuardar(); return renderConta(); }
+    if (a === "nuvem") {
+      if (!confirm(t("mgClearAsk"))) return;
+      return mgRun("sync", async () => { await sbReq("/rest/v1/colecoes?user_id=eq." + encodeURIComponent(sb.id), { method: "DELETE" }); sb.ultimo = 0; sb.sujo = true; sbGuardar(); return t("mgCleared"); });
+    }
+    if (a === "outros") return mgRun("sessao", async () => { await sbReq("/auth/v1/logout?scope=others", { method: "POST" }); return t("mgOthersDone"); });
+    if (a === "apagar") {
+      const sen = mgVal("mgDelSenha");
+      if (!confirm(t("mgDelAsk"))) return;
+      return mgRun("del", async () => {
+        await mgReauth(sen);
+        try { await sbReq("/rest/v1/rpc/excluir_conta", { method: "POST", body: "{}" }); }
+        catch (e) { throw new Error(t("mgDelMissing")); }
+        sb = null; sbGuardar(); conta.perfil = null; salvarConta(); sbModo = "entrar"; sbMsg = t("mgDeleted"); return "";
+      });
+    }
+  }
   async function autenticar(novo) {
     const nome = novo ? $("inNome").value.trim() : "", email = $("inEmail").value.trim(), senha = $("inSenha").value;
     const erro = $("erro");
@@ -3234,7 +3346,8 @@
   contaBox.addEventListener("click", e => {
     if (e.target.closest("#btnEntrar")) autenticar(false);
     if (e.target.closest("#btnCriar")) autenticar(true);
-    const mo = e.target.closest("[data-sbm]"); if (mo) { sbModo = mo.dataset.sbm; sbMsg = ""; renderConta(); }
+    const mg = e.target.closest("[data-mg]"); if (mg) mgAcao(mg.dataset.mg);
+    const mo = e.target.closest("[data-sbm]"); if (mo) { sbModo = mo.dataset.sbm; sbMsg = ""; sbSec = null; renderConta(); }
     if (e.target.closest("#btnRec")) recuperar();
     if (e.target.closest("#btnNova")) novaSenha();
     if (e.target.closest("#btnSync")) sbSincronizar("manual");
