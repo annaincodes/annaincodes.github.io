@@ -2235,25 +2235,34 @@
     }
     return l.filter((u, i) => u && l.indexOf(u) === i);
   }
-  // Mostra logo a imagem normal e troca pela mais nítida assim que ela carregar
-  function melhorarImg(img, c) {
-    const atual = img.src;
-    let melhor = 0;
-    const considerar = u => {
-      const t = new Image();
-      t.referrerPolicy = "no-referrer";
-      t.onload = () => {
+  // Mostra logo a imagem normal e troca por uma mais nítida só se for comprovadamente a mesma carta
+  function miniatura(im) {
+    const cv = document.createElement("canvas"); cv.width = 24; cv.height = 33;
+    const g = cv.getContext("2d"); g.drawImage(im, 0, 0, 24, 33);
+    return g.getImageData(0, 0, 24, 33).data;
+  }
+  const carregarCors = u => new Promise(ok => { const t = new Image(); t.crossOrigin = "anonymous"; t.referrerPolicy = "no-referrer"; t.onload = () => ok(t); t.onerror = () => ok(null); t.src = u; });
+  async function melhorarImg(img, c) {
+    const cand = imgsMelhores(c);
+    if (!cand.length) return;
+    const baseUrl = img.src;
+    try {
+      const ref = await carregarCors(baseUrl);
+      if (!ref) return;
+      const rm = miniatura(ref);
+      let melhor = ref.naturalWidth, alvo = "";
+      for (const u of cand) {
+        const t = await carregarCors(u);
+        if (!t) continue;
         const prop = t.naturalWidth / (t.naturalHeight || 1);
-        if (!img.isConnected || prop < 0.62 || prop > 0.8) return;
-        const base = melhor || img.naturalWidth || 0;
-        if (t.naturalWidth > base || (t.naturalWidth === base && /\.png$/.test(u) && !melhor)) {
-          melhor = t.naturalWidth; img.dataset.hq = "1"; img.src = u;
-        }
-      };
-      t.src = u;
-    };
-    const iniciar = () => imgsMelhores(c).forEach(considerar);
-    if (img.complete && img.naturalWidth) iniciar(); else img.addEventListener("load", iniciar, { once: true });
+        if (prop < 0.62 || prop > 0.8) continue;
+        const tm = miniatura(t);
+        let d = 0; for (let n = 0; n < rm.length; n++) d += Math.abs(rm[n] - tm[n]);
+        if (d / rm.length > 28) continue; // não parece a mesma carta (ex.: verso)
+        if (t.naturalWidth > melhor || (t.naturalWidth === melhor && /\.png$/.test(u) && !alvo)) { melhor = t.naturalWidth; alvo = u; }
+      }
+      if (alvo && img.isConnected && img.src === baseUrl) img.src = alvo;
+    } catch (e) { /* sem acesso aos pixels: mantém a imagem atual */ }
   }
   const numeroTxt = c => {
     const s = SETS[c.set];
