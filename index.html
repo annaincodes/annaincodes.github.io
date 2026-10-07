@@ -669,6 +669,57 @@
   .zc-ok:empty { display: none; }
   /* Barra de binders */
   .bd-bar { margin: 0 0 12px; }
+  /* Amigos, perfis e visibilidade */
+  .bd-vis { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-top: 10px; font-size: 0.85rem; color: var(--muted); }
+  .bd-vis label { font-weight: 700; }
+  .bd-vis select { height: 34px; padding: 0 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--field-fg); font: 600 14px "Figtree", system-ui, sans-serif; cursor: pointer; }
+  .bd-vis-nota { flex: 1 1 180px; min-width: 0; }
+  .am-linha { display: flex; align-items: center; gap: 8px; }
+  .am-linha input, .am-sel select { flex: 1; min-width: 0; height: 42px; padding: 0 12px; border: 1px solid var(--tl-line); border-radius: 12px; background: var(--surface); color: var(--tl-fg); font: 500 16px "Figtree", system-ui, sans-serif; }
+  .am-sel { margin-top: 0; } .am-sel select { width: 100%; }
+  .am-arroba { font-weight: 800; color: var(--tl-muted); }
+  .am-eu { margin: 0; font-size: 1rem; overflow-wrap: anywhere; } .am-eu span { color: var(--tl-muted); font-weight: 600; }
+  .am-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .am-p { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 8px 0; border-top: 1px solid var(--tl-line); }
+  .am-p:first-child { border-top: 0; }
+  .am-av, .fv-av { width: 38px; height: 38px; font-size: 1rem; flex: none; }
+  .am-quem { flex: 1 1 120px; min-width: 0; display: grid; } .am-quem strong, .am-quem small { overflow-wrap: anywhere; } .am-quem small { color: var(--tl-muted); }
+  .am-bts { display: flex; gap: 6px; flex-wrap: wrap; } .am-bts .tl-btn { min-height: 36px; padding: 0 12px; font-size: 13px; }
+  .am-x { width: 36px; padding: 0 !important; font-size: 20px !important; line-height: 1; }
+  .am-wl small { color: var(--tl-muted); }
+  .fv { display: grid; gap: 14px; justify-items: start; } .fv > section { width: 100%; }
+  .fv-cab { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .fv-av { width: 52px; height: 52px; font-size: 1.4rem; }
+  .fv-quem { flex: 1 1 160px; min-width: 0; } .fv-quem h2 { margin: 0; font: 800 1.3rem/1.2 "Bricolage Grotesque", system-ui, sans-serif; overflow-wrap: anywhere; } .fv-quem p { margin: 2px 0 0; color: var(--tl-muted); overflow-wrap: anywhere; }
+  .fv-acoes { margin-top: 0; } .fv-cab > .tl-ok, .fv-cab > .tl-erro { flex-basis: 100%; }
+  .fv-st { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 12px; background: var(--tl-soft); font-weight: 700; font-size: 14px; }
+  .fv-binders { margin-bottom: 10px; max-width: 100%; }
+  .fv-filtros { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 14px; } .fv-filtros .tabs { max-width: 100%; }
+  .fv-vis { font-size: 0.82rem; font-weight: 700; color: var(--tl-muted); }
+  .fv-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 14px 12px; }
+  @media (max-width: 520px) { .fv-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 8px; } }
+  .fv-c { min-width: 0; }
+  .fv-img { position: relative; aspect-ratio: 63 / 88; border-radius: 7px; overflow: hidden; background: var(--page); }
+  .fv-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .fv-q { position: absolute; right: 5px; top: 5px; padding: 1px 7px; border-radius: 99px; background: rgba(0, 0, 0, 0.62); color: #fff; font-size: 12px; font-weight: 800; }
+  .fv-n { margin: 6px 0 0; font-size: 0.82rem; font-weight: 700; line-height: 1.2; overflow-wrap: anywhere; }
+  .fv-s { margin: 1px 0 0; font-size: 0.72rem; color: var(--tl-muted); line-height: 1.25; overflow-wrap: anywhere; }
+  .fv-tag { display: inline-block; margin-top: 4px; padding: 1px 7px; border-radius: 99px; background: var(--tl-pri-bg); color: var(--tl-pri-fg); font-size: 0.68rem; font-weight: 800; }
+  .campo-nota { margin: 4px 0 0 !important; font-size: 0.8rem; }
+  .campo-nota.ok { color: var(--text); font-weight: 700; }
+  .campo-nota.ruim { color: var(--erro, #A3112F); font-weight: 700; }
+  html[data-modo="escuro"] .campo-nota.ruim { color: #FF9AAE; }
+  .painel .am-linha input { flex: 1; min-width: 0; }
+  .aceite { display: flex; align-items: flex-start; gap: 8px; margin-top: 12px; font-size: 0.88rem; line-height: 1.4; }
+  .aceite input { flex: none; width: 18px; height: 18px; margin: 1px 0 0; accent-color: var(--seg-on-bg); }
+  .aceite .link-btn { padding: 0; font-size: inherit; }
+  .termos-modal { z-index: 60; }
+  .termos-corpo { max-height: min(65vh, 560px); overflow-y: auto; padding-right: 4px; font-size: 0.92rem; line-height: 1.55; }
+  .termos-corpo p { margin: 0 0 10px; }
+  .foot .link-btn + .link-btn { margin-left: 14px; }
+  /* celular: espaço para as bolinhas de cor não cobrirem o fim da página */
+  @media (max-width: 520px) { .foot { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 78px); } .foot .link-btn + .link-btn { margin-left: 0; } }
+
   .bd-tabs { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 2px; }
   .bd-tab { flex: none; display: inline-flex; align-items: center; gap: 2px; max-width: min(280px, 100%); height: 40px; padding: 0 4px; border: 1.5px solid var(--line); border-radius: 99px; color: var(--text); }
   .bd-tab.on { background: var(--seg-on-bg); border-color: var(--seg-on-bg); color: var(--seg-on-fg); }
@@ -714,6 +765,7 @@
     <button type="button" data-area="decks" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="8" y="3" width="11" height="15" rx="2" stroke="currentColor" stroke-width="2"/><path d="M5 7v11a3 3 0 0 0 3 3h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-i18n="areaDecks">Deck Builder</span></button>
     <button type="button" data-area="dex" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M3 12h6m6 0h6" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg><span data-i18n="areaDex">Pokédex</span></button>
     <button type="button" data-area="card" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="11" r="2.2" stroke="currentColor" stroke-width="2"/><path d="M5.8 16.5c.6-1.6 1.8-2.4 3.2-2.4s2.6.8 3.2 2.4M14.5 10h3.5M14.5 13.5h3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-i18n="areaCard">Trainer card</span></button>
+    <button type="button" data-area="amigos" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2" stroke="currentColor" stroke-width="2"/><path d="M3.5 19c.7-3 2.9-4.6 5.5-4.6s4.8 1.6 5.5 4.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="17" cy="9.5" r="2.5" stroke="currentColor" stroke-width="2"/><path d="M16.2 14.6c2.2.1 3.8 1.5 4.3 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-i18n="areaFriends">Friends</span></button>
     <button type="button" data-area="tools" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5l1.9 4.6 4.6 1.9-4.6 1.9L12 16.5l-1.9-4.6L5.5 10l4.6-1.9z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M18.5 15.5l.8 1.9 1.9.8-1.9.8-.8 1.9-.8-1.9-1.9-.8 1.9-.8z" fill="currentColor"/></svg><span data-i18n="areaTools">Tools</span></button>
   </nav>
   </div>
@@ -740,7 +792,7 @@
 
   <main>
    <div id="areaBinder">
-    <div class="bd-bar"><div class="bd-tabs" id="bdTabs" role="group" data-i18n-aria="bindersAria" aria-label="Binders"></div></div>
+    <div class="bd-bar"><div class="bd-tabs" id="bdTabs" role="group" data-i18n-aria="bindersAria" aria-label="Binders"></div><div class="bd-vis" id="bdVis"></div></div>
     <div class="controls">
       <div class="tabs" role="group" data-i18n-aria="show" aria-label="Show">
         <button type="button" data-tab="todas" aria-pressed="true"><span data-i18n="tabAll">All</span> <span class="count" id="cTodas">0</span></button>
@@ -901,6 +953,7 @@
     </div>
    </div>
 
+   <div id="areaAmigos" class="tl" hidden><div id="amCorpo" aria-live="polite"></div></div>
    <div id="areaTools" class="tl" hidden>
     <div class="tl-grid">
       <section class="tl-card" aria-labelledby="tlValT">
@@ -941,6 +994,7 @@
 
   <footer class="foot">
     <p data-i18n="footer"></p>
+    <button type="button" class="link-btn" data-termos="1" data-i18n="termsLink">Terms &amp; privacy</button>
     <button type="button" class="link-btn" id="reset"></button>
   </footer>
 </div>
@@ -1005,6 +1059,12 @@
   </div>
 </div>
 
+<div class="dt-modal termos-modal" id="termosModal" role="dialog" aria-modal="true" aria-labelledby="termosTitulo" hidden>
+  <div class="dt-box tl termos-box">
+    <div class="dt-topo"><h2 id="termosTitulo">Terms</h2><button type="button" class="fechar" id="termosFechar" data-i18n-aria="dtClose" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></div>
+    <div id="termosCorpo" class="termos-corpo"></div>
+  </div>
+</div>
 <div class="dt-modal" id="dtModal" role="dialog" aria-modal="true" aria-labelledby="dtTitulo" hidden>
   <div class="dt-box tl">
     <div class="dt-topo">
@@ -1179,6 +1239,9 @@
       mgDanger: "Delete account", mgDelD: "Permanently deletes your account and cloud collection. The collection in this browser is kept.", mgDelete: "Delete my account permanently",
       mgDelAsk: "Delete your account permanently? This cannot be undone.", mgDelMissing: "Account deletion is not set up yet in Supabase (missing excluir_conta function).", mgDeleted: "Account deleted.",
       sbNet: "the server could not be reached. Check your connection, ad blockers or private mode, and that the project is not paused in Supabase.",
+      sbChoose: "This is a new account with no collection saved yet. This browser already has cards marked. What do you want to do?",
+      sbFresh: "Start with an empty collection", sbBring: "Bring this browser's collection to the account",
+      sbOutAsk: "Sign out? The collection leaves this browser, but stays saved in your account.", sbOutUnsaved: "Your latest changes could not be saved to the account. Sign out anyway and lose them?",
       sbIntroUp: "Create your account to keep your collection safe online.", sbForgot: "Forgot my password", sbBack: "Back to sign in", sbSendLink: "Send reset link",
       sbRecIntro: "Enter your email and we will send a link to create a new password.", sbRecSent: "Link sent! Check your email (and spam).",
       sbNewIntro: "Choose your new password.", sbNewPass: "New password", sbSave: "Save password", acctTitle: "Account",
@@ -1273,6 +1336,9 @@
       mgDanger: "Excluir conta", mgDelD: "Apaga para sempre a sua conta e a coleção na nuvem. A coleção deste navegador é mantida.", mgDelete: "Excluir minha conta para sempre",
       mgDelAsk: "Excluir sua conta para sempre? Isso não pode ser desfeito.", mgDelMissing: "A exclusão de conta ainda não foi configurada no Supabase (falta a função excluir_conta).", mgDeleted: "Conta excluída.",
       sbNet: "não foi possível alcançar o servidor. Verifique a conexão, bloqueadores de anúncios ou aba privada, e se o projeto não está pausado no Supabase.",
+      sbChoose: "Esta é uma conta nova, sem coleção salva ainda. Este navegador já tem cartas marcadas. O que você quer fazer?",
+      sbFresh: "Começar com a coleção vazia", sbBring: "Trazer a coleção deste navegador para a conta",
+      sbOutAsk: "Sair da conta? A coleção sai deste navegador, mas continua salva na sua conta.", sbOutUnsaved: "Suas últimas alterações não puderam ser salvas na conta. Sair mesmo assim e perdê-las?",
       sbIntroUp: "Crie sua conta para manter a coleção segura online.", sbForgot: "Esqueci minha senha", sbBack: "Voltar para entrar", sbSendLink: "Enviar link",
       sbRecIntro: "Digite seu e-mail e enviaremos um link para criar uma nova senha.", sbRecSent: "Link enviado! Veja seu e-mail (e o spam).",
       sbNewIntro: "Escolha a sua nova senha.", sbNewPass: "Nova senha", sbSave: "Salvar senha", acctTitle: "Conta",
@@ -1449,7 +1515,7 @@
     try {
       const o = JSON.parse(localStorage.getItem(KEY_BINDERS) || "null");
       if (o && Array.isArray(o.lista)) {
-        const lista = o.lista.filter(b => b && b.id).map(b => ({ id: String(b.id), name: String(b.name || "").slice(0, 30) }));
+        const lista = o.lista.filter(b => b && b.id).map(b => ({ id: String(b.id), name: String(b.name || "").slice(0, 30), vis: ["amigos", "publico"].includes(b.vis) ? b.vis : "privado" }));
         if (lista.length) return { lista, atual: lista.some(b => b.id === o.atual) ? o.atual : lista[0].id };
       }
     } catch (e) { /* começa com um binder */ }
@@ -1489,9 +1555,8 @@
         return { qty, langs, fav: new Set((o.fav || []).map(migrar)), star: new Set(), cop: copiasDe(qty, langs) };
       }
     } catch (e) { /* usa os exemplos */ }
-    const langs = {};
-    Object.keys(SEED_QTY).forEach(id => { langs[id] = ["en"]; });
-    return { qty: Object.assign({}, SEED_QTY), langs, fav: new Set(SEED_FAV), star: new Set(SEED_STAR), cop: copiasDe(SEED_QTY, langs) };
+    // quem chega pela primeira vez começa com o binder vazio
+    return { qty: {}, langs: {}, fav: new Set(), star: new Set(), cop: {} };
   }
   function salvar() {
     try { localStorage.setItem(chaveBinder(bnd.atual), JSON.stringify({ cop: state.cop, qty: state.qty, langs: state.langs, fav: [...state.fav], star: [...state.star] })); } catch (e) { /* segue sem salvar */ }
@@ -1512,7 +1577,7 @@
         if (!LANGS.includes(cfg.lang)) cfg.lang = "en";
         if (!TEMAS.includes(cfg.tema)) cfg.tema = "rosa";
         if (cfg.modo !== "claro" && cfg.modo !== "escuro") cfg.modo = null;
-        if (!["binder", "decks", "dex", "tools", "card"].includes(cfg.area)) cfg.area = "binder";
+        if (!["binder", "decks", "dex", "tools", "card", "amigos"].includes(cfg.area)) cfg.area = "binder";
         return { perfil, cfg };
       }
     } catch (e) { /* usa o padrão */ }
@@ -2192,7 +2257,7 @@
   }, { passive: true });
 
   /* ---------- Áreas: Binder e Deck Builder ---------- */
-  function atualizar() { if (conta.cfg.area === "card") renderCard(); else if (conta.cfg.area === "tools") renderTools(); else if (conta.cfg.area === "decks") renderDeck(); else if (conta.cfg.area === "dex") { renderDex(); carregarDex(); } else render(); }
+  function atualizar() { if (conta.cfg.area === "card") renderCard(); else if (conta.cfg.area === "tools") renderTools(); else if (conta.cfg.area === "decks") renderDeck(); else if (conta.cfg.area === "dex") { renderDex(); carregarDex(); } else if (conta.cfg.area === "amigos") { renderAmigos(); amAtualizarSeVelho(); } else render(); }
   function aplicarArea() {
     const a = conta.cfg.area;
     $("areaBinder").hidden = a !== "binder";
@@ -2200,11 +2265,12 @@
     $("areaDex").hidden = a !== "dex";
     $("areaTools").hidden = a !== "tools";
     $("areaCard").hidden = a !== "card";
+    $("areaAmigos").hidden = a !== "amigos";
     $("statsBinder").hidden = a !== "binder";
     $("statsDeck").hidden = a !== "decks";
     $("statsDex").hidden = a !== "dex";
     $("reset").hidden = a !== "binder";
-    $("lead").textContent = t(a === "decks" ? "leadDeck" : a === "dex" ? "leadDex" : a === "tools" ? "leadTools" : a === "card" ? "leadCard" : "lead");
+    $("lead").textContent = t(a === "decks" ? "leadDeck" : a === "dex" ? "leadDex" : a === "tools" ? "leadTools" : a === "card" ? "leadCard" : a === "amigos" ? "leadFriends" : "lead");
     document.querySelectorAll(".areas [data-area]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.area === conta.cfg.area)));
   }
   document.querySelector(".areas").addEventListener("click", e => {
@@ -3092,7 +3158,7 @@
   const KEY_SB = "fichario-pokemon-sb-v1";
   const ehSync = k => /^fichario-pokemon-(v3|binders-v1|decks-v1|cartao-v1)/.test(k);
   const lsSet = Storage.prototype.setItem;
-  let sbModo = "entrar", sb = null, sbMsg = "", sbOcupado = false, sbConflito = null, sbAplicando = false, sbTimer = 0;
+  let sbEscolha = false, sbModo = "entrar", sb = null, sbMsg = "", sbOcupado = false, sbConflito = null, sbAplicando = false, sbTimer = 0;
   try { sb = JSON.parse(localStorage.getItem(KEY_SB) || "null"); } catch (e) { sb = null; }
   const sbGuardar = () => { try { if (sb) lsSet.call(localStorage, KEY_SB, JSON.stringify(sb)); else localStorage.removeItem(KEY_SB); } catch (e) { /* segue */ } };
   async function sbReq(caminho, opc = {}, comToken = true) {
@@ -3113,7 +3179,8 @@
   function sbSessao(j) {
     const u = j.user || {};
     sb = Object.assign(sb || {}, { access: j.access_token, refresh: j.refresh_token, exp: Date.now() / 1000 + (j.expires_in || 3600),
-      id: u.id || (sb && sb.id), email: u.email || (sb && sb.email), nome: (u.user_metadata && u.user_metadata.nome) || (sb && sb.nome) || "" });
+      id: u.id || (sb && sb.id), email: u.email || (sb && sb.email), nome: (u.user_metadata && u.user_metadata.nome) || (sb && sb.nome) || "",
+      usuario: (u.user_metadata && u.user_metadata.usuario) || (sb && sb.usuario) || "" });
     conta.perfil = { nome: sb.nome || (sb.email || "?").split("@")[0], email: sb.email || "" };
     salvarConta(); sbGuardar();
   }
@@ -3123,11 +3190,12 @@
     return o;
   }
   async function sbEnviar() {
-    if (!sb || sbConflito) return;
+    if (!sb || sbConflito || sbEscolha) return;
     const agora = Date.now();
     await sbReq("/rest/v1/colecoes?on_conflict=user_id", { method: "POST", headers: { Prefer: "resolution=merge-duplicates,return=minimal" },
       body: JSON.stringify({ user_id: sb.id, dados: sbSnapshot(), atualizado: new Date(agora).toISOString() }) });
     sb.ultimo = agora; sb.sujo = false; sbGuardar();
+    publicarBinders();
   }
   async function sbBuscar() {
     const j = await sbReq("/rest/v1/colecoes?user_id=eq." + encodeURIComponent(sb.id) + "&select=dados,atualizado");
@@ -3148,7 +3216,10 @@
     sbOcupado = true; sbMsg = t("sbSyncing"); renderConta();
     try {
       const rem = await sbBuscar();
-      if (!rem) { await sbEnviar(); sbMsg = t("sbOk"); }
+      if (!rem) {
+        if (inicial === "login" && temDadosLocais()) { sbEscolha = true; sbMsg = ""; }
+        else { await sbEnviar(); sbMsg = t("sbOk"); }
+      }
       else if (rem.em > (sb.ultimo || 0)) {
         if (!sb.sujo && (!temDadosLocais() || inicial === "load")) { sbAplicar(rem); return; }
         if (!temDadosLocais()) { sbAplicar(rem); return; }
@@ -3161,13 +3232,22 @@
     lsSet.call(this, k, v);
     if (this === localStorage && sb && !sbAplicando && ehSync(k)) {
       sb.sujo = true; sbGuardar();
-      if (sbConflito || sb.auto === false) return;
+      if (sbConflito || sbEscolha || sb.auto === false) return;
       clearTimeout(sbTimer);
       sbTimer = setTimeout(() => sbEnviar().then(() => { sbMsg = t("sbOk"); if (painel.classList.contains("open")) renderConta(); }).catch(e => { sbMsg = t("sbErr", e.message); }), 4000);
     }
   };
 
   function renderConta() {
+    if (sb && sbEscolha && sbModo !== "nova") {
+      contaBox.innerHTML = `
+        <div class="conta-ok" id="contaOk" tabindex="-1"><span class="avatar" aria-hidden="true">${esc(((conta.perfil && conta.perfil.nome) || "?").charAt(0).toUpperCase())}</span>
+          <div><p class="nome">${esc(conta.perfil ? conta.perfil.nome : "")}</p><p class="email">${esc(sb.email || "")}</p></div></div>
+        <p class="nota">${esc(t("sbChoose"))}</p>
+        <button type="button" class="btn-primary" id="btnZero">${esc(t("sbFresh"))}</button>
+        <button type="button" class="btn-sec" id="btnTrazer">${esc(t("sbBring"))}</button>`;
+      return;
+    }
     if (sb && sbModo === "gerenciar") { contaBox.innerHTML = gerenciarHTML(); return; }
     if (sb && sbModo !== "nova") {
       const p = conta.perfil || { nome: "?", email: sb.email || "" };
@@ -3197,9 +3277,11 @@
           <button type="button" data-sbm="criar" aria-pressed="${cri}">${esc(t("sbUp"))}</button>
         </div>
         <p class="nota" style="margin-top:0">${esc(rec ? t("sbRecIntro") : cri ? t("sbIntroUp") : t("sbIntro"))}</p>
-        ${cri ? `<div class="field"><label for="inNome">${esc(t("name"))}</label><input id="inNome" type="text" autocomplete="nickname" maxlength="30"></div>` : ""}
+        ${cri ? `<div class="field"><label for="inUsuario">${esc(t("sbUser"))}</label><div class="am-linha"><span class="am-arroba" aria-hidden="true">@</span><input id="inUsuario" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="20" aria-describedby="usuarioSt"></div><p class="nota campo-nota" id="usuarioSt" aria-live="polite">${esc(t("amUserRule"))}</p></div>
+        <div class="field"><label for="inNome">${esc(t("sbNick"))}</label><input id="inNome" type="text" autocomplete="nickname" maxlength="30" aria-describedby="nickSt"><p class="nota campo-nota" id="nickSt">${esc(t("sbNickHint"))}</p></div>` : ""}
         <div class="field"><label for="inEmail">${esc(t("email"))}</label><input id="inEmail" type="email" inputmode="email" autocomplete="email"></div>
         ${rec ? "" : `<div class="field"><label for="inSenha">${esc(t("sbPass"))}</label><input id="inSenha" type="password" autocomplete="${cri ? "new-password" : "current-password"}" minlength="6"></div>`}
+        ${cri ? `<label class="aceite"><input type="checkbox" id="inAceito"><span>${esc(t("sbAccept"))} <button type="button" class="link-btn" data-termos="1">${esc(t("termsLink"))}</button></span></label>` : ""}
         <p class="erro" id="erro" role="alert">${esc(sbMsg)}</p>
         <button type="button" class="btn-primary" id="${rec ? "btnRec" : cri ? "btnCriar" : "btnEntrar"}"${sbOcupado ? " disabled" : ""}>${esc(rec ? t("sbSendLink") : cri ? t("sbUp") : t("sbIn"))}</button>
         ${ent ? `<button type="button" class="btn-sec" data-sbm="recuperar">${esc(t("sbForgot"))}</button>` : ""}
@@ -3235,7 +3317,7 @@
       history.replaceState(null, "", location.pathname + location.search);
       abrirPainel();
       if (tipo === "recovery") { sbModo = "nova"; sbMsg = ""; sb.sujo = false; renderConta(); }
-      else await sbSincronizar("login");
+      else { await amGarantirPerfil(); await sbSincronizar("login"); }
     } catch (e) { sb = null; sbGuardar(); sbMsg = t("sbErr", e.message); renderConta(); }
   }
 
@@ -3248,8 +3330,13 @@
     const auto = sb.auto !== false, d = sbOcupado ? " disabled" : "";
     return `
       <button type="button" class="btn-sec" data-sbm="entrar" style="margin-top:0">← ${esc(t("mgBack"))}</button>
+      <h3 class="mg-h">${esc(t("sbUser"))}</h3>
+      <div class="field"><label for="mgUsuario">${esc(t("sbUser"))}</label><div class="am-linha"><span class="am-arroba" aria-hidden="true">@</span><input id="mgUsuario" type="text" value="${esc((amState && amState.perfil && amState.perfil.usuario) || sb.usuario || "")}" maxlength="20" autocomplete="username" autocapitalize="none" spellcheck="false"></div></div>
+      <p class="nota" style="margin:6px 0 0">${esc(t("amUserRule"))}</p>
+      ${mgMsg("usuario")}<button type="button" class="btn-primary" data-mg="usuario"${d}>${esc(t("sbSave2"))}</button>
       <h3 class="mg-h">${esc(t("mgName"))}</h3>
-      ${mgCampo("mgNome", t("name"), "text", p.nome, "nickname")}
+      ${mgCampo("mgNome", t("sbNick"), "text", p.nome, "nickname")}
+      <p class="nota" style="margin:6px 0 0">${esc(t("sbNickHint"))}</p>
       ${mgMsg("nome")}<button type="button" class="btn-primary" data-mg="nome"${d}>${esc(t("sbSave2"))}</button>
       <h3 class="mg-h">${esc(t("mgEmail"))}</h3>
       <p class="nota" style="margin:6px 0 0">${esc(t("mgEmailNow", sb.email || ""))}</p>
@@ -3288,12 +3375,27 @@
   }
   const mgVal = id => ($(id) ? $(id).value : "");
   function mgAcao(a) {
+    if (a === "usuario") {
+      const u = limparUsuario(mgVal("mgUsuario"));
+      if (!usuarioValido(u)) { sbSec = { sec: "usuario", txt: t("amUserInvalid"), ok: false }; return renderConta(); }
+      return mgRun("usuario", async () => {
+        const nome = (conta.perfil && conta.perfil.nome) || sb.nome || "";
+        try {
+          await sbReq("/rest/v1/perfis?on_conflict=user_id", { method: "POST", headers: { Prefer: "resolution=merge-duplicates,return=minimal" },
+            body: JSON.stringify({ user_id: sb.id, usuario: u, nome, atualizado: new Date().toISOString() }) });
+        } catch (e) { throw new Error(/duplicate|23505|unique/i.test(e.message) ? t("amUserTaken", u) : t("sbErr", e.message)); }
+        amState.perfil = { user_id: sb.id, usuario: u, nome }; sb.usuario = u; sbGuardar();
+        sbReq("/auth/v1/user", { method: "PUT", body: JSON.stringify({ data: { usuario: u } }) }).catch(() => {});
+        renderAmigos(); publicarBinders();
+        return t("mgSaved");
+      });
+    }
     if (a === "nome") {
       const nome = mgVal("mgNome").trim();
       if (nome.length < 2) { sbSec = { sec: "nome", txt: t("errName"), ok: false }; return renderConta(); }
       return mgRun("nome", async () => {
         await sbReq("/auth/v1/user", { method: "PUT", body: JSON.stringify({ data: { nome } }) });
-        sb.nome = nome; conta.perfil = { nome, email: sb.email }; salvarConta(); sbGuardar(); return t("mgSaved");
+        sb.nome = nome; conta.perfil = { nome, email: sb.email }; salvarConta(); sbGuardar(); amAtualizarNome(nome); return t("mgSaved");
       });
     }
     if (a === "email") {
@@ -3325,39 +3427,66 @@
     }
   }
   async function autenticar(novo) {
+    const usuario = novo ? limparUsuario($("inUsuario").value) : "";
     const nome = novo ? $("inNome").value.trim() : "", email = $("inEmail").value.trim(), senha = $("inSenha").value;
     const erro = $("erro");
+    if (novo && !usuarioValido(usuario)) { erro.textContent = t("amUserInvalid"); $("inUsuario").focus(); return; }
     if (novo && nome.length < 2) { erro.textContent = t("errName"); $("inNome").focus(); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { erro.textContent = t("errEmail"); $("inEmail").focus(); return; }
     if (senha.length < 6) { erro.textContent = t("sbErrPass"); $("inSenha").focus(); return; }
+    if (novo && !($("inAceito") && $("inAceito").checked)) { erro.textContent = t("sbErrTerms"); $("inAceito").focus(); return; }
     sbOcupado = true; erro.textContent = t("sbSyncing"); Array.from(contaBox.querySelectorAll(".btn-primary,.btn-sec")).forEach(x => x.disabled = true);
     try {
       let j;
       if (novo) {
-        j = await sbReq("/auth/v1/signup", { method: "POST", body: JSON.stringify({ email, password: senha, data: { nome } }) }, false);
+        const livre = await usuarioLivre(usuario);
+        if (!livre) { sbOcupado = false; Array.from(contaBox.querySelectorAll(".btn-primary,.btn-sec")).forEach(x => x.disabled = false); erro.textContent = t("amUserTaken", usuario); $("inUsuario").focus(); return; }
+        j = await sbReq("/auth/v1/signup", { method: "POST", body: JSON.stringify({ email, password: senha, data: { nome, usuario, termos: new Date().toISOString().slice(0, 10) } }) }, false);
         if (!j.access_token) { sbOcupado = false; sbMsg = t("sbConfirm"); renderConta(); return; }
       } else {
         j = await sbReq("/auth/v1/token?grant_type=password", { method: "POST", body: JSON.stringify({ email, password: senha }) }, false);
       }
       sb = { ultimo: 0, sujo: false }; sbSessao(j); sbMsg = "";
+      await amGarantirPerfil();
       sbOcupado = false; await sbSincronizar("login");
+      if (amState) { amState.carregado = false; renderAmigos(); }
+      renderVisBinder();
     } catch (e) { sbOcupado = false; sbMsg = t("sbErr", e.message); renderConta(); }
   }
   contaBox.addEventListener("click", e => {
     if (e.target.closest("#btnEntrar")) autenticar(false);
     if (e.target.closest("#btnCriar")) autenticar(true);
     const mg = e.target.closest("[data-mg]"); if (mg) mgAcao(mg.dataset.mg);
-    const mo = e.target.closest("[data-sbm]"); if (mo) { sbModo = mo.dataset.sbm; sbMsg = ""; sbSec = null; renderConta(); }
+    const mo = e.target.closest("[data-sbm]"); if (mo) { sbModo = mo.dataset.sbm; sbMsg = ""; sbSec = null; renderConta();
+      if (sbModo === "gerenciar" && sb && !(amState && amState.perfil)) amGarantirPerfil().then(() => { if (sbModo === "gerenciar") renderConta(); }); }
     if (e.target.closest("#btnRec")) recuperar();
     if (e.target.closest("#btnNova")) novaSenha();
     if (e.target.closest("#btnSync")) sbSincronizar("manual");
     if (e.target.closest("#btnNuvem")) sbAplicar(sbConflito);
     if (e.target.closest("#btnLocal")) { const r = sbConflito; sbConflito = null; sb.ultimo = r.em; sbEnviar().then(() => { sbMsg = t("sbOk"); renderConta(); }).catch(er => { sbMsg = t("sbErr", er.message); renderConta(); }); }
+    if (e.target.closest("#btnZero")) {
+      sbEscolha = false;
+      Object.keys(sbSnapshot()).forEach(k => localStorage.removeItem(k));
+      sb.sujo = false; sbGuardar(); location.reload();
+    }
+    if (e.target.closest("#btnTrazer")) {
+      sbEscolha = false; sbOcupado = true; renderConta();
+      sbEnviar().then(() => { sbMsg = t("sbOk"); }).catch(er => { sbMsg = t("sbErr", er.message); }).then(() => { sbOcupado = false; renderConta(); });
+    }
     if (e.target.closest("#btnSair")) {
-      try { if (sb) sbReq("/auth/v1/logout", { method: "POST" }).catch(() => {}); } catch (er) { /* segue */ }
-      sb = null; sbConflito = null; sbMsg = ""; sbGuardar(); conta.perfil = null; salvarConta(); renderConta();
+      if (!confirm(t("sbOutAsk"))) return;
+      sair();
     }
   });
+  async function sair() {
+    {
+      try { if (sb && sb.sujo) await sbEnviar(); } catch (er) { if (!confirm(t("sbOutUnsaved"))) return; }
+      try { if (sb) await sbReq("/auth/v1/logout", { method: "POST" }); } catch (er) { /* segue */ }
+      sb = null; sbConflito = null; sbEscolha = false; sbMsg = ""; sbGuardar(); conta.perfil = null; salvarConta();
+      Object.keys(sbSnapshot()).forEach(k => localStorage.removeItem(k));
+      location.reload();
+    }
+  }
   contaBox.addEventListener("keydown", e => {
     if (e.key === "Enter" && e.target.matches("#inNome, #inEmail, #inSenha")) { e.preventDefault(); sbModo === "nova" ? novaSenha() : sbModo === "recuperar" ? recuperar() : autenticar(sbModo === "criar"); }
   });
@@ -3612,6 +3741,152 @@
     }
   };
   Object.keys(TL_TXT).forEach(l => Object.assign(I18N[l], TL_TXT[l]));
+
+  /* Textos de amigos, compartilhamento, termos e (em japonês) da conta */
+  const AM_TXT = {
+    en: {
+      areaFriends: "Friends", leadFriends: "Add friends, see their collections and share your wishlist.",
+      visLbl: "Who can see this binder", vis_privado: "🔒 Private", vis_amigos: "👥 Friends", vis_publico: "🌐 Public",
+      visNotePriv: "Only you.", visNoteFr: "Your friends can see it.", visNotePub: "Anyone with your profile link can see it.", visLogin: "Sign in to share it.",
+      amLoginT: "Sign in to use Friends", amLoginD: "Create an account or sign in to add friends, see their binders and share your wishlist.",
+      amViewT: "Open a profile", amViewD: "Type a username to see that person's public binders.", amOpen: "Open", amUserLbl: "Username",
+      amUserT: "Choose your username", amUserD: "Your friends will find you by this name. It also appears in your profile link.",
+      amUserRule: "3 to 20 characters: lowercase letters, numbers and _.", amUserInvalid: "Use 3 to 20 characters: lowercase letters, numbers or _.",
+      amUserTaken: u => "@" + u + " is already taken. Try another one.",
+      amProfileT: "My profile", amProfileD: "Your link shows your Public binders. Binders set to Friends only appear for friends.",
+      amCopyLink: "Copy link", amSeeMine: "See my profile", amEditUser: "Change username",
+      amAddT: "Add a friend", amAddD: "Type your friend's username to send a request.", amUserPh: "username", amAddBtn: "Add friend",
+      amSelf: "That's you!", amNotFound: u => "No one found as @" + u + ".", amAlready: u => "You and @" + u + " are already friends.",
+      amSent: u => "Request sent to @" + u + ".", amPending: u => "You already sent a request to @" + u + ".", amNowFriends: u => "You and @" + u + " are now friends!",
+      amReceived: "Requests for you", amSentLbl: "Waiting for an answer", amAccept: "Accept", amDecline: "Decline", amCancel: "Cancel", amAccepted: "Request accepted!",
+      amFriendsT: "Friends", amNoFriends: "No friends yet. Add someone by username.", amSeeColl: "See collection", amRemove: "Remove friend",
+      amRemoveAsk: n => "Remove " + n + " from your friends?",
+      amWishT: "Shareable wishlist", amWishD: "Share the cards you are looking for, by link, text or image.", amWishBinder: "Binder",
+      amWishCount: n => n === 1 ? "1 card on the wishlist." : n + " cards on the wishlist.", amWishTitle: "My wishlist",
+      amWishPriv: "This binder is private. Set it to Friends or Public (in the Binder tab) to share the link.",
+      amFriendsLbl: "Friends", amRequested: "Request sent", amThisIsYou: "this is you",
+      amNoShared: "No binders shared with you yet.", amNoSharedAnon: "No public binders. Sign in to see binders shared with friends.",
+      amNoSharedMe: "You are not sharing any binder yet. In the Binder tab, choose Friends or Public under the binder name.",
+      amOwned: "Owned", amWish: "Wishlist", amFavs: "Favorites", amEmptyOwn: "No cards marked in this binder.", amEmptyWish: "The wishlist is empty.", amEmptyFav: "No favorites yet.",
+      amYourWish: "On your wishlist", amYouHave: "You have it",
+      sbAccept: "I have read and accept the", sbErrTerms: "To create an account, accept the terms and privacy policy.",
+      termsLink: "Terms & privacy", termsTitle: "Terms of use and privacy",
+      termsBody: `<p><strong>About the site.</strong> Virtual Pokémon Binder is a free personal project, made for study and portfolio. It is not affiliated with or endorsed by Nintendo, The Pokémon Company, Creatures or Game Freak. Card data and images come from TCGdex and PokéAPI.</p>
+<p><strong>Without an account.</strong> Everything stays only in your browser (local storage). We do not use cookies or ads.</p>
+<p><strong>With an account.</strong> We store your email, trainer name, username and collection (binders, decks and trainer card) on Supabase, the service that runs the login. Your password is never visible to us.</p>
+<p><strong>What others can see.</strong> Binders are private by default. Binders set to Friends are seen only by people you accept as friends; Public binders and your username can be seen by anyone with your link. Your email is never shown.</p>
+<p><strong>Visits.</strong> We count visits anonymously: only the date and the page, with no IP, cookies or identification.</p>
+<p><strong>Your control.</strong> In Account settings you can change your name, email and password, delete the online copy of your collection or delete your account permanently, which erases your data and friendships.</p>
+<p><strong>Age.</strong> If you are under 13, ask a parent or guardian before creating an account.</p>
+<p><strong>Use.</strong> Use a username that is respectful and does not impersonate anyone. Accounts used to bother others may be removed. The site is offered as is, with no guarantee that it will always be available.</p>
+<p><strong>Contact.</strong> Questions or requests: github.com/annaincodes.</p>`
+    },
+    pt: {
+      areaFriends: "Amigos", leadFriends: "Adicione amigos, veja as coleções deles e compartilhe sua wishlist.",
+      visLbl: "Quem pode ver este binder", vis_privado: "🔒 Privado", vis_amigos: "👥 Amigos", vis_publico: "🌐 Público",
+      visNotePriv: "Só você.", visNoteFr: "Seus amigos podem ver.", visNotePub: "Qualquer pessoa com o link do seu perfil pode ver.", visLogin: "Entre na conta para compartilhar.",
+      amLoginT: "Entre para usar Amigos", amLoginD: "Crie uma conta ou entre para adicionar amigos, ver os binders deles e compartilhar sua wishlist.",
+      amViewT: "Abrir um perfil", amViewD: "Digite um nome de usuário para ver os binders públicos dessa pessoa.", amOpen: "Abrir", amUserLbl: "Nome de usuário",
+      amUserT: "Escolha seu nome de usuário", amUserD: "Seus amigos vão te encontrar por esse nome. Ele também aparece no link do seu perfil.",
+      amUserRule: "De 3 a 20 caracteres: letras minúsculas, números e _.", amUserInvalid: "Use de 3 a 20 caracteres: letras minúsculas, números ou _.",
+      amUserTaken: u => "@" + u + " já está em uso. Tente outro.",
+      amProfileT: "Meu perfil", amProfileD: "Seu link mostra os binders Públicos. Binders em Amigos aparecem só para amigos.",
+      amCopyLink: "Copiar link", amSeeMine: "Ver meu perfil", amEditUser: "Alterar usuário",
+      amAddT: "Adicionar amigo", amAddD: "Digite o nome de usuário do seu amigo para enviar um pedido.", amUserPh: "usuario", amAddBtn: "Adicionar amigo",
+      amSelf: "Esse é você!", amNotFound: u => "Ninguém encontrado como @" + u + ".", amAlready: u => "Você e @" + u + " já são amigos.",
+      amSent: u => "Pedido enviado para @" + u + ".", amPending: u => "Você já enviou um pedido para @" + u + ".", amNowFriends: u => "Agora você e @" + u + " são amigos!",
+      amReceived: "Pedidos para você", amSentLbl: "Aguardando resposta", amAccept: "Aceitar", amDecline: "Recusar", amCancel: "Cancelar", amAccepted: "Pedido aceito!",
+      amFriendsT: "Amigos", amNoFriends: "Nenhum amigo ainda. Adicione alguém pelo nome de usuário.", amSeeColl: "Ver coleção", amRemove: "Remover amigo",
+      amRemoveAsk: n => "Remover " + n + " dos seus amigos?",
+      amWishT: "Wishlist compartilhável", amWishD: "Compartilhe as cartas que você procura, por link, texto ou imagem.", amWishBinder: "Binder",
+      amWishCount: n => n === 1 ? "1 carta na wishlist." : n + " cartas na wishlist.", amWishTitle: "Minha wishlist",
+      amWishPriv: "Este binder está privado. Deixe em Amigos ou Público (na aba Binder) para compartilhar o link.",
+      amFriendsLbl: "Amigos", amRequested: "Pedido enviado", amThisIsYou: "este é você",
+      amNoShared: "Nenhum binder compartilhado com você ainda.", amNoSharedAnon: "Nenhum binder público. Entre na conta para ver os binders compartilhados com amigos.",
+      amNoSharedMe: "Você ainda não compartilha nenhum binder. Na aba Binder, escolha Amigos ou Público abaixo do nome do binder.",
+      amOwned: "Tenho", amWish: "Wishlist", amFavs: "Favoritas", amEmptyOwn: "Nenhuma carta marcada neste binder.", amEmptyWish: "A wishlist está vazia.", amEmptyFav: "Nenhuma favorita ainda.",
+      amYourWish: "Na sua wishlist", amYouHave: "Você tem",
+      sbAccept: "Li e aceito os", sbErrTerms: "Para criar a conta, aceite os termos e a política de privacidade.",
+      termsLink: "Termos e privacidade", termsTitle: "Termos de uso e privacidade",
+      termsBody: `<p><strong>Sobre o site.</strong> O Virtual Pokémon Binder é um projeto pessoal e gratuito, feito para estudo e portfólio. Não tem ligação nem aprovação da Nintendo, The Pokémon Company, Creatures ou Game Freak. Os dados e imagens das cartas vêm da TCGdex e da PokéAPI.</p>
+<p><strong>Sem conta.</strong> Tudo fica só no seu navegador (armazenamento local). Não usamos cookies nem anúncios.</p>
+<p><strong>Com conta.</strong> Guardamos seu e-mail, nome de treinador, nome de usuário e coleção (binders, decks e cartão de treinador) no Supabase, o serviço que faz o login. Sua senha nunca fica visível para nós.</p>
+<p><strong>O que outras pessoas veem.</strong> Os binders começam privados. Binders em Amigos só são vistos por quem você aceitar como amigo; binders Públicos e seu nome de usuário podem ser vistos por qualquer pessoa com o seu link. Seu e-mail nunca é mostrado.</p>
+<p><strong>Visitas.</strong> Contamos as visitas de forma anônima: só a data e a página, sem IP, cookies ou identificação.</p>
+<p><strong>Seu controle.</strong> Em Configurações da conta você pode alterar nome, e-mail e senha, apagar a cópia online da coleção ou excluir a conta para sempre, o que apaga seus dados e amizades.</p>
+<p><strong>Idade.</strong> Se você tem menos de 13 anos, peça a um responsável antes de criar uma conta.</p>
+<p><strong>Uso.</strong> Use um nome de usuário respeitoso e que não se passe por outra pessoa. Contas usadas para incomodar outras pessoas podem ser removidas. O site é oferecido como está, sem garantia de que estará sempre disponível.</p>
+<p><strong>Contato.</strong> Dúvidas ou pedidos: github.com/annaincodes.</p>`
+    },
+    ja: {
+      areaFriends: "フレンド", leadFriends: "フレンドを追加して、コレクションを見たり、ほしいものリストを共有したりできます。",
+      visLbl: "このバインダーを見られる人", vis_privado: "🔒 非公開", vis_amigos: "👥 フレンド", vis_publico: "🌐 公開",
+      visNotePriv: "自分だけ。", visNoteFr: "フレンドが見られます。", visNotePub: "プロフィールのリンクを知っている人なら誰でも見られます。", visLogin: "共有するにはログインしてください。",
+      amLoginT: "フレンド機能を使うにはログイン", amLoginD: "アカウントを作成するかログインすると、フレンドの追加、バインダーの閲覧、ほしいものリストの共有ができます。",
+      amViewT: "プロフィールを開く", amViewD: "ユーザー名を入力すると、その人の公開バインダーを見られます。", amOpen: "開く", amUserLbl: "ユーザー名",
+      amUserT: "ユーザー名を決めましょう", amUserD: "フレンドはこの名前であなたを見つけます。プロフィールのリンクにも表示されます。",
+      amUserRule: "3〜20文字：英小文字、数字、_。", amUserInvalid: "3〜20文字の英小文字、数字、_ を使ってください。",
+      amUserTaken: u => "@" + u + " はすでに使われています。別の名前にしてください。",
+      amProfileT: "マイプロフィール", amProfileD: "リンクでは公開バインダーが表示されます。「フレンド」のバインダーはフレンドにだけ表示されます。",
+      amCopyLink: "リンクをコピー", amSeeMine: "自分のプロフィールを見る", amEditUser: "ユーザー名を変更",
+      amAddT: "フレンドを追加", amAddD: "フレンドのユーザー名を入力して申請を送ります。", amUserPh: "ユーザー名", amAddBtn: "フレンドに追加",
+      amSelf: "それはあなたです！", amNotFound: u => "@" + u + " は見つかりませんでした。", amAlready: u => "@" + u + " とはすでにフレンドです。",
+      amSent: u => "@" + u + " に申請を送りました。", amPending: u => "@" + u + " にはすでに申請を送っています。", amNowFriends: u => "@" + u + " とフレンドになりました！",
+      amReceived: "あなたへの申請", amSentLbl: "返事を待っています", amAccept: "承認", amDecline: "断る", amCancel: "取り消す", amAccepted: "申請を承認しました！",
+      amFriendsT: "フレンド", amNoFriends: "まだフレンドがいません。ユーザー名で追加しましょう。", amSeeColl: "コレクションを見る", amRemove: "フレンドを解除",
+      amRemoveAsk: n => n + " をフレンドから外しますか？",
+      amWishT: "共有できるほしいものリスト", amWishD: "探しているカードを、リンク・テキスト・画像で共有できます。", amWishBinder: "バインダー",
+      amWishCount: n => "ほしいものリストに " + n + " 枚。", amWishTitle: "ほしいものリスト",
+      amWishPriv: "このバインダーは非公開です。リンクを共有するには、バインダータブで「フレンド」か「公開」にしてください。",
+      amFriendsLbl: "フレンド", amRequested: "申請済み", amThisIsYou: "あなた",
+      amNoShared: "あなたに共有されているバインダーはまだありません。", amNoSharedAnon: "公開バインダーはありません。ログインするとフレンド向けのバインダーを見られます。",
+      amNoSharedMe: "まだバインダーを共有していません。バインダータブで、バインダー名の下の「フレンド」か「公開」を選んでください。",
+      amOwned: "持っている", amWish: "ほしいもの", amFavs: "お気に入り", amEmptyOwn: "このバインダーにはまだカードがありません。", amEmptyWish: "ほしいものリストは空です。", amEmptyFav: "お気に入りはまだありません。",
+      amYourWish: "あなたのほしいもの", amYouHave: "持っています",
+      sbAccept: "次の内容を読み、同意します：", sbErrTerms: "アカウントを作成するには、利用規約とプライバシーポリシーに同意してください。",
+      termsLink: "利用規約とプライバシー", termsTitle: "利用規約とプライバシー",
+      termsBody: `<p><strong>このサイトについて。</strong>Virtual Pokémon Binder は、学習とポートフォリオのために作った無料の個人プロジェクトです。任天堂、株式会社ポケモン、クリーチャーズ、ゲームフリークとは関係がなく、承認も受けていません。カードのデータと画像は TCGdex と PokéAPI のものです。</p>
+<p><strong>アカウントなしの場合。</strong>データはすべてお使いのブラウザの中だけに保存されます。Cookie や広告は使っていません。</p>
+<p><strong>アカウントありの場合。</strong>メールアドレス、トレーナー名、ユーザー名、コレクション（バインダー、デッキ、トレーナーカード）を、ログインを管理する Supabase に保存します。パスワードを私たちが見ることはありません。</p>
+<p><strong>ほかの人に見えるもの。</strong>バインダーは最初は非公開です。「フレンド」のバインダーは承認したフレンドだけが、「公開」のバインダーとユーザー名はリンクを知っている人なら誰でも見られます。メールアドレスは表示されません。</p>
+<p><strong>訪問数。</strong>訪問は匿名で数えます。記録するのは日付とページだけで、IP、Cookie、個人を特定する情報は使いません。</p>
+<p><strong>あなたが管理できること。</strong>アカウント設定で、名前・メール・パスワードの変更、オンラインのコレクションの削除、アカウントの完全な削除（データとフレンド関係も消えます）ができます。</p>
+<p><strong>年齢。</strong>13歳未満の方は、アカウントを作る前に保護者に相談してください。</p>
+<p><strong>使い方。</strong>ほかの人になりすまさない、礼儀正しいユーザー名を使ってください。迷惑行為に使われたアカウントは削除されることがあります。サイトは現状のまま提供され、いつでも利用できることは保証されません。</p>
+<p><strong>連絡先。</strong>質問やお願いは github.com/annaincodes まで。</p>`,
+      /* conta e login */
+      sbIntro: "ログインすると、コレクションをオンラインに保存して、どの端末からでも開けます。", sbPass: "パスワード", sbIn: "ログイン", sbUp: "アカウント作成",
+      sbNote: "コレクションはこのブラウザに残り、ログイン後にアカウントへコピーされます。", sbErrPass: "6文字以上のパスワードにしてください。",
+      sbConfirm: "あと少し！メールのリンクからアカウントを確認してから、ログインしてください。", sbSyncing: "お待ちください…", sbOk: "コレクションをアカウントに保存しました。",
+      sbErr: m => "接続できませんでした：" + m, sbNow: "今すぐ同期", sbConflict: "このブラウザとアカウントのコレクションが違います。どちらを残しますか？",
+      sbUseCloud: "アカウントのコレクションを使う", sbUseLocal: "このブラウザのものを残してアップロード",
+      sbIntroUp: "アカウントを作って、コレクションをオンラインで安全に保存しましょう。", sbForgot: "パスワードを忘れた", sbBack: "ログインに戻る", sbSendLink: "リンクを送る",
+      sbRecIntro: "メールアドレスを入力すると、新しいパスワードを作るためのリンクを送ります。", sbRecSent: "リンクを送りました！メール（と迷惑メール）を確認してください。",
+      sbNewIntro: "新しいパスワードを決めてください。", sbNewPass: "新しいパスワード", sbSave: "パスワードを保存", acctTitle: "アカウント",
+      sbNet: "サーバーに接続できませんでした。通信状況、広告ブロッカーやプライベートモード、Supabase のプロジェクトが一時停止していないかを確認してください。",
+      sbChoose: "これは新しいアカウントで、まだコレクションが保存されていません。このブラウザにはすでにカードが登録されています。どうしますか？",
+      sbFresh: "空のコレクションから始める", sbBring: "このブラウザのコレクションをアカウントに移す",
+      sbOutAsk: "ログアウトしますか？コレクションはこのブラウザから消えますが、アカウントには保存されたままです。", sbOutUnsaved: "最新の変更をアカウントに保存できませんでした。それでもログアウトして変更を失いますか？",
+      mgOpen: "アカウント設定", mgBack: "戻る", mgName: "トレーナー名", sbSave2: "保存", mgSaved: "保存しました！", mgEmail: "メール", mgEmailNow: e => "現在のメール：" + e,
+      mgNewEmail: "新しいメール", mgCurPass: "現在のパスワード", mgChangeEmail: "メールを変更", mgEmailSent: e => e + " に確認リンクを送りました。リンクを開くとメールが変わります。",
+      mgPass: "パスワード", mgRepeat: "新しいパスワード（もう一度）", mgChangePass: "パスワードを変更", mgNoMatch: "2つの新しいパスワードが違います。", mgPassDone: "パスワードを変更しました。",
+      mgWrong: "現在のパスワードが違います。", mgNeedPass: "現在のパスワードを入力してください。", mgSync: "同期", mgSyncD: "コレクションをアカウントに保存する方法を選べます。",
+      mgAutoOn: "自動同期：オン", mgAutoOff: "自動同期：オフ（「今すぐ同期」を使います）", mgClearCloud: "オンラインのコレクションを削除",
+      mgClearAsk: "アカウントに保存したコレクションを削除しますか？このブラウザのコピーは残ります。", mgCleared: "オンラインのコピーを削除しました。このブラウザのコレクションは残っています。",
+      mgSessions: "端末", mgSessionsD: "ほかのブラウザや端末からすべてログアウトします。", mgOthers: "ほかの端末からログアウト", mgOthersDone: "ほかの端末をログアウトしました。",
+      mgDanger: "アカウント削除", mgDelD: "アカウントとオンラインのコレクションを完全に削除します。このブラウザのコレクションは残ります。", mgDelete: "アカウントを完全に削除",
+      mgDelAsk: "アカウントを完全に削除しますか？元に戻せません。", mgDelMissing: "Supabase でアカウント削除がまだ設定されていません（excluir_conta 関数がありません）。", mgDeleted: "アカウントを削除しました。"
+    }
+  };
+  const AM_TXT2 = {
+    en: { sbUser: "Username", sbNick: "Nickname (trainer name)", sbNickHint: "Shown on your profile and trainer card. It can be the same as someone else's.",
+      sbUserChecking: "Checking…", sbUserFree: u => "✓ @" + u + " is available.", mgName: "Nickname" },
+    pt: { sbUser: "Nome de usuário", sbNick: "Apelido (nome de treinador)", sbNickHint: "Aparece no seu perfil e no cartão de treinador. Pode ser igual ao de outras pessoas.",
+      sbUserChecking: "Verificando…", sbUserFree: u => "✓ @" + u + " está disponível.", mgName: "Apelido" },
+    ja: { sbUser: "ユーザー名", sbNick: "ニックネーム（トレーナー名）", sbNickHint: "プロフィールとトレーナーカードに表示されます。ほかの人と同じでも大丈夫です。",
+      sbUserChecking: "確認中…", sbUserFree: u => "✓ @" + u + " は使えます。", mgName: "ニックネーム" }
+  };
+  Object.keys(AM_TXT).forEach(l => Object.assign(I18N[l], AM_TXT[l], AM_TXT2[l]));
 
   /* ---------- Detalhes das cartas (categoria, estágio, tipos, preços), com cópia local ---------- */
   const DET_KEY = "det-v1", DET_DIAS = 3;
@@ -4796,6 +5071,7 @@
     }).join("") + `<button type="button" class="bd-novo" data-bdnovo="1" aria-label="${esc(t("binderNew"))}" title="${esc(t("binderNew"))}">${ICON.plus}<span>${esc(t("binderNewShort"))}</span></button>`;
     const inp = $("bdInput");
     if (inp) { inp.focus(); inp.select(); }
+    renderVisBinder();
   }
   function trocarBinder(id) {
     if (id === bnd.atual) return;
@@ -4815,7 +5091,7 @@
     if (!id) return;
     const inp = $("bdInput");
     const b = bnd.lista.find(x => x.id === id);
-    if (salvarNome && b && inp) { b.name = inp.value.replace(/\s+/g, " ").trim().slice(0, 30); salvarBinders(); }
+    if (salvarNome && b && inp) { b.name = inp.value.replace(/\s+/g, " ").trim().slice(0, 30); salvarBinders(); publicarBinders(); }
     bdState.editando = null;
     renderBinders();
     const r = $("bdTabs").querySelector(`[data-bdren="${CSS.escape(id)}"]`); if (r) r.focus();
@@ -4836,6 +5112,7 @@
       const i = bnd.lista.findIndex(b => b.id === id);
       try { localStorage.removeItem(chaveBinder(id)); } catch (err) { /* segue */ }
       bnd.lista.splice(i, 1);
+      publicarBinders();
       const prox = bnd.lista[Math.max(0, i - 1)];
       bnd.atual = null;
       trocarBinder(prox.id);
@@ -4844,7 +5121,7 @@
     }
     if (novo) {
       const id = "b" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
-      bnd.lista.push({ id, name: t("binderN", bnd.lista.length + 1) });
+      bnd.lista.push({ id, name: t("binderN", bnd.lista.length + 1), vis: "privado" });
       trocarBinder(id);
       bdState.editando = id;
       renderBinders();
@@ -4856,6 +5133,440 @@
     else if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); terminarRenomear(false); }
   });
   $("bdTabs").addEventListener("focusout", e => { if (e.target.id === "bdInput") setTimeout(() => { if (bdState.editando) terminarRenomear(true); }, 0); });
+
+
+  /* =====================================================================
+     Amigos, perfis públicos, binders compartilhados e wishlist
+     ===================================================================== */
+  const AM_VIS = ["privado", "amigos", "publico"];
+  const usuarioValido = u => /^[a-z0-9_]{3,20}$/.test(u);
+  const limparUsuario = u => String(u || "").trim().toLowerCase().replace(/^@/, "");
+  const urlPerfil = (u, b, v) => location.origin + location.pathname + "?u=" + encodeURIComponent(u) + (b ? "&b=" + encodeURIComponent(b) : "") + (v ? "&v=" + v : "");
+  var amState = { view: "lista", carregado: false, carregando: false, erro: "", perfil: null, amigos: [], recebidos: [], enviados: [],
+    msg: null, editUser: false, alvo: null, alvoBinders: [], alvoB: null, filtro: "own", alvoErro: "", alvoCarregando: false, wishB: bnd.atual, buscaU: "" };
+  // sem login, a leitura usa a chave pública (só enxerga o que é público)
+  const amReq = (caminho, opc) => sbReq(caminho, opc || {}, !!sb);
+  const ICON_GENTE = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2" stroke="currentColor" stroke-width="2"/><path d="M3.5 19c.7-3 2.9-4.6 5.5-4.6s4.8 1.6 5.5 4.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="17" cy="9.5" r="2.5" stroke="currentColor" stroke-width="2"/><path d="M16.2 14.6c2.2.1 3.8 1.5 4.3 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  const ICON_LINK = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 14a4.5 4.5 0 006.4 0l3-3a4.5 4.5 0 00-6.4-6.4l-1 1M14 10a4.5 4.5 0 00-6.4 0l-3 3a4.5 4.5 0 006.4 6.4l1-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  const ICON_MAIS = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10" cy="8.5" r="3.4" stroke="currentColor" stroke-width="2"/><path d="M3.5 19.5c.7-3.2 3.2-5 6.5-5 1.4 0 2.7.3 3.7 1M18 13v6M15 16h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  const ICON_ESTRELA = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8 6.8 19.5l1-5.8-4.2-4.1 5.8-.8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
+
+  function amMsg(sec, txt, erro) { amState.msg = { sec, txt, erro: !!erro }; renderAmigos(); }
+  const amMsgHTML = sec => amState.msg && amState.msg.sec === sec ? `<p class="${amState.msg.erro ? "tl-erro" : "tl-ok"}" role="status">${esc(amState.msg.txt)}</p>` : "";
+  const amErroTxt = e => /duplicate|23505|unique/i.test(e && e.message || "") ? "dup" : t("sbErr", e && e.message || "?");
+
+  async function amCarregar() {
+    if (!sb || amState.carregando) return;
+    amState.carregando = true; amState.erro = ""; renderAmigos();
+    try {
+      const eu = await sbReq("/rest/v1/perfis?user_id=eq." + sb.id + "&select=user_id,usuario,nome");
+      amState.perfil = eu[0] || null;
+      const rel = await sbReq("/rest/v1/amizades?select=de,para,status");
+      const ids = [...new Set(rel.map(r => r.de === sb.id ? r.para : r.de))];
+      const ps = ids.length ? await sbReq("/rest/v1/perfis?user_id=in.(" + ids.join(",") + ")&select=user_id,usuario,nome") : [];
+      const P = new Map(ps.map(p => [p.user_id, p]));
+      const pf = id => P.get(id) || { user_id: id, usuario: "", nome: "?" };
+      const ord = (a, b) => (a.nome || a.usuario).localeCompare(b.nome || b.usuario);
+      amState.amigos = rel.filter(r => r.status === "aceita").map(r => pf(r.de === sb.id ? r.para : r.de)).sort(ord);
+      amState.recebidos = rel.filter(r => r.status === "pendente" && r.para === sb.id).map(r => pf(r.de)).sort(ord);
+      amState.enviados = rel.filter(r => r.status === "pendente" && r.de === sb.id).map(r => pf(r.para)).sort(ord);
+      amState.carregado = true; amState.quando = Date.now();
+      if (amState.perfil && conta.perfil && conta.perfil.nome && amState.perfil.nome !== conta.perfil.nome) amAtualizarNome(conta.perfil.nome);
+    } catch (e) { amState.erro = t("sbErr", e.message); amState.carregado = true; }
+    amState.carregando = false; renderAmigos();
+  }
+  async function usuarioLivre(u) {
+    const r = await sbReq("/rest/v1/perfis?usuario=eq." + encodeURIComponent(u) + "&select=user_id", {}, false);
+    return !r.length || !!(sb && r[0].user_id === sb.id);
+  }
+  // cria o perfil com o @ escolhido no cadastro (na primeira vez que a pessoa entra)
+  async function amGarantirPerfil() {
+    if (!sb) return;
+    try {
+      const eu = await sbReq("/rest/v1/perfis?user_id=eq." + sb.id + "&select=user_id,usuario,nome");
+      if (eu[0]) { amState.perfil = eu[0]; if (sb.usuario !== eu[0].usuario) { sb.usuario = eu[0].usuario; sbGuardar(); } return; }
+      const u = limparUsuario(sb.usuario);
+      if (!usuarioValido(u)) return;
+      const nome = (conta.perfil && conta.perfil.nome) || sb.nome || "";
+      await sbReq("/rest/v1/perfis?on_conflict=user_id", { method: "POST", headers: { Prefer: "resolution=merge-duplicates,return=minimal" },
+        body: JSON.stringify({ user_id: sb.id, usuario: u, nome, atualizado: new Date().toISOString() }) });
+      amState.perfil = { user_id: sb.id, usuario: u, nome };
+    } catch (e) { /* se o @ foi ocupado, a aba Amigos pede outro */ }
+  }
+  let usuarioTimer = 0, usuarioPedido = 0;
+  contaBox.addEventListener("input", e => {
+    if (e.target.id !== "inUsuario") return;
+    const st = $("usuarioSt"), u = limparUsuario(e.target.value);
+    clearTimeout(usuarioTimer);
+    st.classList.remove("ok", "ruim");
+    if (!u) { st.textContent = t("amUserRule"); return; }
+    if (!usuarioValido(u)) { st.textContent = t("amUserInvalid"); st.classList.add("ruim"); return; }
+    st.textContent = t("sbUserChecking");
+    const n = ++usuarioPedido;
+    usuarioTimer = setTimeout(async () => {
+      try {
+        const livre = await usuarioLivre(u);
+        if (n !== usuarioPedido || !$("usuarioSt")) return;
+        st.textContent = livre ? t("sbUserFree", u) : t("amUserTaken", u);
+        st.classList.add(livre ? "ok" : "ruim");
+      } catch (err) { if (n === usuarioPedido) st.textContent = t("amUserRule"); }
+    }, 450);
+  });
+  function amAtualizarSeVelho() {
+    if (amState && sb && amState.carregado && !amState.carregando && amState.view === "lista" && Date.now() - (amState.quando || 0) > 20000) amCarregar();
+  }
+  async function amSalvarUsuario() {
+    const u = limparUsuario($("amUser") && $("amUser").value);
+    if (!usuarioValido(u)) return amMsg("perfil", t("amUserInvalid"), true);
+    const nome = (conta.perfil && conta.perfil.nome) || "";
+    try {
+      await sbReq("/rest/v1/perfis?on_conflict=user_id", { method: "POST", headers: { Prefer: "resolution=merge-duplicates,return=minimal" },
+        body: JSON.stringify({ user_id: sb.id, usuario: u, nome, atualizado: new Date().toISOString() }) });
+      amState.perfil = { user_id: sb.id, usuario: u, nome }; amState.editUser = false;
+      amMsg("perfil", t("mgSaved"));
+      publicarBinders();
+    } catch (e) { const m = amErroTxt(e); amMsg("perfil", m === "dup" ? t("amUserTaken", u) : m, true); }
+  }
+  function amAtualizarNome(nome) {
+    if (!sb || !amState.perfil) return;
+    amState.perfil.nome = nome;
+    sbReq("/rest/v1/perfis?user_id=eq." + sb.id, { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ nome, atualizado: new Date().toISOString() }) }).catch(() => {});
+  }
+  async function amAdicionar(usuario, sec) {
+    sec = sec || "add";
+    const u = limparUsuario(usuario);
+    if (!usuarioValido(u)) return amMsg(sec, t("amUserInvalid"), true);
+    if (amState.perfil && u === amState.perfil.usuario) return amMsg(sec, t("amSelf"), true);
+    try {
+      const r = await sbReq("/rest/v1/perfis?usuario=eq." + encodeURIComponent(u) + "&select=user_id,usuario,nome");
+      if (!r[0]) return amMsg(sec, t("amNotFound", u), true);
+      const alvo = r[0];
+      if (amState.amigos.some(a => a.user_id === alvo.user_id)) return amMsg(sec, t("amAlready", u), true);
+      if (amState.recebidos.some(a => a.user_id === alvo.user_id)) { await amAceitar(alvo.user_id); return amMsg(sec, t("amNowFriends", u)); }
+      await sbReq("/rest/v1/amizades", { method: "POST", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ de: sb.id, para: alvo.user_id }) });
+      await amCarregar();
+      amMsg(sec, t("amSent", u));
+    } catch (e) { const m = amErroTxt(e); amMsg(sec, m === "dup" ? t("amPending", u) : m, true); }
+  }
+  async function amAceitar(id) {
+    await sbReq("/rest/v1/amizades?de=eq." + id + "&para=eq." + sb.id, { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ status: "aceita" }) });
+    await amCarregar();
+  }
+  async function amRemover(id) {
+    await sbReq("/rest/v1/amizades?or=(and(de.eq." + sb.id + ",para.eq." + id + "),and(de.eq." + id + ",para.eq." + sb.id + "))", { method: "DELETE", headers: { Prefer: "return=minimal" } });
+    await amCarregar();
+  }
+
+  /* ---------- Binders compartilhados: uma cópia resumida de cada binder que não é privado ---------- */
+  function dadosBinder(id) {
+    return id === bnd.atual ? { cop: state.cop, fav: state.fav, star: state.star } : carregar(chaveBinder(id));
+  }
+  function snapshotBinder(id) {
+    const d = dadosBinder(id), q = {}, l = {};
+    Object.entries(d.cop || {}).forEach(([k, a]) => {
+      if (!a || !a.length) return;
+      q[k] = a.length;
+      const ls = LANGS.filter(x => a.some(c => c.l === x));
+      if (ls.length) l[k] = ls;
+    });
+    return { q, l, fav: [...(d.fav || [])], star: [...(d.star || [])] };
+  }
+  let pubTimer = 0;
+  function publicarBinders() { if (!sb) return; clearTimeout(pubTimer); pubTimer = setTimeout(publicarAgora, 1500); }
+  async function publicarAgora() {
+    if (!sb) return;
+    const pubs = bnd.lista.filter(b => b.vis === "amigos" || b.vis === "publico");
+    try {
+      if (pubs.length) await sbReq("/rest/v1/binders_compartilhados?on_conflict=user_id,binder_id", { method: "POST", headers: { Prefer: "resolution=merge-duplicates,return=minimal" },
+        body: JSON.stringify(pubs.map(b => ({ user_id: sb.id, binder_id: b.id, nome: nomeBinder(b), vis: b.vis, dados: snapshotBinder(b.id), atualizado: new Date().toISOString() }))) });
+      const fora = pubs.length ? "&binder_id=not.in.(" + pubs.map(b => '"' + b.id + '"').join(",") + ")" : "";
+      await sbReq("/rest/v1/binders_compartilhados?user_id=eq." + sb.id + fora, { method: "DELETE", headers: { Prefer: "return=minimal" } });
+    } catch (e) { console.warn("Binders compartilhados:", e); }
+  }
+  function renderVisBinder() {
+    const box = $("bdVis");
+    if (!box) return;
+    const b = bnd.lista.find(x => x.id === bnd.atual);
+    if (!b) { box.innerHTML = ""; return; }
+    const v = AM_VIS.includes(b.vis) ? b.vis : "privado";
+    const nota = v === "privado" ? t("visNotePriv") : !sb ? t("visLogin") : v === "amigos" ? t("visNoteFr") : t("visNotePub");
+    box.innerHTML = `<label for="bdVisSel">${esc(t("visLbl"))}</label>
+      <select id="bdVisSel">${AM_VIS.map(x => `<option value="${x}"${x === v ? " selected" : ""}>${esc(t("vis_" + x))}</option>`).join("")}</select>
+      <span class="bd-vis-nota">${esc(nota)}</span>`;
+  }
+  document.addEventListener("change", e => {
+    if (e.target.id === "bdVisSel") {
+      const b = bnd.lista.find(x => x.id === bnd.atual);
+      if (!b) return;
+      b.vis = e.target.value; salvarBinders(); publicarBinders(); renderVisBinder();
+      $("bdVisSel").focus();
+    } else if (e.target.id === "amWishSel") { amState.wishB = e.target.value; renderAmigos(); const s = $("amWishSel"); if (s) s.focus(); }
+  });
+
+  /* ---------- Perfil de outra pessoa (ou o próprio) ---------- */
+  async function amAbrirPerfil(usuario, binder, filtro) {
+    const u = limparUsuario(usuario);
+    amState.view = "perfil"; amState.alvo = null; amState.alvoBinders = []; amState.alvoErro = "";
+    amState.alvoCarregando = true; amState.alvoB = binder || null; amState.filtro = filtro || "own";
+    renderAmigos();
+    try {
+      if (!usuarioValido(u)) throw new Error(t("amUserInvalid"));
+      const r = await amReq("/rest/v1/perfis?usuario=eq." + encodeURIComponent(u) + "&select=user_id,usuario,nome");
+      if (!r[0]) throw new Error(t("amNotFound", u));
+      amState.alvo = r[0];
+      amState.alvoBinders = await amReq("/rest/v1/binders_compartilhados?user_id=eq." + r[0].user_id + "&select=binder_id,nome,vis,dados,atualizado&order=nome");
+      if (!amState.alvoBinders.some(b => b.binder_id === amState.alvoB)) amState.alvoB = amState.alvoBinders[0] ? amState.alvoBinders[0].binder_id : null;
+    } catch (e) { amState.alvoErro = e.message; }
+    amState.alvoCarregando = false; renderAmigos();
+    const v = $("amVoltar"); if (v) v.focus();
+  }
+  function amFecharPerfil() {
+    amState.view = "lista"; amState.alvo = null;
+    if (location.search) history.replaceState(null, "", location.pathname);
+    renderAmigos();
+  }
+  const ordCarta = (a, b) => { const x = POR_ID.get(a), y = POR_ID.get(b); return (x ? x.ord : 1e9) - (y ? y.ord : 1e9) || a.localeCompare(b); };
+  function amGrade(ids, d, filtro) {
+    if (!ids.length) return `<p class="tl-nota">${esc(t(filtro === "star" ? "amEmptyWish" : filtro === "fav" ? "amEmptyFav" : "amEmptyOwn"))}</p>`;
+    const MAX = 600, eu = !!(sb && amState.alvo && amState.alvo.user_id === sb.id);
+    const itens = ids.slice(0, MAX).map(id => {
+      const c = POR_ID.get(id), q = (d.q || {})[id] || 0;
+      const sel = !eu && filtro === "own" && state.star.has(id) ? `<span class="fv-tag">${esc(t("amYourWish"))}</span>`
+        : !eu && filtro === "star" && state.own.has(id) ? `<span class="fv-tag">${esc(t("amYouHave"))}</span>` : "";
+      return `<li class="fv-c"><div class="fv-img">${c && (c.img || c.fb) ? `<img src="${esc(imgPequena(c))}" data-fb="${esc(c.fb || "")}" alt="" loading="lazy" decoding="async">` : ""}${filtro === "own" && q > 1 ? `<span class="fv-q">×${q}</span>` : ""}</div>
+        <p class="fv-n">${esc(c ? c.n : id)}</p><p class="fv-s">${c ? esc("#" + numeroTxt(c) + " · " + setNome(c)) : ""}</p>${sel}</li>`;
+    }).join("");
+    return `<ul class="fv-grid">${itens}</ul>${ids.length > MAX ? `<p class="tl-nota">${esc(t("tlMore", ids.length - MAX))}</p>` : ""}`;
+  }
+  function amHtmlPerfil() {
+    const voltar = `<button type="button" class="tl-btn" id="amVoltar" data-am="voltar">← ${esc(t("mgBack"))}</button>`;
+    if (amState.alvoCarregando) return `${voltar}<div class="tl-prog"><span class="spin" aria-hidden="true"></span><p>${esc(t("sbSyncing"))}</p></div>`;
+    if (amState.alvoErro || !amState.alvo) return `${voltar}<p class="tl-erro" role="alert">${esc(amState.alvoErro || "?")}</p>`;
+    const a = amState.alvo, bs = amState.alvoBinders, eu = !!(sb && a.user_id === sb.id);
+    let rel = "";
+    if (sb && !eu) {
+      if (amState.amigos.some(x => x.user_id === a.user_id)) rel = `<span class="fv-st">✓ ${esc(t("amFriendsLbl"))}</span>`;
+      else if (amState.enviados.some(x => x.user_id === a.user_id)) rel = `<span class="fv-st">${esc(t("amRequested"))}</span>`;
+      else if (amState.recebidos.some(x => x.user_id === a.user_id)) rel = `<button type="button" class="tl-btn on" data-am="aceitar" data-id="${esc(a.user_id)}">${esc(t("amAccept"))}</button>`;
+      else rel = `<button type="button" class="tl-btn on" data-am="addPerfil" data-u="${esc(a.usuario)}">${esc(t("amAddBtn"))}</button>`;
+    }
+    const cab = `<section class="tl-card fv-cab">
+        <span class="avatar fv-av" aria-hidden="true">${esc((a.nome || a.usuario).charAt(0).toUpperCase())}</span>
+        <div class="fv-quem"><h2>${esc(a.nome || a.usuario)}</h2><p>@${esc(a.usuario)}${eu ? " · " + esc(t("amThisIsYou")) : ""}</p></div>
+        <div class="tl-acoes fv-acoes">${rel}<button type="button" class="tl-btn" data-am="copiarPerfil" data-u="${esc(a.usuario)}">${esc(t("amCopyLink"))}</button></div>
+        ${amMsgHTML("perfilAlvo")}
+      </section>`;
+    if (!bs.length) return `${voltar}${cab}<section class="tl-card"><p class="tl-nota" style="margin:0">${esc(t(eu ? "amNoSharedMe" : sb ? "amNoShared" : "amNoSharedAnon"))}</p></section>`;
+    const b = bs.find(x => x.binder_id === amState.alvoB) || bs[0], d = b.dados || {};
+    const listas = { own: Object.keys(d.q || {}), star: (d.star || []).slice(), fav: (d.fav || []).slice() };
+    Object.values(listas).forEach(l => l.sort(ordCarta));
+    const tabsB = bs.length > 1 ? `<div class="tabs fv-binders" role="group" aria-label="${esc(t("bindersAria"))}">${bs.map(x => `<button type="button" data-am="binder" data-b="${esc(x.binder_id)}" aria-pressed="${x.binder_id === b.binder_id}">${esc(x.nome || t("binderDefault"))}</button>`).join("")}</div>` : `<h3 class="tl-h3">${esc(b.nome || t("binderDefault"))}</h3>`;
+    const filtros = `<div class="tabs" role="group" aria-label="${esc(t("show"))}">${[["own", "amOwned"], ["star", "amWish"], ["fav", "amFavs"]].map(([k, r]) => `<button type="button" data-am="filtro" data-f="${k}" aria-pressed="${amState.filtro === k}">${esc(t(r))} <span class="count">${listas[k].length}</span></button>`).join("")}</div>`;
+    const espera = state.status !== "ok" ? `<div class="tl-prog"><span class="spin" aria-hidden="true"></span><p>${esc(t("tlWait"))}</p></div>` : "";
+    return `${voltar}${cab}<section class="tl-card">${tabsB}<div class="fv-filtros">${filtros}<span class="fv-vis">${esc(t("vis_" + b.vis))}</span></div>${espera}${amGrade(listas[amState.filtro] || [], d, amState.filtro)}</section>`;
+  }
+
+  /* ---------- Wishlist compartilhável ---------- */
+  function wishLista(id) {
+    const d = dadosBinder(id);
+    return [...(d.star || [])].sort(ordCarta).map(x => ({ id: x, c: POR_ID.get(x) }));
+  }
+  function textoWish(id) {
+    const b = bnd.lista.find(x => x.id === id), lst = wishLista(id);
+    const linhas = lst.map(x => "• " + (x.c ? x.c.n + " #" + numeroTxt(x.c) + " (" + setNome(x.c) + ")" : x.id));
+    const link = b && b.vis !== "privado" && amState.perfil ? "\n\n" + urlPerfil(amState.perfil.usuario, id, "wish") : "";
+    return t("amWishTitle") + " — " + (b ? nomeBinder(b) : "") + "\n" + (linhas.join("\n") || "—") + link;
+  }
+  async function imagemWish(id) {
+    const b = bnd.lista.find(x => x.id === id), lst = wishLista(id);
+    if (document.fonts && document.fonts.ready) await document.fonts.ready;
+    const W = 1080, POR = 22, LH = 40, cols = lst.length > POR ? 2 : 1;
+    const linhas = Math.min(POR, Math.max(Math.ceil(lst.length / cols), 4));
+    const H = 250 + linhas * LH + 110;
+    const cv = document.createElement("canvas"); cv.width = W; cv.height = H;
+    const g = cv.getContext("2d");
+    const bg = corVar("--hd-bg"), fg = corVar("--hd-fg"), sub = corVar("--hd-sub");
+    g.fillStyle = bg; g.fillRect(0, 0, W, H);
+    const sil = await silhueta();
+    if (sil) g.drawImage(silPintada(sil, fg, 92, 102), 60, 50);
+    g.fillStyle = fg; g.font = `800 46px ${FONTE_T}`; g.textBaseline = "alphabetic";
+    g.fillText(cortarTexto(g, t("amWishTitle").toUpperCase(), W - 260), 180, 104);
+    g.fillStyle = sub; g.font = `500 26px ${FONTE_C}`;
+    const quem = (nomeTreinador() || t("trainer")) + (amState.perfil ? "  @" + amState.perfil.usuario : "") + (b ? "  ·  " + nomeBinder(b) : "");
+    g.fillText(cortarTexto(g, quem, W - 260), 182, 144);
+    retRedondo(g, 60, 190, W - 120, H - 270, 24); g.fillStyle = "rgba(255,255,255,0.07)"; g.fill();
+    g.font = `500 22px ${FONTE_C}`; g.fillStyle = sub;
+    const larg = cols === 2 ? 450 : W - 180;
+    lst.slice(0, POR * cols).forEach((it, i) => {
+      const col = Math.floor(i / POR), lin = i % POR;
+      g.fillText(cortarTexto(g, "• " + (it.c ? it.c.n + " #" + numeroTxt(it.c) : it.id), larg), 90 + col * 470, 240 + lin * LH);
+    });
+    if (!lst.length) g.fillText("—", 90, 240);
+    if (lst.length > POR * cols) g.fillText(t("tlMore", lst.length - POR * cols), 90, 240 + POR * LH);
+    g.fillStyle = sub; g.globalAlpha = 0.75; g.font = `500 20px ${FONTE_C}`;
+    const rod = b && b.vis !== "privado" && amState.perfil ? urlPerfil(amState.perfil.usuario).replace(/^https?:\/\//, "") : t("title") + (location.host ? " · " + location.host : "");
+    g.fillText(cortarTexto(g, rod, W - 120), 60, H - 34);
+    g.globalAlpha = 1;
+    return new Promise(ok => cv.toBlob(ok, "image/png"));
+  }
+
+  /* ---------- Aba Amigos ---------- */
+  function amSecao(id, icone, titulo, desc, corpo) {
+    return `<section class="tl-card" aria-labelledby="${id}"><header class="tl-cab"><span class="tl-ic" aria-hidden="true">${icone}</span><h2 id="${id}">${esc(titulo)}</h2></header>${desc ? `<p class="tl-desc">${esc(desc)}</p>` : ""}${corpo}</section>`;
+  }
+  function amPessoa(p, botoes) {
+    return `<li class="am-p"><span class="avatar am-av" aria-hidden="true">${esc((p.nome || p.usuario || "?").charAt(0).toUpperCase())}</span>
+      <div class="am-quem"><strong>${esc(p.nome || p.usuario)}</strong>${p.usuario ? `<small>@${esc(p.usuario)}</small>` : ""}</div><div class="am-bts">${botoes}</div></li>`;
+  }
+  function renderAmigos() {
+    if (!amState || conta.cfg.area !== "amigos") return;
+    const box = $("amCorpo");
+    if (!box) return;
+    if (amState.view === "perfil") { box.innerHTML = `<div class="fv">${amHtmlPerfil()}</div>`; return; }
+    const verPerfil = amSecao("amVerT", ICON_LINK, t("amViewT"), t("amViewD"), `
+      <div class="am-linha"><input type="text" id="amVerU" placeholder="@${esc(t("amUserPh"))}" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="21" value="${esc(amState.buscaU)}" aria-label="${esc(t("amUserLbl"))}">
+      <button type="button" class="tl-btn on" data-am="ver">${esc(t("amOpen"))}</button></div>`);
+    if (!sb) {
+      box.innerHTML = `<div class="tl-grid">${amSecao("amEntrarT", ICON_GENTE, t("amLoginT"), t("amLoginD"), `<div class="tl-acoes"><button type="button" class="tl-btn on" data-am="entrar">${esc(t("sbIn"))}</button></div>`)}${verPerfil}</div>`;
+      return;
+    }
+    if (!amState.carregado) { box.innerHTML = `<div class="tl-prog"><span class="spin" aria-hidden="true"></span><p>${esc(t("sbSyncing"))}</p></div>`; if (!amState.carregando) amCarregar(); return; }
+    if (amState.erro) { box.innerHTML = `<div class="tl-grid">${amSecao("amErrT", ICON_GENTE, t("areaFriends"), "", `<p class="tl-erro" role="alert">${esc(amState.erro)}</p><div class="tl-acoes"><button type="button" class="tl-btn on" data-am="recarregar">${esc(t("retry"))}</button></div>`)}</div>`; return; }
+    const p = amState.perfil;
+    const campoUser = `<div class="am-linha"><span class="am-arroba" aria-hidden="true">@</span><input type="text" id="amUser" value="${esc(p ? p.usuario : "")}" maxlength="20" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="${esc(t("amUserLbl"))}">
+      <button type="button" class="tl-btn on" data-am="salvarUser">${esc(t("sbSave2"))}</button></div><p class="tl-nota">${esc(t("amUserRule"))}</p>`;
+    if (!p) { box.innerHTML = `<div class="tl-grid">${amSecao("amUserT", ICON_GENTE, t("amUserT"), t("amUserD"), campoUser + amMsgHTML("perfil"))}</div>`; return; }
+    const perfil = amSecao("amPerfilT", ICON_GENTE, t("amProfileT"), t("amProfileD"), amState.editUser ? campoUser + amMsgHTML("perfil") : `
+      <p class="am-eu"><strong>${esc(p.nome || conta.perfil && conta.perfil.nome || "")}</strong> <span>@${esc(p.usuario)}</span></p>
+      <div class="tl-acoes"><button type="button" class="tl-btn on" data-am="copiarPerfil" data-u="${esc(p.usuario)}">${esc(t("amCopyLink"))}</button>
+      <button type="button" class="tl-btn" data-am="verEu">${esc(t("amSeeMine"))}</button><button type="button" class="tl-btn" data-am="editUser">${esc(t("amEditUser"))}</button></div>${amMsgHTML("perfil")}`);
+    const add = amSecao("amAddT", ICON_MAIS, t("amAddT"), t("amAddD"), `
+      <div class="am-linha"><span class="am-arroba" aria-hidden="true">@</span><input type="text" id="amAddU" placeholder="${esc(t("amUserPh"))}" maxlength="21" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="${esc(t("amUserLbl"))}">
+      <button type="button" class="tl-btn on" data-am="add">${esc(t("amAddBtn"))}</button></div>${amMsgHTML("add")}
+      ${amState.recebidos.length ? `<h3 class="tl-h3">${esc(t("amReceived"))} <span class="tl-n">${amState.recebidos.length}</span></h3><ul class="am-lista">${amState.recebidos.map(x => amPessoa(x, `<button type="button" class="tl-btn on" data-am="aceitar" data-id="${esc(x.user_id)}">${esc(t("amAccept"))}</button><button type="button" class="tl-btn" data-am="recusar" data-id="${esc(x.user_id)}">${esc(t("amDecline"))}</button>`)).join("")}</ul>` : ""}
+      ${amState.enviados.length ? `<h3 class="tl-h3">${esc(t("amSentLbl"))} <span class="tl-n">${amState.enviados.length}</span></h3><ul class="am-lista">${amState.enviados.map(x => amPessoa(x, `<button type="button" class="tl-btn" data-am="cancelar" data-id="${esc(x.user_id)}">${esc(t("amCancel"))}</button>`)).join("")}</ul>` : ""}`);
+    const amigos = amSecao("amListaT", ICON_GENTE, t("amFriendsT") + (amState.amigos.length ? " (" + amState.amigos.length + ")" : ""), "", amState.amigos.length
+      ? `<ul class="am-lista">${amState.amigos.map(x => amPessoa(x, `<button type="button" class="tl-btn on" data-am="verAmigo" data-u="${esc(x.usuario)}"${x.usuario ? "" : " disabled"}>${esc(t("amSeeColl"))}</button><button type="button" class="tl-btn am-x" data-am="remover" data-id="${esc(x.user_id)}" aria-label="${esc(t("amRemove"))}: ${esc(x.nome || x.usuario)}" title="${esc(t("amRemove"))}">×</button>`)).join("")}</ul>${amMsgHTML("lista")}`
+      : `<p class="tl-nota" style="margin:0">${esc(t("amNoFriends"))}</p>`);
+    if (!bnd.lista.some(b => b.id === amState.wishB)) amState.wishB = bnd.atual;
+    const wb = bnd.lista.find(b => b.id === amState.wishB), wl = wishLista(amState.wishB), priv = !wb || wb.vis === "privado";
+    const wish = amSecao("amWishT", ICON_ESTRELA, t("amWishT"), t("amWishD"), `
+      <div class="field am-sel"><label for="amWishSel">${esc(t("amWishBinder"))}</label><select id="amWishSel">${bnd.lista.map(b => `<option value="${esc(b.id)}"${b.id === amState.wishB ? " selected" : ""}>${esc(nomeBinder(b))} · ${esc(t("vis_" + (b.vis || "privado")))}</option>`).join("")}</select></div>
+      <p class="tl-nota">${esc(t("amWishCount", wl.length))}</p>
+      ${wl.length ? `<ul class="tl-mini am-wl">${wl.slice(0, 6).map(x => `<li>${esc(x.c ? x.c.n : x.id)}${x.c ? `<small> #${esc(numeroTxt(x.c))}</small>` : ""}</li>`).join("")}</ul>${wl.length > 6 ? `<p class="tl-nota">${esc(t("tlMore", wl.length - 6))}</p>` : ""}` : ""}
+      <div class="tl-acoes"><button type="button" class="tl-btn on" data-am="wishLink"${priv || !wl.length ? " disabled" : ""}>${esc(t("amCopyLink"))}</button>
+      <button type="button" class="tl-btn" data-am="wishTxt"${wl.length ? "" : " disabled"}>${esc(t("tlCopy"))}</button>
+      <button type="button" class="tl-btn" data-am="wishImg"${wl.length ? "" : " disabled"}>${esc(t("tlImg"))}</button></div>
+      ${priv ? `<p class="tl-nota">${esc(t("amWishPriv"))}</p>` : ""}${amMsgHTML("wish")}`);
+    box.innerHTML = `<div class="tl-grid">${perfil}${add}${amigos}${wish}${verPerfil}</div>`;
+  }
+  $("amCorpo").addEventListener("error", e => {
+    const img = e.target;
+    if (img.tagName === "IMG" && img.dataset.fb && img.src !== img.dataset.fb) { img.src = img.dataset.fb; img.dataset.fb = ""; }
+  }, true);
+  $("amCorpo").addEventListener("keydown", e => {
+    if (e.key !== "Enter") return;
+    if (e.target.id === "amAddU") { e.preventDefault(); amAdicionar(e.target.value); }
+    else if (e.target.id === "amUser") { e.preventDefault(); amSalvarUsuario(); }
+    else if (e.target.id === "amVerU") { e.preventDefault(); amState.buscaU = e.target.value; amAbrirPerfil(e.target.value); }
+  });
+  $("amCorpo").addEventListener("click", async e => {
+    const b = e.target.closest("[data-am]");
+    if (!b || b.disabled) return;
+    const a = b.dataset.am, id = b.dataset.id;
+    try {
+      if (a === "entrar") abrirPainel();
+      else if (a === "recarregar") { amState.carregado = false; amCarregar(); }
+      else if (a === "salvarUser") amSalvarUsuario();
+      else if (a === "editUser") { amState.editUser = true; amState.msg = null; renderAmigos(); const i = $("amUser"); if (i) { i.focus(); i.select(); } }
+      else if (a === "copiarPerfil") amMsg(amState.view === "perfil" ? "perfilAlvo" : "perfil", (await copiar(urlPerfil(b.dataset.u))) ? t("tlCopied") : t("tlCopyErr"));
+      else if (a === "verEu") amAbrirPerfil(amState.perfil.usuario);
+      else if (a === "ver") { amState.buscaU = $("amVerU").value; amAbrirPerfil($("amVerU").value); }
+      else if (a === "verAmigo") amAbrirPerfil(b.dataset.u);
+      else if (a === "voltar") amFecharPerfil();
+      else if (a === "binder") { amState.alvoB = b.dataset.b; renderAmigos(); }
+      else if (a === "filtro") { amState.filtro = b.dataset.f; renderAmigos(); const f = $("amCorpo").querySelector(`[data-f="${b.dataset.f}"]`); if (f) f.focus(); }
+      else if (a === "add") amAdicionar($("amAddU").value);
+      else if (a === "addPerfil") { await amAdicionar(b.dataset.u, "perfilAlvo"); }
+      else if (a === "aceitar") { await amAceitar(id); amMsg(amState.view === "perfil" ? "perfilAlvo" : "add", t("amAccepted")); }
+      else if (a === "recusar" || a === "cancelar") await amRemover(id);
+      else if (a === "remover") { const p = amState.amigos.find(x => x.user_id === id); if (confirm(t("amRemoveAsk", p ? p.nome || p.usuario : ""))) await amRemover(id); }
+      else if (a === "wishLink") amMsg("wish", (await copiar(urlPerfil(amState.perfil.usuario, amState.wishB, "wish"))) ? t("tlCopied") : t("tlCopyErr"));
+      else if (a === "wishTxt") amMsg("wish", (await copiar(textoWish(amState.wishB))) ? t("tlCopied") : t("tlCopyErr"));
+      else if (a === "wishImg") { const blob = await imagemWish(amState.wishB); if (blob) baixar("wishlist-" + hoje() + ".png", blob); }
+    } catch (err) { amMsg(amState.view === "perfil" ? "perfilAlvo" : "lista", t("sbErr", err.message), true); }
+  });
+
+  /* ---------- Sincronização quase em tempo real (confere a conta a cada 15 s) ---------- */
+  function sbAplicarSuave(rem) {
+    sbAplicando = true;
+    try {
+      Object.keys(sbSnapshot()).forEach(k => localStorage.removeItem(k));
+      Object.keys(rem.dados || {}).forEach(k => { if (ehSync(k)) lsSet.call(localStorage, k, rem.dados[k]); });
+      sb.ultimo = rem.em; sb.sujo = false; sbGuardar();
+    } finally { sbAplicando = false; }
+    const nb = carregarBinders(); bnd.lista = nb.lista; bnd.atual = nb.atual;
+    const d = carregar(chaveBinder(bnd.atual));
+    state.cop = d.cop || {}; state.fav = d.fav; state.star = d.star;
+    state.qty = {}; state.langs = {}; state.own = new Set();
+    Object.keys(state.cop).forEach(sincronizar);
+    const nd = carregarDecks(); dk.decks = nd.decks; dk.atual = nd.atual;
+    try { Object.assign(cartao, carregarCartao()); } catch (e) { /* segue */ }
+    renderBinders(); atualizar();
+  }
+  let sbChecando = false;
+  async function sbVerificar() {
+    if (!sb || sbChecando || sbConflito || sbEscolha || sbOcupado || sb.sujo || document.hidden || sb.auto === false) return;
+    // não troca nada enquanto uma janela de edição está aberta
+    if (document.querySelector('[aria-modal="true"]:not([hidden]):not(.painel)') || (painel.classList.contains("open") && sbModo === "gerenciar")) return;
+    sbChecando = true;
+    try {
+      const j = await sbReq("/rest/v1/colecoes?user_id=eq." + sb.id + "&select=atualizado");
+      const em = j && j[0] ? Date.parse(j[0].atualizado) || 0 : 0;
+      if (em > (sb.ultimo || 0) && !sb.sujo) {
+        const rem = await sbBuscar();
+        if (rem && !sb.sujo) { sbAplicarSuave(rem); sbMsg = t("sbOk"); if (painel.classList.contains("open")) renderConta(); }
+      }
+    } catch (e) { /* tenta de novo na próxima */ }
+    sbChecando = false;
+  }
+  setInterval(() => { sbVerificar(); if (conta.cfg.area === "amigos" && !document.hidden) amAtualizarSeVelho(); }, 15000);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) sbVerificar(); });
+  window.addEventListener("focus", () => sbVerificar());
+
+  /* ---------- Contador de visitas: uma por sessão, sem cookies e sem dados pessoais ---------- */
+  (function contarVisita() {
+    if (!/^https?:$/.test(location.protocol) || /^(localhost|127\.)/.test(location.hostname)) return;
+    try { if (sessionStorage.getItem("fichario-visita")) return; sessionStorage.setItem("fichario-visita", "1"); } catch (e) { return; }
+    fetch(SB_URL + "/rest/v1/visitas", { method: "POST", keepalive: true,
+      headers: { apikey: SB_KEY, Authorization: "Bearer " + SB_KEY, "Content-Type": "application/json", Prefer: "return=minimal" },
+      body: JSON.stringify({ pagina: new URLSearchParams(location.search).get("u") ? "perfil" : "inicio" }) }).catch(() => {});
+  })();
+
+  /* ---------- Termos e privacidade ---------- */
+  const termosModal = $("termosModal");
+  let termosVolta = null;
+  function abrirTermos() {
+    termosVolta = document.activeElement;
+    $("termosCorpo").innerHTML = t("termsBody");
+    $("termosTitulo").textContent = t("termsTitle");
+    termosModal.hidden = false; $("termosFechar").focus();
+  }
+  function fecharTermos() { termosModal.hidden = true; if (termosVolta && termosVolta.focus) termosVolta.focus(); }
+  document.addEventListener("click", e => {
+    if (e.target.closest("[data-termos]")) { e.preventDefault(); abrirTermos(); }
+    else if (e.target.closest("#termosFechar") || e.target === termosModal) fecharTermos();
+  });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !termosModal.hidden) { e.stopPropagation(); fecharTermos(); } }, true);
+
+  /* ---------- Link de perfil (?u=usuario&b=binder&v=wish) ---------- */
+  {
+    const qs = new URLSearchParams(location.search);
+    if (qs.get("u")) {
+      conta.cfg.area = "amigos";
+      amAbrirPerfil(qs.get("u"), qs.get("b"), qs.get("v") === "wish" ? "star" : "own");
+    }
+  }
 
   aplicarIdioma();
   aplicarCfg();
