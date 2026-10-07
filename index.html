@@ -841,10 +841,34 @@
   .am-wl li { padding: 4px 10px; border-radius: 99px; background: var(--tl-soft); font-size: 0.82rem; font-weight: 700; }
   .am-wl small { margin-left: 4px; color: var(--tl-muted); font-weight: 600; }
   .am-wl-mais { background: transparent !important; color: var(--tl-muted); }
-  .am-badge { min-width: 20px; height: 20px; padding: 0 6px; border-radius: 99px; background: #E0245E; color: #fff; font: 800 12px/20px "Figtree", system-ui, sans-serif; text-align: center; }
+  .avatar.av-foto { overflow: hidden; }
+  .avatar.av-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .av-rodape .tl-btn.on { margin-right: auto; }
+  .avatar.av-poke { background: var(--seg-bg, var(--seg-on-bg)); overflow: hidden; }
+  .avatar.av-poke img { width: 84%; height: 84%; object-fit: contain; image-rendering: pixelated; image-rendering: -webkit-optimize-contrast; display: block; }
+  .av-troca { position: relative; flex: none; padding: 0; border: 0; background: transparent; border-radius: 50%; cursor: pointer; color: inherit; }
+  .av-troca:focus-visible { outline: 3px solid var(--hd-bg); outline-offset: 2px; }
+  .av-lapis { position: absolute; right: -3px; bottom: -3px; width: 20px; height: 20px; display: grid; place-items: center; border-radius: 50%; background: var(--hd-bg); color: var(--hd-fg); box-shadow: 0 0 0 2px var(--surface, #fff); }
+  .av-modal { position: fixed; inset: 0; z-index: 95; display: grid; place-items: center; padding: 16px; background: rgba(0, 0, 0, 0.55); }
+  .av-modal[hidden] { display: none; }
+  .av-card { width: min(94vw, 460px); max-height: 86vh; display: flex; flex-direction: column; overflow: hidden; padding: 18px; border-radius: 20px; background: var(--surface, #fff); color: var(--text); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4); }
+  .av-card h2 { margin: 0 0 4px; font: 800 1.15rem "Bricolage Grotesque", system-ui, sans-serif; }
+  .av-card p { margin: 0 0 12px; font-size: 0.88rem; color: var(--muted); }
+  .av-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(54px, 1fr)); gap: 8px; margin: 0 0 14px; padding: 4px; list-style: none; overflow: auto; flex: 1; min-height: 0; }
+  .av-op { width: 100%; aspect-ratio: 1; display: grid; place-items: center; padding: 4px; border: 2px solid var(--line); border-radius: 14px; background: var(--seg-bg, transparent); cursor: pointer; }
+  .av-op img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+  .av-op[aria-pressed="true"] { border-color: var(--hd-bg); box-shadow: 0 0 0 2px var(--hd-bg); background: var(--hd-fg); }
+  .av-op:focus-visible { outline: 3px solid var(--hd-bg); outline-offset: 2px; }
+  .av-rodape { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+  .am-badge { flex: none; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 99px; background: var(--hd-fg); color: var(--hd-bg); box-shadow: 0 0 0 2px var(--hd-bg); font: 800 12px/20px "Figtree", system-ui, sans-serif; text-align: center; font-variant-numeric: tabular-nums; }
+  .hd .areas button[aria-pressed="true"] .am-badge { background: var(--hd-bg); color: var(--hd-fg); box-shadow: 0 0 0 2px var(--hd-fg); }
+  .am-abas .am-badge { background: var(--hd-bg); color: var(--hd-fg); box-shadow: 0 0 0 2px var(--hd-fg); }
+  .am-toast .am-toast-ic { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 99px; background: var(--hd-fg); color: var(--hd-bg); }
+  .am-toast .am-toast-ic svg { display: block; }
+  .am-toast-x svg { display: block; margin: auto; }
   .am-topo { display: flex; justify-content: flex-end; margin: -6px 0 12px; }
   .am-pedidos { border: 2px solid var(--tl-pri-bg); }
-  .am-toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(env(safe-area-inset-bottom, 0px) + 78px); z-index: 55; display: flex; align-items: center; gap: 10px; max-width: min(92vw, 460px); padding: 10px 10px 10px 16px; border-radius: 16px; background: var(--hd-bg); color: var(--hd-fg); box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35); font-weight: 700; font-size: 0.92rem; }
+  .am-toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(env(safe-area-inset-bottom, 0px) + 78px); z-index: 90; display: flex; align-items: center; gap: 10px; max-width: min(92vw, 460px); padding: 10px 10px 10px 16px; border-radius: 16px; background: var(--hd-bg); color: var(--hd-fg); box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35); font-weight: 700; font-size: 0.92rem; }
   .am-toast[hidden] { display: none; }
   .am-toast #amToastVer { flex: none; height: 34px; padding: 0 14px; border: 0; border-radius: 10px; background: var(--hd-fg); color: var(--hd-bg); font: 800 14px "Figtree", system-ui, sans-serif; cursor: pointer; }
   .am-toast-x { flex: none; width: 30px; height: 30px; border: 0; border-radius: 99px; background: transparent; color: inherit; font-size: 20px; cursor: pointer; }
@@ -1208,7 +1232,8 @@
   </div>
 </div>
 
-<div class="am-toast" id="amToast" role="status" hidden><span id="amToastTxt"></span><button type="button" id="amToastVer"></button><button type="button" class="am-toast-x" id="amToastX" aria-label="Close">×</button></div>
+<div class="av-modal" id="avModal" hidden><div class="av-card" role="dialog" aria-modal="true" aria-labelledby="avTit"><h2 id="avTit"></h2><p id="avDesc"></p><ul class="av-grade" id="avGrade"></ul><p class="tl-erro" id="avErro" role="alert" hidden></p><input type="file" id="avArq" accept="image/*" hidden><div class="av-rodape"><button type="button" class="tl-btn on" id="avUp"></button><button type="button" class="tl-btn" id="avNenhum"></button><button type="button" class="tl-btn" id="avFechar"></button></div></div></div>
+<div class="am-toast" id="amToast" role="status" hidden><span class="am-toast-ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="9.5" cy="8.5" r="3.2" stroke="currentColor" stroke-width="2"/><path d="M3.5 19c.7-3 3-4.6 6-4.6s5.3 1.6 6 4.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.5 7v6M15.5 10h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span id="amToastTxt" style="flex:1;min-width:0"></span><button type="button" id="amToastVer"></button><button type="button" class="am-toast-x" id="amToastX" aria-label="Close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></div>
 <div class="dt-modal termos-modal" id="termosModal" role="dialog" aria-modal="true" aria-labelledby="termosTitulo" hidden>
   <div class="dt-box tl termos-box">
     <div class="dt-topo"><h2 id="termosTitulo">Terms</h2><button type="button" class="fechar" id="termosFechar" data-i18n-aria="dtClose" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></div>
@@ -1722,8 +1747,19 @@
   /* ---------- Conta e configurações (salvas no navegador) ---------- */
   const KEY_CONTA = "fichario-pokemon-conta-v2";
   const reduzir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // ícones de perfil: número na Pokédex do Pokémon
+  const AVATARES = [25, 133, 1, 4, 7, 6, 9, 39, 52, 54, 63, 92, 94, 131, 143, 150, 151, 152, 155, 158, 175, 196, 197, 212, 215, 248, 249, 252, 255, 258, 282, 303, 359, 384, 387, 390, 393, 403, 448, 468, 470, 471, 491, 570, 658, 700, 722, 725, 728, 778, 813, 816, 906, 909, 912];
+  const avUrl = id => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+  // bolinha do perfil: Pokémon escolhido ou, sem escolha, a inicial do nome
+  // foto enviada: só aceita imagem pequena em data URL (vem da nuvem, então é conferida)
+  const imgAvatarOk = v => typeof v === "string" && v.length <= 40000 && /^data:image\/(webp|jpeg|png);base64,[A-Za-z0-9+\/=]+$/.test(v);
+  function avHtml(nome, avatar, cls, foto) {
+    const id = AVATARES.includes(avatar) ? avatar : 0;
+    const src = imgAvatarOk(foto) ? foto : id ? avUrl(id) : "";
+    return `<span class="avatar ${cls || ""}${src ? (imgAvatarOk(foto) ? " av-foto" : " av-poke") : ""}" aria-hidden="true">${src ? `<img src="${src}" alt="" ${imgAvatarOk(foto) ? "" : 'loading="lazy" '}decoding="async" referrerpolicy="no-referrer">` : esc(String(nome || "?").charAt(0).toUpperCase())}</span>`;
+  }
   function carregarConta() {
-    const padrao = { perfil: null, cfg: { cinza: true, anim: !reduzir, ordem: "num", lang: "en", tema: "rosa", area: "binder", modo: null } };
+    const padrao = { perfil: null, cfg: { cinza: true, anim: !reduzir, ordem: "num", lang: "en", tema: "rosa", area: "binder", modo: null, avatar: 0, avatarImg: "" } };
     try {
       const raw = localStorage.getItem(KEY_CONTA);
       if (raw) {
@@ -1735,6 +1771,8 @@
         if (!TEMAS.includes(cfg.tema)) cfg.tema = "rosa";
         if (cfg.modo !== "claro" && cfg.modo !== "escuro") cfg.modo = null;
         if (!["binder", "decks", "dex", "tools", "card", "amigos"].includes(cfg.area)) cfg.area = "binder";
+        cfg.avatar = AVATARES.includes(cfg.avatar) ? cfg.avatar : 0;
+        cfg.avatarImg = imgAvatarOk(cfg.avatarImg) ? cfg.avatarImg : "";
         return { perfil, cfg };
       }
     } catch (e) { /* usa o padrão */ }
@@ -3707,7 +3745,16 @@
   let sbEscolha = false, sbModo = "entrar", sb = null, sbMsg = "", sbOcupado = false, sbConflito = null, sbAplicando = false, sbTimer = 0;
   try { sb = JSON.parse(localStorage.getItem(KEY_SB) || "null"); } catch (e) { sb = null; }
   const sbGuardar = () => { try { if (sb) lsSet.call(localStorage, KEY_SB, JSON.stringify(sb)); else localStorage.removeItem(KEY_SB); } catch (e) { /* segue */ } };
+  // 'avatar' é uma coluna opcional em perfis: se o SQL ainda não foi rodado, tudo segue sem ela
+  let AV_OK = true;
   async function sbReq(caminho, opc = {}, comToken = true) {
+    if (AV_OK && caminho.includes("/rest/v1/perfis") && caminho.includes("select=user_id,usuario,nome")) {
+      try { return await sbReq0(caminho.replace("select=user_id,usuario,nome", "select=user_id,usuario,nome,avatar,avatar_img"), opc, comToken); }
+      catch (e) { if (e && e.message === t("sbNet")) throw e; AV_OK = false; }
+    }
+    return sbReq0(caminho, opc, comToken);
+  }
+  async function sbReq0(caminho, opc = {}, comToken = true) {
     if (comToken && sb && sb.exp < Date.now() / 1000 + 60) await sbRenovar();
     const h = Object.assign({ apikey: SB_KEY, "Content-Type": "application/json" }, opc.headers || {});
     h.Authorization = "Bearer " + (comToken && sb ? sb.access : SB_KEY);
@@ -3795,7 +3842,7 @@
   function renderConta() {
     if (sb && sbEscolha && sbModo !== "nova") {
       contaBox.innerHTML = `
-        <div class="conta-ok" id="contaOk" tabindex="-1"><span class="avatar" aria-hidden="true">${esc(((conta.perfil && conta.perfil.nome) || "?").charAt(0).toUpperCase())}</span>
+        <div class="conta-ok" id="contaOk" tabindex="-1">${avHtml((conta.perfil && conta.perfil.nome) || "?", meuAvatar(), "", meuAvatarImg())}
           <div><p class="nome">${esc(conta.perfil ? conta.perfil.nome : "")}</p><p class="email">${esc(sb.email || "")}</p></div></div>
         <p class="nota">${esc(t("sbChoose"))}</p>
         <button type="button" class="btn-primary" id="btnZero">${esc(t("sbFresh"))}</button>
@@ -3807,7 +3854,7 @@
       const p = conta.perfil || { nome: "?", email: sb.email || "" };
       contaBox.innerHTML = `
         <div class="conta-ok" id="contaOk" tabindex="-1">
-          <span class="avatar" aria-hidden="true">${esc(p.nome.charAt(0).toUpperCase())}</span>
+          ${avHtml(p.nome, meuAvatar(), "", meuAvatarImg())}
           <div><p class="nome">${esc(p.nome)}</p><p class="email">${esc(p.email)}</p></div>
         </div>
         ${sbConflito ? `<p class="nota">${esc(t("sbConflict"))}</p>
@@ -4441,7 +4488,7 @@
   const AM_TXT2 = {
     en: { sbUser: "Username", sbNick: "Nickname (trainer name)", sbNickHint: "Shown on your profile and trainer card. It can be the same as someone else's.",
       sbUserChecking: "Checking…", sbUserFree: u => "✓ @" + u + " is available.", mgName: "Nickname",
-      amReceivedD: "These people want to be your friend.", amRefresh: "Refresh", amBadgeLbl: n => n === 1 ? "1 friend request" : n + " friend requests",
+      amReceivedD: "These people want to be your friend.", amRefresh: "Refresh", avChange: "Change icon", avTitle: "Choose your icon", avD: "Your friends will see this Pokémon next to your name.", avNone: "Use my initial", avSaved: "Icon updated.", avNeedSql: "Saved on this device. To show it to friends, run the avatar SQL in Supabase (see supabase-avatar.sql).", avUpload: "Upload image", avBadFile: "Choose a valid image (PNG, JPG or WebP).", avTooBig: "That image is too large. Try a smaller one.", avClose: "Close", amBadgeLbl: n => n === 1 ? "1 friend request" : n + " friend requests",
       visManT: "Who sees your binders", visManD: "Choose, binder by binder, who can see it. Changes are shared right away.", visCards: n => n === 1 ? "1 card" : n + " cards",
       visSaved: (b, v) => b + ": " + v + ".", visPreview: "See my profile as others see it",
       fvNone: "No cards match this search.", fvShowing: (a, b) => "Showing " + a + " of " + b + " cards", fvMore: (a, b) => "Show " + a + " more (" + b + " left)",
@@ -4454,7 +4501,7 @@
       amNotSaved: "The request was not saved in Supabase. Check that the supabase-amigos.sql file was run in the SQL Editor." },
     pt: { sbUser: "Nome de usuário", sbNick: "Apelido (nome de treinador)", sbNickHint: "Aparece no seu perfil e no cartão de treinador. Pode ser igual ao de outras pessoas.",
       sbUserChecking: "Verificando…", sbUserFree: u => "✓ @" + u + " está disponível.", mgName: "Apelido",
-      amReceivedD: "Estas pessoas querem ser suas amigas.", amRefresh: "Atualizar", amBadgeLbl: n => n === 1 ? "1 pedido de amizade" : n + " pedidos de amizade",
+      amReceivedD: "Estas pessoas querem ser suas amigas.", amRefresh: "Atualizar", avChange: "Trocar ícone", avTitle: "Escolha seu ícone", avD: "Suas amigas e amigos vão ver esse Pokémon ao lado do seu nome.", avNone: "Usar minha inicial", avSaved: "Ícone atualizado.", avNeedSql: "Salvo neste aparelho. Para aparecer para os amigos, rode o SQL do avatar no Supabase (veja supabase-avatar.sql).", avUpload: "Enviar imagem", avBadFile: "Escolha uma imagem válida (PNG, JPG ou WebP).", avTooBig: "A imagem é grande demais. Tente uma menor.", avClose: "Fechar", amBadgeLbl: n => n === 1 ? "1 pedido de amizade" : n + " pedidos de amizade",
       visManT: "Quem vê seus binders", visManD: "Escolha, binder por binder, quem pode ver. A mudança é compartilhada na hora.", visCards: n => n === 1 ? "1 carta" : n + " cartas",
       visSaved: (b, v) => b + ": " + v + ".", visPreview: "Ver meu perfil como os outros veem",
       fvNone: "Nenhuma carta encontrada nesta busca.", fvShowing: (a, b) => "Mostrando " + a + " de " + b + " cartas", fvMore: (a, b) => "Mostrar mais " + a + " (faltam " + b + ")",
@@ -4467,7 +4514,7 @@
       amNotSaved: "O pedido não foi salvo no Supabase. Confira se o arquivo supabase-amigos.sql foi rodado no SQL Editor." },
     ja: { sbUser: "ユーザー名", sbNick: "ニックネーム（トレーナー名）", sbNickHint: "プロフィールとトレーナーカードに表示されます。ほかの人と同じでも大丈夫です。",
       sbUserChecking: "確認中…", sbUserFree: u => "✓ @" + u + " は使えます。", mgName: "ニックネーム",
-      amReceivedD: "この人たちがフレンドになりたがっています。", amRefresh: "更新", amBadgeLbl: n => "フレンド申請 " + n + " 件",
+      amReceivedD: "この人たちがフレンドになりたがっています。", amRefresh: "更新", avChange: "アイコンを変更", avTitle: "アイコンを選ぶ", avD: "フレンドにこのポケモンが名前の横に表示されます。", avNone: "イニシャルを使う", avSaved: "アイコンを更新しました。", avNeedSql: "この端末に保存しました。フレンドに表示するには Supabase で avatar の SQL を実行してください（supabase-avatar.sql）。", avUpload: "画像をアップロード", avBadFile: "有効な画像（PNG、JPG、WebP）を選んでください。", avTooBig: "画像が大きすぎます。小さいものをお試しください。", avClose: "閉じる", amBadgeLbl: n => "フレンド申請 " + n + " 件",
       visManT: "バインダーを見られる人", visManD: "バインダーごとに、見られる人を選べます。変更はすぐに共有されます。", visCards: n => n + "枚",
       visSaved: (b, v) => b + "：" + v, visPreview: "ほかの人から見たプロフィールを見る",
       fvNone: "この検索に合うカードはありません。", fvShowing: (a, b) => b + "枚中 " + a + "枚を表示", fvMore: (a, b) => "さらに " + a + "枚表示（残り " + b + "枚）",
@@ -5776,6 +5823,13 @@
     try {
       const eu = await sbReq("/rest/v1/perfis?user_id=eq." + sb.id + "&select=user_id,usuario,nome");
       amState.perfil = eu[0] || null;
+      if (amState.perfil && (amState.perfil.avatar_img || amState.perfil.avatar)) {
+        const ni = imgAvatarOk(amState.perfil.avatar_img) ? amState.perfil.avatar_img : "", na = ni ? 0 : (AVATARES.includes(amState.perfil.avatar) ? amState.perfil.avatar : 0);
+        if (conta.cfg.avatarImg !== ni || conta.cfg.avatar !== na) { conta.cfg.avatarImg = ni; conta.cfg.avatar = na; salvarConta(); }
+      } else if (AV_OK && amState.perfil && (conta.cfg.avatar || conta.cfg.avatarImg)) {
+        amState.perfil.avatar = conta.cfg.avatar || 0; amState.perfil.avatar_img = conta.cfg.avatarImg || null;
+        sbReq0("/rest/v1/perfis?user_id=eq." + sb.id, { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ avatar: conta.cfg.avatar || 0, avatar_img: conta.cfg.avatarImg || null }) }).catch(() => { AV_OK = false; });
+      }
       const rel = await sbReq("/rest/v1/amizades?select=de,para,status");
       const ids = [...new Set(rel.map(r => r.de === sb.id ? r.para : r.de))];
       const ps = ids.length ? await sbReq("/rest/v1/perfis?user_id=in.(" + ids.join(",") + ")&select=user_id,usuario,nome") : [];
@@ -5854,6 +5908,62 @@
     conta.cfg.area = "amigos"; salvarConta(); aplicarArea(); atualizar(); amCarregar();
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
+  const meuAvatar = () => conta.cfg.avatar || 0;
+  const meuAvatarImg = () => conta.cfg.avatarImg || "";
+  let avAnterior = null;
+  function avAbrir() {
+    avAnterior = document.activeElement;
+    $("avTit").textContent = t("avTitle"); $("avDesc").textContent = t("avD");
+    $("avNenhum").textContent = t("avNone"); $("avUp").textContent = t("avUpload"); $("avErro").hidden = true; $("avFechar").textContent = t("avClose");
+    const atual = meuAvatarImg() ? -1 : meuAvatar();
+    $("avGrade").innerHTML = AVATARES.map(id => `<li><button type="button" class="av-op" data-av="${id}" aria-pressed="${id === atual}" aria-label="#${id}"><img src="${avUrl(id)}" alt="" loading="lazy" referrerpolicy="no-referrer"></button></li>`).join("");
+    $("avModal").hidden = false;
+    const f = $("avGrade").querySelector('[aria-pressed="true"]') || $("avGrade").querySelector("button"); if (f) f.focus();
+  }
+  function avFechar() { $("avModal").hidden = true; if (avAnterior && avAnterior.isConnected) avAnterior.focus(); }
+  async function avSalvar(id, foto) {
+    conta.cfg.avatar = id; conta.cfg.avatarImg = foto || ""; salvarConta();
+    if (amState.perfil) { amState.perfil.avatar = id; amState.perfil.avatar_img = foto || null; }
+    avFechar(); renderAmigos(); if (typeof renderConta === "function") renderConta();
+    if (sb && amState.perfil) {
+      try {
+        await sbReq0("/rest/v1/perfis?user_id=eq." + sb.id, { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ avatar: id, avatar_img: foto || null, atualizado: new Date().toISOString() }) });
+        amMsg("perfil", t("avSaved"));
+      } catch (e) { AV_OK = false; amMsg("perfil", t("avNeedSql"), true); }
+    } else amMsg("perfil", t("avSaved"));
+  }
+  const avEscolher = id => avSalvar(id, "");
+  // recorta no centro, reduz para 128×128 e comprime até ficar pequeno
+  async function avPreparar(arq) {
+    if (!arq || !/^image\/(png|jpe?g|webp|gif|bmp|avif)$/i.test(arq.type)) throw new Error(t("avBadFile"));
+    if (arq.size > 15 * 1024 * 1024) throw new Error(t("avTooBig"));
+    const url = URL.createObjectURL(arq);
+    try {
+      const im = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error(t("avBadFile"))); i.src = url; });
+      const lado = Math.min(im.naturalWidth, im.naturalHeight);
+      if (!lado) throw new Error(t("avBadFile"));
+      for (const [tam, q] of [[128, 0.85], [128, 0.7], [96, 0.7], [64, 0.7]]) {
+        const cv = document.createElement("canvas"); cv.width = cv.height = tam;
+        const g = cv.getContext("2d"); g.imageSmoothingQuality = "high";
+        g.drawImage(im, (im.naturalWidth - lado) / 2, (im.naturalHeight - lado) / 2, lado, lado, 0, 0, tam, tam);
+        let d = cv.toDataURL("image/webp", q);
+        if (!d.startsWith("data:image/webp")) d = cv.toDataURL("image/jpeg", q);
+        if (imgAvatarOk(d)) return d;
+      }
+      throw new Error(t("avTooBig"));
+    } finally { URL.revokeObjectURL(url); }
+  }
+  $("avArq").addEventListener("change", async () => {
+    const f = $("avArq").files && $("avArq").files[0]; $("avArq").value = "";
+    if (!f) return;
+    try { avSalvar(0, await avPreparar(f)); } catch (e) { $("avErro").textContent = e.message; $("avErro").hidden = false; }
+  });
+  $("avUp").addEventListener("click", () => $("avArq").click());
+  $("avGrade").addEventListener("click", e => { const b = e.target.closest("[data-av]"); if (b) avEscolher(parseInt(b.dataset.av, 10)); });
+  $("avNenhum").addEventListener("click", () => avEscolher(0));
+  $("avFechar").addEventListener("click", avFechar);
+  $("avModal").addEventListener("click", e => { if (e.target === $("avModal")) avFechar(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("avModal").hidden) { e.preventDefault(); e.stopPropagation(); avFechar(); } }, true);
   const amNomeDe = async id => { try { const p = await sbReq("/rest/v1/perfis?user_id=eq." + id + "&select=usuario"); return p[0] ? "@" + p[0].usuario : ""; } catch (e) { return ""; } };
   // confere pedidos e amizades; avisa o que é novo e atualiza a aba Amigos na hora
   async function amChecarPedidos(evento) {
@@ -5925,7 +6035,7 @@
     try {
       await sbReq("/rest/v1/perfis?on_conflict=user_id", { method: "POST", headers: { Prefer: "resolution=merge-duplicates,return=minimal" },
         body: JSON.stringify({ user_id: sb.id, usuario: u, nome, atualizado: new Date().toISOString() }) });
-      amState.perfil = { user_id: sb.id, usuario: u, nome }; amState.editUser = false;
+      amState.perfil = { user_id: sb.id, usuario: u, nome, avatar: conta.cfg.avatar || 0, avatar_img: conta.cfg.avatarImg || null }; amState.editUser = false;
       amMsg("perfil", t("mgSaved"));
       publicarBinders();
     } catch (e) { const m = amErroTxt(e); amMsg("perfil", m === "dup" ? t("amUserTaken", u) : m, true); }
@@ -6124,7 +6234,7 @@
     const todosQ = {}; bs.forEach(b => Object.entries((b.dados || {}).q || {}).forEach(([id, n]) => { todosQ[id] = (todosQ[id] || 0) + n; }));
     const nCartas = Object.keys(todosQ).length, nCopias = Object.values(todosQ).reduce((s, n) => s + n, 0);
     const cab = `<section class="tl-card fv-cab">
-        <span class="avatar fv-av" aria-hidden="true">${esc((a.nome || a.usuario).charAt(0).toUpperCase())}</span>
+        ${avHtml(a.nome || a.usuario, a.avatar, "fv-av", a.avatar_img)}
         <div class="fv-quem"><h2>${esc(a.nome || a.usuario)}</h2><p>@${esc(a.usuario)}${eu ? " · " + esc(t("amThisIsYou")) : ""}</p>
           ${bs.length ? `<p class="fv-resumo">${esc(t("fvSummary", bs.length, nCartas, nCopias))}</p>` : ""}</div>
         <div class="tl-acoes fv-acoes">${rel}<button type="button" class="tl-btn" data-am="copiarPerfil" data-u="${esc(a.usuario)}">${esc(t("amCopyLink"))}</button></div>
@@ -6264,7 +6374,7 @@
     return `<section class="tl-card" aria-labelledby="${id}"><header class="tl-cab"><span class="tl-ic" aria-hidden="true">${icone}</span><h2 id="${id}">${esc(titulo)}</h2></header>${desc ? `<p class="tl-desc">${esc(desc)}</p>` : ""}${corpo}</section>`;
   }
   function amPessoa(p, botoes) {
-    return `<li class="am-p"><span class="avatar am-av" aria-hidden="true">${esc((p.nome || p.usuario || "?").charAt(0).toUpperCase())}</span>
+    return `<li class="am-p">${avHtml(p.nome || p.usuario, p.avatar, "am-av", p.avatar_img)}
       <div class="am-quem"><strong>${esc(p.nome || p.usuario)}</strong>${p.usuario ? `<small>@${esc(p.usuario)}</small>` : ""}</div><div class="am-bts">${botoes}</div></li>`;
   }
   function renderAmigos() {
@@ -6307,7 +6417,7 @@
     const nPed = amState.recebidos.length;
     // cabeçalho compacto: quem sou eu + link do perfil + atualizar
     const cab = `<div class="am-cab">
-        <span class="avatar am-av" aria-hidden="true">${esc((p.nome || p.usuario).charAt(0).toUpperCase())}</span>
+        <button type="button" class="av-troca" data-am="avatar" aria-label="${esc(t("avChange"))}" title="${esc(t("avChange"))}">${avHtml(p.nome || p.usuario, meuAvatar(), "am-av", meuAvatarImg())}<span class="av-lapis" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></span></button>
         <div class="am-quem"><strong>${esc(p.nome || (conta.perfil && conta.perfil.nome) || p.usuario)}</strong><small>@${esc(p.usuario)}</small></div>
         <button type="button" class="tl-btn am-cab-bt" data-am="copiarPerfil" data-u="${esc(p.usuario)}">${ICON_LINK}<span>${esc(t("amCopyLink"))}</span></button>
         <button type="button" class="tl-btn am-ic-bt" data-am="recarregar"${amState.carregando ? " disabled" : ""} aria-label="${esc(t("amRefresh"))}" title="${esc(t("amRefresh"))}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 11a8 8 0 10-2.3 5.7M20 5v6h-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -6323,7 +6433,7 @@
           `<button type="button" class="tl-btn on" data-am="aceitar" data-id="${esc(x.user_id)}">${esc(t("amAccept"))}</button><button type="button" class="tl-btn" data-am="recusar" data-id="${esc(x.user_id)}">${esc(t("amDecline"))}</button>`)).join("")}</ul>${amMsgHTML("pedidos")}</div>` : "";
       const lista = amState.amigos.length ? `<ul class="am-grade">${amState.amigos.map(x => `<li class="am-amigo">
           <button type="button" class="am-amigo-bt" data-am="verAmigo" data-u="${esc(x.usuario)}"${x.usuario ? "" : " disabled"} aria-label="${esc(t("amSeeColl") + ": " + (x.nome || x.usuario))}">
-            <span class="avatar am-av" aria-hidden="true">${esc((x.nome || x.usuario || "?").charAt(0).toUpperCase())}</span>
+            ${avHtml(x.nome || x.usuario, x.avatar, "am-av", x.avatar_img)}
             <span class="am-quem"><strong>${esc(x.nome || x.usuario)}</strong>${x.usuario ? `<small>@${esc(x.usuario)}</small>` : ""}</span>
             <span class="am-seta" aria-hidden="true">›</span></button>
           <button type="button" class="am-x" data-am="remover" data-id="${esc(x.user_id)}" aria-label="${esc(t("amRemove"))}: ${esc(x.nome || x.usuario)}" title="${esc(t("amRemove"))}">×</button></li>`).join("")}</ul>`
@@ -6382,6 +6492,7 @@
       if (a === "entrar") abrirPainel();
       else if (a === "recarregar") { if (amState.erro) amState.carregado = false; amState.erro = ""; amCarregar(); }
       else if (a === "salvarUser") amSalvarUsuario();
+      else if (a === "avatar") avAbrir();
       else if (a === "editUser") { amState.editUser = true; amState.msg = null; renderAmigos(); const i = $("amUser"); if (i) { i.focus(); i.select(); } }
       else if (a === "copiarPerfil") amMsg(amState.view === "perfil" ? "perfilAlvo" : "perfil", (await copiar(urlPerfil(b.dataset.u))) ? t("tlCopied") : t("tlCopyErr"));
       else if (a === "verEu") amAbrirPerfil(amState.perfil.usuario);
