@@ -127,7 +127,7 @@
   @media (hover: hover) { .btn-primary:hover { opacity: 0.9; } .btn-sec:hover, .fechar:hover { background: var(--bg); } }
   .conta-ok { display: flex; align-items: center; gap: 12px; padding: 4px 0; }
   .conta-ok:focus { outline: none; }
-  .avatar { flex: none; width: 56px; height: 56px; display: grid; place-items: center; border-radius: 50%; background: var(--seg-on-bg); color: var(--seg-on-fg); font: 800 1.25rem "Bricolage Grotesque", system-ui, sans-serif; }
+  .avatar { flex: none; width: 62px; height: 62px; display: grid; place-items: center; border-radius: 50%; background: var(--seg-on-bg); color: var(--seg-on-fg); font: 800 1.25rem "Bricolage Grotesque", system-ui, sans-serif; }
   .conta-ok p { margin: 0; min-width: 0; overflow-wrap: anywhere; }
   .conta-ok .nome { font-weight: 700; }
   .conta-ok .email { color: var(--muted); font-size: 0.88rem; }
@@ -304,6 +304,36 @@
 
   /* Controles */
   .controls { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+  /* barra do binder: abas + layout, busca + ordem + filtros recolhíveis */
+  .controls.bf { flex-direction: column; flex-wrap: nowrap; gap: 10px; }
+  .bf-l1 { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; }
+  .bf-lay { display: inline-flex; align-items: center; gap: 8px; }
+  .bf-lay-r { color: var(--muted); font: 600 12px "Figtree", system-ui, sans-serif; letter-spacing: 0.04em; text-transform: uppercase; }
+  .seg { display: inline-flex; gap: 2px; padding: 3px; background: var(--seg-bg); border-radius: 99px; }
+  .seg button { min-width: 38px; height: 30px; padding: 0 10px; border: 0; border-radius: 99px; background: transparent; color: var(--muted); font: 600 13px "Figtree", system-ui, sans-serif; font-variant-numeric: tabular-nums; cursor: pointer; }
+  .seg button[aria-pressed="true"] { background: var(--seg-on-bg); color: var(--seg-on-fg); }
+  .seg button:focus-visible, .bf-btn:focus-visible, .bf-limpar:focus-visible { outline: 3px solid var(--hd-bg); outline-offset: 2px; }
+  .bf-l2 { display: flex; align-items: center; gap: 8px; }
+  .bf-l2 .search { flex: 1 1 auto; }
+  .bf .search input, .bf select, .bf-btn { height: 40px; border: 1px solid var(--line); border-radius: 99px; background: var(--surface); color: var(--field-fg); font: 500 14px "Figtree", system-ui, sans-serif; }
+  .bf .search input { width: 100%; padding: 0 16px 0 40px; }
+  .bf .search svg { left: 15px; }
+  .bf select { padding: 0 14px; min-width: 0; }
+  .bf-l2 .f-ordem { flex: 0 0 auto; width: 176px; font-weight: 600; }
+  .bf-btn { flex: none; display: inline-flex; align-items: center; gap: 7px; padding: 0 16px; font-weight: 600; cursor: pointer; }
+  .bf-btn[aria-expanded="true"] { border-color: var(--hd-bg); }
+  .bf-n { min-width: 18px; height: 18px; padding: 0 5px; border-radius: 99px; background: var(--hd-bg); color: var(--hd-fg); font: 800 11px/18px "Figtree", system-ui, sans-serif; text-align: center; }
+  .bf-painel { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); align-items: center; gap: 8px; padding: 10px; border: 1px solid var(--line); border-radius: 20px; background: color-mix(in srgb, var(--surface) 55%, transparent); }
+  .bf-painel[hidden] { display: none; }
+  .bf-limpar { justify-self: start; height: 34px; padding: 0 12px; border: 0; background: transparent; color: var(--muted); font: 600 13px "Figtree", system-ui, sans-serif; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  .bf-limpar[hidden] { display: none; }
+  @media (max-width: 620px) {
+    .bf-l1 { gap: 8px; } .bf-l1 .tabs { flex: 1 1 100%; } .bf-lay { flex: 1 1 100%; justify-content: space-between; }
+    .seg { flex: 1; } .seg button { flex: 1; min-width: 0; padding: 0 4px; }
+    .bf-l2 { flex-wrap: wrap; } .bf-l2 .search { flex: 1 1 100%; }
+    .bf-l2 .f-ordem { flex: 1 1 0; width: auto; } .bf .search input, .bf select { font-size: 16px; }
+    .bf-painel { grid-template-columns: 1fr 1fr; } .bf-limpar { grid-column: 1 / -1; }
+  }
   .tabs { display: flex; gap: 2px; padding: 4px; background: var(--seg-bg); border-radius: 12px; flex: 0 1 auto; overflow-x: auto; }
   .tabs button { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border: 0; border-radius: 9px; background: transparent; color: var(--muted); font: 600 14px "Figtree", system-ui, sans-serif; white-space: nowrap; cursor: pointer; }
   .tabs button[aria-pressed="true"] { background: var(--seg-on-bg); color: var(--seg-on-fg); }
@@ -334,7 +364,8 @@
   .spine { flex: none; width: 44px; display: flex; flex-direction: column; justify-content: space-evenly; align-items: center; }
   .spine i { width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #F4F6F9, #8E98A8 55%, #5A6474); box-shadow: 0 2px 4px rgba(90, 30, 55, 0.5); }
   .sheet { flex: 1; min-width: 0; padding: clamp(10px, 2.4vw, 22px); border-radius: 12px; background: var(--page); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 2px 8px rgba(58, 22, 38, 0.45); }
-  .grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(8px, 2vw, 18px); }
+  .grid { --cols: 4; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: clamp(8px, 2vw, 18px); }
+  .grid[data-cols="5"], .grid[data-cols="6"] { gap: clamp(6px, 1.2vw, 12px); }
   .grid:focus, .vazio:focus { outline: none; }
 
   .cell { container-type: inline-size; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
@@ -485,8 +516,19 @@
     .spine { width: 14px; }
     .spine i { display: none; }
   }
-  @media (max-width: 859px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-  @media (max-width: 479px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  /* cartas pequenas (layouts maiores): esconde o que não cabe e deixa os controles mais finos */
+  @container (max-width: 170px) {
+    .cap .st { display: none; }
+    .btn-own .lbl { display: none; }
+    .ctrl button { height: 32px; } .flags button { height: 30px; }
+    .qty-btn { min-width: 32px; height: 26px; top: 4px; right: 4px; padding: 0 6px; font-size: 12px; }
+  }
+  @container (max-width: 120px) {
+    .cap { font-size: 11px; } .cap .l1 { gap: 3px; }
+    .ctrl { gap: 4px; } .ctrl button { height: 28px; border-radius: 8px; } .btn-fav, .btn-star { width: 30px; }
+    .flags { gap: 3px; } .flags button { height: 26px; border-radius: 8px; } .flags button .fl svg { width: 16px; }
+    .qty-btn { min-width: 26px; height: 22px; padding: 0 5px; gap: 2px; font-size: 11px; } .qty-btn svg { width: 11px; height: 11px; }
+  }
 
   @media (prefers-reduced-motion: no-preference) {
     .grid.flip { animation: virar 0.24s ease-out; }
@@ -775,14 +817,14 @@
   .am-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
   .am-p { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 8px 0; border-top: 1px solid var(--tl-line); }
   .am-p:first-child { border-top: 0; }
-  .am-av, .fv-av { width: 46px; height: 46px; font-size: 1.1rem; flex: none; }
+  .am-av, .fv-av { width: 52px; height: 52px; font-size: 1.15rem; flex: none; }
   .am-quem { flex: 1 1 120px; min-width: 0; display: grid; } .am-quem strong, .am-quem small { overflow-wrap: anywhere; } .am-quem small { color: var(--tl-muted); }
   .am-bts { display: flex; gap: 6px; flex-wrap: wrap; } .am-bts .tl-btn { min-height: 36px; padding: 0 12px; font-size: 13px; }
   .am-x { width: 36px; padding: 0 !important; font-size: 20px !important; line-height: 1; }
   .am-wl small { color: var(--tl-muted); }
   .fv { display: grid; gap: 14px; justify-items: start; } .fv > section { width: 100%; }
   .fv-cab { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
-  .fv-av { width: 64px; height: 64px; font-size: 1.5rem; }
+  .fv-av { width: 74px; height: 74px; font-size: 1.6rem; }
   .fv-quem { flex: 1 1 160px; min-width: 0; } .fv-quem h2 { margin: 0; font: 800 1.3rem/1.2 "Bricolage Grotesque", system-ui, sans-serif; overflow-wrap: anywhere; } .fv-quem p { margin: 2px 0 0; color: var(--tl-muted); overflow-wrap: anywhere; }
   .fv-acoes { margin-top: 0; } .fv-cab > .tl-ok, .fv-cab > .tl-erro { flex-basis: 100%; }
   .fv-st { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 12px; background: var(--tl-soft); font-weight: 700; font-size: 14px; }
@@ -854,7 +896,7 @@
   .av-card { width: min(94vw, 460px); max-height: 86vh; display: flex; flex-direction: column; overflow: hidden; padding: 18px; border-radius: 20px; background: var(--surface, #fff); color: var(--text); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4); }
   .av-card h2 { margin: 0 0 4px; font: 800 1.15rem "Bricolage Grotesque", system-ui, sans-serif; }
   .av-card p { margin: 0 0 12px; font-size: 0.88rem; color: var(--muted); }
-  .av-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 8px; margin: 0 0 14px; padding: 4px; list-style: none; overflow: auto; flex: 1; min-height: 0; }
+  .av-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; margin: 0 0 14px; padding: 4px; list-style: none; overflow: auto; flex: 1; min-height: 0; }
   .av-op { position: relative; overflow: hidden; width: 100%; aspect-ratio: 1; display: grid; place-items: center; padding: 0; border: 2px solid var(--line); border-radius: 50%; background: var(--seg-bg, transparent); color: var(--text); cursor: pointer; }
   .av-op img { position: absolute; inset: 8%; width: 84%; height: 84%; max-width: none; object-fit: contain; }
   .av-op img.av-rosto { inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -964,23 +1006,33 @@
   <main>
    <div id="areaBinder">
     <div class="bd-bar"><div class="bd-tabs" id="bdTabs" role="group" data-i18n-aria="bindersAria" aria-label="Binders"></div><div class="bd-vis" id="bdVis"></div></div>
-    <div class="controls">
-      <div class="tabs" role="group" data-i18n-aria="show" aria-label="Show">
-        <button type="button" data-tab="todas" aria-pressed="true"><span data-i18n="tabAll">All</span> <span class="count" id="cTodas">0</span></button>
-        <button type="button" data-tab="colecao" aria-pressed="false"><span data-i18n="tabOwned">Owned</span> <span class="count" id="cColecao">0</span></button>
-        <button type="button" data-tab="favoritas" aria-pressed="false"><span data-i18n="tabWish">Wishlist</span> <span class="count" id="cFavoritas">0</span></button>
-        <button type="button" data-tab="estrelas" aria-pressed="false"><span data-i18n="tabStar">Favorites</span> <span class="count" id="cEstrelas">0</span></button>
+    <div class="controls bf">
+      <div class="bf-l1">
+        <div class="tabs" role="group" data-i18n-aria="show" aria-label="Show">
+          <button type="button" data-tab="todas" aria-pressed="true"><span data-i18n="tabAll">All</span> <span class="count" id="cTodas">0</span></button>
+          <button type="button" data-tab="colecao" aria-pressed="false"><span data-i18n="tabOwned">Owned</span> <span class="count" id="cColecao">0</span></button>
+          <button type="button" data-tab="favoritas" aria-pressed="false"><span data-i18n="tabWish">Wishlist</span> <span class="count" id="cFavoritas">0</span></button>
+          <button type="button" data-tab="estrelas" aria-pressed="false"><span data-i18n="tabStar">Favorites</span> <span class="count" id="cEstrelas">0</span></button>
+        </div>
+        <div class="bf-lay"><span class="bf-lay-r" data-i18n="layoutLbl">Layout</span>
+          <div class="seg" id="layBox" role="group" data-i18n-aria="layoutLbl" aria-label="Layout">
+            <button type="button" data-lay="2" aria-pressed="false">2×2</button><button type="button" data-lay="3" aria-pressed="false">3×3</button><button type="button" data-lay="4" aria-pressed="true">4×4</button><button type="button" data-lay="5" aria-pressed="false">5×5</button><button type="button" data-lay="6" aria-pressed="false">6×6</button>
+          </div></div>
       </div>
-      <div class="filters">
+      <div class="bf-l2">
         <label class="search">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           <input id="busca" type="search" data-i18n-ph="searchPh" data-i18n-aria="searchAria" placeholder="Search by name" aria-label="Search cards by name" autocomplete="off">
         </label>
+        <select id="fOrdem" class="f-ordem" data-i18n-aria="order" aria-label="Card order"></select>
+        <button type="button" class="bf-btn" id="fToggle" aria-expanded="false" aria-controls="fPainel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="15" cy="7" r="2.2" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="17" r="2.2" stroke="currentColor" stroke-width="2"/></svg><span data-i18n="filtersBtn">Filters</span><span class="bf-n" id="fN" hidden></span></button>
+      </div>
+      <div class="bf-painel" id="fPainel" hidden>
         <select id="fPosse" data-i18n-aria="sitAria" aria-label="Filter by ownership"></select>
         <select id="fSerie" data-i18n-aria="serieAria" aria-label="Filter by series"></select>
         <select id="fSet" data-i18n-aria="setAria" aria-label="Filter by set"></select>
         <select id="fRaridade" class="f-rar" data-i18n-aria="rarLbl" aria-label="Rarity"><option value="">Rarity</option></select>
-        <select id="fOrdem" class="f-ordem" data-i18n-aria="order" aria-label="Card order"></select>
+        <button type="button" class="bf-limpar" id="fLimpar" data-i18n="filtersClear" hidden>Clear filters</button>
       </div>
     </div>
 
@@ -1752,9 +1804,10 @@
   const KEY_CONTA = "fichario-pokemon-conta-v2";
   const reduzir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   // ícones de perfil: número na Pokédex do Pokémon
-  const AVATARES = [25, 133, 1, 4, 7, 39, 52, 54, 63, 92, 131, 143, 150, 151, 152, 155, 158, 175, 196, 197, 252, 255, 258, 282, 387, 390, 393, 403, 448, 470, 471, 570, 658, 700, 722, 725, 728, 778, 813, 816, 906, 909, 912];
+  // Pikachu, Raichu, Eevee e suas evoluções + os três iniciais de cada geração
+  const AVATARES = [25, 26, 133, 134, 135, 136, 196, 197, 470, 471, 700, 1, 4, 7, 152, 155, 158, 252, 255, 258, 387, 390, 393, 495, 498, 501, 650, 653, 656, 722, 725, 728, 810, 813, 816, 906, 909, 912];
   const avUrl = id => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
-  // enquadra a parte de cima do Pokémon (rosto) pelo contorno real da arte, sem cortar a cabeça
+  // enquadra a cabeça pelo contorno real da arte, preenche o ícone e usa um fundo pastel da cor do Pokémon
   const avCache = new Map();
   function avRosto(id, tam) {
     const k = id + ":" + tam;
@@ -1770,10 +1823,19 @@
           let x0 = W, y0 = Hh, x1 = 0, y1 = 0;
           for (let y = 0; y < Hh; y++) for (let x = 0; x < W; x++) if (d[(y * W + x) * 4 + 3] > 24) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
           if (x1 <= x0 || y1 <= y0) return ok("");
-          const bw = x1 - x0 + 1, bh = y1 - y0 + 1;
-          const lado = Math.max(bw, bh * 0.74) * 1.14, sx = x0 + bw / 2 - lado / 2, sy = y0 - lado * 0.07, kk = tam / lado;
+          const bh = y1 - y0 + 1, faixa = y0 + bh * 0.5;
+          // cabeça = faixa de cima do contorno; centro e largura dela (ignora caudas e braços longe do centro)
+          let hx0 = W, hx1 = 0, cor = [0, 0, 0], n = 0, somaX = 0, nx = 0;
+          for (let y = y0; y < faixa; y++) for (let x = x0; x <= x1; x++) { const i = (y * W + x) * 4; if (d[i + 3] > 24) { somaX += x; nx++; if (x < hx0) hx0 = x; if (x > hx1) hx1 = x; } }
+          const cx = nx ? somaX / nx : (x0 + x1) / 2;
+          // largura da cabeça: dispersão em torno do centro (robusta a pontas)
+          let desv = 0; for (let y = y0; y < faixa; y += 2) for (let x = x0; x <= x1; x += 2) { if (d[(y * W + x) * 4 + 3] > 24) desv += (x - cx) * (x - cx); }
+          const larg = Math.min(hx1 - hx0 + 1, Math.sqrt(desv / Math.max(1, nx / 4)) * 3.2);
+          for (let y = y0; y <= y1; y += 3) for (let x = x0; x <= x1; x += 3) { const i = (y * W + x) * 4; if (d[i + 3] > 200) { cor[0] += d[i]; cor[1] += d[i + 1]; cor[2] += d[i + 2]; n++; } }
+          const lado = Math.max(larg, bh * 0.42) * 1.3, sx = cx - lado / 2, sy = y0 - lado * 0.12, kk = tam / lado;
           const cv = document.createElement("canvas"); cv.width = cv.height = tam;
           const g = cv.getContext("2d"); g.imageSmoothingQuality = "high";
+          if (n) { const m = c => Math.round(c / n * 0.28 + 255 * 0.72); g.fillStyle = `rgb(${m(cor[0])},${m(cor[1])},${m(cor[2])})`; g.fillRect(0, 0, tam, tam); }
           g.drawImage(im, -sx * kk, -sy * kk, W * kk, Hh * kk);
           for (const q of [0.85, 0.75, 0.65]) { const u = cv.toDataURL("image/webp", q); if (imgAvatarOk(u)) return ok(u); }
           ok("");
@@ -1795,7 +1857,7 @@
     return `<span class="avatar ${cls || ""}${tem ? " av-foto" : id ? " av-poke" : ""}" aria-hidden="true">${miolo}</span>`;
   }
   function carregarConta() {
-    const padrao = { perfil: null, cfg: { cinza: true, anim: !reduzir, ordem: "num", lang: "en", tema: "rosa", area: "binder", modo: null, avatar: 0, avatarImg: "" } };
+    const padrao = { perfil: null, cfg: { cinza: true, anim: !reduzir, ordem: "num", lang: "en", tema: "rosa", area: "binder", modo: null, avatar: 0, avatarImg: "", layout: 4 } };
     try {
       const raw = localStorage.getItem(KEY_CONTA);
       if (raw) {
@@ -1807,8 +1869,10 @@
         if (!TEMAS.includes(cfg.tema)) cfg.tema = "rosa";
         if (cfg.modo !== "claro" && cfg.modo !== "escuro") cfg.modo = null;
         if (!["binder", "decks", "dex", "tools", "card", "amigos"].includes(cfg.area)) cfg.area = "binder";
+        cfg.layout = [2, 3, 4, 5, 6].includes(cfg.layout) ? cfg.layout : 4;
+        const antigo = cfg.avatar && !AVATARES.includes(cfg.avatar);
         cfg.avatar = AVATARES.includes(cfg.avatar) ? cfg.avatar : 0;
-        cfg.avatarImg = imgAvatarOk(cfg.avatarImg) ? cfg.avatarImg : "";
+        cfg.avatarImg = !antigo && imgAvatarOk(cfg.avatarImg) ? cfg.avatarImg : "";
         return { perfil, cfg };
       }
     } catch (e) { /* usa o padrão */ }
@@ -2362,7 +2426,12 @@
 
   /* ---------- Lista filtrada e desenho ---------- */
   const mqLarga = window.matchMedia("(min-width: 860px)"), mqEstreita = window.matchMedia("(max-width: 479px)");
-  const calcPorPagina = () => mqLarga.matches ? 12 : mqEstreita.matches ? 6 : 9;
+  // layout N×N: N colunas e N linhas por página (em telas menores, o limite de colunas é menor)
+  const LAYOUTS = [2, 3, 4, 5, 6];
+  const colunasMax = () => mqLarga.matches ? 6 : mqEstreita.matches ? 3 : 5;
+  const layoutAtual = () => LAYOUTS.includes(conta.cfg.layout) ? conta.cfg.layout : 4;
+  const colunas = () => Math.min(layoutAtual(), colunasMax());
+  const calcPorPagina = () => colunas() * layoutAtual();
   let porPagina = calcPorPagina();
   const grid = $("grid"), vazio = $("vazio"), prev = $("prev"), next = $("next"), pgIn = $("pgIn");
 
@@ -2503,13 +2572,28 @@
       ? `<span class="spin" aria-hidden="true"></span><span>${esc(t("loading"))}${state.progresso ? ` (${esc(state.progresso)})` : ""}</span>`
       : `<span>${esc(t("loadErr"))}</span>${state.erro ? `<small class="erro-tec">${esc(t("techDetail"))}: ${esc(state.erro)}</small>` : ""}<button type="button" class="btn-retry" data-retry="1">${esc(t("retry"))}</button>`;
   }
+  function aplicarLayoutUI() {
+    const n = layoutAtual(), c = colunas();
+    grid.style.setProperty("--cols", c); grid.dataset.cols = c;
+    document.querySelectorAll("#layBox [data-lay]").forEach(b => { const on = Number(b.dataset.lay) === n; b.setAttribute("aria-pressed", String(on)); b.title = t("layTip", Number(b.dataset.lay) * Math.min(Number(b.dataset.lay), colunasMax())); });
+  }
+  let filtrosAbertos = null;
+  function filtrosUI() {
+    const n = [state.posse, state.serie, state.set, state.rar].filter(Boolean).length;
+    const bn = $("fN"); bn.hidden = !n; bn.textContent = n;
+    $("fLimpar").hidden = !n;
+    if (filtrosAbertos === null) filtrosAbertos = n > 0;
+    $("fPainel").hidden = !filtrosAbertos; $("fToggle").setAttribute("aria-expanded", String(filtrosAbertos));
+  }
   function render() {
     const carregado = state.status === "ok";
     const lista = carregado ? filtradas() : [];
     state.lista = lista;
+    aplicarLayoutUI();
     const paginas = Math.max(1, Math.ceil(lista.length / porPagina));
     state.page = Math.min(state.page, paginas - 1);
     guardarVisao();
+    filtrosUI();
 
     if (!carregado) {
       grid.hidden = true; vazio.hidden = false;
@@ -2684,6 +2768,17 @@
     porPagina = novo;
     atualizar();
   }
+  $("fToggle").addEventListener("click", () => { filtrosAbertos = !filtrosAbertos; filtrosUI(); });
+  $("fLimpar").addEventListener("click", () => { state.posse = state.serie = state.set = state.rar = ""; state.page = 0; preencherFiltros(); render(); });
+  $("layBox").addEventListener("click", e => {
+    const b = e.target.closest("[data-lay]"); if (!b) return;
+    const n = Number(b.dataset.lay); if (n === layoutAtual()) return;
+    const primeira = state.page * porPagina;
+    conta.cfg.layout = n; salvarConta();
+    const novo = calcPorPagina();
+    state.page = Math.floor(primeira / novo); porPagina = novo; state.qtyOpen = null;
+    render();
+  });
   mqLarga.addEventListener("change", mudouLargura);
   mqEstreita.addEventListener("change", mudouLargura);
 
@@ -4525,7 +4620,7 @@
   const AM_TXT2 = {
     en: { sbUser: "Username", sbNick: "Nickname (trainer name)", sbNickHint: "Shown on your profile and trainer card. It can be the same as someone else's.",
       sbUserChecking: "Checking…", sbUserFree: u => "✓ @" + u + " is available.", mgName: "Nickname",
-      amReceivedD: "These people want to be your friend.", amRefresh: "Refresh", avChange: "Change icon", avTitle: "Choose your icon", avD: "Your friends will see this Pokémon next to your name.", avNone: "Use my initial", avSaved: "Icon updated.", avNeedSql: "Saved on this device. To show it to friends, run the avatar SQL in Supabase (see supabase-avatar.sql).", avUpload: "Upload image", avBadFile: "Choose a valid image (PNG, JPG or WebP).", avTooBig: "That image is too large. Try a smaller one.", avClose: "Close", amBadgeLbl: n => n === 1 ? "1 friend request" : n + " friend requests",
+      amReceivedD: "These people want to be your friend.", amRefresh: "Refresh", avChange: "Change icon", avTitle: "Choose your icon", avD: "Your friends will see this Pokémon next to your name.", avNone: "Use my initial", avSaved: "Icon updated.", avNeedSql: "Saved on this device. To show it to friends, run the avatar SQL in Supabase (see supabase-avatar.sql).", avUpload: "Upload image", avBadFile: "Choose a valid image (PNG, JPG or WebP).", avTooBig: "That image is too large. Try a smaller one.", layoutLbl: "Layout", layTip: n => n + " cards per page", filtersBtn: "Filters", filtersClear: "Clear filters", avClose: "Close", amBadgeLbl: n => n === 1 ? "1 friend request" : n + " friend requests",
       visManT: "Who sees your binders", visManD: "Choose, binder by binder, who can see it. Changes are shared right away.", visCards: n => n === 1 ? "1 card" : n + " cards",
       visSaved: (b, v) => b + ": " + v + ".", visPreview: "See my profile as others see it",
       fvNone: "No cards match this search.", fvShowing: (a, b) => "Showing " + a + " of " + b + " cards", fvMore: (a, b) => "Show " + a + " more (" + b + " left)",
@@ -4538,7 +4633,7 @@
       amNotSaved: "The request was not saved in Supabase. Check that the supabase-amigos.sql file was run in the SQL Editor." },
     pt: { sbUser: "Nome de usuário", sbNick: "Apelido (nome de treinador)", sbNickHint: "Aparece no seu perfil e no cartão de treinador. Pode ser igual ao de outras pessoas.",
       sbUserChecking: "Verificando…", sbUserFree: u => "✓ @" + u + " está disponível.", mgName: "Apelido",
-      amReceivedD: "Estas pessoas querem ser suas amigas.", amRefresh: "Atualizar", avChange: "Trocar ícone", avTitle: "Escolha seu ícone", avD: "Suas amigas e amigos vão ver esse Pokémon ao lado do seu nome.", avNone: "Usar minha inicial", avSaved: "Ícone atualizado.", avNeedSql: "Salvo neste aparelho. Para aparecer para os amigos, rode o SQL do avatar no Supabase (veja supabase-avatar.sql).", avUpload: "Enviar imagem", avBadFile: "Escolha uma imagem válida (PNG, JPG ou WebP).", avTooBig: "A imagem é grande demais. Tente uma menor.", avClose: "Fechar", amBadgeLbl: n => n === 1 ? "1 pedido de amizade" : n + " pedidos de amizade",
+      amReceivedD: "Estas pessoas querem ser suas amigas.", amRefresh: "Atualizar", avChange: "Trocar ícone", avTitle: "Escolha seu ícone", avD: "Suas amigas e amigos vão ver esse Pokémon ao lado do seu nome.", avNone: "Usar minha inicial", avSaved: "Ícone atualizado.", avNeedSql: "Salvo neste aparelho. Para aparecer para os amigos, rode o SQL do avatar no Supabase (veja supabase-avatar.sql).", avUpload: "Enviar imagem", avBadFile: "Escolha uma imagem válida (PNG, JPG ou WebP).", avTooBig: "A imagem é grande demais. Tente uma menor.", layoutLbl: "Layout", layTip: n => n + " cartas por página", filtersBtn: "Filtros", filtersClear: "Limpar filtros", avClose: "Fechar", amBadgeLbl: n => n === 1 ? "1 pedido de amizade" : n + " pedidos de amizade",
       visManT: "Quem vê seus binders", visManD: "Escolha, binder por binder, quem pode ver. A mudança é compartilhada na hora.", visCards: n => n === 1 ? "1 carta" : n + " cartas",
       visSaved: (b, v) => b + ": " + v + ".", visPreview: "Ver meu perfil como os outros veem",
       fvNone: "Nenhuma carta encontrada nesta busca.", fvShowing: (a, b) => "Mostrando " + a + " de " + b + " cartas", fvMore: (a, b) => "Mostrar mais " + a + " (faltam " + b + ")",
@@ -4551,7 +4646,7 @@
       amNotSaved: "O pedido não foi salvo no Supabase. Confira se o arquivo supabase-amigos.sql foi rodado no SQL Editor." },
     ja: { sbUser: "ユーザー名", sbNick: "ニックネーム（トレーナー名）", sbNickHint: "プロフィールとトレーナーカードに表示されます。ほかの人と同じでも大丈夫です。",
       sbUserChecking: "確認中…", sbUserFree: u => "✓ @" + u + " は使えます。", mgName: "ニックネーム",
-      amReceivedD: "この人たちがフレンドになりたがっています。", amRefresh: "更新", avChange: "アイコンを変更", avTitle: "アイコンを選ぶ", avD: "フレンドにこのポケモンが名前の横に表示されます。", avNone: "イニシャルを使う", avSaved: "アイコンを更新しました。", avNeedSql: "この端末に保存しました。フレンドに表示するには Supabase で avatar の SQL を実行してください（supabase-avatar.sql）。", avUpload: "画像をアップロード", avBadFile: "有効な画像（PNG、JPG、WebP）を選んでください。", avTooBig: "画像が大きすぎます。小さいものをお試しください。", avClose: "閉じる", amBadgeLbl: n => "フレンド申請 " + n + " 件",
+      amReceivedD: "この人たちがフレンドになりたがっています。", amRefresh: "更新", avChange: "アイコンを変更", avTitle: "アイコンを選ぶ", avD: "フレンドにこのポケモンが名前の横に表示されます。", avNone: "イニシャルを使う", avSaved: "アイコンを更新しました。", avNeedSql: "この端末に保存しました。フレンドに表示するには Supabase で avatar の SQL を実行してください（supabase-avatar.sql）。", avUpload: "画像をアップロード", avBadFile: "有効な画像（PNG、JPG、WebP）を選んでください。", avTooBig: "画像が大きすぎます。小さいものをお試しください。", layoutLbl: "レイアウト", layTip: n => "1ページ " + n + " 枚", filtersBtn: "絞り込み", filtersClear: "絞り込みを解除", avClose: "閉じる", amBadgeLbl: n => "フレンド申請 " + n + " 件",
       visManT: "バインダーを見られる人", visManD: "バインダーごとに、見られる人を選べます。変更はすぐに共有されます。", visCards: n => n + "枚",
       visSaved: (b, v) => b + "：" + v, visPreview: "ほかの人から見たプロフィールを見る",
       fvNone: "この検索に合うカードはありません。", fvShowing: (a, b) => b + "枚中 " + a + "枚を表示", fvMore: (a, b) => "さらに " + a + "枚表示（残り " + b + "枚）",
@@ -5861,7 +5956,7 @@
       const eu = await sbReq("/rest/v1/perfis?user_id=eq." + sb.id + "&select=user_id,usuario,nome");
       amState.perfil = eu[0] || null;
       if (amState.perfil && (amState.perfil.avatar_img || amState.perfil.avatar)) {
-        const ni = imgAvatarOk(amState.perfil.avatar_img) ? amState.perfil.avatar_img : "", na = AVATARES.includes(amState.perfil.avatar) ? amState.perfil.avatar : 0;
+        const antigo = amState.perfil.avatar && !AVATARES.includes(amState.perfil.avatar), ni = !antigo && imgAvatarOk(amState.perfil.avatar_img) ? amState.perfil.avatar_img : "", na = AVATARES.includes(amState.perfil.avatar) ? amState.perfil.avatar : 0;
         if (conta.cfg.avatarImg !== ni || conta.cfg.avatar !== na) { conta.cfg.avatarImg = ni; conta.cfg.avatar = na; salvarConta(); }
       } else if (AV_OK && amState.perfil && (conta.cfg.avatar || conta.cfg.avatarImg)) {
         amState.perfil.avatar = conta.cfg.avatar || 0; amState.perfil.avatar_img = conta.cfg.avatarImg || null;
@@ -5956,9 +6051,9 @@
     const lapis = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 6l3 3" stroke="currentColor" stroke-width="2"/></svg>';
     const subiu = foto && !atual;
     $("avGrade").innerHTML = `<li><button type="button" class="av-op av-up" data-avup aria-pressed="${!!subiu}" aria-label="${esc(t("avUpload"))}" title="${esc(t("avUpload"))}">${subiu ? `<img class="av-up-foto" src="${foto}" alt="">` : lapis}</button></li>`
-      + AVATARES.map(id => `<li><button type="button" class="av-op" data-av="${id}" aria-pressed="${id === atual}" aria-label="#${id}"><img src="${avUrl(id)}" alt="" loading="lazy" referrerpolicy="no-referrer"></button></li>`).join("");
+      + AVATARES.map(id => `<li><button type="button" class="av-op" data-av="${id}" aria-pressed="${id === atual}" aria-label="#${id}"><img src="${avUrl(id)}" alt="" referrerpolicy="no-referrer" style="opacity:0"></button></li>`).join("");
     $("avModal").hidden = false;
-    $("avGrade").querySelectorAll("button[data-av] img").forEach(img => { const id = parseInt(img.closest("[data-av]").dataset.av, 10); avRosto(id, 128).then(u => { if (u && img.isConnected) { img.src = u; img.classList.add("av-rosto"); } }); });
+    $("avGrade").querySelectorAll("button[data-av] img").forEach(img => { const id = parseInt(img.closest("[data-av]").dataset.av, 10); avRosto(id, 128).then(u => { if (!img.isConnected) return; if (u) { img.src = u; img.classList.add("av-rosto"); } img.style.opacity = ""; }); });
     const f = $("avGrade").querySelector('[aria-pressed="true"]') || $("avGrade").querySelector("button"); if (f) f.focus();
   }
   function avFechar() { $("avModal").hidden = true; if (avAnterior && avAnterior.isConnected) avAnterior.focus(); }
