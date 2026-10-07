@@ -2221,6 +2221,40 @@
 
   const imgPequena = c => c.img ? c.img + "/low.webp" : c.pi || c.fb;
   const imgGrande = c => c.img ? c.img + "/high.webp" : c.pg || c.pi || c.fb;
+  // Candidatas de maior qualidade para o zoom: pokemontcg.io (hires) e PNG sem perdas da TCGdex
+  function imgsMelhores(c) {
+    const l = [];
+    if (c.pg) l.push(c.pg);
+    if (c.img) {
+      const op = typeof PTCG_POR_SET !== "undefined" && PTCG_POR_SET[c.set];
+      if (op && op.length && !c.pg) {
+        const letras = !/^\d+$/.test(c.lid), alvo = op.find(o => o.sub === letras) || op[0];
+        l.push(ptcgUrl(alvo.pid, ptcgNum(c.lid), true));
+      }
+      l.push(c.img + "/high.png");
+    }
+    return l.filter((u, i) => u && l.indexOf(u) === i);
+  }
+  // Mostra logo a imagem normal e troca pela mais nítida assim que ela carregar
+  function melhorarImg(img, c) {
+    const atual = img.src;
+    let melhor = 0;
+    const considerar = u => {
+      const t = new Image();
+      t.referrerPolicy = "no-referrer";
+      t.onload = () => {
+        const prop = t.naturalWidth / (t.naturalHeight || 1);
+        if (!img.isConnected || prop < 0.62 || prop > 0.8) return;
+        const base = melhor || img.naturalWidth || 0;
+        if (t.naturalWidth > base || (t.naturalWidth === base && /\.png$/.test(u) && !melhor)) {
+          melhor = t.naturalWidth; img.dataset.hq = "1"; img.src = u;
+        }
+      };
+      t.src = u;
+    };
+    const iniciar = () => imgsMelhores(c).forEach(considerar);
+    if (img.complete && img.naturalWidth) iniciar(); else img.addEventListener("load", iniciar, { once: true });
+  }
   const numeroTxt = c => {
     const s = SETS[c.set];
     if (/^\d+$/.test(c.lid) && s && s.official) return `${c.lid}/${String(s.official).padStart(c.lid.length, "0")}`;
@@ -2601,6 +2635,7 @@
       });
       img.src = src;
       box.appendChild(img);
+      melhorarImg(img, c);
     } else box.innerHTML = fallbackHTML(c);
     $("zNome").textContent = `${c.n} #${num}`;
     $("zDet").textContent = `${setNome(c)} · ${SETS[c.set] ? SETS[c.set].serieName : ""}` + (c.rar ? " · " + t("rar_" + c.rar) : "");
@@ -6107,7 +6142,7 @@
     if (c && (c.img || c.pi || c.fb)) {
       const img = new Image(); img.referrerPolicy = "no-referrer"; img.alt = c.n + ", " + t("number") + " " + numeroTxt(c);
       img.addEventListener("error", () => { const nx = proximaImg(img, c, true); if (nx) img.src = nx; });
-      img.src = imgGrande(c); box.appendChild(img);
+      img.src = imgGrande(c); box.appendChild(img); melhorarImg(img, c);
     }
     $("fvzNome").textContent = c ? c.n + " #" + numeroTxt(c) : id;
     $("fvzDet").textContent = c ? setNome(c) + (SETS[c.set] && SETS[c.set].serieName ? " · " + SETS[c.set].serieName : "") + (c.rar ? " · " + t("rar_" + c.rar) : "") : "";
