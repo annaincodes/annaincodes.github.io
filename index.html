@@ -314,6 +314,15 @@
   .search input, .filters select { height: 42px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--field-fg); font: 500 14px "Figtree", system-ui, sans-serif; }
   .search input { width: 100%; padding: 0 12px 0 36px; }
   .filters select { flex: 1 1 140px; min-width: 0; padding: 0 10px; }
+  .filters .f-ordem { font-weight: 700; }
+  .filters .search { flex: 2 1 220px; }
+  .filters:has(#fOrdem) select { flex: 1 1 128px; }
+  .filters .f-rar { font-weight: 700; }
+  @media (max-width: 520px) {
+    .filters select { flex: 1 1 calc(33.333% - 6px) !important; }
+    .filters .f-ordem, .filters .f-rar { flex: 1 1 calc(50% - 4px) !important; }
+    .filters #dOrdem { flex-basis: 100% !important; }
+  }
 
   /* Fichário */
   .binder {
@@ -904,6 +913,8 @@
         <select id="fPosse" data-i18n-aria="sitAria" aria-label="Filter by ownership"></select>
         <select id="fSerie" data-i18n-aria="serieAria" aria-label="Filter by series"></select>
         <select id="fSet" data-i18n-aria="setAria" aria-label="Filter by set"></select>
+        <select id="fRaridade" class="f-rar" data-i18n-aria="rarLbl" aria-label="Rarity"><option value="">Rarity</option></select>
+        <select id="fOrdem" class="f-ordem" data-i18n-aria="order" aria-label="Card order"></select>
       </div>
     </div>
 
@@ -964,6 +975,7 @@
           <select id="dPosse" data-i18n-aria="sitAria" aria-label="Filter by ownership"></select>
           <select id="dSerie" data-i18n-aria="serieAria" aria-label="Filter by series"></select>
           <select id="dSet" data-i18n-aria="setAria" aria-label="Filter by set"></select>
+          <select id="dOrdem" class="f-ordem" data-i18n-aria="order" aria-label="Card order"></select>
         </div>
       </div>
       <p class="deck-aviso" id="deckAviso" role="status"></p>
@@ -1234,12 +1246,6 @@
       <button type="button" class="switch" id="cfgAnim" role="switch" aria-checked="true" aria-labelledby="lAnim"><span class="knob"><svg viewBox="0 0 32 32" aria-hidden="true"><use href="#pbh"/></svg></span></button>
     </div>
     <div class="row col">
-      <div class="field">
-        <label for="cfgOrdem" data-i18n="order"></label>
-        <select id="cfgOrdem"></select>
-      </div>
-    </div>
-    <div class="row col">
       <p class="row-t" id="lLang" data-i18n="lang"></p>
       <div class="langs" role="group" aria-labelledby="lLang">
         <button type="button" class="lang-btn" data-lang="en" lang="en" aria-pressed="true"><span class="flag" data-flag="us"></span><span>English (USA)</span><svg class="tick" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -1321,7 +1327,7 @@
       panelTitle: "Account & settings", closePanel: "Close panel", account: "Account", siteSettings: "Site settings",
       dim: "Darken cards I don't own", dimD: "Turn off to see every card in full color.",
       anim: "Animations", animD: "Effects when turning pages and marking cards.",
-      order: "Card order", ordNum: "Set (newest first) and number", ordName: "Name (A to Z)", ordDex: "Pokédex number (Trainers & Energy last)",
+      order: "Card order", ordNum: "Order: newest set", ordName: "Order: name A–Z", ordDex: "Order: Pokédex no.", ordNameZ: "Order: name Z–A", ordQty: "Order: most copies", ordOld: "Order: oldest set",
       lang: "Language",
       langNote: "Changes the site language. Card names and images always come in English. The flags on each card mark which language versions you own.",
       acctIntro: "Create your account to personalize your binder.", name: "Trainer name", email: "Email",
@@ -1418,7 +1424,7 @@
       panelTitle: "Conta e configurações", closePanel: "Fechar painel", account: "Cadastro", siteSettings: "Configurações do site",
       dim: "Escurecer cartas que não tenho", dimD: "Desligue para ver todas as cartas com a cor original.",
       anim: "Animações", animD: "Efeitos ao virar a página e ao marcar uma carta.",
-      order: "Ordem das cartas", ordNum: "Coleção (mais nova primeiro) e número", ordName: "Nome (A a Z)", ordDex: "Número na Pokédex (Treinador e Energia por último)",
+      order: "Ordem das cartas", ordNum: "Ordem: coleção mais nova", ordName: "Ordem: nome A–Z", ordDex: "Ordem: nº da Pokédex", ordNameZ: "Ordem: nome Z–A", ordQty: "Ordem: mais cópias", ordOld: "Ordem: coleção mais antiga",
       lang: "Idioma",
       langNote: "Muda o idioma do site. Os nomes e as imagens das cartas ficam sempre em inglês. As bandeiras de cada carta marcam em quais idiomas você tem a carta.",
       acctIntro: "Crie sua conta para identificar o seu fichário.", name: "Nome de treinador", email: "E-mail",
@@ -1515,7 +1521,7 @@
       panelTitle: "アカウントと設定", closePanel: "パネルを閉じる", account: "アカウント", siteSettings: "サイト設定",
       dim: "持っていないカードを暗くする", dimD: "オフにすると、すべてのカードが元の色で表示されます。",
       anim: "アニメーション", animD: "ページをめくるときやカードをチェックするときの効果。",
-      order: "カードの並び順", ordNum: "セット（新しい順）と番号", ordName: "名前（A〜Z）", ordDex: "図鑑番号順（トレーナーズ・エネルギーは最後）",
+      order: "カードの並び順", ordNum: "並び順：新しいセット", ordName: "並び順：名前 A〜Z", ordDex: "並び順：図鑑番号", ordNameZ: "並び順：名前 Z〜A", ordQty: "並び順：枚数が多い", ordOld: "並び順：古いセット",
       lang: "言語",
       langNote: "サイトの言語を変更します。カード名と画像は常に英語です。各カードの旗で、どの言語版を持っているかを記録できます。",
       acctIntro: "アカウントを作成して、バインダーを自分用にしましょう。", name: "トレーナー名", email: "メールアドレス",
@@ -1684,7 +1690,7 @@
         const o = JSON.parse(raw);
         const perfil = o.perfil && o.perfil.nome ? { nome: String(o.perfil.nome), email: String(o.perfil.email || "") } : null;
         const cfg = Object.assign(padrao.cfg, o.cfg || {});
-        if (!["nome", "dex"].includes(cfg.ordem)) cfg.ordem = "num";
+        if (!["nome", "dex", "nomeZ", "qtd", "novas"].includes(cfg.ordem)) cfg.ordem = "num";
         if (!LANGS.includes(cfg.lang)) cfg.lang = "en";
         if (!TEMAS.includes(cfg.tema)) cfg.tema = "rosa";
         if (cfg.modo !== "claro" && cfg.modo !== "escuro") cfg.modo = null;
@@ -1701,7 +1707,7 @@
   const saved = carregarVisao(bnd.atual);
   const conta = carregarConta();
   const state = {
-    tab: "todas", q: "", posse: "", serie: "", set: "", page: 0,
+    tab: "todas", q: "", posse: "", serie: "", set: "", rar: "", page: 0,
     qty: {}, langs: {}, fav: saved.fav, star: saved.star, cop: saved.cop || {}, own: new Set(),
     status: "loading", qtyOpen: null, lista: []
   };
@@ -1720,7 +1726,8 @@
   let CARTAS = [];
   const POR_ID = new Map();
   let SETS = {};      // id -> { id, name, serie, serieName, official, total }
-  let SERIES = [];    // [{ id, name, sets: [ids] }] da mais nova para a mais antiga
+  let SERIES = [];
+  let SETS_ORD = {};  // posição de cada coleção (0 = mais nova)    // [{ id, name, sets: [ids] }] da mais nova para a mais antiga
 
   async function getJSON(url, tentativas = 2) {
     let ultimo;
@@ -1789,6 +1796,314 @@
     return todas;
   }
 
+
+  /* =====================================================================
+     Segunda fonte de cartas: Pokémon TCG API (pokemontcg.io), em inglês.
+     - Completa imagens que faltam na TCGdex.
+     - Acrescenta cartas e coleções que a TCGdex ainda não tem
+       (ex.: Crown Zenith Galarian Gallery, GG35/GG70).
+     Fica guardada no aparelho por alguns dias para não repetir as buscas.
+     ===================================================================== */
+  const PTCG = "https://api.pokemontcg.io/v2", PTCG_IMG = "https://images.pokemontcg.io/";
+  const PTCG_KEY = "ptcg-v1", PTCG_HORAS = 72, PTCG_MAX_SETS = 30;
+  const PTCG_SUB = /^(.*?)[\s:]+(trainer gallery|galarian gallery|shiny vault|classic collection|radiant collection)$/i;
+  const PTCG_ALIAS = { base: "baseset", basicenergy: "energies", wizardsblackstarpromos: "wizardsblackstarpromos" };
+  const nSet = s => norm(String(s || "")).replace(/^hs\W+/, "").replace(/&/g, "and").replace(/[^a-z0-9]/g, "");
+  const nNum = s => String(s || "").toUpperCase().replace(/^([A-Z]*)0*(\d)/, "$1$2");
+  let PTCG_DADOS = null;           // { quando, sets: [...], cartas: { ptcgSetId: [cards] } }
+  const PTCG_POR_SET = {};         // id do set na TCGdex -> [{ pid, sub }]
+  async function ptcgLer() {
+    try {
+      const db = await abrirDB();
+      return await new Promise(ok => { const r = db.transaction("dados").objectStore("dados").get(PTCG_KEY); r.onsuccess = () => ok(r.result || null); r.onerror = () => ok(null); });
+    } catch (e) { return null; }
+  }
+  function ptcgGravar(v) { abrirDB().then(db => db.transaction("dados", "readwrite").objectStore("dados").put(v, PTCG_KEY)).catch(() => {}); }
+  async function ptcgJSON(caminho) {
+    const r = await fetch(PTCG + caminho);
+    if (!r.ok) throw new Error("pokemontcg.io HTTP " + r.status);
+    return r.json();
+  }
+  // liga cada coleção da pokemontcg.io a uma coleção da TCGdex (pelo nome)
+  function ptcgMapear(psets) {
+    const porNome = new Map();
+    Object.values(SETS).forEach(s => { if (!s.ptcg) porNome.set(nSet(s.name), s.id); });
+    const achar = nome => { const k = nSet(nome); return porNome.get(k) || porNome.get(PTCG_ALIAS[k] || "") || null; };
+    const mapa = {};
+    psets.forEach(ps => {
+      let sid = achar(ps.name), sub = false;
+      if (!sid) { const m = ps.name.match(PTCG_SUB); if (m) { const base = achar(m[1]); if (base) { sid = base; sub = true; } } }
+      mapa[ps.id] = sid ? { sid, sub } : null;
+    });
+    return mapa;
+  }
+  const ptcgUrl = (pid, num, grande) => PTCG_IMG + pid + "/" + num + (grande ? "_hires.png" : ".png");
+  // número no formato da pokemontcg.io ("001" -> "1"; "TG05" fica "TG05")
+  const ptcgNum = lid => /^\d+$/.test(lid) ? String(parseInt(lid, 10)) : String(lid).toUpperCase();
+  // coloca a carta nova na lista, com número no mesmo formato das outras da coleção
+  function ptcgNovaCarta(sid, pc) {
+    const doSet = CARTAS.filter(c => c.set === sid && /^\d+$/.test(c.lid));
+    const largura = doSet.length && doSet.every(c => c.lid.length === doSet[0].lid.length) && doSet[0].lid.startsWith("0") ? doSet[0].lid.length : 0;
+    const lid = /^\d+$/.test(pc.number) && largura ? pc.number.padStart(largura, "0") : String(pc.number);
+    const id = sid + "-" + lid;
+    if (POR_ID.has(id)) return null;
+    return { id, set: sid, lid, n: pc.name, nn: norm(pc.name), key: numKey(lid), img: "", fb: "", ord: 0,
+      pi: (pc.images && pc.images.small) || "", pg: (pc.images && (pc.images.large || pc.images.small)) || "", extra: 1, rarP: pc.rarity || "" };
+  }
+  // aplica os dados da pokemontcg.io sobre o catálogo já montado
+  function ptcgAplicar(dados) {
+    if (!dados || !Array.isArray(dados.sets) || !CARTAS.length) return { novas: 0, faltam: [] };
+    const mapa = ptcgMapear(dados.sets);
+    Object.keys(PTCG_POR_SET).forEach(k => delete PTCG_POR_SET[k]);
+    let novas = 0;
+    const faltam = [];
+    dados.sets.forEach(ps => {
+      let m = mapa[ps.id];
+      const ano = parseInt(String(ps.releaseDate || "").slice(0, 4), 10) || 0;
+      // coleção que a TCGdex não tem: cria (só subconjuntos ou coleções recentes, para não duplicar por diferença de nome)
+      if (!m && (PTCG_SUB.test(ps.name) || ano >= 2021)) {
+        const nid = "ptcg-" + ps.id;
+        if (!SETS[nid]) {
+          const base = ps.name.match(PTCG_SUB) ? Object.values(SETS).find(s => !s.ptcg && nSet(ps.name).startsWith(nSet(s.name))) : null;
+          let serie = base ? SERIES.find(x => x.id === base.serie) : SERIES.find(x => nSet(x.name) === nSet(ps.series));
+          if (!serie) { serie = { id: "ptcg-" + nSet(ps.series || "other"), name: ps.series || "Other", sets: [] }; SERIES.push(serie); }
+          SETS[nid] = { id: nid, name: ps.name, serie: serie.id, serieName: serie.name, official: ps.printedTotal || 0, total: 0, ptcg: ps.id };
+          const pos = base ? serie.sets.indexOf(base.id) + 1 : 0;
+          serie.sets.splice(Math.max(0, pos), 0, nid);
+          SETS_ORD[nid] = base ? (SETS_ORD[base.id] || 0) + 0.5 : (SETS_ORD[serie.sets[1]] || 0) - 0.5;
+        }
+        m = { sid: nid, sub: false, nova: true };
+      }
+      if (!m) return;
+      (PTCG_POR_SET[m.sid] = PTCG_POR_SET[m.sid] || []).push({ pid: ps.id, sub: m.sub });
+      const daSet = CARTAS.filter(c => c.set === m.sid);
+      const tem = m.sub ? daSet.filter(c => !/^\d+$/.test(c.lid)).length : daSet.length;
+      const cartas = dados.cartas && dados.cartas[ps.id];
+      if (cartas) {
+        const ja = new Set(daSet.map(c => nNum(c.lid)));
+        cartas.forEach(pc => {
+          if (!pc || !pc.number || !pc.name) return;
+          const k = nNum(pc.number);
+          const existente = daSet.find(c => nNum(c.lid) === k);
+          // carta que já existe mas sem imagem: usa a imagem exata da pokemontcg.io
+          if (existente) { if (!existente.img && pc.images) { existente.pi = pc.images.small || ""; existente.pg = pc.images.large || existente.pi; } if (pc.rarity) existente.rarP = pc.rarity; return; }
+          if (ja.has(k)) return;
+          const nc = ptcgNovaCarta(m.sid, pc);
+          if (!nc) return;
+          ja.add(k); CARTAS.push(nc); POR_ID.set(nc.id, nc); SETS[m.sid].total++; novas++;
+          const pre = /^([A-Z]+)\d+$/.exec(nc.lid);
+          if (pre && (m.sub || m.nova) && ps.printedTotal) { SETS[m.sid].sub = SETS[m.sid].sub || {}; SETS[m.sid].sub[pre[1]] = ps.printedTotal; }
+        });
+      } else if (tem < (ps.total || 0)) faltam.push(ps);
+      // subconjuntos como Galarian Gallery: número "GG35/GG70"
+      if (m.sub && ps.printedTotal) {
+        const pre = daSet.map(c => /^([A-Z]+)\d+$/.exec(c.lid)).find(Boolean);
+        if (pre) { SETS[m.sid].sub = SETS[m.sid].sub || {}; SETS[m.sid].sub[pre[1]] = SETS[m.sid].sub[pre[1]] || ps.printedTotal; }
+      }
+    });
+    // cartas da TCGdex sem imagem: monta o endereço da imagem na pokemontcg.io pelo número
+    CARTAS.forEach(c => {
+      if (c.img || c.pi) return;
+      const op = PTCG_POR_SET[c.set];
+      if (!op || !op.length) return;
+      const letras = !/^\d+$/.test(c.lid);
+      const alvo = op.find(o => o.sub === letras) || op[0];
+      c.pi = ptcgUrl(alvo.pid, ptcgNum(c.lid), false); c.pg = ptcgUrl(alvo.pid, ptcgNum(c.lid), true);
+    });
+    if (novas) {
+      CARTAS.sort((a, b) => (SETS_ORD[a.set] || 0) - (SETS_ORD[b.set] || 0) || collator.compare(a.lid, b.lid));
+      CARTAS.forEach((c, i) => { c.ord = i; });
+    }
+    aplicarRar();
+    return { novas, faltam };
+  }
+  let ptcgRodando = false;
+  async function completarComPtcg() {
+    if (ptcgRodando || !CARTAS.length) return;
+    ptcgRodando = true;
+    try {
+      let dados = PTCG_DADOS || await ptcgLer();
+      const velho = !dados || Date.now() - (dados.quando || 0) > PTCG_HORAS * 3600e3;
+      if (dados && !velho) { PTCG_DADOS = dados; const r = ptcgAplicar(dados); preencherFiltros(); atualizar(); if (!r.faltam.length) return; }
+      if (velho) {
+        const j = await ptcgJSON("/sets?select=id,name,series,printedTotal,total,releaseDate&orderBy=-releaseDate&pageSize=250");
+        dados = { quando: Date.now(), sets: j.data || [], cartas: (dados && dados.cartas) || {} };
+      }
+      // busca as cartas só das coleções em que faltam cartas (as mais novas primeiro)
+      const { faltam } = ptcgAplicar({ sets: dados.sets, cartas: {} });
+      const buscar = faltam.filter(ps => !(dados.cartas[ps.id] && !velho)).slice(0, PTCG_MAX_SETS);
+      for (const ps of buscar) {
+        try {
+          let pagina = 1, todas = [];
+          for (;;) {
+            const j = await ptcgJSON("/cards?q=" + encodeURIComponent("set.id:" + ps.id) + "&select=id,name,number,images,rarity&pageSize=250&page=" + pagina);
+            todas = todas.concat(j.data || []);
+            if (!j.totalCount || todas.length >= j.totalCount || !(j.data || []).length) break;
+            pagina++;
+          }
+          dados.cartas[ps.id] = todas.map(c => ({ name: c.name, number: c.number, images: c.images, rarity: c.rarity || "" }));
+        } catch (e) { console.warn("pokemontcg.io:", ps.id, e); break; }
+      }
+      PTCG_DADOS = dados; ptcgGravar(dados);
+      ptcgAplicar(dados);
+      preencherFiltros(); atualizar();
+    } catch (e) { console.warn("pokemontcg.io indisponível:", e); }
+    finally { ptcgRodando = false; }
+  }
+  // próxima imagem a tentar quando uma falha: TCGdex → pokemontcg.io → galeria oficial
+  function proximaImg(img, c, grande) {
+    const lista = [grande ? c.pg : c.pi, c.fb].filter(Boolean);
+    const i = parseInt(img.dataset.alt || "0", 10);
+    for (let k = i; k < lista.length; k++) if (lista[k] && img.src !== lista[k]) { img.dataset.alt = String(k + 1); return lista[k]; }
+    img.dataset.alt = String(lista.length);
+    return "";
+  }
+
+
+  /* =====================================================================
+     Raridade das cartas (TCGdex, com a pokemontcg.io para as cartas extras)
+     Cada raridade vira uma chave (ex.: "sir") e entra em grupos (Full Art, Ouro…)
+     ===================================================================== */
+  const RAR_KEY = "rar-v1", RAR_DIAS = 7;
+  // ordem de exibição e grupos de cada raridade
+  const RAR_DEF = [
+    ["common", []], ["uncommon", []], ["rare", []], ["holo", []], ["double", ["vex"]], ["vseries", ["vex"]], ["oldex", ["vex"]],
+    ["ultra", ["fullart", "vex"]], ["ir", ["fullart", "alt"]], ["sir", ["fullart", "alt"]], ["mhr", ["fullart", "gold"]], ["hyper", ["fullart", "gold"]],
+    ["secret", ["fullart", "gold"]], ["rainbow", ["fullart", "gold"]], ["trainerfull", ["fullart"]], ["gallery", ["fullart", "gal"]], ["bwr", ["fullart"]],
+    ["shiny", ["shiny"]], ["shinyultra", ["shiny", "fullart"]], ["acespec", []], ["radiant", []], ["amazing", []],
+    ["lvx", []], ["prime", []], ["legend", []], ["break", []], ["prism", []], ["star", []], ["classic", []], ["promo", []], ["outra", []]
+  ];
+  const RAR_GRUPOS = ["fullart", "alt", "gold", "shiny", "gal", "vex"];
+  const RAR_TAGS = Object.fromEntries(RAR_DEF.map(([k, g]) => [k, g]));
+  // siglas que também funcionam na busca (ex.: "sar", "fa", "tg")
+  const RAR_SIGLA = { sar: "r:sir", sir: "r:sir", ir: "r:ir", ar: "r:ir", hr: "r:hyper", ur: "r:ultra", sr: "r:secret", rr: "r:double", fa: "g:fullart", fullart: "g:fullart",
+    tg: "r:gallery", gg: "r:gallery", shiny: "g:shiny", ace: "r:acespec", acespec: "r:acespec", radiant: "r:radiant", gold: "g:gold", mhr: "r:mhr", bwr: "r:bwr" };
+  function rarChave(txt) {
+    const s = norm(String(txt || "")).replace(/[^a-z]/g, "");
+    if (!s || s === "none") return "outra";
+    if (s.includes("specialillustration")) return "sir";
+    if (s.includes("illustration")) return "ir";
+    if (s.includes("megahyper")) return "mhr";
+    if (s.includes("hyper")) return "hyper";
+    if (s.includes("shinyultra") || s.includes("shinyholov") || s.includes("shinyrarev")) return "shinyultra";
+    if (s.includes("shiny")) return "shiny";
+    if (s.includes("rainbow")) return "rainbow";
+    if (s.includes("secret")) return "secret";
+    if (s.includes("acespec")) return "acespec";
+    if (s.includes("radiant")) return "radiant";
+    if (s.includes("amazing")) return "amazing";
+    if (s.includes("fullarttrainer") || s.includes("trainerfullart")) return "trainerfull";
+    if (s.includes("gallery")) return "gallery";
+    if (s.includes("blackwhite")) return "bwr";
+    if (s.includes("ultra")) return "ultra";
+    if (s.includes("double")) return "double";
+    if (s.includes("vmax") || s.includes("vstar") || /holov$|rarev$|holorarev|rareholov/.test(s) || s.includes("holorarevunion") || s.includes("gx")) return "vseries";
+    if (s.includes("lvx")) return "lvx";
+    if (s.includes("prime")) return "prime";
+    if (s.includes("legend")) return "legend";
+    if (s.includes("break")) return "break";
+    if (s.includes("prism")) return "prism";
+    if (s.includes("star")) return "star";
+    if (/holoex$|rareholoex|holorareex/.test(s)) return "oldex";
+    if (s.includes("classic")) return "classic";
+    if (s.includes("promo")) return "promo";
+    if (s.includes("holo")) return "holo";
+    if (s.includes("uncommon")) return "uncommon";
+    if (s.includes("common")) return "common";
+    if (s.includes("rare")) return "rare";
+    return "outra";
+  }
+  var RAR_MAPA = null;      // id da carta -> nome da raridade (como vem da API)
+  var RAR_CONTA = null;     // chave -> quantidade de cartas
+  function aplicarRar() {
+    if (!RAR_MAPA) return;
+    RAR_CONTA = {};
+    CARTAS.forEach(c => {
+      const bruto = RAR_MAPA[c.id] || c.rarP || "";
+      c.rarN = bruto; c.rar = bruto ? rarChave(bruto) : "";
+      if (c.rar) RAR_CONTA[c.rar] = (RAR_CONTA[c.rar] || 0) + 1;
+    });
+  }
+  const rarCasa = (c, f) => !f ? true : f.startsWith("g:") ? !!(c.rar && (RAR_TAGS[c.rar] || []).includes(f.slice(2))) : c.rar === f.slice(2);
+  async function rarLer() {
+    try { const db = await abrirDB(); return await new Promise(ok => { const r = db.transaction("dados").objectStore("dados").get(RAR_KEY); r.onsuccess = () => ok(r.result || null); r.onerror = () => ok(null); }); }
+    catch (e) { return null; }
+  }
+  let rarRodando = false;
+  async function carregarRaridades() {
+    if (rarRodando) return;
+    if (RAR_MAPA) { aplicarRar(); return; }
+    rarRodando = true;
+    try {
+      const cache = await rarLer();
+      if (cache && cache.mapa && Date.now() - cache.quando < RAR_DIAS * 864e5) { RAR_MAPA = cache.mapa; }
+      else {
+        const lista = (await getJSON(API + "/rarities")).filter(r => r && typeof r === "string");
+        // das mais curtas para as mais longas: se a API devolver nomes parecidos, a mais específica vence
+        lista.sort((a, b) => a.length - b.length);
+        const res = new Array(lista.length);
+        let i = 0;
+        const trab = async () => { while (i < lista.length) { const k = i++; try { res[k] = await getJSON(API + "/cards?rarity=" + encodeURIComponent("eq:" + lista[k])); } catch (e) { res[k] = []; } } };
+        await Promise.all(Array.from({ length: 6 }, trab));
+        // se a busca exata não trouxe nada, tenta a busca simples (a mais específica continua vencendo)
+        if (!res.some(r => r && r.length)) {
+          i = 0;
+          const trab2 = async () => { while (i < lista.length) { const k = i++; try { res[k] = await getJSON(API + "/cards?rarity=" + encodeURIComponent(lista[k])); } catch (e) { res[k] = []; } } };
+          await Promise.all(Array.from({ length: 6 }, trab2));
+        }
+        const mapa = {};
+        lista.forEach((r, k) => (res[k] || []).forEach(c => { if (c && c.id) mapa[c.id] = r; }));
+        if (!Object.keys(mapa).length) throw new Error("no rarity data");
+        RAR_MAPA = mapa;
+        abrirDB().then(db => db.transaction("dados", "readwrite").objectStore("dados").put({ quando: Date.now(), mapa }, RAR_KEY)).catch(() => {});
+      }
+      aplicarRar(); preencherRaridade(); if (state.rar) render();
+    } catch (e) { console.warn("Raridades indisponíveis:", e); RAR_MAPA = RAR_MAPA || {}; aplicarRar(); preencherRaridade(); }
+    finally { rarRodando = false; }
+  }
+  function preencherRaridade() {
+    const el = $("fRaridade");
+    if (!el) return;
+    const conta = RAR_CONTA || {};
+    const total = Object.values(conta).reduce((s, n) => s + n, 0);
+    const n = k => conta[k] || 0;
+    const grupo = g => RAR_DEF.filter(([, tg]) => tg.includes(g)).reduce((s, [k]) => s + n(k), 0);
+    let html = `<option value="">${esc(t(RAR_MAPA ? "rarAll" : "rarLoading"))}</option>`;
+    if (total) {
+      html += `<optgroup label="${esc(t("rarGroups"))}">${RAR_GRUPOS.filter(g => grupo(g)).map(g => `<option value="g:${g}">${esc(t("rarG_" + g))} · ${grupo(g)}</option>`).join("")}</optgroup>`;
+      html += `<optgroup label="${esc(t("rarEach"))}">${RAR_DEF.filter(([k]) => n(k)).map(([k]) => `<option value="r:${k}">${esc(t("rar_" + k))} · ${n(k)}</option>`).join("")}</optgroup>`;
+    }
+    el.innerHTML = html;
+    el.value = state.rar || "";
+    if (el.value !== (state.rar || "")) { el.value = ""; state.rar = ""; }
+    el.disabled = !total && !!RAR_MAPA;
+  }
+  $("fRaridade").addEventListener("change", e => { state.rar = e.target.value; state.page = 0; render(); });
+  const RAR_TXT = {
+    en: { rarAll: "Rarity", rarLoading: "Rarity (loading…)", rarGroups: "Groups", rarEach: "Rarities",
+      rarG_fullart: "Full Art (all)", rarG_alt: "Illustration / Alt Art (IR + SIR)", rarG_gold: "Gold, Hyper & Secret", rarG_shiny: "Shiny", rarG_gal: "Trainer / Galarian Gallery", rarG_vex: "Pokémon V, VMAX, VSTAR, GX & ex",
+      rar_common: "Common", rar_uncommon: "Uncommon", rar_rare: "Rare", rar_holo: "Rare Holo", rar_double: "Double Rare (ex)", rar_vseries: "Rare Holo V / VMAX / VSTAR / GX", rar_oldex: "Rare Holo EX (classic)",
+      rar_ultra: "Ultra Rare (Full Art)", rar_ir: "Illustration Rare (IR)", rar_sir: "Special Illustration Rare (SIR / SAR)", rar_mhr: "Mega Hyper Rare", rar_hyper: "Hyper Rare (Gold)", rar_secret: "Secret Rare",
+      rar_rainbow: "Rainbow Rare", rar_trainerfull: "Full Art Trainer", rar_gallery: "Trainer / Galarian Gallery", rar_bwr: "Black White Rare", rar_shiny: "Shiny Rare", rar_shinyultra: "Shiny Ultra Rare",
+      rar_acespec: "ACE SPEC Rare", rar_radiant: "Radiant Rare", rar_amazing: "Amazing Rare", rar_lvx: "LV.X", rar_prime: "Prime", rar_legend: "LEGEND", rar_break: "BREAK", rar_prism: "Prism Star",
+      rar_star: "Gold Star", rar_classic: "Classic Collection", rar_promo: "Promo", rar_outra: "Other", rarLbl: "Rarity" },
+    pt: { rarAll: "Raridade", rarLoading: "Raridade (carregando…)", rarGroups: "Grupos", rarEach: "Raridades",
+      rarG_fullart: "Full Art (todas)", rarG_alt: "Ilustração / Alt Art (IR + SIR)", rarG_gold: "Douradas, Hyper e Secretas", rarG_shiny: "Shiny", rarG_gal: "Trainer / Galarian Gallery", rarG_vex: "Pokémon V, VMAX, VSTAR, GX e ex",
+      rar_common: "Comum", rar_uncommon: "Incomum", rar_rare: "Rara", rar_holo: "Rara Holo", rar_double: "Rara Dupla (ex)", rar_vseries: "Rara Holo V / VMAX / VSTAR / GX", rar_oldex: "Rara Holo EX (clássica)",
+      rar_ultra: "Ultra Rara (Full Art)", rar_ir: "Rara Ilustrada (IR)", rar_sir: "Rara Ilustrada Especial (SIR / SAR)", rar_mhr: "Mega Hyper Rara", rar_hyper: "Hyper Rara (dourada)", rar_secret: "Rara Secreta",
+      rar_rainbow: "Rara Arco-íris", rar_trainerfull: "Treinador Full Art", rar_gallery: "Trainer / Galarian Gallery", rar_bwr: "Black White Rare", rar_shiny: "Rara Shiny", rar_shinyultra: "Ultra Rara Shiny",
+      rar_acespec: "ACE SPEC", rar_radiant: "Rara Radiante", rar_amazing: "Rara Incrível", rar_lvx: "LV.X", rar_prime: "Prime", rar_legend: "LENDA", rar_break: "TURBO (BREAK)", rar_prism: "Prisma",
+      rar_star: "Estrela Dourada", rar_classic: "Classic Collection", rar_promo: "Promo", rar_outra: "Outra", rarLbl: "Raridade" },
+    ja: { rarAll: "レアリティ", rarLoading: "レアリティ（読み込み中…）", rarGroups: "グループ", rarEach: "レアリティ",
+      rarG_fullart: "フルアート（すべて）", rarG_alt: "イラスト（AR + SAR）", rarG_gold: "ゴールド・UR・シークレット", rarG_shiny: "色違い", rarG_gal: "トレーナー／ガラルギャラリー", rarG_vex: "V・VMAX・VSTAR・GX・ex",
+      rar_common: "C", rar_uncommon: "U", rar_rare: "R", rar_holo: "R（ホロ）", rar_double: "RR（ex）", rar_vseries: "V・VMAX・VSTAR・GX", rar_oldex: "ex（旧）",
+      rar_ultra: "SR（フルアート）", rar_ir: "AR（イラストレア）", rar_sir: "SAR（スペシャルアートレア）", rar_mhr: "MUR（メガウルトラレア）", rar_hyper: "UR（ゴールド）", rar_secret: "シークレットレア",
+      rar_rainbow: "HR（レインボー）", rar_trainerfull: "トレーナーズ SR", rar_gallery: "トレーナー／ガラルギャラリー", rar_bwr: "BWR", rar_shiny: "S（色違い）", rar_shinyultra: "SSR（色違いSR）",
+      rar_acespec: "ACE SPEC", rar_radiant: "K（かがやく）", rar_amazing: "A（アメイジング）", rar_lvx: "LV.X", rar_prime: "グレート", rar_legend: "LEGEND", rar_break: "BREAK", rar_prism: "プリズムスター",
+      rar_star: "スター", rar_classic: "クラシックコレクション", rar_promo: "プロモ", rar_outra: "その他", rarLbl: "レアリティ" }
+  };
+  Object.keys(RAR_TXT).forEach(l => Object.assign(I18N[l], RAR_TXT[l]));
+
   async function carregarDados() {
     state.status = "loading"; state.erro = ""; state.progresso = "";
     atualizar();
@@ -1797,6 +2112,7 @@
       montar(cache.detalhes, cache.cards);
       state.status = "ok";
       preencherFiltros(); atualizar();
+      completarComPtcg(); carregarRaridades();
       return;
     }
     try {
@@ -1817,6 +2133,7 @@
     }
     preencherFiltros();
     atualizar();
+    if (state.status === "ok") { completarComPtcg(); carregarRaridades(); }
   }
 
   function montar(detalhes, cards) {
@@ -1858,13 +2175,18 @@
     });
     CARTAS.sort((a, b) => ordemSet[a.set] - ordemSet[b.set] || collator.compare(a.lid, b.lid));
     CARTAS.forEach((c, i) => { c.ord = i; POR_ID.set(c.id, c); });
+    SETS_ORD = ordemSet;
+    aplicarRar();
   }
 
-  const imgPequena = c => c.img ? c.img + "/low.webp" : c.fb;
-  const imgGrande = c => c.img ? c.img + "/high.webp" : c.fb;
+  const imgPequena = c => c.img ? c.img + "/low.webp" : c.pi || c.fb;
+  const imgGrande = c => c.img ? c.img + "/high.webp" : c.pg || c.pi || c.fb;
   const numeroTxt = c => {
     const s = SETS[c.set];
-    return /^\d+$/.test(c.lid) && s && s.official ? `${c.lid}/${String(s.official).padStart(c.lid.length, "0")}` : c.lid;
+    if (/^\d+$/.test(c.lid) && s && s.official) return `${c.lid}/${String(s.official).padStart(c.lid.length, "0")}`;
+    const pre = /^([A-Z]+)(\d+)$/.exec(c.lid);
+    if (pre && s && s.sub && s.sub[pre[1]]) return `${c.lid}/${pre[1]}${String(s.sub[pre[1]]).padStart(pre[2].length, "0")}`;
+    return c.lid;
   };
   const setNome = c => (SETS[c.set] ? SETS[c.set].name : "");
 
@@ -1877,6 +2199,9 @@
   const ORDENS = {
     num: (a, b) => a.ord - b.ord,
     nome: (a, b) => collator.compare(a.n, b.n) || a.ord - b.ord,
+    nomeZ: (a, b) => collator.compare(b.n, a.n) || a.ord - b.ord,
+    qtd: (a, b) => (state.qty[b.id] || 0) - (state.qty[a.id] || 0) || a.ord - b.ord,
+    novas: (a, b) => (SETS_ORD[b.set] || 0) - (SETS_ORD[a.set] || 0) || collator.compare(a.lid, b.lid),
     dex: (a, b) => dxDe(a) - dxDe(b) || a.ord - b.ord
   };
   // Ordem pelo número do Pokémon na Pokédex: descobre o Pokémon pelo nome da carta
@@ -1899,7 +2224,7 @@
   }
   function ordenar(lista) {
     const o = conta.cfg.ordem;
-    if (o === "nome") return lista.sort(ORDENS.nome);
+    if (o === "nome" || o === "nomeZ" || o === "qtd" || o === "novas") return lista.sort(ORDENS[o]);
     if (o === "dex") {
       if (dexState.status === "ok" && DEX_CHAVES) return lista.sort(ORDENS.dex);
       if (dexState.status === "idle") carregarDex();
@@ -1908,6 +2233,9 @@
   }
   function casaBusca(c, tks) {
     for (const tk of tks) {
+      // siglas de raridade na busca: "sar", "fa", "tg", "hr"…
+      const sg = RAR_SIGLA[tk];
+      if (sg && c.rar && rarCasa(c, sg)) continue;
       if (ehNumero(tk)) { if (c.key !== numKey(tk) && !c.nn.includes(tk)) return false; }
       else if (!c.nn.includes(tk)) return false;
     }
@@ -1923,6 +2251,7 @@
       if (state.posse === "faltam" && state.own.has(c.id)) return false;
       if (state.serie && SETS[c.set].serie !== state.serie) return false;
       if (state.set && c.set !== state.set) return false;
+      if (state.rar && !rarCasa(c, state.rar)) return false;
       if (tks.length && !casaBusca(c, tks)) return false;
       return true;
     });
@@ -2067,7 +2396,7 @@
     const cell = img.closest(".cell");
     const c = POR_ID.get(cell.dataset.id);
     if (!c) return;
-    if (c.fb && img.dataset.fb !== "1" && img.src !== c.fb) { img.dataset.fb = "1"; img.src = c.fb; return; }
+    const nx = proximaImg(img, c, false); if (nx) { img.src = nx; return; }
     const div = document.createElement("div");
     div.innerHTML = fallbackHTML(c);
     img.replaceWith(div.firstElementChild);
@@ -2227,14 +2556,14 @@
       img.referrerPolicy = "no-referrer";
       img.alt = `${c.n}, ${t("number")} ${num}, ${setNome(c)}`;
       img.addEventListener("error", () => {
-        if (c.fb && img.dataset.fb !== "1" && img.src !== c.fb) { img.dataset.fb = "1"; img.src = c.fb; return; }
+        const nx = proximaImg(img, c, true); if (nx) { img.src = nx; return; }
         box.innerHTML = fallbackHTML(c);
       });
       img.src = src;
       box.appendChild(img);
     } else box.innerHTML = fallbackHTML(c);
     $("zNome").textContent = `${c.n} #${num}`;
-    $("zDet").textContent = `${setNome(c)} · ${SETS[c.set] ? SETS[c.set].serieName : ""}`;
+    $("zDet").textContent = `${setNome(c)} · ${SETS[c.set] ? SETS[c.set].serieName : ""}` + (c.rar ? " · " + t("rar_" + c.rar) : "");
     $("zPos").textContent = t("zPos", zState.i + 1, zState.ids.length);
     const f = $("zFav"), o = $("zOwn");
     f.setAttribute("aria-pressed", String(fav));
@@ -2582,7 +2911,7 @@
     if (!(img instanceof HTMLImageElement)) return;
     const c = POR_ID.get(img.closest(".cell").dataset.id);
     if (!c) return;
-    if (c.fb && img.dataset.fb !== "1" && img.src !== c.fb) { img.dataset.fb = "1"; img.src = c.fb; return; }
+    const nx = proximaImg(img, c, false); if (nx) { img.src = nx; return; }
     const div = document.createElement("div");
     div.innerHTML = fallbackHTML(c);
     img.replaceWith(div.firstElementChild);
@@ -3617,7 +3946,6 @@
     document.documentElement.classList.toggle("sem-anim", !conta.cfg.anim);
     $("cfgCinza").setAttribute("aria-checked", String(conta.cfg.cinza));
     $("cfgAnim").setAttribute("aria-checked", String(conta.cfg.anim));
-    $("cfgOrdem").value = conta.cfg.ordem;
     document.documentElement.dataset.tema = conta.cfg.tema;
     document.documentElement.dataset.modo = modoEfetivo();
     rotuloModo();
@@ -3637,7 +3965,11 @@
   });
   $("cfgCinza").addEventListener("click", () => { conta.cfg.cinza = !conta.cfg.cinza; salvarConta(); aplicarCfg(); atualizar(); });
   $("cfgAnim").addEventListener("click", () => { conta.cfg.anim = !conta.cfg.anim; salvarConta(); aplicarCfg(); });
-  $("cfgOrdem").addEventListener("change", e => { conta.cfg.ordem = e.target.value; state.page = 0; dState.page = 0; salvarConta(); atualizar(); });
+  ["fOrdem", "dOrdem"].forEach(id => $(id).addEventListener("change", e => {
+    conta.cfg.ordem = e.target.value; state.page = 0; dState.page = 0; salvarConta();
+    ["fOrdem", "dOrdem"].forEach(o => { if (o !== id) $(o).value = conta.cfg.ordem; });
+    atualizar();
+  }));
 
   /* ---------- Idioma (bandeiras) ---------- */
   const FLAGS = (() => {
@@ -3667,7 +3999,11 @@
     sel("dSet", `<option value="">${esc(t("set"))}</option>` + (dState.serie
       ? dGrupos.map(opts).join("")
       : dGrupos.map(s => `<optgroup label="${esc(s.name)}">${opts(s)}</optgroup>`).join("")), dState.set);
-    sel("cfgOrdem", `<option value="num">${esc(t("ordNum"))}</option><option value="nome">${esc(t("ordName"))}</option><option value="dex">${esc(t("ordDex"))}</option>`, conta.cfg.ordem);
+    const ordOpts = [["num", "ordNum"], ["dex", "ordDex"], ["nome", "ordName"], ["nomeZ", "ordNameZ"], ["qtd", "ordQty"], ["novas", "ordOld"]]
+      .map(([v, k]) => `<option value="${v}">${esc(t(k))}</option>`).join("");
+    sel("fOrdem", ordOpts, conta.cfg.ordem);
+    sel("dOrdem", ordOpts, conta.cfg.ordem);
+    preencherRaridade();
   }
   function aplicarIdioma() {
     const d = I18N[conta.cfg.lang];
@@ -4482,6 +4818,7 @@
     if (IMG_EXTRA[id]) return IMG_EXTRA[id][alta ? "high" : "low"];
     const c = POR_ID.get(id);
     let base = c && c.img;
+    if (!base && c && (c.pg || c.pi)) return alta ? c.pg || c.pi : c.pi || c.pg;
     if (!base) {
       const i = id.lastIndexOf("-"), sid = id.slice(0, i), lid = id.slice(i + 1);
       base = `https://assets.tcgdex.net/en/${sid.startsWith("sv") ? "sv" : sid.startsWith("me") ? "me" : "swsh"}/${sid}/${lid}`;
@@ -5658,7 +5995,7 @@
       const tag = !eu && filtro !== "star" && state.star.has(id) ? `<span class="fv-tag">${esc(t("amYourWish"))}</span>`
         : !eu && filtro === "star" && state.own.has(id) ? `<span class="fv-tag">${esc(t("amYouHave"))}</span>` : "";
       return `<li class="fv-c"><button type="button" class="fv-bt" data-am="fvAbrir" data-i="${i}" aria-label="${esc(c ? c.n + ", " + t("number") + " " + numeroTxt(c) + ", " + setNome(c) : id)}">
-        <span class="fv-img">${c && (c.img || c.fb) ? `<img src="${esc(imgPequena(c))}" data-fb="${esc(c.fb || "")}" alt="" loading="lazy" decoding="async">` : ""}${filtro === "own" && q > 1 ? `<span class="fv-q">×${q}</span>` : ""}</span></button>
+        <span class="fv-img">${c && (c.img || c.pi || c.fb) ? `<img src="${esc(imgPequena(c))}" data-fb="${esc((c.img ? c.pi || c.fb : c.fb) || "")}" alt="" loading="lazy" decoding="async">` : ""}${filtro === "own" && q > 1 ? `<span class="fv-q">×${q}</span>` : ""}</span></button>
         <p class="fv-n">${esc(c ? c.n : id)}</p><p class="fv-s">${c ? esc("#" + numeroTxt(c) + " · " + setNome(c)) : ""}</p>${tag}</li>`;
     }).join("");
     const mais = ids.length > lim ? `<div class="fv-mais"><button type="button" class="tl-btn" data-am="fvMais">${esc(t("fvMore", Math.min(FV_PASSO, ids.length - lim), ids.length - lim))}</button></div>` : "";
@@ -5725,13 +6062,13 @@
     const ids = amState.fvIds || [], id = ids[fvZ.i], c = POR_ID.get(id), { d } = fvDados();
     if (!id) return;
     const box = $("fvzImg"); box.innerHTML = "";
-    if (c && (c.img || c.fb)) {
+    if (c && (c.img || c.pi || c.fb)) {
       const img = new Image(); img.referrerPolicy = "no-referrer"; img.alt = c.n + ", " + t("number") + " " + numeroTxt(c);
-      img.addEventListener("error", () => { if (c.fb && img.src !== c.fb) img.src = c.fb; });
-      img.src = c.img ? imgGrande(c) : c.fb; box.appendChild(img);
+      img.addEventListener("error", () => { const nx = proximaImg(img, c, true); if (nx) img.src = nx; });
+      img.src = imgGrande(c); box.appendChild(img);
     }
     $("fvzNome").textContent = c ? c.n + " #" + numeroTxt(c) : id;
-    $("fvzDet").textContent = c ? setNome(c) + (SETS[c.set] && SETS[c.set].serieName ? " · " + SETS[c.set].serieName : "") : "";
+    $("fvzDet").textContent = c ? setNome(c) + (SETS[c.set] && SETS[c.set].serieName ? " · " + SETS[c.set].serieName : "") + (c.rar ? " · " + t("rar_" + c.rar) : "") : "";
     $("fvzPos").textContent = t("fvPos", fvZ.i + 1, ids.length);
     const q = (d.q || {})[id] || 0, ls = (d.l || {})[id] || [], nm = t("langNames"), quem = amState.alvo.nome || "@" + amState.alvo.usuario;
     const linhas = [];
