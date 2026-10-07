@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script>try{var c0=JSON.parse(localStorage.getItem("fichario-pokemon-conta-v2")||"{}").cfg||{},d0=document.documentElement;if(c0.tema)d0.dataset.tema=c0.tema;d0.dataset.modo=c0.modo||"claro"}catch(e){}</script>
-<title>Virtual Pokémon Binder</title>
+<title>NanaDex · Virtual Binder</title>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#3A1626">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -156,6 +156,9 @@
   .hd-in { max-width: 1040px; margin: 0 auto; padding: calc(clamp(14px, 2.6vw, 22px) + env(safe-area-inset-top, 0px)) clamp(14px, 4vw, 24px) clamp(14px, 2.6vw, 20px) 52px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 28px; }
   .hd-marca { display: flex; align-items: center; gap: clamp(14px, 3vw, 26px); min-width: 0; }
   .hd-sil { flex: none; width: clamp(70px, 12vw, 116px); aspect-ratio: 158 / 176; background: var(--hd-fg); -webkit-mask: var(--sil) center / contain no-repeat; mask: var(--sil) center / contain no-repeat; transition: background 0.25s ease; }
+  .hd-logo { flex: none; display: block; width: clamp(66px, 11vw, 104px); height: auto; overflow: visible; --lg-sat: var(--own); --lg-line: var(--hd-bg); --lg-back: var(--hd-fg); --lg-front: color-mix(in srgb, var(--hd-fg) 14%, #fff); --lg-acc: color-mix(in srgb, var(--lg-sat) 84%, #fff); --lg-accd: color-mix(in srgb, var(--lg-sat) 78%, #000); --lg-mid: color-mix(in srgb, var(--hd-fg) 70%, var(--lg-sat)); --lg-deep: var(--lg-sat); --lg-h1: var(--hd-fg); --lg-h2: color-mix(in srgb, var(--hd-fg) 55%, var(--lg-sat)); }
+  html[data-tema="cinza"] .hd-logo { --lg-sat: #777777; }
+  .hd .hd-by { margin-top: 5px; font-size: clamp(0.66rem, 1.5vw, 0.78rem); letter-spacing: 0.16em; text-transform: uppercase; }
   .hd-linha { flex: none; width: 1.5px; align-self: stretch; min-height: 54px; border-radius: 2px; background: var(--hd-fg); opacity: 0.55; }
   .hd-txt { min-width: 0; }
   .hd h1 { margin: 0; font: 800 clamp(1.35rem, 4.4vw, 2.3rem)/1.08 "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif; letter-spacing: 0.01em; text-transform: uppercase; color: var(--hd-fg); }
@@ -961,11 +964,11 @@
 <header class="hd">
   <div class="hd-in">
     <div class="hd-marca">
-      <span class="hd-sil" aria-hidden="true"></span>
+      <svg class="hd-logo" viewBox="33 17 137 158" aria-hidden="true" focusable="false"><defs><linearGradient id="hdlgF" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--lg-h1)"/><stop offset="1" style="stop-color:var(--lg-h2)"/></linearGradient><linearGradient id="hdlgB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--lg-mid)"/><stop offset="1" style="stop-color:var(--lg-deep)"/></linearGradient><clipPath id="hdlgC"><path d="M100 120 C70 98 66 72 83 69 C92 68 98 74 100 80 C102 74 108 68 117 69 C134 72 130 98 100 120 Z"/></clipPath></defs><g transform="rotate(-12 100 100)"><rect x="56" y="26" width="88" height="124" rx="11" stroke-width="2.6" style="fill:var(--lg-back);stroke:var(--lg-line)"/></g><g transform="rotate(8 100 100)"><rect x="56" y="26" width="88" height="124" rx="11" stroke-width="2.6" style="fill:var(--lg-front);stroke:var(--lg-line)"/><rect x="64" y="34" width="72" height="108" rx="7" fill="none" stroke-width="1.3" stroke-dasharray="3 4" style="stroke:var(--lg-acc)"/><path d="M-58.50 0.00 L-58.35 -1.23 L-57.93 -2.37 L-57.30 -3.39 L-56.50 -4.28 L-55.57 -5.07 L-54.51 -5.77 L-53.34 -6.41 L-52.05 -6.99 L-50.64 -7.54 L-49.12 -8.05 L-47.48 -8.53 L-45.74 -8.99 L-43.88 -9.42 L-41.91 -9.84 L-39.84 -10.24 L-37.67 -10.62 L-35.41 -10.99 L-33.05 -11.33 L-30.61 -11.66 L-28.10 -11.97 L-25.50 -12.26 L-22.84 -12.52 L-20.12 -12.77 L-17.35 -12.98 L-14.53 -13.16 L-11.67 -13.32 L-8.78 -13.44 L-5.87 -13.53 L-2.94 -13.58 L-0.00 -13.60 L2.94 -13.58 L5.87 -13.53 L8.78 -13.44 L11.67 -13.32 L14.53 -13.16 L17.35 -12.98 L20.12 -12.77 L22.84 -12.52 L25.50 -12.26 L28.10 -11.97 L30.61 -11.66 L33.05 -11.33 L35.41 -10.99 L37.67 -10.62 L39.84 -10.24 L41.91 -9.84 L43.88 -9.42 L45.74 -8.99 L47.48 -8.53 L49.12 -8.05 L50.64 -7.54 L52.05 -6.99 L53.34 -6.41 L54.51 -5.77 L55.57 -5.07 L56.50 -4.28 L57.30 -3.39 L57.93 -2.37 L58.35 -1.23 L58.50 -0.00 L53.50 -0.00 L53.49 -0.13 L53.45 -0.34 L53.32 -0.68 L53.05 -1.12 L52.62 -1.66 L52.01 -2.26 L51.22 -2.91 L50.27 -3.58 L49.15 -4.27 L47.87 -4.95 L46.45 -5.63 L44.87 -6.29 L43.16 -6.94 L41.32 -7.56 L39.35 -8.15 L37.27 -8.70 L35.08 -9.22 L32.78 -9.70 L30.39 -10.14 L27.90 -10.55 L25.34 -10.91 L22.71 -11.23 L20.01 -11.51 L17.26 -11.75 L14.46 -11.95 L11.61 -12.11 L8.74 -12.24 L5.84 -12.33 L2.92 -12.38 L-0.00 -12.40 L-2.92 -12.38 L-5.84 -12.33 L-8.74 -12.24 L-11.61 -12.11 L-14.46 -11.95 L-17.26 -11.75 L-20.01 -11.51 L-22.71 -11.23 L-25.34 -10.91 L-27.90 -10.55 L-30.39 -10.14 L-32.78 -9.70 L-35.08 -9.22 L-37.27 -8.70 L-39.35 -8.15 L-41.32 -7.56 L-43.16 -6.94 L-44.87 -6.29 L-46.45 -5.63 L-47.87 -4.95 L-49.15 -4.27 L-50.27 -3.58 L-51.22 -2.91 L-52.01 -2.26 L-52.62 -1.66 L-53.05 -1.12 L-53.32 -0.68 L-53.45 -0.34 L-53.49 -0.13 L-53.50 0.00 Z" transform="translate(100 95) rotate(-24)" style="fill:var(--lg-acc)"/><g transform="translate(0 1.5)"><path d="M100 120 C70 98 66 72 83 69 C92 68 98 74 100 80 C102 74 108 68 117 69 C134 72 130 98 100 120 Z" fill="url(#hdlgF)" stroke-width="1.8" stroke-linejoin="round" transform="translate(100 92) scale(1.0) translate(-100 -92)" style="stroke:var(--lg-acc)"/><g transform="translate(0 -4)"></g></g><g transform="translate(0 2)"><g transform="translate(100 94) scale(0.44) translate(-100 -94.5)"><g clip-path="url(#hdlgC)"><rect x="55" y="57.5" width="90" height="37" fill="url(#hdlgB)"/><rect x="55" y="94.5" width="90" height="35" style="fill:var(--lg-front)"/><rect x="55" y="91.9" width="90" height="5.2" style="fill:var(--lg-accd)"/></g><path d="M100 120 C70 98 66 72 83 69 C92 68 98 74 100 80 C102 74 108 68 117 69 C134 72 130 98 100 120 Z" fill="none" stroke-width="3.64" stroke-linejoin="round" style="stroke:var(--lg-accd)"/><circle cx="100" cy="94.5" r="7.4" fill="#fff" stroke-width="3.18" style="stroke:var(--lg-accd)"/><circle cx="100" cy="94.5" r="2.8" style="fill:var(--lg-mid)"/></g></g><path d="M58.50 0.00 L58.35 1.23 L57.93 2.37 L57.30 3.39 L56.50 4.28 L55.57 5.07 L54.51 5.77 L53.34 6.41 L52.05 6.99 L50.64 7.54 L49.12 8.05 L47.48 8.53 L45.74 8.99 L43.88 9.42 L41.91 9.84 L39.84 10.24 L37.67 10.62 L35.41 10.99 L33.05 11.33 L30.61 11.66 L28.10 11.97 L25.50 12.26 L22.84 12.52 L20.12 12.77 L17.35 12.98 L14.53 13.16 L11.67 13.32 L8.78 13.44 L5.87 13.53 L2.94 13.58 L0.00 13.60 L-2.94 13.58 L-5.87 13.53 L-8.78 13.44 L-11.67 13.32 L-14.53 13.16 L-17.35 12.98 L-20.12 12.77 L-22.84 12.52 L-25.50 12.26 L-28.10 11.97 L-30.61 11.66 L-33.05 11.33 L-35.41 10.99 L-37.67 10.62 L-39.84 10.24 L-41.91 9.84 L-43.88 9.42 L-45.74 8.99 L-47.48 8.53 L-49.12 8.05 L-50.64 7.54 L-52.05 6.99 L-53.34 6.41 L-54.51 5.77 L-55.57 5.07 L-56.50 4.28 L-57.30 3.39 L-57.93 2.37 L-58.35 1.23 L-58.50 0.00 L-53.50 0.00 L-53.49 0.13 L-53.45 0.34 L-53.32 0.68 L-53.05 1.12 L-52.62 1.66 L-52.01 2.26 L-51.22 2.91 L-50.27 3.58 L-49.15 4.27 L-47.87 4.95 L-46.45 5.63 L-44.87 6.29 L-43.16 6.94 L-41.32 7.56 L-39.35 8.15 L-37.27 8.70 L-35.08 9.22 L-32.78 9.70 L-30.39 10.14 L-27.90 10.55 L-25.34 10.91 L-22.71 11.23 L-20.01 11.51 L-17.26 11.75 L-14.46 11.95 L-11.61 12.11 L-8.74 12.24 L-5.84 12.33 L-2.92 12.38 L0.00 12.40 L2.92 12.38 L5.84 12.33 L8.74 12.24 L11.61 12.11 L14.46 11.95 L17.26 11.75 L20.01 11.51 L22.71 11.23 L25.34 10.91 L27.90 10.55 L30.39 10.14 L32.78 9.70 L35.08 9.22 L37.27 8.70 L39.35 8.15 L41.32 7.56 L43.16 6.94 L44.87 6.29 L46.45 5.63 L47.87 4.95 L49.15 4.27 L50.27 3.58 L51.22 2.91 L52.01 2.26 L52.62 1.66 L53.05 1.12 L53.32 0.68 L53.45 0.34 L53.49 0.13 L53.50 0.00 Z" transform="translate(100 95) rotate(-24)" style="fill:var(--lg-acc)"/></g><path d="M160 23 Q161.7 38.3 168.5 40 Q161.7 41.7 160 57 Q158.3 41.7 151.5 40 Q158.3 38.3 160 23 Z" style="fill:var(--lg-acc)"/><path d="M42 143 Q43.5 156.5 49.5 158 Q43.5 159.5 42 173 Q40.5 159.5 34.5 158 Q40.5 156.5 42 143 Z" style="fill:var(--lg-acc)"/></svg>
       <span class="hd-linha" aria-hidden="true"></span>
       <div class="hd-txt">
-        <h1 data-i18n="h1">Virtual Pokémon Binder</h1>
-        <p class="hd-by" data-i18n="by">By Anna</p>
+        <h1 data-i18n="h1">NanaDex</h1>
+        <p class="hd-by" data-i18n="by">Virtual Binder</p>
       </div>
     </div>
     <nav class="areas" data-i18n-aria="areasAria" aria-label="Sections">
@@ -1427,7 +1430,7 @@
       priceTrend: "Trend", priceAvg30: "30-day average", priceNone: "No price for this card yet.", priceErr: "Couldn't load prices right now.",
       priceNote: "Prices from TCGdex, updated daily. They change often.", priceLigaTitle: "Portuguese, Japanese and English (R$)",
       ligaLink: "See prices on LigaPokemon",
-      htmlLang: "en", title: "Virtual Pokémon Binder", h1: "Virtual Pokémon Binder", by: "By Anna", sideTab: "Account & settings",
+      htmlLang: "en", title: "NanaDex · Virtual Binder", h1: "NanaDex", by: "Virtual Binder", sideTab: "Account & settings",
       lead: "Mark the cards you own and keep your favorites.",
       stats: (n, tot) => `<strong>${n}</strong> of <span>${tot}</span> cards in your collection`,
       progress: "Collection progress", show: "Show", tabAll: "All", tabOwned: "Owned", tabWish: "Wishlist", tabStar: "Favorites",
@@ -1524,7 +1527,7 @@
       priceTrend: "Tendência", priceAvg30: "Média de 30 dias", priceNone: "Ainda não há preço para esta carta.", priceErr: "Não foi possível carregar os preços agora.",
       priceNote: "Preços da TCGdex, atualizados diariamente. Mudam com frequência.", priceLigaTitle: "Português, japonês e inglês (R$)",
       ligaLink: "Ver preços na LigaPokemon",
-      htmlLang: "pt-BR", title: "Fichário Pokémon Virtual", h1: "Fichário Pokémon Virtual", by: "Por Anna", sideTab: "Conta e configurações",
+      htmlLang: "pt-BR", title: "NanaDex · Fichário Virtual", h1: "NanaDex", by: "Fichário Virtual", sideTab: "Conta e configurações",
       lead: "Marque as cartas que você tem e guarde as favoritas.",
       stats: (n, tot) => `<strong>${n}</strong> de <span>${tot}</span> cartas na coleção`,
       progress: "Progresso da coleção", show: "Mostrar", tabAll: "Todas", tabOwned: "Na coleção", tabWish: "Lista de desejos", tabStar: "Favoritas",
@@ -1621,7 +1624,7 @@
       priceTrend: "トレンド", priceAvg30: "30日平均", priceNone: "このカードの価格はまだありません。", priceErr: "現在価格を読み込めません。",
       priceNote: "TCGdex の価格（毎日更新）。価格はよく変わります。", priceLigaTitle: "ポルトガル語・日本語・英語（R$）",
       ligaLink: "LigaPokemon で価格を見る",
-      htmlLang: "ja", title: "バーチャルポケモンバインダー", h1: "バーチャルポケモンバインダー", by: "Annaより", sideTab: "アカウントと設定",
+      htmlLang: "ja", title: "NanaDex · バーチャルバインダー", h1: "NanaDex", by: "バーチャルバインダー", sideTab: "アカウントと設定",
       lead: "持っているカードをチェックして、お気に入りを保存しましょう。",
       stats: (n, tot) => `<strong>${n}</strong> / <span>${tot}</span> 枚を所持`,
       progress: "コレクションの進み具合", show: "表示", tabAll: "すべて", tabOwned: "所持", tabWish: "ほしいもの", tabStar: "お気に入り",
