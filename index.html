@@ -1751,6 +1751,19 @@
     qty: {}, langs: {}, fav: saved.fav, star: saved.star, cop: saved.cop || {}, own: new Set(),
     status: "loading", qtyOpen: null, lista: []
   };
+  // F5 mantém o ponto onde você estava (aba, filtros, página e binder)
+  const KEY_VISAO = "fichario-pokemon-visao-v1";
+  try {
+    const v = JSON.parse(sessionStorage.getItem(KEY_VISAO) || "null");
+    if (v && v.b === bnd.atual) {
+      ["tab", "q", "posse", "serie", "set", "rar"].forEach(k => { if (typeof v[k] === "string") state[k] = v[k]; });
+      state.page = Math.max(0, parseInt(v.page, 10) || 0);
+      const bs = $("busca"); if (bs) bs.value = state.q;
+    }
+  } catch (e) { /* começa do início */ }
+  function guardarVisao() {
+    try { sessionStorage.setItem(KEY_VISAO, JSON.stringify({ b: bnd.atual, tab: state.tab, q: state.q, posse: state.posse, serie: state.serie, set: state.set, rar: state.rar, page: state.page })); } catch (e) { /* segue */ }
+  }
 
   // quantidade e idiomas de cada carta vêm da lista de cópias
   function sincronizar(id) {
@@ -2422,6 +2435,7 @@
     state.lista = lista;
     const paginas = Math.max(1, Math.ceil(lista.length / porPagina));
     state.page = Math.min(state.page, paginas - 1);
+    guardarVisao();
 
     if (!carregado) {
       grid.hidden = true; vazio.hidden = false;
@@ -2644,7 +2658,6 @@
       });
       img.src = src;
       box.appendChild(img);
-      melhorarImg(img, c);
     } else box.innerHTML = fallbackHTML(c);
     $("zNome").textContent = `${c.n} #${num}`;
     $("zDet").textContent = `${setNome(c)} · ${SETS[c.set] ? SETS[c.set].serieName : ""}` + (c.rar ? " · " + t("rar_" + c.rar) : "");
@@ -3735,11 +3748,18 @@
     const j = await sbReq("/rest/v1/colecoes?user_id=eq." + encodeURIComponent(sb.id) + "&select=dados,atualizado");
     return j && j[0] ? { dados: j[0].dados || {}, em: Date.parse(j[0].atualizado) || 0 } : null;
   }
+  // o binder aberto no momento é escolha deste aparelho: a nuvem não deve trocá-lo
+  function manterAtual(k, v, atualLocal) {
+    if (k !== KEY_BINDERS || !atualLocal) return v;
+    try { const o = JSON.parse(v); if (o && Array.isArray(o.lista) && (o.lista.some(b => b.id === atualLocal) || (atualLocal === MESTRE && o.lista.length > 1))) { o.atual = atualLocal; return JSON.stringify(o); } } catch (e) { /* mantém */ }
+    return v;
+  }
   function sbAplicar(rem) {
     sbAplicando = true;
+    const atualLocal = bnd.atual;
     try {
       Object.keys(sbSnapshot()).forEach(k => localStorage.removeItem(k));
-      Object.keys(rem.dados).forEach(k => { if (ehSync(k)) lsSet.call(localStorage, k, rem.dados[k]); });
+      Object.keys(rem.dados).forEach(k => { if (ehSync(k)) lsSet.call(localStorage, k, manterAtual(k, rem.dados[k], atualLocal)); });
       sb.ultimo = rem.em; sb.sujo = false; sbGuardar();
     } finally { sbAplicando = false; }
     location.reload();
@@ -6151,7 +6171,7 @@
     if (c && (c.img || c.pi || c.fb)) {
       const img = new Image(); img.referrerPolicy = "no-referrer"; img.alt = c.n + ", " + t("number") + " " + numeroTxt(c);
       img.addEventListener("error", () => { const nx = proximaImg(img, c, true); if (nx) img.src = nx; });
-      img.src = imgGrande(c); box.appendChild(img); melhorarImg(img, c);
+      img.src = imgGrande(c); box.appendChild(img);
     }
     $("fvzNome").textContent = c ? c.n + " #" + numeroTxt(c) : id;
     $("fvzDet").textContent = c ? setNome(c) + (SETS[c.set] && SETS[c.set].serieName ? " · " + SETS[c.set].serieName : "") + (c.rar ? " · " + t("rar_" + c.rar) : "") : "";
@@ -6388,9 +6408,10 @@
   /* ---------- Sincronização quase em tempo real (confere a conta a cada 15 s) ---------- */
   function sbAplicarSuave(rem) {
     sbAplicando = true;
+    const atualLocal = bnd.atual;
     try {
       Object.keys(sbSnapshot()).forEach(k => localStorage.removeItem(k));
-      Object.keys(rem.dados || {}).forEach(k => { if (ehSync(k)) lsSet.call(localStorage, k, rem.dados[k]); });
+      Object.keys(rem.dados || {}).forEach(k => { if (ehSync(k)) lsSet.call(localStorage, k, manterAtual(k, rem.dados[k], atualLocal)); });
       sb.ultimo = rem.em; sb.sujo = false; sbGuardar();
     } finally { sbAplicando = false; }
     const nb = carregarBinders(); bnd.lista = nb.lista; bnd.atual = nb.atual;
