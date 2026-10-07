@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<script>try{var c0=JSON.parse(localStorage.getItem("fichario-pokemon-conta-v2")||"{}").cfg||{},d0=document.documentElement;if(c0.tema)d0.dataset.tema=c0.tema;d0.dataset.modo=c0.modo||(matchMedia("(prefers-color-scheme: dark)").matches?"escuro":"claro")}catch(e){}</script>
+<script>try{var c0=JSON.parse(localStorage.getItem("fichario-pokemon-conta-v2")||"{}").cfg||{},d0=document.documentElement;if(c0.tema)d0.dataset.tema=c0.tema;d0.dataset.modo=c0.modo||"claro"}catch(e){}</script>
 <title>Virtual Pokémon Binder</title>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#3A1626">
@@ -726,6 +726,44 @@
   html.mestre #zCopias, html.mestre .zoom-qty, html.mestre #zOwn { display: none !important; }
   html.mestre #reset { visibility: hidden; }
   .z-onde { margin: 6px 0 0; font-weight: 700; font-size: 0.9rem; }
+  /* ---------- Carta ampliada: imagem de um lado, informações do outro ---------- */
+  .zoom-box { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 380px); align-items: center; gap: clamp(18px, 3vw, 36px); width: min(100%, 1020px); }
+  .zoom-close { position: fixed; top: calc(env(safe-area-inset-top, 0px) + 14px); right: calc(env(safe-area-inset-right, 0px) + 14px); z-index: 5; }
+  .zoom-stage { grid-column: 1; min-width: 0; }
+  .zoom-img { max-height: min(78vh, 640px); }
+  .zoom { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .zoom-side { grid-column: 2; min-width: 0; display: flex; flex-direction: column; gap: 12px; max-height: calc(100vh - 56px); max-height: calc(100dvh - 56px); overflow-y: auto; overscroll-behavior: contain;
+    padding: 20px 18px 18px; border-radius: 24px; background: linear-gradient(180deg, color-mix(in srgb, var(--page) 88%, #fff 12%), var(--page)); border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.8); scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.25) transparent; }
+  .zoom-side .zoom-info { text-align: left; padding-right: 4px; }
+  .zoom-side .zoom-info h2 { font-size: 1.45rem; }
+  .zoom-side .zoom-info p { color: #E9CFDA; }
+  .zoom-side .zoom-info .pos { margin-top: 6px; font-size: 0.78rem; opacity: 0.75; }
+  .zoom-side .zoom-ctrl, .zoom-side .zoom-precos, .zoom-side .zoom-copias, .zoom-side .zoom-copia { max-width: none; }
+  .zoom-side .zoom-qty { justify-content: space-between; padding: 6px 6px 6px 14px; border-radius: 14px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); }
+  .zoom-side .zoom-qty span { margin-right: auto; font-size: 0.9rem; }
+  .zoom-side .zoom-ctrl button { border-radius: 14px; }
+  .zoom-side .zoom-precos, .zoom-side .zoom-copias { border-radius: 18px; background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.12); }
+  .zoom-side .zc-lista { max-height: none; overflow: visible; }
+  .zoom-side .zc-item { padding: 10px 0 0; }
+  /* Salvar e Fechar ficam sempre à vista no fim do painel */
+  .zoom-side .zc-acoes { position: sticky; bottom: -18px; z-index: 2; margin: 12px -14px -12px; padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0 0 18px 18px; background: var(--page); box-shadow: 0 -12px 20px -16px rgba(0, 0, 0, 0.7); }
+  .zoom-side .zc-salvar { box-shadow: 0 8px 18px -10px var(--acc); }
+  @media (max-width: 760px) {
+    .zoom { align-items: flex-start; padding-top: calc(env(safe-area-inset-top, 0px) + 10px); }
+    .zoom-box { grid-template-columns: 1fr; gap: 12px; width: min(100%, 520px); }
+    .zoom-stage, .zoom-side { grid-column: 1; }
+    .zoom-img { flex: none; height: 40vh; height: 40dvh; max-height: none; width: auto; aspect-ratio: 63 / 88; }
+    .zoom-img img { height: 100%; width: auto; }
+    .zoom-side { max-height: none; overflow: visible; padding: 16px 14px 14px; border-radius: 22px; }
+    .zoom-side .zoom-info { text-align: center; padding-right: 0; }
+    .zoom-side .zoom-info h2 { font-size: 1.25rem; }
+    .zoom-side .zoom-ctrl:not(.zoom-qty) { justify-content: center; }
+    .zoom-side .zc-acoes { bottom: calc(-1 * env(safe-area-inset-bottom, 0px)); margin-bottom: -12px; }
+    .zoom-close { top: calc(env(safe-area-inset-top, 0px) + 8px); right: 8px; width: 40px; height: 40px; }
+  }
+
   @keyframes piscar { 0%, 100% { opacity: 1; } 40% { opacity: 0.35; } }
   .piscar { animation: piscar 0.5s ease 2; }
   html.sem-anim .piscar { animation: none; }
@@ -1133,6 +1171,7 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </div>
+    <div class="zoom-side" id="zSide">
     <div class="zoom-info">
       <h2 id="zNome"></h2>
       <p id="zDet"></p>
@@ -1165,6 +1204,7 @@
       <h3 id="zPrecosT" data-i18n="prices">Prices</h3>
       <div id="zPrecosCorpo" aria-live="polite"></div>
     </section>
+    </div>
   </div>
 </div>
 
@@ -2642,6 +2682,7 @@
     zState.origem = id;
     desenharZoom();
     zoom.hidden = false;
+    zoom.scrollTop = 0; $("zSide").scrollTop = 0;
     wrap.inert = true;
     $("zClose").focus();
   }
@@ -3952,9 +3993,8 @@
     document.querySelectorAll("#temas [data-tema]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.tema === conta.cfg.tema)));
   }
   const mqEscuro = window.matchMedia("(prefers-color-scheme: dark)");
-  const modoEfetivo = () => conta.cfg.modo || (mqEscuro.matches ? "escuro" : "claro");
+  const modoEfetivo = () => conta.cfg.modo || "claro";
   function rotuloModo() { $("modo").setAttribute("aria-label", t(modoEfetivo() === "escuro" ? "toLight" : "toDark")); }
-  if (mqEscuro.addEventListener) mqEscuro.addEventListener("change", () => { if (!conta.cfg.modo) aplicarCfg(); });
   $("modo").addEventListener("click", () => { conta.cfg.modo = modoEfetivo() === "escuro" ? "claro" : "escuro"; salvarConta(); aplicarCfg(); });
   $("temas").addEventListener("click", e => {
     const b = e.target.closest("[data-tema]");
@@ -5269,11 +5309,13 @@
     if (!b) return;
     const id = zState.ids[zState.i], i = Number(b.closest("[data-i]").dataset.i);
     const cp = (state.cop[id] || [])[i];
-    if (!cp || cp.l === b.dataset.cl) return;
-    cp.l = b.dataset.cl;
+    if (!cp) return;
+    // clicar de novo no idioma já escolhido limpa a seleção
+    const lang = b.dataset.cl;
+    cp.l = cp.l === lang ? "" : lang;
     sincronizar(id);
     salvar(); atualizar(); desenharCopias(POR_ID.get(id));
-    const nb = $("zCopiasLista").querySelector(`[data-i="${i}"] [data-cl="${cp.l}"]`); if (nb) nb.focus();
+    const nb = $("zCopiasLista").querySelector(`[data-i="${i}"] [data-cl="${lang}"]`); if (nb) nb.focus();
   });
   // Salvar: grava (as mudanças já ficam salvas ao editar), confirma e fecha a carta. Fechar: só fecha.
   $("zSalvar").addEventListener("click", () => {
