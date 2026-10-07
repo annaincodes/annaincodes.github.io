@@ -674,6 +674,52 @@
   .bd-vis label { font-weight: 700; }
   .bd-vis select { height: 34px; padding: 0 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--field-fg); font: 600 14px "Figtree", system-ui, sans-serif; cursor: pointer; }
   .bd-vis-nota { flex: 1 1 180px; min-width: 0; }
+  .bd-vis-lbl { font-weight: 700; }
+  .vis-seg { display: inline-flex; gap: 2px; padding: 3px; border-radius: 12px; background: var(--seg-bg); max-width: 100%; overflow-x: auto; }
+  .vis-seg button { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border: 0; border-radius: 9px; background: transparent; color: var(--muted); font: 700 13px "Figtree", system-ui, sans-serif; white-space: nowrap; cursor: pointer; }
+  .vis-seg button[aria-checked="true"] { background: var(--seg-on-bg); color: var(--seg-on-fg); }
+  @media (hover: hover) { .vis-seg button[aria-checked="false"]:hover { color: var(--text); } }
+  .vis-ic { flex: none; display: inline-block; vertical-align: -3px; }
+  .vis-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 0.82rem; font-weight: 700; color: var(--tl-muted); }
+  .vis-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+  .vis-lista li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; padding: 8px 0; border-top: 1px solid var(--tl-line); }
+  .vis-lista li:first-child { border-top: 0; }
+  .vis-nome { display: grid; min-width: 0; flex: 1 1 120px; } .vis-nome strong { overflow-wrap: anywhere; } .vis-nome small { color: var(--tl-muted); }
+  .tl-nota .vis-ic { width: 13px; height: 13px; vertical-align: -2px; }
+  .fv-binders button { display: inline-flex; align-items: center; gap: 6px; }
+  .fv-resumo { margin: 4px 0 0 !important; font-size: 0.84rem; font-weight: 700; color: var(--tl-fg) !important; }
+  .fv-eu { flex-basis: 100%; margin: 0; }
+  .fv-ctrl { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr); gap: 8px; margin-bottom: 12px; }
+  @media (max-width: 620px) { .fv-ctrl { grid-template-columns: 1fr 1fr; } .fv-busca { grid-column: 1 / -1; } }
+  .fv-ctrl select { width: 100%; min-width: 0; height: 42px; padding: 0 10px; border: 1px solid var(--tl-line); border-radius: 12px; background: var(--surface); color: var(--tl-fg); font: 600 14px "Figtree", system-ui, sans-serif; }
+  .fv-cont { margin: 0 0 10px; font-size: 0.8rem; color: var(--tl-muted); }
+  .fv-bt { display: block; width: 100%; padding: 0; border: 0; border-radius: 8px; background: none; cursor: zoom-in; }
+  @media (hover: hover) { .fv-bt:hover .fv-img { transform: translateY(-2px); box-shadow: 0 10px 18px -12px rgba(0, 0, 0, 0.6); } }
+  .fv-img { display: block; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  html.sem-anim .fv-img { transition: none; }
+  .fv-mais { display: flex; justify-content: center; margin-top: 16px; }
+  .fv-zoom { position: fixed; inset: 0; z-index: 45; display: flex; align-items: center; justify-content: center; padding: calc(env(safe-area-inset-top, 0px) + 12px) 12px calc(env(safe-area-inset-bottom, 0px) + 12px); background: var(--zoom-bg, rgba(20, 8, 16, 0.95)); color: var(--b-ink, #fff); overflow-y: auto; }
+  .fv-zoom[hidden] { display: none; }
+  .fv-zbox { position: relative; width: min(100%, 560px); margin: auto; display: grid; gap: 12px; justify-items: center; text-align: center; }
+  .fv-zbox .zoom-close { position: absolute; top: 0; right: 0; }
+  .fv-zpalco { display: flex; align-items: center; gap: 10px; width: 100%; justify-content: center; padding-top: 44px; }
+  .fv-zimg { width: min(70vw, 360px); aspect-ratio: 63 / 88; border-radius: 14px; overflow: hidden; background: rgba(255, 255, 255, 0.06); }
+  .fv-zimg img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .fv-zinfo h2 { margin: 0; font: 800 1.3rem/1.2 "Bricolage Grotesque", system-ui, sans-serif; }
+  .fv-zinfo p { margin: 4px 0 0; }
+  .fv-zinfo .pos { opacity: 0.7; font-size: 0.85rem; }
+  .fvz-l { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; font-size: 0.92rem; }
+  .fvz-fl { display: inline-flex; gap: 4px; } .fvz-fl .fl svg { width: 22px; height: 15px; border-radius: 3px; display: block; }
+  .fvz-eu { font-weight: 800; color: var(--acc, #F8B4CB); }
+  .bd-mestre .bd-nome { display: inline-flex; align-items: center; gap: 6px; }
+  .bd-mestre:not(.on) { border-style: dashed; }
+  .bd-mestre-nota { font-weight: 600; }
+  html.mestre #zCopias, html.mestre .zoom-qty, html.mestre #zOwn { display: none !important; }
+  html.mestre #reset { visibility: hidden; }
+  .z-onde { margin: 6px 0 0; font-weight: 700; font-size: 0.9rem; }
+  @keyframes piscar { 0%, 100% { opacity: 1; } 40% { opacity: 0.35; } }
+  .piscar { animation: piscar 0.5s ease 2; }
+  html.sem-anim .piscar { animation: none; }
   .am-linha { display: flex; align-items: center; gap: 8px; }
   .am-linha input, .am-sel select { flex: 1; min-width: 0; height: 42px; padding: 0 12px; border: 1px solid var(--tl-line); border-radius: 12px; background: var(--surface); color: var(--tl-fg); font: 500 16px "Figtree", system-ui, sans-serif; }
   .am-sel { margin-top: 0; } .am-sel select { width: 100%; }
@@ -705,6 +751,56 @@
   .fv-n { margin: 6px 0 0; font-size: 0.82rem; font-weight: 700; line-height: 1.2; overflow-wrap: anywhere; }
   .fv-s { margin: 1px 0 0; font-size: 0.72rem; color: var(--tl-muted); line-height: 1.25; overflow-wrap: anywhere; }
   .fv-tag { display: inline-block; margin-top: 4px; padding: 1px 7px; border-radius: 99px; background: var(--tl-pri-bg); color: var(--tl-pri-fg); font-size: 0.68rem; font-weight: 800; }
+  .am { display: grid; gap: 14px; max-width: 760px; }
+  .am-solo { max-width: 560px; }
+  .am-cab { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .am-cab .am-quem { flex: 1 1 0; min-width: 0; } .am-cab .am-quem strong, .am-cab .am-quem small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .am-cab { flex-wrap: nowrap; }
+  @media (max-width: 520px) { .am-cab-bt span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } .am-cab-bt { width: 40px; padding: 0 !important; } }
+  .am-cab-bt, .am-busca .tl-btn, .tl-acoes .tl-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+  .am-cab-bt svg, .tl-acoes .tl-btn svg { width: 16px; height: 16px; }
+  .am-ic-bt { width: 40px; padding: 0 !important; display: inline-grid; place-items: center; }
+  .am-abas { max-width: 100%; }
+  .am-abas button { gap: 6px; }
+  .am-abas .am-badge { margin-left: 2px; }
+  .am-painel { padding: 18px; }
+  .am-busca { display: flex; align-items: center; gap: 8px; }
+  .am-busca input { flex: 1; min-width: 0; height: 42px; padding: 0 12px; border: 1px solid var(--tl-line); border-radius: 12px; background: var(--surface); color: var(--tl-fg); font: 500 16px "Figtree", system-ui, sans-serif; }
+  @media (max-width: 520px) { .am-busca { flex-wrap: wrap; } .am-busca input { flex: 1 1 calc(100% - 30px); } .am-busca .tl-btn { flex: 1 1 0; } }
+  .am-sep { margin-top: 20px; }
+  .am-pedidos { margin-top: 14px; padding: 4px 14px 10px; border-radius: 14px; background: var(--tl-soft); }
+  .am-pedidos .tl-h3 { margin-top: 10px; }
+  .am-pedidos .am-p { border-top-color: color-mix(in srgb, var(--tl-line) 70%, transparent); }
+  .am-grade { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: 8px; }
+  .am-amigo { position: relative; }
+  .am-amigo-bt { width: 100%; display: flex; align-items: center; gap: 10px; padding: 10px 40px 10px 10px; border: 1px solid var(--tl-line); border-radius: 14px; background: var(--surface); color: var(--tl-fg); text-align: left; font: inherit; cursor: pointer; }
+  @media (hover: hover) { .am-amigo-bt:hover { background: var(--tl-soft); } .am-amigo .am-x:hover { background: var(--tl-soft); color: var(--tl-fg); } }
+  .am-amigo .am-quem { flex: 1; min-width: 0; } .am-amigo .am-quem strong, .am-amigo .am-quem small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .am-seta { font-size: 22px; line-height: 1; color: var(--tl-muted); }
+  .am-amigo .am-x { position: absolute; top: 50%; right: 6px; transform: translateY(-50%); width: 28px; height: 28px; border: 0; border-radius: 99px; background: transparent; color: var(--tl-muted); font-size: 18px; line-height: 1; cursor: pointer; display: none; }
+  .am-amigo:hover .am-x, .am-amigo:focus-within .am-x { display: block; }
+  .am-amigo:hover .am-seta, .am-amigo:focus-within .am-seta { visibility: hidden; }
+  @media (hover: none) { .am-amigo .am-x { display: block; } .am-seta { visibility: hidden; } }
+  .am-vazio { margin: 0; }
+  .am-env { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 10px; font-size: 0.82rem; color: var(--tl-muted); }
+  .am-chip { display: inline-flex; align-items: center; gap: 2px; padding: 2px 4px 2px 10px; border-radius: 99px; background: var(--tl-soft); color: var(--tl-fg); font-weight: 700; }
+  .am-chip button { width: 22px; height: 22px; border: 0; border-radius: 99px; background: transparent; color: inherit; font-size: 15px; line-height: 1; cursor: pointer; }
+  .am-linha-info { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .am-linha-info .am-eu { font-weight: 800; font-size: 1.05rem; }
+  .am-wish-top { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
+  .am-wish-top .am-sel { flex: 1 1 220px; }
+  .am-wish-n { padding-bottom: 11px; font-size: 0.85rem; font-weight: 700; color: var(--tl-muted); }
+  .am-wl { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .am-wl li { padding: 4px 10px; border-radius: 99px; background: var(--tl-soft); font-size: 0.82rem; font-weight: 700; }
+  .am-wl small { margin-left: 4px; color: var(--tl-muted); font-weight: 600; }
+  .am-wl-mais { background: transparent !important; color: var(--tl-muted); }
+  .am-badge { min-width: 20px; height: 20px; padding: 0 6px; border-radius: 99px; background: #E0245E; color: #fff; font: 800 12px/20px "Figtree", system-ui, sans-serif; text-align: center; }
+  .am-topo { display: flex; justify-content: flex-end; margin: -6px 0 12px; }
+  .am-pedidos { border: 2px solid var(--tl-pri-bg); }
+  .am-toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(env(safe-area-inset-bottom, 0px) + 78px); z-index: 55; display: flex; align-items: center; gap: 10px; max-width: min(92vw, 460px); padding: 10px 10px 10px 16px; border-radius: 16px; background: var(--hd-bg); color: var(--hd-fg); box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35); font-weight: 700; font-size: 0.92rem; }
+  .am-toast[hidden] { display: none; }
+  .am-toast #amToastVer { flex: none; height: 34px; padding: 0 14px; border: 0; border-radius: 10px; background: var(--hd-fg); color: var(--hd-bg); font: 800 14px "Figtree", system-ui, sans-serif; cursor: pointer; }
+  .am-toast-x { flex: none; width: 30px; height: 30px; border: 0; border-radius: 99px; background: transparent; color: inherit; font-size: 20px; cursor: pointer; }
   .campo-nota { margin: 4px 0 0 !important; font-size: 0.8rem; }
   .campo-nota.ok { color: var(--text); font-weight: 700; }
   .campo-nota.ruim { color: var(--erro, #A3112F); font-weight: 700; }
@@ -765,7 +861,7 @@
     <button type="button" data-area="decks" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="8" y="3" width="11" height="15" rx="2" stroke="currentColor" stroke-width="2"/><path d="M5 7v11a3 3 0 0 0 3 3h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-i18n="areaDecks">Deck Builder</span></button>
     <button type="button" data-area="dex" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M3 12h6m6 0h6" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg><span data-i18n="areaDex">Pokédex</span></button>
     <button type="button" data-area="card" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="11" r="2.2" stroke="currentColor" stroke-width="2"/><path d="M5.8 16.5c.6-1.6 1.8-2.4 3.2-2.4s2.6.8 3.2 2.4M14.5 10h3.5M14.5 13.5h3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-i18n="areaCard">Trainer card</span></button>
-    <button type="button" data-area="amigos" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2" stroke="currentColor" stroke-width="2"/><path d="M3.5 19c.7-3 2.9-4.6 5.5-4.6s4.8 1.6 5.5 4.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="17" cy="9.5" r="2.5" stroke="currentColor" stroke-width="2"/><path d="M16.2 14.6c2.2.1 3.8 1.5 4.3 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-i18n="areaFriends">Friends</span></button>
+    <button type="button" data-area="amigos" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2" stroke="currentColor" stroke-width="2"/><path d="M3.5 19c.7-3 2.9-4.6 5.5-4.6s4.8 1.6 5.5 4.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="17" cy="9.5" r="2.5" stroke="currentColor" stroke-width="2"/><path d="M16.2 14.6c2.2.1 3.8 1.5 4.3 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-i18n="areaFriends">Friends</span><span class="am-badge" id="amBadge" hidden></span></button>
     <button type="button" data-area="tools" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5l1.9 4.6 4.6 1.9-4.6 1.9L12 16.5l-1.9-4.6L5.5 10l4.6-1.9z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M18.5 15.5l.8 1.9 1.9.8-1.9.8-.8 1.9-.8-1.9-1.9-.8 1.9-.8z" fill="currentColor"/></svg><span data-i18n="areaTools">Tools</span></button>
   </nav>
   </div>
@@ -1029,6 +1125,7 @@
       <h2 id="zNome"></h2>
       <p id="zDet"></p>
       <p class="pos" id="zPos" aria-live="polite"></p>
+      <p class="z-onde" id="zOnde" hidden></p>
     </div>
     <div class="zoom-ctrl">
       <button type="button" class="z-fav" id="zFav" aria-pressed="false" aria-label="Wishlist"></button>
@@ -1059,6 +1156,7 @@
   </div>
 </div>
 
+<div class="am-toast" id="amToast" role="status" hidden><span id="amToastTxt"></span><button type="button" id="amToastVer"></button><button type="button" class="am-toast-x" id="amToastX" aria-label="Close">×</button></div>
 <div class="dt-modal termos-modal" id="termosModal" role="dialog" aria-modal="true" aria-labelledby="termosTitulo" hidden>
   <div class="dt-box tl termos-box">
     <div class="dt-topo"><h2 id="termosTitulo">Terms</h2><button type="button" class="fechar" id="termosFechar" data-i18n-aria="dtClose" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></div>
@@ -1511,12 +1609,14 @@
   /* ---------- Vários binders: cada um guarda a própria coleção ---------- */
   const KEY_BINDERS = "fichario-pokemon-binders-v1";
   const chaveBinder = id => id === "main" ? KEY : KEY + ":" + id;
+  // binder mestre: junta todos os binders (só para ver; para editar, abre o binder da carta)
+  const MESTRE = "__todos";
   function carregarBinders() {
     try {
       const o = JSON.parse(localStorage.getItem(KEY_BINDERS) || "null");
       if (o && Array.isArray(o.lista)) {
         const lista = o.lista.filter(b => b && b.id).map(b => ({ id: String(b.id), name: String(b.name || "").slice(0, 30), vis: ["amigos", "publico"].includes(b.vis) ? b.vis : "privado" }));
-        if (lista.length) return { lista, atual: lista.some(b => b.id === o.atual) ? o.atual : lista[0].id };
+        if (lista.length) return { lista, atual: lista.some(b => b.id === o.atual) || (o.atual === MESTRE && lista.length > 1) ? o.atual : lista[0].id };
       }
     } catch (e) { /* começa com um binder */ }
     return { lista: [{ id: "main", name: "" }], atual: "main" };
@@ -1558,7 +1658,18 @@
     // quem chega pela primeira vez começa com o binder vazio
     return { qty: {}, langs: {}, fav: new Set(), star: new Set(), cop: {} };
   }
+  function agregarBinders() {
+    const cop = {}, fav = new Set(), star = new Set();
+    bnd.lista.forEach(b => {
+      const d = carregar(chaveBinder(b.id));
+      Object.entries(d.cop || {}).forEach(([id, a]) => { (cop[id] = cop[id] || []).push(...a.map(x => Object.assign({}, x, { _b: b.id }))); });
+      d.fav.forEach(x => fav.add(x)); d.star.forEach(x => star.add(x));
+    });
+    return { cop, fav, star };
+  }
+  const carregarVisao = id => id === MESTRE ? agregarBinders() : carregar(chaveBinder(id));
   function salvar() {
+    if (bnd.atual === MESTRE) return;
     try { localStorage.setItem(chaveBinder(bnd.atual), JSON.stringify({ cop: state.cop, qty: state.qty, langs: state.langs, fav: [...state.fav], star: [...state.star] })); } catch (e) { /* segue sem salvar */ }
   }
 
@@ -1587,7 +1698,7 @@
     try { localStorage.setItem(KEY_CONTA, JSON.stringify(conta)); } catch (e) { /* segue sem salvar */ }
   }
 
-  const saved = carregar(chaveBinder(bnd.atual));
+  const saved = carregarVisao(bnd.atual);
   const conta = carregarConta();
   const state = {
     tab: "todas", q: "", posse: "", serie: "", set: "", page: 0,
@@ -2100,6 +2211,14 @@
     const own = state.own.has(c.id), fav = state.fav.has(c.id);
     const q = state.qty[c.id] || 0;
     const num = numeroTxt(c);
+    const onde = $("zOnde");
+    if (bnd.atual === MESTRE) {
+      const cont = {};
+      (state.cop[c.id] || []).forEach(x => { cont[x._b] = (cont[x._b] || 0) + 1; });
+      const em = bnd.lista.filter(b => cont[b.id]).map(b => nomeBinder(b) + " ×" + cont[b.id]);
+      onde.textContent = em.length ? t("bdWhere") + " " + em.join(" · ") : t("bdNowhere");
+      onde.hidden = false;
+    } else onde.hidden = true;
     const box = $("zImg");
     box.innerHTML = "";
     const src = imgGrande(c);
@@ -3183,6 +3302,7 @@
       usuario: (u.user_metadata && u.user_metadata.usuario) || (sb && sb.usuario) || "" });
     conta.perfil = { nome: sb.nome || (sb.email || "?").split("@")[0], email: sb.email || "" };
     salvarConta(); sbGuardar();
+    try { rtToken(); } catch (e) { /* tempo real ainda não iniciou */ }
   }
   function sbSnapshot() {
     const o = {};
@@ -3450,7 +3570,7 @@
       await amGarantirPerfil();
       sbOcupado = false; await sbSincronizar("login");
       if (amState) { amState.carregado = false; renderAmigos(); }
-      renderVisBinder();
+      renderVisBinder(); amSnap = null; amChecarPedidos(); rtConectar();
     } catch (e) { sbOcupado = false; sbMsg = t("sbErr", e.message); renderConta(); }
   }
   contaBox.addEventListener("click", e => {
@@ -3746,7 +3866,7 @@
   const AM_TXT = {
     en: {
       areaFriends: "Friends", leadFriends: "Add friends, see their collections and share your wishlist.",
-      visLbl: "Who can see this binder", vis_privado: "🔒 Private", vis_amigos: "👥 Friends", vis_publico: "🌐 Public",
+      visLbl: "Who can see this binder", vis_privado: "Private", vis_amigos: "Friends", vis_publico: "Public",
       visNotePriv: "Only you.", visNoteFr: "Your friends can see it.", visNotePub: "Anyone with your profile link can see it.", visLogin: "Sign in to share it.",
       amLoginT: "Sign in to use Friends", amLoginD: "Create an account or sign in to add friends, see their binders and share your wishlist.",
       amViewT: "Open a profile", amViewD: "Type a username to see that person's public binders.", amOpen: "Open", amUserLbl: "Username",
@@ -3783,7 +3903,7 @@
     },
     pt: {
       areaFriends: "Amigos", leadFriends: "Adicione amigos, veja as coleções deles e compartilhe sua wishlist.",
-      visLbl: "Quem pode ver este binder", vis_privado: "🔒 Privado", vis_amigos: "👥 Amigos", vis_publico: "🌐 Público",
+      visLbl: "Quem pode ver este binder", vis_privado: "Privado", vis_amigos: "Amigos", vis_publico: "Público",
       visNotePriv: "Só você.", visNoteFr: "Seus amigos podem ver.", visNotePub: "Qualquer pessoa com o link do seu perfil pode ver.", visLogin: "Entre na conta para compartilhar.",
       amLoginT: "Entre para usar Amigos", amLoginD: "Crie uma conta ou entre para adicionar amigos, ver os binders deles e compartilhar sua wishlist.",
       amViewT: "Abrir um perfil", amViewD: "Digite um nome de usuário para ver os binders públicos dessa pessoa.", amOpen: "Abrir", amUserLbl: "Nome de usuário",
@@ -3820,7 +3940,7 @@
     },
     ja: {
       areaFriends: "フレンド", leadFriends: "フレンドを追加して、コレクションを見たり、ほしいものリストを共有したりできます。",
-      visLbl: "このバインダーを見られる人", vis_privado: "🔒 非公開", vis_amigos: "👥 フレンド", vis_publico: "🌐 公開",
+      visLbl: "このバインダーを見られる人", vis_privado: "非公開", vis_amigos: "フレンド", vis_publico: "公開",
       visNotePriv: "自分だけ。", visNoteFr: "フレンドが見られます。", visNotePub: "プロフィールのリンクを知っている人なら誰でも見られます。", visLogin: "共有するにはログインしてください。",
       amLoginT: "フレンド機能を使うにはログイン", amLoginD: "アカウントを作成するかログインすると、フレンドの追加、バインダーの閲覧、ほしいものリストの共有ができます。",
       amViewT: "プロフィールを開く", amViewD: "ユーザー名を入力すると、その人の公開バインダーを見られます。", amOpen: "開く", amUserLbl: "ユーザー名",
@@ -3880,11 +4000,44 @@
   };
   const AM_TXT2 = {
     en: { sbUser: "Username", sbNick: "Nickname (trainer name)", sbNickHint: "Shown on your profile and trainer card. It can be the same as someone else's.",
-      sbUserChecking: "Checking…", sbUserFree: u => "✓ @" + u + " is available.", mgName: "Nickname" },
+      sbUserChecking: "Checking…", sbUserFree: u => "✓ @" + u + " is available.", mgName: "Nickname",
+      amReceivedD: "These people want to be your friend.", amRefresh: "Refresh", amBadgeLbl: n => n === 1 ? "1 friend request" : n + " friend requests",
+      visManT: "Who sees your binders", visManD: "Choose, binder by binder, who can see it. Changes are shared right away.", visCards: n => n === 1 ? "1 card" : n + " cards",
+      visSaved: (b, v) => b + ": " + v + ".", visPreview: "See my profile as others see it",
+      fvNone: "No cards match this search.", fvShowing: (a, b) => "Showing " + a + " of " + b + " cards", fvMore: (a, b) => "Show " + a + " more (" + b + " left)",
+      fvSearchPh: "Search by name or number", fvSetLbl: "Set", fvAllSets: "All sets", fvSortLbl: "Order", fvSortSet: "By set", fvSortName: "By name", fvSortQty: "Most copies",
+      fvSummary: (b, c, q) => b + (b === 1 ? " shared binder · " : " shared binders · ") + c + (c === 1 ? " card · " : " cards · ") + q + (q === 1 ? " copy" : " copies"),
+      fvSelfNote: "This is how your friends see you. Only binders set to Friends or Public appear here.",
+      fvPos: (a, b) => a + " of " + b, fvTheyHave: (n, q) => n + " has " + q + (q === 1 ? " copy" : " copies"), fvTheyWant: n => "On " + n + "'s wishlist", fvTheyFav: n => "One of " + n + "'s favorites",
+      fvYouHaveN: q => "You have " + q + (q === 1 ? " copy" : " copies"),
+      amTabPriv: "Privacy", amFindPh: "Find a trainer by username", amSeeReq: "See", amAcceptedYou: u => (u || "Someone") + " accepted your friend request!", amNewReq: u => "New friend request" + (u ? " from " + u : "") + "!", amNewReqN: n => n + " new friend requests!",
+      amNotSaved: "The request was not saved in Supabase. Check that the supabase-amigos.sql file was run in the SQL Editor." },
     pt: { sbUser: "Nome de usuário", sbNick: "Apelido (nome de treinador)", sbNickHint: "Aparece no seu perfil e no cartão de treinador. Pode ser igual ao de outras pessoas.",
-      sbUserChecking: "Verificando…", sbUserFree: u => "✓ @" + u + " está disponível.", mgName: "Apelido" },
+      sbUserChecking: "Verificando…", sbUserFree: u => "✓ @" + u + " está disponível.", mgName: "Apelido",
+      amReceivedD: "Estas pessoas querem ser suas amigas.", amRefresh: "Atualizar", amBadgeLbl: n => n === 1 ? "1 pedido de amizade" : n + " pedidos de amizade",
+      visManT: "Quem vê seus binders", visManD: "Escolha, binder por binder, quem pode ver. A mudança é compartilhada na hora.", visCards: n => n === 1 ? "1 carta" : n + " cartas",
+      visSaved: (b, v) => b + ": " + v + ".", visPreview: "Ver meu perfil como os outros veem",
+      fvNone: "Nenhuma carta encontrada nesta busca.", fvShowing: (a, b) => "Mostrando " + a + " de " + b + " cartas", fvMore: (a, b) => "Mostrar mais " + a + " (faltam " + b + ")",
+      fvSearchPh: "Buscar por nome ou número", fvSetLbl: "Coleção", fvAllSets: "Todas as coleções", fvSortLbl: "Ordem", fvSortSet: "Por coleção", fvSortName: "Por nome", fvSortQty: "Mais cópias",
+      fvSummary: (b, c, q) => b + (b === 1 ? " binder compartilhado · " : " binders compartilhados · ") + c + (c === 1 ? " carta · " : " cartas · ") + q + (q === 1 ? " cópia" : " cópias"),
+      fvSelfNote: "É assim que seus amigos veem você. Só aparecem os binders em Amigos ou Público.",
+      fvPos: (a, b) => a + " de " + b, fvTheyHave: (n, q) => n + " tem " + q + (q === 1 ? " cópia" : " cópias"), fvTheyWant: n => "Na wishlist de " + n, fvTheyFav: n => "Uma das favoritas de " + n,
+      fvYouHaveN: q => "Você tem " + q + (q === 1 ? " cópia" : " cópias"),
+      amTabPriv: "Privacidade", amFindPh: "Encontre um treinador pelo @", amSeeReq: "Ver", amAcceptedYou: u => (u || "Alguém") + " aceitou seu pedido de amizade!", amNewReq: u => "Novo pedido de amizade" + (u ? " de " + u : "") + "!", amNewReqN: n => n + " novos pedidos de amizade!",
+      amNotSaved: "O pedido não foi salvo no Supabase. Confira se o arquivo supabase-amigos.sql foi rodado no SQL Editor." },
     ja: { sbUser: "ユーザー名", sbNick: "ニックネーム（トレーナー名）", sbNickHint: "プロフィールとトレーナーカードに表示されます。ほかの人と同じでも大丈夫です。",
-      sbUserChecking: "確認中…", sbUserFree: u => "✓ @" + u + " は使えます。", mgName: "ニックネーム" }
+      sbUserChecking: "確認中…", sbUserFree: u => "✓ @" + u + " は使えます。", mgName: "ニックネーム",
+      amReceivedD: "この人たちがフレンドになりたがっています。", amRefresh: "更新", amBadgeLbl: n => "フレンド申請 " + n + " 件",
+      visManT: "バインダーを見られる人", visManD: "バインダーごとに、見られる人を選べます。変更はすぐに共有されます。", visCards: n => n + "枚",
+      visSaved: (b, v) => b + "：" + v, visPreview: "ほかの人から見たプロフィールを見る",
+      fvNone: "この検索に合うカードはありません。", fvShowing: (a, b) => b + "枚中 " + a + "枚を表示", fvMore: (a, b) => "さらに " + a + "枚表示（残り " + b + "枚）",
+      fvSearchPh: "名前か番号で検索", fvSetLbl: "セット", fvAllSets: "すべてのセット", fvSortLbl: "並び順", fvSortSet: "セット順", fvSortName: "名前順", fvSortQty: "枚数が多い順",
+      fvSummary: (b, c, q) => "共有バインダー " + b + "つ・カード " + c + "枚・" + q + "枚のコピー",
+      fvSelfNote: "フレンドからはこのように見えます。「フレンド」か「公開」のバインダーだけが表示されます。",
+      fvPos: (a, b) => b + "枚中 " + a + "枚目", fvTheyHave: (n, q) => n + " は " + q + "枚持っています", fvTheyWant: n => n + " のほしいもの", fvTheyFav: n => n + " のお気に入り",
+      fvYouHaveN: q => "あなたは " + q + "枚持っています",
+      amTabPriv: "プライバシー", amFindPh: "ユーザー名でトレーナーを探す", amSeeReq: "見る", amAcceptedYou: u => (u || "誰か") + " がフレンド申請を承認しました！", amNewReq: u => (u ? u + " から" : "") + "新しいフレンド申請が届きました！", amNewReqN: n => "新しいフレンド申請が " + n + " 件あります！",
+      amNotSaved: "申請が Supabase に保存されませんでした。SQL Editor で supabase-amigos.sql を実行したか確認してください。" }
   };
   Object.keys(AM_TXT).forEach(l => Object.assign(I18N[l], AM_TXT[l], AM_TXT2[l]));
 
@@ -5059,7 +5212,11 @@
     const ICON_LAPIS = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M13.5 6.5l4 4" stroke="currentColor" stroke-width="2.2"/></svg>';
     const ICON_X = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>';
     const varios = bnd.lista.length > 1;
-    $("bdTabs").innerHTML = bnd.lista.map(b => {
+    if (!varios && bnd.atual === MESTRE) { bnd.atual = null; trocarBinder(bnd.lista[0].id); return; }
+    const mestreOn = bnd.atual === MESTRE;
+    document.documentElement.classList.toggle("mestre", mestreOn);
+    const abaMestre = varios ? `<div class="bd-tab bd-mestre${mestreOn ? " on" : ""}"><button type="button" class="bd-nome" data-bd="${MESTRE}" aria-pressed="${mestreOn}" title="${esc(t("bdAllTip"))}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="6" width="12" height="15" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 3h10a2 2 0 012 2v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>${esc(t("bdAll"))}</span></button></div>` : "";
+    $("bdTabs").innerHTML = abaMestre + bnd.lista.map(b => {
       const on = b.id === bnd.atual, nome = nomeBinder(b);
       if (bdState.editando === b.id) return `<div class="bd-tab on edit"><input class="bd-input" id="bdInput" type="text" maxlength="30" value="${esc(b.name || nome)}" aria-label="${esc(t("binderRenLbl"))}" autocomplete="off"></div>`;
       const armado = bdState.armado === b.id;
@@ -5078,7 +5235,7 @@
     if (bnd.atual) salvar();
     bnd.atual = id;
     salvarBinders();
-    const d = carregar(chaveBinder(id));
+    const d = carregarVisao(id);
     state.cop = d.cop || {}; state.fav = d.fav; state.star = d.star;
     state.qty = {}; state.langs = {}; state.own = new Set();
     Object.keys(state.cop).forEach(sincronizar);
@@ -5139,6 +5296,14 @@
      Amigos, perfis públicos, binders compartilhados e wishlist
      ===================================================================== */
   const AM_VIS = ["privado", "amigos", "publico"];
+  // ícones de visibilidade (seguem a cor do binder escolhido)
+  const VIS_ICON = {
+    privado: '<svg class="vis-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.5" fill="currentColor"/><path d="M8 10.5V8a4 4 0 018 0v2.5" stroke="currentColor" stroke-width="2.2"/></svg>',
+    amigos: '<svg class="vis-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8" r="3.6" fill="currentColor"/><path d="M2.5 20c.6-3.8 3.2-6 6.5-6s5.9 2.2 6.5 6z" fill="currentColor"/><circle cx="17" cy="9" r="2.8" fill="currentColor" opacity=".75"/><path d="M15.6 14.2c3 .1 5.2 2.1 5.9 5.8h-4.2c-.3-2.3-.8-4.2-1.7-5.8z" fill="currentColor" opacity=".75"/></svg>',
+    publico: '<svg class="vis-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="2.2"/><path d="M3.8 12h16.4M12 3.5c2.4 2.4 3.6 5.2 3.6 8.5s-1.2 6.1-3.6 8.5c-2.4-2.4-3.6-5.2-3.6-8.5S9.6 5.9 12 3.5z" stroke="currentColor" stroke-width="2"/></svg>',
+    todos: '<svg class="vis-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="6" width="12" height="15" rx="2" fill="currentColor"/><path d="M8 3h10a2 2 0 012 2v12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>'
+  };
+  const visSeg = (v, alvo, rot) => `<div class="vis-seg" role="radiogroup" aria-label="${esc(rot)}">${AM_VIS.map(x => `<button type="button" role="radio" aria-checked="${x === v}" data-visset="${x}" data-b="${esc(alvo)}">${VIS_ICON[x]}<span>${esc(t("vis_" + x))}</span></button>`).join("")}</div>`;
   const usuarioValido = u => /^[a-z0-9_]{3,20}$/.test(u);
   const limparUsuario = u => String(u || "").trim().toLowerCase().replace(/^@/, "");
   const urlPerfil = (u, b, v) => location.origin + location.pathname + "?u=" + encodeURIComponent(u) + (b ? "&b=" + encodeURIComponent(b) : "") + (v ? "&v=" + v : "");
@@ -5156,8 +5321,15 @@
   const amErroTxt = e => /duplicate|23505|unique/i.test(e && e.message || "") ? "dup" : t("sbErr", e && e.message || "?");
 
   async function amCarregar() {
-    if (!sb || amState.carregando) return;
-    amState.carregando = true; amState.erro = ""; renderAmigos();
+    if (!sb) return;
+    if (amState.carregando) { amState.denovo = true; return amState.promessa; }
+    amState.promessa = amCarregarAgora();
+    return amState.promessa;
+  }
+  async function amCarregarAgora() {
+    const forcar = !amState.carregado;
+    amState.carregando = true; amState.erro = "";
+    if (forcar) renderAmigos();
     try {
       const eu = await sbReq("/rest/v1/perfis?user_id=eq." + sb.id + "&select=user_id,usuario,nome");
       amState.perfil = eu[0] || null;
@@ -5173,7 +5345,13 @@
       amState.carregado = true; amState.quando = Date.now();
       if (amState.perfil && conta.perfil && conta.perfil.nome && amState.perfil.nome !== conta.perfil.nome) amAtualizarNome(conta.perfil.nome);
     } catch (e) { amState.erro = t("sbErr", e.message); amState.carregado = true; }
-    amState.carregando = false; renderAmigos();
+    amState.carregando = false;
+    amBadge(amState.recebidos.length);
+    if (amState.denovo) { amState.denovo = false; return amCarregarAgora(); }
+    const assin = JSON.stringify([amState.perfil, amState.amigos, amState.recebidos, amState.enviados, amState.erro]);
+    if (assin === amState.assin && !forcar) return;
+    amState.assin = assin;
+    renderAmigos();
   }
   async function usuarioLivre(u) {
     const r = await sbReq("/rest/v1/perfis?usuario=eq." + encodeURIComponent(u) + "&select=user_id", {}, false);
@@ -5212,6 +5390,88 @@
       } catch (err) { if (n === usuarioPedido) st.textContent = t("amUserRule"); }
     }, 450);
   });
+  /* ---------- Aviso de pedidos de amizade (no botão Amigos e num aviso na tela) ---------- */
+  let amSnap = null;
+  function amBadge(n) {
+    const b = $("amBadge");
+    if (!b) return;
+    b.hidden = !n; b.textContent = n > 9 ? "9+" : String(n || "");
+    const btn = b.closest("button");
+    if (btn) btn.setAttribute("aria-label", t("areaFriends") + (n ? " — " + t("amBadgeLbl", n) : ""));
+  }
+  function amToast(txt) {
+    $("amToastTxt").textContent = txt; $("amToastVer").textContent = t("amSeeReq");
+    $("amToast").hidden = false;
+    clearTimeout(amToast.t); amToast.t = setTimeout(() => { $("amToast").hidden = true; }, 12000);
+  }
+  $("amToastX").addEventListener("click", () => { $("amToast").hidden = true; });
+  $("amToastVer").addEventListener("click", () => {
+    $("amToast").hidden = true;
+    if (amState.view === "perfil") amState.view = "lista";
+    conta.cfg.area = "amigos"; salvarConta(); aplicarArea(); atualizar(); amCarregar();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+  const amNomeDe = async id => { try { const p = await sbReq("/rest/v1/perfis?user_id=eq." + id + "&select=usuario"); return p[0] ? "@" + p[0].usuario : ""; } catch (e) { return ""; } };
+  // confere pedidos e amizades; avisa o que é novo e atualiza a aba Amigos na hora
+  async function amChecarPedidos(evento) {
+    if (!sb || (document.hidden && !evento)) return;
+    try {
+      const r = await sbReq("/rest/v1/amizades?select=de,para,status");
+      const receb = r.filter(x => x.para === sb.id && x.status === "pendente").map(x => x.de);
+      const aceitos = r.filter(x => x.status === "aceita").map(x => x.de === sb.id ? x.para : x.de);
+      const assin = r.map(x => x.de + ">" + x.para + ":" + x.status).sort().join("|");
+      amBadge(receb.length);
+      if (amSnap) {
+        const novosPed = receb.filter(x => !amSnap.receb.has(x));
+        const meAceitaram = r.filter(x => x.status === "aceita" && x.de === sb.id && !amSnap.aceitos.has(x.para)).map(x => x.para);
+        if (novosPed.length) amToast(novosPed.length > 1 ? t("amNewReqN", novosPed.length) : t("amNewReq", await amNomeDe(novosPed[0])));
+        else if (meAceitaram.length) amToast(t("amAcceptedYou", await amNomeDe(meAceitaram[0])));
+      }
+      const mudou = !amSnap || amSnap.assin !== assin;
+      amSnap = { receb: new Set(receb), aceitos: new Set(aceitos), assin };
+      if (mudou && amState.carregado) { if (conta.cfg.area === "amigos") amCarregar(); else amState.quando = 0; }
+    } catch (e) { /* tenta de novo depois */ }
+  }
+  /* Tempo real: o Supabase avisa na hora quando um pedido chega, é aceito ou removido.
+     Se a conexão não funcionar, a conferência a cada 10 s continua valendo. */
+  let rtWS = null, rtRef = 0, rtHb = 0, rtTentativa = 0, rtOk = false, rtTimer = 0;
+  const rtTopico = () => "realtime:amizades-" + (sb ? sb.id : "");
+  function rtConectar() {
+    if (!sb || rtWS || !("WebSocket" in window) || !/^https?:$/.test(location.protocol)) return;
+    let ws;
+    try { ws = new WebSocket(SB_URL.replace(/^http/, "ws") + "/realtime/v1/websocket?apikey=" + encodeURIComponent(SB_KEY) + "&vsn=1.0.0"); } catch (e) { return; }
+    rtWS = ws;
+    const topico = rtTopico(), uid = sb.id;
+    ws.onopen = () => {
+      ws.send(JSON.stringify({ topic: topico, event: "phx_join", ref: String(++rtRef), join_ref: String(rtRef), payload: { access_token: sb ? sb.access : SB_KEY, config: {
+        broadcast: { self: false }, presence: { key: "" },
+        postgres_changes: [{ event: "*", schema: "public", table: "amizades", filter: "para=eq." + uid }, { event: "*", schema: "public", table: "amizades", filter: "de=eq." + uid }] } } }));
+      clearInterval(rtHb);
+      rtHb = setInterval(() => { if (ws.readyState === 1) ws.send(JSON.stringify({ topic: "phoenix", event: "heartbeat", payload: {}, ref: String(++rtRef) })); }, 25000);
+    };
+    ws.onmessage = ev => {
+      let m; try { m = JSON.parse(ev.data); } catch (e) { return; }
+      if (m.topic !== topico) return;
+      if (m.event === "phx_reply") { rtOk = !!(m.payload && m.payload.status === "ok"); if (rtOk) rtTentativa = 0; }
+      else if (m.event === "postgres_changes") { clearTimeout(rtTimer); rtTimer = setTimeout(() => amChecarPedidos(true), 250); }
+      else if (m.event === "phx_error" || m.event === "phx_close" || (m.event === "system" && m.payload && m.payload.status === "error")) rtOk = false;
+    };
+    ws.onclose = () => { clearInterval(rtHb); if (rtWS === ws) rtWS = null; rtOk = false; if (sb) setTimeout(rtConectar, Math.min(60000, 2000 * 2 ** rtTentativa++)); };
+    ws.onerror = () => { try { ws.close(); } catch (e) { /* já fechado */ } };
+  }
+  function rtToken() {
+    if (rtWS && rtWS.readyState === 1 && sb) rtWS.send(JSON.stringify({ topic: rtTopico(), event: "access_token", payload: { access_token: sb.access }, ref: String(++rtRef) }));
+  }
+  let amTick = 0;
+  setInterval(() => { amTick++; if (!rtOk || amTick % 6 === 0) amChecarPedidos(); }, 10000);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) { amChecarPedidos(); if (!rtWS) rtConectar(); } });
+  if (sb) setTimeout(() => { amChecarPedidos(); rtConectar(); }, 1500);
+  // se outra aba entrar em outra conta, esta aba recarrega para não misturar as contas
+  window.addEventListener("storage", e => {
+    if (e.key !== KEY_SB) return;
+    let novo = null; try { novo = JSON.parse(e.newValue || "null"); } catch (er) { novo = null; }
+    if ((novo && novo.id) !== (sb && sb.id)) location.reload();
+  });
   function amAtualizarSeVelho() {
     if (amState && sb && amState.carregado && !amState.carregando && amState.view === "lista" && Date.now() - (amState.quando || 0) > 20000) amCarregar();
   }
@@ -5244,15 +5504,24 @@
       if (amState.amigos.some(a => a.user_id === alvo.user_id)) return amMsg(sec, t("amAlready", u), true);
       if (amState.recebidos.some(a => a.user_id === alvo.user_id)) { await amAceitar(alvo.user_id); return amMsg(sec, t("amNowFriends", u)); }
       await sbReq("/rest/v1/amizades", { method: "POST", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ de: sb.id, para: alvo.user_id }) });
+      // confere se o pedido ficou mesmo salvo no Supabase
+      const conf = await sbReq("/rest/v1/amizades?de=eq." + sb.id + "&para=eq." + alvo.user_id + "&select=status");
+      if (!conf.length) throw new Error(t("amNotSaved"));
       await amCarregar();
       amMsg(sec, t("amSent", u));
     } catch (e) { const m = amErroTxt(e); amMsg(sec, m === "dup" ? t("amPending", u) : m, true); }
   }
   async function amAceitar(id) {
+    const p = amState.recebidos.find(x => x.user_id === id);
+    if (p) { amState.recebidos = amState.recebidos.filter(x => x !== p); amState.amigos = amState.amigos.concat(p); amBadge(amState.recebidos.length); renderAmigos(); }
     await sbReq("/rest/v1/amizades?de=eq." + id + "&para=eq." + sb.id, { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ status: "aceita" }) });
+    const conf = await sbReq("/rest/v1/amizades?de=eq." + id + "&para=eq." + sb.id + "&select=status");
+    if (!conf.length || conf[0].status !== "aceita") throw new Error(t("amNotSaved"));
     await amCarregar();
   }
   async function amRemover(id) {
+    ["recebidos", "enviados", "amigos"].forEach(k => { amState[k] = amState[k].filter(x => x.user_id !== id); });
+    amBadge(amState.recebidos.length); renderAmigos();
     await sbReq("/rest/v1/amizades?or=(and(de.eq." + sb.id + ",para.eq." + id + "),and(de.eq." + id + ",para.eq." + sb.id + "))", { method: "DELETE", headers: { Prefer: "return=minimal" } });
     await amCarregar();
   }
@@ -5286,21 +5555,35 @@
   function renderVisBinder() {
     const box = $("bdVis");
     if (!box) return;
+    if (bnd.atual === MESTRE) { box.innerHTML = `<span class="bd-vis-nota bd-mestre-nota" id="bdMestreNota">${esc(t("bdAllNote", bnd.lista.length))}</span>`; return; }
     const b = bnd.lista.find(x => x.id === bnd.atual);
     if (!b) { box.innerHTML = ""; return; }
     const v = AM_VIS.includes(b.vis) ? b.vis : "privado";
     const nota = v === "privado" ? t("visNotePriv") : !sb ? t("visLogin") : v === "amigos" ? t("visNoteFr") : t("visNotePub");
-    box.innerHTML = `<label for="bdVisSel">${esc(t("visLbl"))}</label>
-      <select id="bdVisSel">${AM_VIS.map(x => `<option value="${x}"${x === v ? " selected" : ""}>${esc(t("vis_" + x))}</option>`).join("")}</select>
-      <span class="bd-vis-nota">${esc(nota)}</span>`;
+    box.innerHTML = `<span class="bd-vis-lbl">${esc(t("visLbl"))}</span>${visSeg(v, b.id, t("visLbl") + ": " + nomeBinder(b))}<span class="bd-vis-nota">${esc(nota)}</span>`;
   }
+  function mudarVis(id, v, botao) {
+    const b = bnd.lista.find(x => x.id === id);
+    if (!b || !AM_VIS.includes(v)) return;
+    b.vis = v; salvarBinders(); publicarBinders(); renderVisBinder();
+    if (conta.cfg.area === "amigos" && amState.view === "lista") { amState.msg = { sec: "vis", txt: t("visSaved", nomeBinder(b), t("vis_" + v)), erro: false }; renderAmigos(); }
+    const area = botao && botao.closest("#bdVis") ? $("bdVis") : $("amCorpo");
+    const f = area && area.querySelector(`[data-visset="${v}"][data-b="${CSS.escape(id)}"]`); if (f) f.focus();
+  }
+  document.addEventListener("click", e => {
+    const b = e.target.closest("[data-visset]");
+    if (b) mudarVis(b.dataset.b, b.dataset.visset, b);
+  });
+  // setas do teclado trocam a opção, como num grupo de rádio
+  document.addEventListener("keydown", e => {
+    const b = e.target.closest && e.target.closest("[data-visset]");
+    if (!b || !["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key)) return;
+    e.preventDefault();
+    const i = AM_VIS.indexOf(b.dataset.visset), n = (i + (e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 1) + AM_VIS.length) % AM_VIS.length;
+    mudarVis(b.dataset.b, AM_VIS[n], b);
+  });
   document.addEventListener("change", e => {
-    if (e.target.id === "bdVisSel") {
-      const b = bnd.lista.find(x => x.id === bnd.atual);
-      if (!b) return;
-      b.vis = e.target.value; salvarBinders(); publicarBinders(); renderVisBinder();
-      $("bdVisSel").focus();
-    } else if (e.target.id === "amWishSel") { amState.wishB = e.target.value; renderAmigos(); const s = $("amWishSel"); if (s) s.focus(); }
+    if (e.target.id === "amWishSel") { amState.wishB = e.target.value; renderAmigos(); const s = $("amWishSel"); if (s) s.focus(); }
   });
 
   /* ---------- Perfil de outra pessoa (ou o próprio) ---------- */
@@ -5308,6 +5591,7 @@
     const u = limparUsuario(usuario);
     amState.view = "perfil"; amState.alvo = null; amState.alvoBinders = []; amState.alvoErro = "";
     amState.alvoCarregando = true; amState.alvoB = binder || null; amState.filtro = filtro || "own";
+    amState.fvBusca = ""; amState.fvSet = ""; amState.fvLimite = FV_PASSO;
     renderAmigos();
     try {
       if (!usuarioValido(u)) throw new Error(t("amUserInvalid"));
@@ -5315,7 +5599,7 @@
       if (!r[0]) throw new Error(t("amNotFound", u));
       amState.alvo = r[0];
       amState.alvoBinders = await amReq("/rest/v1/binders_compartilhados?user_id=eq." + r[0].user_id + "&select=binder_id,nome,vis,dados,atualizado&order=nome");
-      if (!amState.alvoBinders.some(b => b.binder_id === amState.alvoB)) amState.alvoB = amState.alvoBinders[0] ? amState.alvoBinders[0].binder_id : null;
+      if (!amState.alvoBinders.some(b => b.binder_id === amState.alvoB)) amState.alvoB = amState.alvoBinders.length > 1 ? MESTRE : amState.alvoBinders[0] ? amState.alvoBinders[0].binder_id : null;
     } catch (e) { amState.alvoErro = e.message; }
     amState.alvoCarregando = false; renderAmigos();
     const v = $("amVoltar"); if (v) v.focus();
@@ -5326,18 +5610,61 @@
     renderAmigos();
   }
   const ordCarta = (a, b) => { const x = POR_ID.get(a), y = POR_ID.get(b); return (x ? x.ord : 1e9) - (y ? y.ord : 1e9) || a.localeCompare(b); };
-  function amGrade(ids, d, filtro) {
-    if (!ids.length) return `<p class="tl-nota">${esc(t(filtro === "star" ? "amEmptyWish" : filtro === "fav" ? "amEmptyFav" : "amEmptyOwn"))}</p>`;
-    const MAX = 600, eu = !!(sb && amState.alvo && amState.alvo.user_id === sb.id);
-    const itens = ids.slice(0, MAX).map(id => {
-      const c = POR_ID.get(id), q = (d.q || {})[id] || 0;
-      const sel = !eu && filtro === "own" && state.star.has(id) ? `<span class="fv-tag">${esc(t("amYourWish"))}</span>`
-        : !eu && filtro === "star" && state.own.has(id) ? `<span class="fv-tag">${esc(t("amYouHave"))}</span>` : "";
-      return `<li class="fv-c"><div class="fv-img">${c && (c.img || c.fb) ? `<img src="${esc(imgPequena(c))}" data-fb="${esc(c.fb || "")}" alt="" loading="lazy" decoding="async">` : ""}${filtro === "own" && q > 1 ? `<span class="fv-q">×${q}</span>` : ""}</div>
-        <p class="fv-n">${esc(c ? c.n : id)}</p><p class="fv-s">${c ? esc("#" + numeroTxt(c) + " · " + setNome(c)) : ""}</p>${sel}</li>`;
-    }).join("");
-    return `<ul class="fv-grid">${itens}</ul>${ids.length > MAX ? `<p class="tl-nota">${esc(t("tlMore", ids.length - MAX))}</p>` : ""}`;
+  const FV_PASSO = 60;
+  // dados do binder escolhido do amigo; "Todos" junta todos os binders compartilhados
+  function fvDados() {
+    const bs = amState.alvoBinders;
+    if (amState.alvoB === MESTRE && bs.length > 1) {
+      const q = {}, l = {}, fav = new Set(), star = new Set();
+      bs.forEach(b => {
+        const d = b.dados || {};
+        Object.entries(d.q || {}).forEach(([id, n]) => { q[id] = (q[id] || 0) + n; });
+        Object.entries(d.l || {}).forEach(([id, ls]) => { l[id] = LANGS.filter(x => (l[id] || []).includes(x) || ls.includes(x)); });
+        (d.fav || []).forEach(x => fav.add(x)); (d.star || []).forEach(x => star.add(x));
+      });
+      return { nome: t("bdAll"), vis: null, d: { q, l, fav: [...fav], star: [...star] } };
+    }
+    const b = bs.find(x => x.binder_id === amState.alvoB) || bs[0];
+    return { nome: b.nome || t("binderDefault"), vis: b.vis, d: b.dados || {} };
   }
+  function fvListas(d) {
+    return { own: Object.keys(d.q || {}), star: (d.star || []).slice(), fav: (d.fav || []).slice() };
+  }
+  // aplica busca, coleção e ordem à lista do filtro atual
+  function fvFiltrar(ids, d) {
+    const q = norm(amState.fvBusca || "").trim();
+    let r = ids.filter(id => {
+      const c = POR_ID.get(id);
+      if (amState.fvSet && (!c || c.set !== amState.fvSet)) return false;
+      if (!q) return true;
+      return c ? c.nn.includes(q) || String(c.lid).includes(q) || numeroTxt(c).includes(q) : id.toLowerCase().includes(q);
+    });
+    if (amState.fvOrdem === "nome") r.sort((a, b) => { const x = POR_ID.get(a), y = POR_ID.get(b); return collator.compare(x ? x.n : a, y ? y.n : b) || ordCarta(a, b); });
+    else if (amState.fvOrdem === "qtd") r.sort((a, b) => ((d.q || {})[b] || 0) - ((d.q || {})[a] || 0) || ordCarta(a, b));
+    else r.sort(ordCarta);
+    return r;
+  }
+  function fvGradeHTML() {
+    if (!amState.alvo || !amState.alvoBinders.length) return "";
+    const { d } = fvDados(), filtro = amState.filtro;
+    const base = fvListas(d)[filtro] || [];
+    const ids = fvFiltrar(base, d);
+    amState.fvIds = ids;
+    if (!base.length) return `<p class="tl-nota">${esc(t(filtro === "star" ? "amEmptyWish" : filtro === "fav" ? "amEmptyFav" : "amEmptyOwn"))}</p>`;
+    if (!ids.length) return `<p class="tl-nota">${esc(t("fvNone"))}</p>`;
+    const eu = !!(sb && amState.alvo.user_id === sb.id), lim = amState.fvLimite || FV_PASSO;
+    const itens = ids.slice(0, lim).map((id, i) => {
+      const c = POR_ID.get(id), q = (d.q || {})[id] || 0;
+      const tag = !eu && filtro !== "star" && state.star.has(id) ? `<span class="fv-tag">${esc(t("amYourWish"))}</span>`
+        : !eu && filtro === "star" && state.own.has(id) ? `<span class="fv-tag">${esc(t("amYouHave"))}</span>` : "";
+      return `<li class="fv-c"><button type="button" class="fv-bt" data-am="fvAbrir" data-i="${i}" aria-label="${esc(c ? c.n + ", " + t("number") + " " + numeroTxt(c) + ", " + setNome(c) : id)}">
+        <span class="fv-img">${c && (c.img || c.fb) ? `<img src="${esc(imgPequena(c))}" data-fb="${esc(c.fb || "")}" alt="" loading="lazy" decoding="async">` : ""}${filtro === "own" && q > 1 ? `<span class="fv-q">×${q}</span>` : ""}</span></button>
+        <p class="fv-n">${esc(c ? c.n : id)}</p><p class="fv-s">${c ? esc("#" + numeroTxt(c) + " · " + setNome(c)) : ""}</p>${tag}</li>`;
+    }).join("");
+    const mais = ids.length > lim ? `<div class="fv-mais"><button type="button" class="tl-btn" data-am="fvMais">${esc(t("fvMore", Math.min(FV_PASSO, ids.length - lim), ids.length - lim))}</button></div>` : "";
+    return `<p class="fv-cont" role="status">${esc(t("fvShowing", Math.min(lim, ids.length), ids.length))}</p><ul class="fv-grid">${itens}</ul>${mais}`;
+  }
+  function visIconeTxt(v) { return `<span class="vis-tag">${VIS_ICON[v] || ""}<span>${esc(t("vis_" + v))}</span></span>`; }
   function amHtmlPerfil() {
     const voltar = `<button type="button" class="tl-btn" id="amVoltar" data-am="voltar">← ${esc(t("mgBack"))}</button>`;
     if (amState.alvoCarregando) return `${voltar}<div class="tl-prog"><span class="spin" aria-hidden="true"></span><p>${esc(t("sbSyncing"))}</p></div>`;
@@ -5350,21 +5677,100 @@
       else if (amState.recebidos.some(x => x.user_id === a.user_id)) rel = `<button type="button" class="tl-btn on" data-am="aceitar" data-id="${esc(a.user_id)}">${esc(t("amAccept"))}</button>`;
       else rel = `<button type="button" class="tl-btn on" data-am="addPerfil" data-u="${esc(a.usuario)}">${esc(t("amAddBtn"))}</button>`;
     }
+    // resumo: cartas e cópias somando todos os binders que a pessoa compartilha
+    const todosQ = {}; bs.forEach(b => Object.entries((b.dados || {}).q || {}).forEach(([id, n]) => { todosQ[id] = (todosQ[id] || 0) + n; }));
+    const nCartas = Object.keys(todosQ).length, nCopias = Object.values(todosQ).reduce((s, n) => s + n, 0);
     const cab = `<section class="tl-card fv-cab">
         <span class="avatar fv-av" aria-hidden="true">${esc((a.nome || a.usuario).charAt(0).toUpperCase())}</span>
-        <div class="fv-quem"><h2>${esc(a.nome || a.usuario)}</h2><p>@${esc(a.usuario)}${eu ? " · " + esc(t("amThisIsYou")) : ""}</p></div>
+        <div class="fv-quem"><h2>${esc(a.nome || a.usuario)}</h2><p>@${esc(a.usuario)}${eu ? " · " + esc(t("amThisIsYou")) : ""}</p>
+          ${bs.length ? `<p class="fv-resumo">${esc(t("fvSummary", bs.length, nCartas, nCopias))}</p>` : ""}</div>
         <div class="tl-acoes fv-acoes">${rel}<button type="button" class="tl-btn" data-am="copiarPerfil" data-u="${esc(a.usuario)}">${esc(t("amCopyLink"))}</button></div>
+        ${eu ? `<p class="tl-nota fv-eu">${esc(t("fvSelfNote"))}</p>` : ""}
         ${amMsgHTML("perfilAlvo")}
       </section>`;
     if (!bs.length) return `${voltar}${cab}<section class="tl-card"><p class="tl-nota" style="margin:0">${esc(t(eu ? "amNoSharedMe" : sb ? "amNoShared" : "amNoSharedAnon"))}</p></section>`;
-    const b = bs.find(x => x.binder_id === amState.alvoB) || bs[0], d = b.dados || {};
-    const listas = { own: Object.keys(d.q || {}), star: (d.star || []).slice(), fav: (d.fav || []).slice() };
-    Object.values(listas).forEach(l => l.sort(ordCarta));
-    const tabsB = bs.length > 1 ? `<div class="tabs fv-binders" role="group" aria-label="${esc(t("bindersAria"))}">${bs.map(x => `<button type="button" data-am="binder" data-b="${esc(x.binder_id)}" aria-pressed="${x.binder_id === b.binder_id}">${esc(x.nome || t("binderDefault"))}</button>`).join("")}</div>` : `<h3 class="tl-h3">${esc(b.nome || t("binderDefault"))}</h3>`;
+    if (amState.alvoB === MESTRE && bs.length < 2) amState.alvoB = bs[0].binder_id;
+    const atual = fvDados(), listas = fvListas(atual.d);
+    const pilulas = bs.length > 1 ? [{ binder_id: MESTRE, nome: t("bdAll") }].concat(bs) : bs;
+    const tabsB = `<div class="tabs fv-binders" role="group" aria-label="${esc(t("bindersAria"))}">${pilulas.map(x => `<button type="button" data-am="binder" data-b="${esc(x.binder_id)}" aria-pressed="${x.binder_id === amState.alvoB}">${x.binder_id === MESTRE ? VIS_ICON.todos : VIS_ICON[x.vis] || ""}<span>${esc(x.nome || t("binderDefault"))}</span></button>`).join("")}</div>`;
     const filtros = `<div class="tabs" role="group" aria-label="${esc(t("show"))}">${[["own", "amOwned"], ["star", "amWish"], ["fav", "amFavs"]].map(([k, r]) => `<button type="button" data-am="filtro" data-f="${k}" aria-pressed="${amState.filtro === k}">${esc(t(r))} <span class="count">${listas[k].length}</span></button>`).join("")}</div>`;
+    const setsPresentes = [...new Set((listas[amState.filtro] || []).map(id => { const c = POR_ID.get(id); return c && c.set; }).filter(Boolean))]
+      .sort((x, y) => (CARTAS.findIndex(c => c.set === x)) - (CARTAS.findIndex(c => c.set === y)));
+    if (amState.fvSet && !setsPresentes.includes(amState.fvSet)) amState.fvSet = "";
+    const controles = `<div class="fv-ctrl">
+        <label class="search fv-busca"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <input type="search" id="fvBusca" value="${esc(amState.fvBusca || "")}" placeholder="${esc(t("fvSearchPh"))}" aria-label="${esc(t("fvSearchPh"))}" autocomplete="off"></label>
+        <select id="fvSet" aria-label="${esc(t("fvSetLbl"))}"><option value="">${esc(t("fvAllSets"))}</option>${setsPresentes.map(sid => `<option value="${esc(sid)}"${sid === amState.fvSet ? " selected" : ""}>${esc(SETS[sid] ? SETS[sid].name : sid)}</option>`).join("")}</select>
+        <select id="fvOrdem" aria-label="${esc(t("fvSortLbl"))}">${[["set", "fvSortSet"], ["nome", "fvSortName"], ["qtd", "fvSortQty"]].map(([k, r]) => `<option value="${k}"${(amState.fvOrdem || "set") === k ? " selected" : ""}>${esc(t(r))}</option>`).join("")}</select>
+      </div>`;
     const espera = state.status !== "ok" ? `<div class="tl-prog"><span class="spin" aria-hidden="true"></span><p>${esc(t("tlWait"))}</p></div>` : "";
-    return `${voltar}${cab}<section class="tl-card">${tabsB}<div class="fv-filtros">${filtros}<span class="fv-vis">${esc(t("vis_" + b.vis))}</span></div>${espera}${amGrade(listas[amState.filtro] || [], d, amState.filtro)}</section>`;
+    return `${voltar}${cab}<section class="tl-card">${tabsB}<div class="fv-filtros">${filtros}${atual.vis ? visIconeTxt(atual.vis) : ""}</div>${controles}${espera}<div id="fvGradeBox">${fvGradeHTML()}</div></section>`;
   }
+  function fvRedesenharGrade() { const g = $("fvGradeBox"); if (g) g.innerHTML = fvGradeHTML(); }
+
+  /* ---------- Carta ampliada do amigo (só para ver) ---------- */
+  const fvZoom = document.createElement("div");
+  fvZoom.className = "fv-zoom"; fvZoom.id = "fvZoom"; fvZoom.hidden = true;
+  fvZoom.setAttribute("role", "dialog"); fvZoom.setAttribute("aria-modal", "true"); fvZoom.setAttribute("aria-labelledby", "fvzNome");
+  fvZoom.innerHTML = `<div class="fv-zbox">
+      <button type="button" class="zoom-close" data-fvz="fechar" id="fvzFechar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+      <div class="fv-zpalco"><button type="button" class="zoom-nav" data-fvz="ant" id="fvzAnt"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="fv-zimg" id="fvzImg"></div>
+        <button type="button" class="zoom-nav" data-fvz="prox" id="fvzProx"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+      <div class="fv-zinfo"><h2 id="fvzNome"></h2><p id="fvzDet"></p><p id="fvzPos" class="pos"></p><div id="fvzExtra"></div></div>
+    </div>`;
+  document.body.appendChild(fvZoom);
+  let fvZ = { i: 0, volta: null };
+  function fvZoomDesenhar() {
+    const ids = amState.fvIds || [], id = ids[fvZ.i], c = POR_ID.get(id), { d } = fvDados();
+    if (!id) return;
+    const box = $("fvzImg"); box.innerHTML = "";
+    if (c && (c.img || c.fb)) {
+      const img = new Image(); img.referrerPolicy = "no-referrer"; img.alt = c.n + ", " + t("number") + " " + numeroTxt(c);
+      img.addEventListener("error", () => { if (c.fb && img.src !== c.fb) img.src = c.fb; });
+      img.src = c.img ? imgGrande(c) : c.fb; box.appendChild(img);
+    }
+    $("fvzNome").textContent = c ? c.n + " #" + numeroTxt(c) : id;
+    $("fvzDet").textContent = c ? setNome(c) + (SETS[c.set] && SETS[c.set].serieName ? " · " + SETS[c.set].serieName : "") : "";
+    $("fvzPos").textContent = t("fvPos", fvZ.i + 1, ids.length);
+    const q = (d.q || {})[id] || 0, ls = (d.l || {})[id] || [], nm = t("langNames"), quem = amState.alvo.nome || "@" + amState.alvo.usuario;
+    const linhas = [];
+    if (q) linhas.push(`<p class="fvz-l"><strong>${esc(t("fvTheyHave", quem, q))}</strong>${ls.length ? `<span class="fvz-fl">${ls.map(l => `<span class="fl" title="${esc(nm[l])}" aria-label="${esc(nm[l])}">${FLAGS[LANG_FLAG[l]]}</span>`).join("")}</span>` : ""}</p>`);
+    if ((d.star || []).includes(id)) linhas.push(`<p class="fvz-l">${esc(t("fvTheyWant", quem))}</p>`);
+    if ((d.fav || []).includes(id)) linhas.push(`<p class="fvz-l">${esc(t("fvTheyFav", quem))}</p>`);
+    if (!(sb && amState.alvo.user_id === sb.id)) {
+      if (state.own.has(id)) linhas.push(`<p class="fvz-l fvz-eu">${esc(t("fvYouHaveN", state.qty[id] || 1))}</p>`);
+      if (state.star.has(id)) linhas.push(`<p class="fvz-l fvz-eu">${esc(t("amYourWish"))}</p>`);
+    }
+    $("fvzExtra").innerHTML = linhas.join("");
+    $("fvzAnt").disabled = fvZ.i <= 0; $("fvzProx").disabled = fvZ.i >= ids.length - 1;
+    $("fvzAnt").setAttribute("aria-label", t("zPrev")); $("fvzProx").setAttribute("aria-label", t("zNext")); $("fvzFechar").setAttribute("aria-label", t("zClose"));
+  }
+  function fvZoomAbrir(i) { fvZ.i = i; fvZ.volta = document.activeElement; fvZoom.hidden = false; document.body.style.overflow = "hidden"; fvZoomDesenhar(); $("fvzFechar").focus(); }
+  function fvZoomFechar() { fvZoom.hidden = true; document.body.style.overflow = ""; if (fvZ.volta && fvZ.volta.focus) fvZ.volta.focus(); }
+  function fvZoomIr(n) { const ids = amState.fvIds || []; const i = fvZ.i + n; if (i < 0 || i >= ids.length) return; fvZ.i = i; fvZoomDesenhar(); }
+  fvZoom.addEventListener("click", e => {
+    const b = e.target.closest("[data-fvz]");
+    if (b) { if (b.dataset.fvz === "fechar") fvZoomFechar(); else fvZoomIr(b.dataset.fvz === "ant" ? -1 : 1); return; }
+    if (e.target === fvZoom) fvZoomFechar();
+  });
+  document.addEventListener("keydown", e => {
+    if (fvZoom.hidden) return;
+    if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); fvZoomFechar(); }
+    else if (e.key === "ArrowLeft") fvZoomIr(-1);
+    else if (e.key === "ArrowRight") fvZoomIr(1);
+  }, true);
+  let fvToqueX = null;
+  fvZoom.addEventListener("touchstart", e => { fvToqueX = e.touches[0].clientX; }, { passive: true });
+  fvZoom.addEventListener("touchend", e => { if (fvToqueX == null) return; const dx = e.changedTouches[0].clientX - fvToqueX; fvToqueX = null; if (Math.abs(dx) > 50) fvZoomIr(dx < 0 ? 1 : -1); }, { passive: true });
+  $("amCorpo").addEventListener("input", e => {
+    if (e.target.id !== "fvBusca") return;
+    amState.fvBusca = e.target.value; amState.fvLimite = FV_PASSO; fvRedesenharGrade();
+  });
+  $("amCorpo").addEventListener("change", e => {
+    if (e.target.id === "fvSet") { amState.fvSet = e.target.value; amState.fvLimite = FV_PASSO; fvRedesenharGrade(); }
+    else if (e.target.id === "fvOrdem") { amState.fvOrdem = e.target.value; fvRedesenharGrade(); }
+  });
 
   /* ---------- Wishlist compartilhável ---------- */
   function wishLista(id) {
@@ -5422,49 +5828,104 @@
     if (!amState || conta.cfg.area !== "amigos") return;
     const box = $("amCorpo");
     if (!box) return;
+    // guarda o que estava digitado e o foco, para uma atualização em segundo plano não apagar nada
+    const guard = {};
+    ["amAddU", "amUser", "amVerU", "fvBusca"].forEach(id => { const el = $(id); if (el) guard[id] = el.value; });
+    const ativo = document.activeElement, focoId = ativo && box.contains(ativo) ? ativo.id : "";
+    const sel = ativo && "selectionStart" in ativo ? [ativo.selectionStart, ativo.selectionEnd] : null;
+    renderAmigosAgora(box);
+    Object.entries(guard).forEach(([id, v]) => { const el = $(id); if (el && !el.value && v) el.value = v; });
+    if (focoId) { const el = $(focoId); if (el && el !== document.activeElement) { el.focus({ preventScroll: true }); if (sel && el.setSelectionRange) try { el.setSelectionRange(sel[0], sel[1]); } catch (e) { /* sem seleção */ } } }
+  }
+  function renderAmigosAgora(box) {
     if (amState.view === "perfil") { box.innerHTML = `<div class="fv">${amHtmlPerfil()}</div>`; return; }
-    const verPerfil = amSecao("amVerT", ICON_LINK, t("amViewT"), t("amViewD"), `
-      <div class="am-linha"><input type="text" id="amVerU" placeholder="@${esc(t("amUserPh"))}" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="21" value="${esc(amState.buscaU)}" aria-label="${esc(t("amUserLbl"))}">
-      <button type="button" class="tl-btn on" data-am="ver">${esc(t("amOpen"))}</button></div>`);
+    const lupa = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
     if (!sb) {
-      box.innerHTML = `<div class="tl-grid">${amSecao("amEntrarT", ICON_GENTE, t("amLoginT"), t("amLoginD"), `<div class="tl-acoes"><button type="button" class="tl-btn on" data-am="entrar">${esc(t("sbIn"))}</button></div>`)}${verPerfil}</div>`;
+      box.innerHTML = `<div class="am am-solo"><section class="tl-card">
+        <header class="tl-cab"><span class="tl-ic" aria-hidden="true">${ICON_GENTE}</span><h2>${esc(t("amLoginT"))}</h2></header>
+        <p class="tl-desc">${esc(t("amLoginD"))}</p>
+        <div class="tl-acoes" style="margin-top:0"><button type="button" class="tl-btn on" data-am="entrar">${esc(t("sbIn"))}</button></div>
+        <h3 class="tl-h3 am-sep">${esc(t("amViewT"))}</h3>
+        <div class="am-busca"><span class="am-arroba" aria-hidden="true">@</span><input type="text" id="amVerU" placeholder="${esc(t("amUserPh"))}" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="21" value="${esc(amState.buscaU)}" aria-label="${esc(t("amUserLbl"))}">
+          <button type="button" class="tl-btn on" data-am="ver">${lupa}<span>${esc(t("amOpen"))}</span></button></div>
+      </section></div>`;
       return;
     }
     if (!amState.carregado) { box.innerHTML = `<div class="tl-prog"><span class="spin" aria-hidden="true"></span><p>${esc(t("sbSyncing"))}</p></div>`; if (!amState.carregando) amCarregar(); return; }
-    if (amState.erro) { box.innerHTML = `<div class="tl-grid">${amSecao("amErrT", ICON_GENTE, t("areaFriends"), "", `<p class="tl-erro" role="alert">${esc(amState.erro)}</p><div class="tl-acoes"><button type="button" class="tl-btn on" data-am="recarregar">${esc(t("retry"))}</button></div>`)}</div>`; return; }
+    if (amState.erro) { box.innerHTML = `<div class="am am-solo"><section class="tl-card"><p class="tl-erro" role="alert" style="margin-top:0">${esc(amState.erro)}</p><div class="tl-acoes"><button type="button" class="tl-btn on" data-am="recarregar">${esc(t("retry"))}</button></div></section></div>`; return; }
     const p = amState.perfil;
-    const campoUser = `<div class="am-linha"><span class="am-arroba" aria-hidden="true">@</span><input type="text" id="amUser" value="${esc(p ? p.usuario : "")}" maxlength="20" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="${esc(t("amUserLbl"))}">
-      <button type="button" class="tl-btn on" data-am="salvarUser">${esc(t("sbSave2"))}</button></div><p class="tl-nota">${esc(t("amUserRule"))}</p>`;
-    if (!p) { box.innerHTML = `<div class="tl-grid">${amSecao("amUserT", ICON_GENTE, t("amUserT"), t("amUserD"), campoUser + amMsgHTML("perfil"))}</div>`; return; }
-    const perfil = amSecao("amPerfilT", ICON_GENTE, t("amProfileT"), t("amProfileD"), amState.editUser ? campoUser + amMsgHTML("perfil") : `
-      <p class="am-eu"><strong>${esc(p.nome || conta.perfil && conta.perfil.nome || "")}</strong> <span>@${esc(p.usuario)}</span></p>
-      <div class="tl-acoes"><button type="button" class="tl-btn on" data-am="copiarPerfil" data-u="${esc(p.usuario)}">${esc(t("amCopyLink"))}</button>
-      <button type="button" class="tl-btn" data-am="verEu">${esc(t("amSeeMine"))}</button><button type="button" class="tl-btn" data-am="editUser">${esc(t("amEditUser"))}</button></div>${amMsgHTML("perfil")}`);
-    const add = amSecao("amAddT", ICON_MAIS, t("amAddT"), t("amAddD"), `
-      <div class="am-linha"><span class="am-arroba" aria-hidden="true">@</span><input type="text" id="amAddU" placeholder="${esc(t("amUserPh"))}" maxlength="21" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="${esc(t("amUserLbl"))}">
-      <button type="button" class="tl-btn on" data-am="add">${esc(t("amAddBtn"))}</button></div>${amMsgHTML("add")}
-      ${amState.recebidos.length ? `<h3 class="tl-h3">${esc(t("amReceived"))} <span class="tl-n">${amState.recebidos.length}</span></h3><ul class="am-lista">${amState.recebidos.map(x => amPessoa(x, `<button type="button" class="tl-btn on" data-am="aceitar" data-id="${esc(x.user_id)}">${esc(t("amAccept"))}</button><button type="button" class="tl-btn" data-am="recusar" data-id="${esc(x.user_id)}">${esc(t("amDecline"))}</button>`)).join("")}</ul>` : ""}
-      ${amState.enviados.length ? `<h3 class="tl-h3">${esc(t("amSentLbl"))} <span class="tl-n">${amState.enviados.length}</span></h3><ul class="am-lista">${amState.enviados.map(x => amPessoa(x, `<button type="button" class="tl-btn" data-am="cancelar" data-id="${esc(x.user_id)}">${esc(t("amCancel"))}</button>`)).join("")}</ul>` : ""}`);
-    const amigos = amSecao("amListaT", ICON_GENTE, t("amFriendsT") + (amState.amigos.length ? " (" + amState.amigos.length + ")" : ""), "", amState.amigos.length
-      ? `<ul class="am-lista">${amState.amigos.map(x => amPessoa(x, `<button type="button" class="tl-btn on" data-am="verAmigo" data-u="${esc(x.usuario)}"${x.usuario ? "" : " disabled"}>${esc(t("amSeeColl"))}</button><button type="button" class="tl-btn am-x" data-am="remover" data-id="${esc(x.user_id)}" aria-label="${esc(t("amRemove"))}: ${esc(x.nome || x.usuario)}" title="${esc(t("amRemove"))}">×</button>`)).join("")}</ul>${amMsgHTML("lista")}`
-      : `<p class="tl-nota" style="margin:0">${esc(t("amNoFriends"))}</p>`);
-    if (!bnd.lista.some(b => b.id === amState.wishB)) amState.wishB = bnd.atual;
-    const wb = bnd.lista.find(b => b.id === amState.wishB), wl = wishLista(amState.wishB), priv = !wb || wb.vis === "privado";
-    const wish = amSecao("amWishT", ICON_ESTRELA, t("amWishT"), t("amWishD"), `
-      <div class="field am-sel"><label for="amWishSel">${esc(t("amWishBinder"))}</label><select id="amWishSel">${bnd.lista.map(b => `<option value="${esc(b.id)}"${b.id === amState.wishB ? " selected" : ""}>${esc(nomeBinder(b))} · ${esc(t("vis_" + (b.vis || "privado")))}</option>`).join("")}</select></div>
-      <p class="tl-nota">${esc(t("amWishCount", wl.length))}</p>
-      ${wl.length ? `<ul class="tl-mini am-wl">${wl.slice(0, 6).map(x => `<li>${esc(x.c ? x.c.n : x.id)}${x.c ? `<small> #${esc(numeroTxt(x.c))}</small>` : ""}</li>`).join("")}</ul>${wl.length > 6 ? `<p class="tl-nota">${esc(t("tlMore", wl.length - 6))}</p>` : ""}` : ""}
-      <div class="tl-acoes"><button type="button" class="tl-btn on" data-am="wishLink"${priv || !wl.length ? " disabled" : ""}>${esc(t("amCopyLink"))}</button>
-      <button type="button" class="tl-btn" data-am="wishTxt"${wl.length ? "" : " disabled"}>${esc(t("tlCopy"))}</button>
-      <button type="button" class="tl-btn" data-am="wishImg"${wl.length ? "" : " disabled"}>${esc(t("tlImg"))}</button></div>
-      ${priv ? `<p class="tl-nota">${esc(t("amWishPriv"))}</p>` : ""}${amMsgHTML("wish")}`);
-    box.innerHTML = `<div class="tl-grid">${perfil}${add}${amigos}${wish}${verPerfil}</div>`;
+    const campoUser = `<div class="am-busca"><span class="am-arroba" aria-hidden="true">@</span><input type="text" id="amUser" value="${esc(p ? p.usuario : "")}" maxlength="20" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="${esc(t("amUserLbl"))}">
+      <button type="button" class="tl-btn on" data-am="salvarUser">${esc(t("sbSave2"))}</button>${p ? `<button type="button" class="tl-btn" data-am="cancelUser">${esc(t("amCancel"))}</button>` : ""}</div><p class="tl-nota">${esc(t("amUserRule"))}</p>`;
+    if (!p) {
+      box.innerHTML = `<div class="am am-solo"><section class="tl-card"><header class="tl-cab"><span class="tl-ic" aria-hidden="true">${ICON_GENTE}</span><h2>${esc(t("amUserT"))}</h2></header><p class="tl-desc">${esc(t("amUserD"))}</p>${campoUser}${amMsgHTML("perfil")}</section></div>`;
+      return;
+    }
+    const aba = ["amigos", "privacidade", "wishlist"].includes(amState.aba) ? amState.aba : "amigos";
+    const nPed = amState.recebidos.length;
+    // cabeçalho compacto: quem sou eu + link do perfil + atualizar
+    const cab = `<div class="am-cab">
+        <span class="avatar am-av" aria-hidden="true">${esc((p.nome || p.usuario).charAt(0).toUpperCase())}</span>
+        <div class="am-quem"><strong>${esc(p.nome || (conta.perfil && conta.perfil.nome) || p.usuario)}</strong><small>@${esc(p.usuario)}</small></div>
+        <button type="button" class="tl-btn am-cab-bt" data-am="copiarPerfil" data-u="${esc(p.usuario)}">${ICON_LINK}<span>${esc(t("amCopyLink"))}</span></button>
+        <button type="button" class="tl-btn am-ic-bt" data-am="recarregar"${amState.carregando ? " disabled" : ""} aria-label="${esc(t("amRefresh"))}" title="${esc(t("amRefresh"))}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 11a8 8 0 10-2.3 5.7M20 5v6h-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>${amMsgHTML("perfil")}`;
+    const abas = `<div class="tabs am-abas" role="tablist" aria-label="${esc(t("areaFriends"))}">${[
+        ["amigos", t("amFriendsT"), amState.amigos.length, nPed],
+        ["privacidade", t("amTabPriv"), 0, 0],
+        ["wishlist", t("amWish"), wishLista(amState.wishB).length, 0]
+      ].map(([k, rot, n, ped]) => `<button type="button" role="tab" id="amTab-${k}" aria-controls="amPainel" aria-selected="${k === aba}" aria-pressed="${k === aba}" tabindex="${k === aba ? 0 : -1}" data-am="aba" data-aba="${k}">${esc(rot)}${n ? ` <span class="count">${n}</span>` : ""}${ped ? `<span class="am-badge" aria-label="${esc(t("amBadgeLbl", ped))}">${ped}</span>` : ""}</button>`).join("")}</div>`;
+    let painel = "";
+    if (aba === "amigos") {
+      const pedidos = nPed ? `<div class="am-pedidos"><h3 class="tl-h3">${esc(t("amReceived"))} <span class="tl-n">${nPed}</span></h3><ul class="am-lista">${amState.recebidos.map(x => amPessoa(x,
+          `<button type="button" class="tl-btn on" data-am="aceitar" data-id="${esc(x.user_id)}">${esc(t("amAccept"))}</button><button type="button" class="tl-btn" data-am="recusar" data-id="${esc(x.user_id)}">${esc(t("amDecline"))}</button>`)).join("")}</ul>${amMsgHTML("pedidos")}</div>` : "";
+      const lista = amState.amigos.length ? `<ul class="am-grade">${amState.amigos.map(x => `<li class="am-amigo">
+          <button type="button" class="am-amigo-bt" data-am="verAmigo" data-u="${esc(x.usuario)}"${x.usuario ? "" : " disabled"} aria-label="${esc(t("amSeeColl") + ": " + (x.nome || x.usuario))}">
+            <span class="avatar am-av" aria-hidden="true">${esc((x.nome || x.usuario || "?").charAt(0).toUpperCase())}</span>
+            <span class="am-quem"><strong>${esc(x.nome || x.usuario)}</strong>${x.usuario ? `<small>@${esc(x.usuario)}</small>` : ""}</span>
+            <span class="am-seta" aria-hidden="true">›</span></button>
+          <button type="button" class="am-x" data-am="remover" data-id="${esc(x.user_id)}" aria-label="${esc(t("amRemove"))}: ${esc(x.nome || x.usuario)}" title="${esc(t("amRemove"))}">×</button></li>`).join("")}</ul>`
+        : `<p class="tl-nota am-vazio">${esc(t("amNoFriends"))}</p>`;
+      const enviados = amState.enviados.length ? `<div class="am-env"><span>${esc(t("amSentLbl"))}:</span>${amState.enviados.map(x => `<span class="am-chip">@${esc(x.usuario || "?")}<button type="button" data-am="cancelar" data-id="${esc(x.user_id)}" aria-label="${esc(t("amCancel"))}: @${esc(x.usuario || "")}" title="${esc(t("amCancel"))}">×</button></span>`).join("")}</div>` : "";
+      painel = `<div class="am-busca"><span class="am-arroba" aria-hidden="true">@</span><input type="text" id="amAddU" placeholder="${esc(t("amFindPh"))}" maxlength="21" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="${esc(t("amUserLbl"))}">
+          <button type="button" class="tl-btn on" data-am="add">${esc(t("amAddBtn"))}</button><button type="button" class="tl-btn" data-am="ver">${esc(t("amOpen"))}</button></div>
+        ${amMsgHTML("add")}${enviados}${pedidos}
+        <h3 class="tl-h3 am-sep">${esc(t("amFriendsT"))} <span class="tl-n">${amState.amigos.length}</span></h3>${lista}${amMsgHTML("lista")}`;
+    } else if (aba === "privacidade") {
+      painel = `<h3 class="tl-h3" style="margin-top:0">${esc(t("amUserLbl"))}</h3>
+        ${amState.editUser ? campoUser : `<div class="am-linha-info"><span class="am-eu">@${esc(p.usuario)}</span><button type="button" class="tl-btn" data-am="editUser">${esc(t("amEditUser"))}</button></div>`}
+        <h3 class="tl-h3 am-sep">${esc(t("visManT"))}</h3>
+        <p class="tl-nota" style="margin:0 0 6px">${esc(t("visManD"))}</p>
+        <ul class="vis-lista">${bnd.lista.map(b => {
+          const v = AM_VIS.includes(b.vis) ? b.vis : "privado", n = Object.keys(dadosBinder(b.id).cop || {}).length;
+          return `<li><div class="vis-nome"><strong>${esc(nomeBinder(b))}</strong><small>${esc(t("visCards", n))} · ${esc(t(v === "privado" ? "visNotePriv" : v === "amigos" ? "visNoteFr" : "visNotePub"))}</small></div>${visSeg(v, b.id, t("visLbl") + ": " + nomeBinder(b))}</li>`;
+        }).join("")}</ul>${amMsgHTML("vis")}
+        <div class="tl-acoes"><button type="button" class="tl-btn" data-am="verEu">${esc(t("visPreview"))}</button></div>`;
+    } else {
+      if (!bnd.lista.some(b => b.id === amState.wishB)) amState.wishB = bnd.atual === MESTRE ? bnd.lista[0].id : bnd.atual;
+      const wb = bnd.lista.find(b => b.id === amState.wishB), wl = wishLista(amState.wishB), priv = !wb || wb.vis === "privado";
+      painel = `<p class="tl-nota" style="margin:0 0 10px">${esc(t("amWishD"))}</p>
+        <div class="am-wish-top"><div class="field am-sel"><label for="amWishSel">${esc(t("amWishBinder"))}</label><select id="amWishSel">${bnd.lista.map(b => `<option value="${esc(b.id)}"${b.id === amState.wishB ? " selected" : ""}>${esc(nomeBinder(b))} · ${esc(t("vis_" + (b.vis || "privado")))}</option>`).join("")}</select></div>
+          <span class="am-wish-n">${esc(t("amWishCount", wl.length))}</span></div>
+        ${wl.length ? `<ul class="am-wl">${wl.slice(0, 8).map(x => `<li>${esc(x.c ? x.c.n : x.id)}${x.c ? `<small>#${esc(numeroTxt(x.c))}</small>` : ""}</li>`).join("")}${wl.length > 8 ? `<li class="am-wl-mais">${esc(t("tlMore", wl.length - 8))}</li>` : ""}</ul>` : ""}
+        <div class="tl-acoes"><button type="button" class="tl-btn on" data-am="wishLink"${priv || !wl.length ? " disabled" : ""}>${ICON_LINK}<span>${esc(t("amCopyLink"))}</span></button>
+          <button type="button" class="tl-btn" data-am="wishTxt"${wl.length ? "" : " disabled"}>${esc(t("tlCopy"))}</button>
+          <button type="button" class="tl-btn" data-am="wishImg"${wl.length ? "" : " disabled"}>${esc(t("tlImg"))}</button></div>
+        ${priv ? `<p class="tl-nota">${VIS_ICON.privado} ${esc(t("amWishPriv"))}</p>` : ""}${amMsgHTML("wish")}`;
+    }
+    box.innerHTML = `<div class="am">${cab}${abas}<section class="tl-card am-painel" id="amPainel" role="tabpanel" aria-labelledby="amTab-${aba}">${painel}</section></div>`;
   }
   $("amCorpo").addEventListener("error", e => {
     const img = e.target;
     if (img.tagName === "IMG" && img.dataset.fb && img.src !== img.dataset.fb) { img.src = img.dataset.fb; img.dataset.fb = ""; }
   }, true);
   $("amCorpo").addEventListener("keydown", e => {
+    const tab = e.target.closest && e.target.closest('[data-am="aba"]');
+    if (tab && (e.key === "ArrowLeft" || e.key === "ArrowRight")) {
+      e.preventDefault();
+      const abas = ["amigos", "privacidade", "wishlist"], i = abas.indexOf(tab.dataset.aba);
+      amState.aba = abas[(i + (e.key === "ArrowLeft" ? -1 : 1) + abas.length) % abas.length]; amState.msg = null; renderAmigos();
+      const f = $("amTab-" + amState.aba); if (f) f.focus(); return;
+    }
     if (e.key !== "Enter") return;
     if (e.target.id === "amAddU") { e.preventDefault(); amAdicionar(e.target.value); }
     else if (e.target.id === "amUser") { e.preventDefault(); amSalvarUsuario(); }
@@ -5476,19 +5937,23 @@
     const a = b.dataset.am, id = b.dataset.id;
     try {
       if (a === "entrar") abrirPainel();
-      else if (a === "recarregar") { amState.carregado = false; amCarregar(); }
+      else if (a === "recarregar") { if (amState.erro) amState.carregado = false; amState.erro = ""; amCarregar(); }
       else if (a === "salvarUser") amSalvarUsuario();
       else if (a === "editUser") { amState.editUser = true; amState.msg = null; renderAmigos(); const i = $("amUser"); if (i) { i.focus(); i.select(); } }
       else if (a === "copiarPerfil") amMsg(amState.view === "perfil" ? "perfilAlvo" : "perfil", (await copiar(urlPerfil(b.dataset.u))) ? t("tlCopied") : t("tlCopyErr"));
       else if (a === "verEu") amAbrirPerfil(amState.perfil.usuario);
-      else if (a === "ver") { amState.buscaU = $("amVerU").value; amAbrirPerfil($("amVerU").value); }
+      else if (a === "ver") { const i = $("amAddU") || $("amVerU"); amState.buscaU = i.value; if (!limparUsuario(i.value)) { i.focus(); return; } amAbrirPerfil(i.value); }
+      else if (a === "aba") { amState.aba = b.dataset.aba; amState.msg = null; amState.editUser = false; renderAmigos(); const f = $("amTab-" + b.dataset.aba); if (f) f.focus(); }
+      else if (a === "cancelUser") { amState.editUser = false; renderAmigos(); }
       else if (a === "verAmigo") amAbrirPerfil(b.dataset.u);
       else if (a === "voltar") amFecharPerfil();
-      else if (a === "binder") { amState.alvoB = b.dataset.b; renderAmigos(); }
-      else if (a === "filtro") { amState.filtro = b.dataset.f; renderAmigos(); const f = $("amCorpo").querySelector(`[data-f="${b.dataset.f}"]`); if (f) f.focus(); }
+      else if (a === "binder") { amState.alvoB = b.dataset.b; amState.fvSet = ""; amState.fvLimite = FV_PASSO; renderAmigos(); const f = $("amCorpo").querySelector(`[data-am="binder"][data-b="${CSS.escape(b.dataset.b)}"]`); if (f) f.focus(); }
+      else if (a === "fvAbrir") fvZoomAbrir(Number(b.dataset.i));
+      else if (a === "fvMais") { const de = amState.fvLimite || FV_PASSO; amState.fvLimite = de + FV_PASSO; fvRedesenharGrade(); const nb = $("fvGradeBox").querySelectorAll(".fv-bt")[de]; if (nb) nb.focus(); }
+      else if (a === "filtro") { amState.filtro = b.dataset.f; amState.fvSet = ""; amState.fvLimite = FV_PASSO; renderAmigos(); const f = $("amCorpo").querySelector(`[data-f="${b.dataset.f}"]`); if (f) f.focus(); }
       else if (a === "add") amAdicionar($("amAddU").value);
       else if (a === "addPerfil") { await amAdicionar(b.dataset.u, "perfilAlvo"); }
-      else if (a === "aceitar") { await amAceitar(id); amMsg(amState.view === "perfil" ? "perfilAlvo" : "add", t("amAccepted")); }
+      else if (a === "aceitar") { await amAceitar(id); amMsg(amState.view === "perfil" ? "perfilAlvo" : "lista", t("amAccepted")); }
       else if (a === "recusar" || a === "cancelar") await amRemover(id);
       else if (a === "remover") { const p = amState.amigos.find(x => x.user_id === id); if (confirm(t("amRemoveAsk", p ? p.nome || p.usuario : ""))) await amRemover(id); }
       else if (a === "wishLink") amMsg("wish", (await copiar(urlPerfil(amState.perfil.usuario, amState.wishB, "wish"))) ? t("tlCopied") : t("tlCopyErr"));
@@ -5506,7 +5971,7 @@
       sb.ultimo = rem.em; sb.sujo = false; sbGuardar();
     } finally { sbAplicando = false; }
     const nb = carregarBinders(); bnd.lista = nb.lista; bnd.atual = nb.atual;
-    const d = carregar(chaveBinder(bnd.atual));
+    const d = carregarVisao(bnd.atual);
     state.cop = d.cop || {}; state.fav = d.fav; state.star = d.star;
     state.qty = {}; state.langs = {}; state.own = new Set();
     Object.keys(state.cop).forEach(sincronizar);
@@ -5558,6 +6023,40 @@
     else if (e.target.closest("#termosFechar") || e.target === termosModal) fecharTermos();
   });
   document.addEventListener("keydown", e => { if (e.key === "Escape" && !termosModal.hidden) { e.stopPropagation(); fecharTermos(); } }, true);
+
+  /* ---------- Binder mestre: bloqueia edições e explica onde editar ---------- */
+  const EDITA_SEL = '#grid button[data-act]:not([data-act="zoom"]):not([data-act="own"]), #dGrid button[data-act="omais"], #dGrid button[data-act="omenos"], #zFav, #zStar, #zOwn, #zDec, #zInc, #reset, [data-tl="import"], [data-tl="impOk"]';
+  document.addEventListener("click", e => {
+    if (bnd.atual !== MESTRE) return;
+    const b = e.target.closest("button");
+    if (!b) return;
+    if (b.matches('#grid button[data-act="own"]')) {
+      // "Tenho" no mestre só abre a carta (mostra em quais binders ela está)
+      e.preventDefault(); e.stopPropagation();
+      state.qtyOpen = null; abrirZoom(b.closest(".cell").dataset.id); avisoMestre(); return;
+    }
+    if (!b.matches(EDITA_SEL)) return;
+    e.preventDefault(); e.stopPropagation(); avisoMestre();
+  }, true);
+  let mestreAvisoT = 0;
+  function avisoMestre() {
+    const z = $("zoom"), aberto = z && !z.hidden;
+    const el = aberto ? $("zOnde") : $("bdMestreNota");
+    if (!el) return;
+    if (!aberto) el.textContent = t("bdAllBlock");
+    el.classList.remove("piscar"); void el.offsetWidth; el.classList.add("piscar");
+    clearTimeout(mestreAvisoT);
+    if (!aberto) mestreAvisoT = setTimeout(() => { const n = $("bdMestreNota"); if (n) n.textContent = t("bdAllNote", bnd.lista.length); }, 4000);
+  }
+  const MESTRE_TXT = {
+    en: { bdAll: "All binders", bdAllTip: "See every card from all your binders together", bdAllNote: n => "Overview of your " + n + " binders together. To edit a card, open the binder it is in.",
+      bdAllBlock: "This is the overview of all binders. Open a binder to add or change cards.", bdWhere: "In:", bdNowhere: "Not in any binder yet." },
+    pt: { bdAll: "Todos os binders", bdAllTip: "Ver todas as cartas de todos os seus binders juntas", bdAllNote: n => "Visão geral dos seus " + n + " binders juntos. Para editar uma carta, abra o binder em que ela está.",
+      bdAllBlock: "Esta é a visão geral de todos os binders. Abra um binder para adicionar ou alterar cartas.", bdWhere: "Em:", bdNowhere: "Ainda não está em nenhum binder." },
+    ja: { bdAll: "すべてのバインダー", bdAllTip: "すべてのバインダーのカードをまとめて見る", bdAllNote: n => n + "つのバインダーをまとめて表示しています。カードを編集するには、そのカードがあるバインダーを開いてください。",
+      bdAllBlock: "ここはすべてのバインダーのまとめ表示です。カードの追加や変更はバインダーを開いて行ってください。", bdWhere: "場所：", bdNowhere: "まだどのバインダーにもありません。" }
+  };
+  Object.keys(MESTRE_TXT).forEach(l => Object.assign(I18N[l], MESTRE_TXT[l]));
 
   /* ---------- Link de perfil (?u=usuario&b=binder&v=wish) ---------- */
   {
