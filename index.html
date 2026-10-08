@@ -2266,11 +2266,30 @@
   }
   // próxima imagem a tentar quando uma falha: TCGdex → pokemontcg.io → galeria oficial
   function proximaImg(img, c, grande) {
-    const lista = [grande ? c.pg : c.pi, c.fb].filter(Boolean);
+    const lista = [grande ? c.pg : c.pi, c.fb].concat(imgsOutrosIdiomas(c, grande)).filter(Boolean);
     const i = parseInt(img.dataset.alt || "0", 10);
     for (let k = i; k < lista.length; k++) if (lista[k] && img.src !== lista[k]) { img.dataset.alt = String(k + 1); return lista[k]; }
     img.dataset.alt = String(lista.length);
     return "";
+  }
+  // Última fonte: a imagem do TCGplayer. O código do produto vem do detalhe da carta na TCGdex.
+  function tpProdutoId(d) {
+    const tp = d && d.pricing && d.pricing.tcgplayer;
+    if (!tp) return "";
+    if (tp.productId) return String(tp.productId);
+    for (const k of Object.keys(tp)) { const v = tp[k]; if (v && typeof v === "object" && v.productId) return String(v.productId); }
+    return "";
+  }
+  const tpUrl = id => id ? `https://product-images.tcgplayer.com/fit-in/437x610/${encodeURIComponent(id)}.jpg` : "";
+  // devolve true se está tentando (a imagem será trocada quando a busca terminar); false se não há mais o que tentar
+  function tentarTp(img, c, fim) {
+    if (img.dataset.tp === "1") return false;                 // a do TCGplayer também falhou
+    const usar = u => { if (u && img.isConnected) { img.dataset.tp = "1"; img.src = u; } else if (fim) fim(); };
+    if (c.tp) { usar(c.tp); return true; }
+    if (c.tp === "") return false;
+    if (/^ptcg-/.test(c.set)) { c.tp = ""; return false; }
+    dadosCarta(c.id).then(d => { c.tp = tpUrl(tpProdutoId(d)); usar(c.tp); }).catch(() => { c.tp = ""; if (fim) fim(); });
+    return true;
   }
 
 
@@ -2493,8 +2512,16 @@
     aplicarRar();
   }
 
-  const imgPequena = c => c.img ? c.img + "/low.webp" : c.pi || c.fb;
-  const imgGrande = c => c.img ? c.img + "/high.webp" : c.pg || c.pi || c.fb;
+  // Coleções sem imagem em inglês na TCGdex: tenta os mesmos arquivos nos outros idiomas
+  const LANGS_ASSET = ["ja", "fr", "de", "es", "it", "pt"];
+  function imgsOutrosIdiomas(c, grande) {
+    const st = SETS[c.set];
+    if (!st || st.ptcg || !st.serie || !c.lid) return [];
+    const ext = grande ? "/high.webp" : "/low.webp";
+    return LANGS_ASSET.map(g => `https://assets.tcgdex.net/${g}/${encodeURIComponent(st.serie)}/${encodeURIComponent(c.set)}/${encodeURIComponent(c.lid)}${ext}`);
+  }
+  const imgPequena = c => c.img ? c.img + "/low.webp" : c.pi || c.fb || imgsOutrosIdiomas(c, false)[0] || "";
+  const imgGrande = c => c.img ? c.img + "/high.webp" : c.pg || c.pi || c.fb || imgsOutrosIdiomas(c, true)[0] || "";
   // Candidatas de maior qualidade para o zoom: pokemontcg.io (hires) e PNG sem perdas da TCGdex
   function imgsMelhores(c) {
     const l = [];
@@ -2775,9 +2802,9 @@
     const c = POR_ID.get(cell.dataset.id);
     if (!c) return;
     const nx = proximaImg(img, c, false); if (nx) { img.src = nx; return; }
-    const div = document.createElement("div");
-    div.innerHTML = fallbackHTML(c);
-    img.replaceWith(div.firstElementChild);
+    const semImg = () => { const div = document.createElement("div"); div.innerHTML = fallbackHTML(c); if (img.isConnected) img.replaceWith(div.firstElementChild); };
+    if (tentarTp(img, c, semImg)) return;
+    semImg();
   }, true);
 
   /* ---------- Quantidade, posse e idiomas ---------- */
@@ -3084,7 +3111,9 @@
       img.alt = `${c.n}, ${t("number")} ${num}, ${setNome(c)}`;
       img.addEventListener("error", () => {
         const nx = proximaImg(img, c, true); if (nx) { img.src = nx; return; }
-        limparCard3D(box); box.innerHTML = fallbackHTML(c); $("zFx").hidden = true;
+        const semImg = () => { if (box._c3dId !== c.id) return; limparCard3D(box); box.innerHTML = fallbackHTML(c); $("zFx").hidden = true; };
+        if (tentarTp(img, c, semImg)) return;
+        semImg();
       });
       img.src = src;
       iniciarCard3D(box, img, c, { onFin: desenharFx, intro: box._c3dId !== c.id });
@@ -3349,8 +3378,40 @@
     }
     const pid = pidDoSet(st);
     if (pid) l.push(`https://images.pokemontcg.io/${encodeURIComponent(pid)}/${tipo === "logo" ? "logo" : "symbol"}.png`);
+    // logo ou símbolo que existe só em outro idioma da TCGdex
+    if (!st.ptcg && st.serie) LANGS_ASSET.forEach(g => l.push(`${ASSETS.replace(/\/en$/, "/" + g)}/${encodeURIComponent(st.serie)}/${encodeURIComponent(st.id)}/${tipo}.webp`));
+    // coleção parecida na pokemontcg.io (nome com as mesmas palavras)
+    const pp = ptcgParecido(st);
+    if (pp && pp.images && pp.images[tipo === "logo" ? "logo" : "symbol"]) l.push(pp.images[tipo === "logo" ? "logo" : "symbol"]);
+    // família de coleções (McDonald's, Trainer Kit…): usa o logo de uma coleção irmã
+    if (tipo === "logo") irmasDe(st).forEach(o => { const b = o.logo; if (b) l.push(imgLogo(b)); });
     return l.filter((u, i) => u && l.indexOf(u) === i);
   }
+  const palavrasSet = n => norm(String(n || "")).replace(/&/g, " and ").split(/[^a-z0-9]+/).filter(w => w && !["the", "of", "and", "set", "collection", "series", "pokemon"].includes(w));
+  function ptcgParecido(st) {
+    if (!PTCG_DADOS || !Array.isArray(PTCG_DADOS.sets)) return null;
+    if (st._pp !== undefined) return st._pp;
+    const a = palavrasSet(st.name);
+    let melhor = null, nota = 0;
+    if (a.length) PTCG_DADOS.sets.forEach(ps => {
+      const b = palavrasSet(ps.name);
+      if (!b.length) return;
+      const comum = a.filter(w => b.includes(w)).length;
+      if (comum < a.length && comum < b.length) return;      // um precisa estar dentro do outro
+      const n = comum / (a.length + b.length - comum);
+      if (n > nota && n >= 0.6) { nota = n; melhor = ps; }
+    });
+    return (st._pp = melhor);
+  }
+  // coleções da mesma família que já têm logo (mesmo começo de nome, ex.: "McDonald's Collection 2022")
+  function irmasDe(st) {
+    const w = palavrasSet(st.name);
+    if (!w.length || !/^mcdonald/.test(w[0])) return [];
+    // o logo do McDonald's (o "M" dourado) vale para todos os anos, menos 2022 que tem o logo Match Battle
+    return Object.values(SETS).filter(o => o !== st && o.logo && /^mcdonald/.test(palavrasSet(o.name)[0] || "") && !/2022/.test(o.name))
+      .sort((x, y) => Math.abs((parseInt(stAno(x), 10) || 0) - (parseInt(stAno(st), 10) || 0)) - Math.abs((parseInt(stAno(y), 10) || 0) - (parseInt(stAno(st), 10) || 0))).slice(0, 4);
+  }
+
   const imgSetHTML = (st, tipo, cls) => {
     const l = urlsSet(st, tipo);
     if (!l.length) return "";
@@ -3431,6 +3492,14 @@
     }
     catch (e) { SET_DET.set(id, null); return null; }
   }
+  $("stDet").addEventListener("error", e => {
+    const img = e.target;
+    if (!(img instanceof HTMLImageElement) || !img.closest(".st-cartas")) return;
+    const z = img.closest("[data-stz]"), c = z && POR_ID.get(z.dataset.stz);
+    if (!c) return;
+    const nx = proximaImg(img, c, false); if (nx) { img.src = nx; return; }
+    tentarTp(img, c, () => {});
+  }, true);
   function renderSetDet() {
     const st = SETS[stState.aberto];
     if (!st) { stState.aberto = null; renderSets(); return; }
@@ -3766,9 +3835,9 @@
     const c = POR_ID.get(img.closest(".cell").dataset.id);
     if (!c) return;
     const nx = proximaImg(img, c, false); if (nx) { img.src = nx; return; }
-    const div = document.createElement("div");
-    div.innerHTML = fallbackHTML(c);
-    img.replaceWith(div.firstElementChild);
+    const semImg = () => { const div = document.createElement("div"); div.innerHTML = fallbackHTML(c); if (img.isConnected) img.replaceWith(div.firstElementChild); };
+    if (tentarTp(img, c, semImg)) return;
+    semImg();
   }, true);
   dGrid.addEventListener("click", e => {
     const b = e.target.closest("button[data-act]");
