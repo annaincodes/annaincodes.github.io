@@ -267,6 +267,39 @@
   .ficha .pill { display: inline-flex; align-items: center; gap: 6px; border-color: rgba(74, 27, 48, 0.5); background: rgba(255, 255, 255, 0.85); color: #3A1626; }
   .ficha-som-erro { margin: 6px 0 0; min-height: 0; font-size: 0.85rem; font-weight: 600; color: #8A1C33; }
   .ficha-som-erro:empty { display: none; }
+  .ficha-abas { display: flex; gap: 6px; padding: 12px 18px 0; border-bottom: 1px solid rgba(74, 27, 48, 0.1); }
+  .ficha-abas button { position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 9px 14px 11px; border: 0; background: none; font: 700 0.92rem "Figtree", system-ui, sans-serif; color: #8A6B78; cursor: pointer; border-radius: 10px 10px 0 0; }
+  .ficha-abas button[aria-selected="true"] { color: #2A1C22; }
+  .ficha-abas button[aria-selected="true"]::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: -1px; height: 3px; border-radius: 3px; background: var(--tc, #C9A6B6); filter: saturate(1.2) brightness(0.85); }
+  .ficha-abas button:hover { color: #2A1C22; background: rgba(74, 27, 48, 0.04); }
+  .ficha-abas button:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+  .ficha-abas .count { padding: 1px 8px; border-radius: 99px; background: rgba(74, 27, 48, 0.08); font-size: 0.74rem; font-weight: 800; color: #6B4A58; }
+  .ficha-abas .count:empty { display: none; }
+  .ficha-corpo[hidden], .ficha-cartas[hidden] { display: none; }
+  .ficha-cartas { padding: 16px 18px 22px; }
+  .xc-topo { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-bottom: 14px; }
+  .xc-filtro { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 4px; border-radius: 99px; background: #FFFFFF; box-shadow: 0 0 0 1px rgba(74, 27, 48, 0.08); }
+  .xc-filtro button { height: 32px; padding: 0 14px; border: 0; border-radius: 99px; background: none; font: 700 0.84rem "Figtree", system-ui, sans-serif; color: #7A5A68; cursor: pointer; }
+  .xc-filtro button span { opacity: 0.7; font-weight: 600; }
+  .xc-filtro button[aria-pressed="true"] { background: #2A1C22; color: #FFFFFF; }
+  .xc-filtro button:focus-visible, .xc-carta:focus-visible, .xc-mais:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .xc-prog { flex: 1 1 120px; max-width: 260px; height: 6px; border-radius: 99px; background: rgba(74, 27, 48, 0.08); overflow: hidden; }
+  .xc-prog i { display: block; height: 100%; border-radius: inherit; background: var(--tc, #C9A6B6); filter: saturate(1.2) brightness(0.85); }
+  .xc-grade { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 16px 12px; }
+  .xc-carta { display: flex; flex-direction: column; gap: 3px; width: 100%; padding: 0; border: 0; background: none; text-align: left; cursor: pointer; font: inherit; color: inherit; }
+  .xc-img { position: relative; display: block; aspect-ratio: 63 / 88; border-radius: 6%; overflow: hidden; background: linear-gradient(160deg, #F1E7EC, #E7D9E0); box-shadow: 0 1px 2px rgba(42, 28, 34, 0.12), 0 6px 14px rgba(42, 28, 34, 0.1); transition: transform 0.18s ease, box-shadow 0.18s ease; }
+  .xc-img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .xc-carta:not(.on) .xc-img img { filter: saturate(0.75); opacity: 0.88; }
+  @media (hover: hover) { .xc-carta:hover .xc-img { transform: translateY(-3px); box-shadow: 0 2px 4px rgba(42, 28, 34, 0.14), 0 12px 24px rgba(42, 28, 34, 0.16); } .xc-carta:hover .xc-img img { filter: none; opacity: 1; } }
+  .xc-sem { display: grid; place-items: center; height: 100%; padding: 8px; text-align: center; font-weight: 700; font-size: 0.78rem; color: #7A5A68; }
+  .xc-ok { position: absolute; top: 6px; right: 6px; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #2E9E6A; color: #FFFFFF; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+  .xc-ok svg { width: 13px; height: 13px; }
+  .xc-set { margin-top: 5px; font-size: 0.76rem; font-weight: 700; line-height: 1.2; color: #3A2830; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+  .xc-num { font-size: 0.72rem; color: #8A6B78; }
+  .xc-mais { display: block; margin: 20px auto 0; height: 40px; padding: 0 20px; border-radius: 99px; border: 1px solid rgba(74, 27, 48, 0.16); background: #FFFFFF; font: 700 0.88rem "Figtree", system-ui, sans-serif; color: #2A1C22; cursor: pointer; }
+  .xc-mais span { opacity: 0.6; font-weight: 600; }
+  .xc-vazio { margin: 18px 0; text-align: center; color: #7A5A68; }
+  @media (max-width: 479px) { .xc-grade { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 8px; } .ficha-cartas { padding: 14px 12px 18px; } .xc-set { font-size: 0.7rem; } }
   .ficha-corpo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; padding: 16px 18px 20px; }
   .ficha-col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
   .ficha-sec { min-width: 0; padding: 14px 16px 16px; border-radius: 16px; background: #FFFFFF; box-shadow: 0 1px 0 rgba(74, 27, 48, 0.06), 0 0 0 1px rgba(74, 27, 48, 0.07); }
@@ -464,7 +497,7 @@
   }
 
   /* Carta ampliada */
-  .zoom { position: fixed; inset: 0; z-index: 40; display: flex; align-items: center; justify-content: center; padding: calc(env(safe-area-inset-top, 0px) + 16px) 16px calc(env(safe-area-inset-bottom, 0px) + 16px); background: var(--zoom-bg); overflow-y: auto; }
+  .zoom { position: fixed; inset: 0; z-index: 45; display: flex; align-items: center; justify-content: center; padding: calc(env(safe-area-inset-top, 0px) + 16px) 16px calc(env(safe-area-inset-bottom, 0px) + 16px); background: var(--zoom-bg); overflow-y: auto; }
   .zoom-box { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; width: min(100%, 420px); margin: auto; color: #FFF3F7; }
   .zoom-close { position: absolute; top: -4px; right: -4px; z-index: 2; width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 50%; background: rgba(24, 8, 16, 0.7); color: #FFF3F7; cursor: pointer; }
   .zoom-stage { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; touch-action: pan-y; }
@@ -1501,7 +1534,12 @@
         </div>
       </div>
     </div>
-    <div class="ficha-corpo" id="xCorpo"></div>
+    <div class="ficha-abas" id="xAbas" role="tablist">
+      <button type="button" role="tab" data-xaba="info" id="xAbaInfo" aria-selected="true" aria-controls="xCorpo">Info</button>
+      <button type="button" role="tab" data-xaba="cartas" id="xAbaCartas" aria-selected="false" aria-controls="xCartas"><span id="xAbaCartasTxt">Cards</span> <span class="count" id="xCartasN"></span></button>
+    </div>
+    <div class="ficha-corpo" id="xCorpo" role="tabpanel" aria-labelledby="xAbaInfo"></div>
+    <div class="ficha-cartas" id="xCartas" role="tabpanel" aria-labelledby="xAbaCartas" hidden></div>
   </div>
 </div>
 
@@ -1599,7 +1637,7 @@
       legendary: "Legendary", mythical: "Mythical", baby: "Baby",
       evoLv: n => `Level ${n}`, evoItem: i => `Use ${i}`, evoTrade: "Trade", evoTradeItem: i => `Trade holding ${i}`, evoFriend: "High friendship", evoMove: m => `Knows ${m}`,
       statNames: { hp: "HP", attack: "Attack", defense: "Defense", "special-attack": "Sp. Atk", "special-defense": "Sp. Def", speed: "Speed" },
-      dexFormAria: "Filter by form", formBase: "Pokémon", formAll: "All forms", formMega: "Mega Evolutions", formGmax: "Gigantamax", tagMega: "Mega Evolution", tagGmax: "Gigantamax", specialForms: "Mega Evolution and Gigantamax",
+      dexFormAria: "Filter by form", formBase: "Pokémon", formAll: "All forms", formMega: "Mega Evolutions", formGmax: "Gigantamax", tagMega: "Mega Evolution", tagGmax: "Gigantamax", specialForms: "Special forms", formRegional: "Regional forms", tagRegional: r => `${r} form`,
       tipos: { normal: "Normal", fire: "Fire", water: "Water", grass: "Grass", electric: "Electric", ice: "Ice", fighting: "Fighting", poison: "Poison", ground: "Ground", flying: "Flying", psychic: "Psychic", bug: "Bug", rock: "Rock", ghost: "Ghost", dragon: "Dragon", dark: "Dark", steel: "Steel", fairy: "Fairy" },
       prices: "Prices", priceLoading: "Loading prices…", priceTcg: "English card · TCGplayer (US$)", priceCm: "Cardmarket (€, Europe)",
       priceTrend: "Trend", priceAvg30: "30-day average", priceNone: "No price for this card yet.", priceErr: "Couldn't load prices right now.",
@@ -1617,7 +1655,7 @@
       page: "Page", of: n => "of " + n,
       footer: "Card data and images from TCGdex (tcgdex.dev), an open-source Pokémon TCG API, with the official Pokémon TCG gallery as a backup for some images. Pokémon TCG Pocket (digital) cards are not included. Pokédex data from PokéAPI (pokeapi.co). Your collection and favorites are saved in this browser.",
       reset: "Clear binder", resetArm: "Tap again to clear everything",
-      zClose: "Close enlarged card", zPoke: n => `Open ${n} in the Pokédex`, zPrev: "Previous card", zNext: "Next card", zPos: (i, n) => `${i} of ${n}`,
+      zClose: "Close enlarged card", xTabInfo: "Info", xTabCards: "Cards", xNoCards: "No cards of this Pokémon in the catalog yet.", zPoke: n => `Open ${n} in the Pokédex`, zPrev: "Previous card", zNext: "Next card", zPos: (i, n) => `${i} of ${n}`,
       panelTitle: "Account & settings", closePanel: "Close panel", account: "Account", siteSettings: "Site settings",
       dim: "Darken cards I don't own", dimD: "Turn off to see every card in full color.",
       anim: "Animations", animD: "Effects when turning pages and marking cards.",
@@ -1696,7 +1734,7 @@
       legendary: "Lendário", mythical: "Mítico", baby: "Bebê",
       evoLv: n => `Nível ${n}`, evoItem: i => `Usar ${i}`, evoTrade: "Troca", evoTradeItem: i => `Troca segurando ${i}`, evoFriend: "Muita amizade", evoMove: m => `Sabe ${m}`,
       statNames: { hp: "PS", attack: "Ataque", defense: "Defesa", "special-attack": "Atq. Esp.", "special-defense": "Def. Esp.", speed: "Velocidade" },
-      dexFormAria: "Filtrar por forma", formBase: "Pokémon", formAll: "Todas as formas", formMega: "Megaevoluções", formGmax: "Gigantamax", tagMega: "Megaevolução", tagGmax: "Gigantamax", specialForms: "Megaevolução e Gigantamax",
+      dexFormAria: "Filtrar por forma", formBase: "Pokémon", formAll: "Todas as formas", formMega: "Megaevoluções", formGmax: "Gigantamax", tagMega: "Megaevolução", tagGmax: "Gigantamax", specialForms: "Formas especiais", formRegional: "Formas regionais", tagRegional: r => `Forma de ${r}`,
       tipos: { normal: "Normal", fire: "Fogo", water: "Água", grass: "Planta", electric: "Elétrico", ice: "Gelo", fighting: "Lutador", poison: "Venenoso", ground: "Terrestre", flying: "Voador", psychic: "Psíquico", bug: "Inseto", rock: "Pedra", ghost: "Fantasma", dragon: "Dragão", dark: "Sombrio", steel: "Aço", fairy: "Fada" },
       prices: "Preços", priceLoading: "Carregando preços…", priceTcg: "Carta em inglês · TCGplayer (US$)", priceCm: "Cardmarket (€, Europa)",
       priceTrend: "Tendência", priceAvg30: "Média de 30 dias", priceNone: "Ainda não há preço para esta carta.", priceErr: "Não foi possível carregar os preços agora.",
@@ -1714,7 +1752,7 @@
       page: "Página", of: n => "de " + n,
       footer: "Dados e imagens das cartas da TCGdex (tcgdex.dev), uma API aberta de Pokémon Estampas Ilustradas, com a galeria oficial como reserva para algumas imagens. As cartas do Pokémon TCG Pocket (digital) não estão incluídas. Dados da Pokédex da PokéAPI (pokeapi.co). Sua coleção e suas favoritas ficam salvas neste navegador.",
       reset: "Limpar fichário", resetArm: "Toque de novo para limpar tudo",
-      zClose: "Fechar carta ampliada", zPoke: n => `Abrir ${n} na Pokédex`, zPrev: "Carta anterior", zNext: "Próxima carta", zPos: (i, n) => `${i} de ${n}`,
+      zClose: "Fechar carta ampliada", xTabInfo: "Informações", xTabCards: "Cartas", xNoCards: "Ainda não há cartas deste Pokémon no catálogo.", zPoke: n => `Abrir ${n} na Pokédex`, zPrev: "Carta anterior", zNext: "Próxima carta", zPos: (i, n) => `${i} de ${n}`,
       panelTitle: "Conta e configurações", closePanel: "Fechar painel", account: "Cadastro", siteSettings: "Configurações do site",
       dim: "Escurecer cartas que não tenho", dimD: "Desligue para ver todas as cartas com a cor original.",
       anim: "Animações", animD: "Efeitos ao virar a página e ao marcar uma carta.",
@@ -1793,7 +1831,7 @@
       legendary: "伝説", mythical: "幻", baby: "ベイビィ",
       evoLv: n => `レベル ${n}`, evoItem: i => `${i} を使う`, evoTrade: "通信交換", evoTradeItem: i => `${i} を持たせて通信交換`, evoFriend: "なつき度が高い", evoMove: m => `${m} を覚えている`,
       statNames: { hp: "HP", attack: "こうげき", defense: "ぼうぎょ", "special-attack": "とくこう", "special-defense": "とくぼう", speed: "すばやさ" },
-      dexFormAria: "すがたで絞り込み", formBase: "ポケモン", formAll: "すべてのすがた", formMega: "メガシンカ", formGmax: "キョダイマックス", tagMega: "メガシンカ", tagGmax: "キョダイマックス", specialForms: "メガシンカ・キョダイマックス",
+      dexFormAria: "すがたで絞り込み", formBase: "ポケモン", formAll: "すべてのすがた", formMega: "メガシンカ", formGmax: "キョダイマックス", tagMega: "メガシンカ", tagGmax: "キョダイマックス", specialForms: "特別なすがた", formRegional: "リージョンフォーム", tagRegional: r => `${({ Alola: "アローラ", Galar: "ガラル", Hisui: "ヒスイ", Paldea: "パルデア" })[r] || r}のすがた`,
       tipos: { normal: "ノーマル", fire: "ほのお", water: "みず", grass: "くさ", electric: "でんき", ice: "こおり", fighting: "かくとう", poison: "どく", ground: "じめん", flying: "ひこう", psychic: "エスパー", bug: "むし", rock: "いわ", ghost: "ゴースト", dragon: "ドラゴン", dark: "あく", steel: "はがね", fairy: "フェアリー" },
       prices: "価格", priceLoading: "価格を読み込み中…", priceTcg: "英語版 · TCGplayer（US$）", priceCm: "Cardmarket（€・ヨーロッパ）",
       priceTrend: "トレンド", priceAvg30: "30日平均", priceNone: "このカードの価格はまだありません。", priceErr: "現在価格を読み込めません。",
@@ -1811,7 +1849,7 @@
       page: "ページ", of: n => "/ " + n,
       footer: "カードのデータと画像は、オープンソースのポケモンカードAPI「TCGdex」（tcgdex.dev）のものです。一部の画像は公式ギャラリーを予備として使っています。ポケモンカードゲーム ポケット（デジタル）のカードは含まれません。図鑑のデータは PokéAPI（pokeapi.co）のものです。コレクションとお気に入りはこのブラウザに保存されます。",
       reset: "バインダーをリセット", resetArm: "もう一度タップですべて削除",
-      zClose: "拡大カードを閉じる", zPoke: n => `${n}をポケモン図鑑で開く`, zPrev: "前のカード", zNext: "次のカード", zPos: (i, n) => `${i} / ${n}`,
+      zClose: "拡大カードを閉じる", xTabInfo: "情報", xTabCards: "カード", xNoCards: "このポケモンのカードはまだ見つかりません。", zPoke: n => `${n}をポケモン図鑑で開く`, zPrev: "前のカード", zNext: "次のカード", zPos: (i, n) => `${i} / ${n}`,
       panelTitle: "アカウントと設定", closePanel: "パネルを閉じる", account: "アカウント", siteSettings: "サイト設定",
       dim: "持っていないカードを暗くする", dimD: "オフにすると、すべてのカードが元の色で表示されます。",
       anim: "アニメーション", animD: "ページをめくるときやカードをチェックするときの効果。",
@@ -3265,6 +3303,13 @@
     $("zImg")._c3dId = null;
     wrap.inert = false;
     const atual = zState.ids[zState.i];
+    if (!dexModal.hidden) {
+      wrap.inert = true;
+      desenharAbaCartas();
+      const v = $("xCartas").querySelector(`[data-xc="${CSS.escape(atual)}"]`);
+      (v || $("xFechar")).focus();
+      return;
+    }
     if (conta.cfg.area === "tools") {
       const v = document.querySelector(`#areaTools [data-zoom="${CSS.escape(atual)}"]`) || document.querySelector(`#areaTools [data-zoom="${CSS.escape(zState.origem || "")}"]`);
       (v || sideTab).focus();
@@ -3303,6 +3348,7 @@
   zoom.addEventListener("click", e => { if (e.target === zoom) fecharZoom(); });
   document.addEventListener("keydown", e => {
     if (!zoom.hidden) {
+      e._zoom = true;
       if (e.key === "Escape") { e.preventDefault(); fecharZoom(); }
       else if (e.key === "ArrowLeft") irZoom(-1);
       else if (e.key === "ArrowRight") irZoom(1);
@@ -4024,7 +4070,21 @@
   const DEX_POR_ID = new Map(), FORMAS_POR_SP = new Map();
   const pidDe = key => (DEX_POR_ID.get(key) || {}).pid || key;
   const spDe = key => (DEX_POR_ID.get(key) || {}).sp || key;
+  const REGIOES = ["alola", "galar", "hisui", "paldea"];
+  const REG_EN = { alola: "Alolan", galar: "Galarian", hisui: "Hisuian", paldea: "Paldean" };
+  const REG_NOME = { alola: "Alola", galar: "Galar", hisui: "Hisui", paldea: "Paldea" };
+  const REG_JA = { alola: "アローラ", galar: "ガラル", hisui: "ヒスイ", paldea: "パルデア" };
+  const ehRegional = tipo => REGIOES.includes(tipo);
+  // selo curto (grade) e etiqueta (ficha) de cada forma especial
+  const seloForma = tipo => tipo === "mega" ? "Mega" : tipo === "gmax" ? "G-Max" : REG_NOME[tipo] || "";
+  const tagForma = tipo => tipo === "mega" ? t("tagMega") : tipo === "gmax" ? t("tagGmax") : t("tagRegional", REG_NOME[tipo] || "");
   function nomeForma(f, l) {
+    if (ehRegional(f.tipo)) {
+      const bEn = nomeBonito((DEX_POR_ID.get(f.sp) || DEX.find(p => p.id === f.sp) || { slug: "" }).slug);
+      if (l === "ja") return (JA_NOMES[f.sp - 1] || bEn) + `（${REG_JA[f.tipo]}のすがた${f.forma ? "・" + f.forma : ""}）`;
+      if (l === "pt") return `${bEn} de ${REG_NOME[f.tipo]}` + (f.forma ? ` (${f.forma})` : "");
+      return `${REG_EN[f.tipo]} ${bEn}` + (f.forma ? ` (${f.forma})` : "");
+    }
     const baseEn = nomeBonito((DEX_POR_ID.get(f.sp) || DEX.find(p => p.id === f.sp) || { slug: "" }).slug);
     const baseJa = JA_NOMES[f.sp - 1] || baseEn;
     if (l === "ja") return (f.tipo === "mega" ? "メガ" + baseJa + (f.suf ? f.suf : "") : "キョダイマックス" + baseJa) + (f.forma ? `（${f.forma}）` : "");
@@ -4050,14 +4110,14 @@
       let lista = null, especiais = null;
       try {
         const db = await abrirDB();
-        const c = await new Promise(ok => { const r = db.transaction("dados").objectStore("dados").get("dex-list-v2"); r.onsuccess = () => ok(r.result || null); r.onerror = () => ok(null); });
+        const c = await new Promise(ok => { const r = db.transaction("dados").objectStore("dados").get("dex-list-v3"); r.onsuccess = () => ok(r.result || null); r.onerror = () => ok(null); });
         if (c && Date.now() - c.quando < 7 * 24 * 3600e3) { lista = c.lista; especiais = c.especiais; }
       } catch (e) { /* sem cache */ }
       if (!lista) {
         const [r, rp] = await Promise.all([papi("/pokemon-species?limit=2000"), papi("/pokemon?limit=3000").catch(() => ({ results: [] }))]);
         lista = (r.results || []).map(x => ({ id: idDaUrl(x.url), slug: x.name })).filter(x => x.id);
-        especiais = (rp.results || []).filter(x => /-mega(-|$)|-gmax(-|$)/.test(x.name)).map(x => ({ pid: idDaUrl(x.url), slug: x.name })).filter(x => x.pid);
-        try { const db = await abrirDB(); db.transaction("dados", "readwrite").objectStore("dados").put({ quando: Date.now(), lista, especiais }, "dex-list-v2"); } catch (e) { /* segue */ }
+        especiais = (rp.results || []).filter(x => /-(mega|gmax|alola|galar|hisui|paldea)(-|$)/.test(x.name) && !/-(cap|totem|starter)(-|$)/.test(x.name)).map(x => ({ pid: idDaUrl(x.url), slug: x.name })).filter(x => x.pid);
+        try { const db = await abrirDB(); db.transaction("dados", "readwrite").objectStore("dados").put({ quando: Date.now(), lista, especiais }, "dex-list-v3"); } catch (e) { /* segue */ }
       }
       DEX = lista.sort((a, b) => a.id - b.id).map(x => ({ id: x.id, sp: x.id, pid: x.id, slug: x.slug, tipo: "", n: nomeBonito(x.slug), nn: norm(nomeBonito(x.slug)) + " " + norm(JA_NOMES[x.id - 1] || "") }));
       const porSlug = new Map(DEX.map(p => [p.slug, p]));
@@ -4069,9 +4129,11 @@
         for (; k > 0; k--) { const b = porSlug.get(partes.slice(0, k).join("-")); if (b) { base = b; break; } }
         if (!base) return;
         const resto = partes.slice(k);
-        const ip = resto.findIndex(w => w === "mega" || w === "gmax");
+        const ip = resto.findIndex(w => w === "mega" || w === "gmax" || REGIOES.includes(w));
         if (ip < 0) return;
-        const f = { id: x.pid, sp: base.id, pid: x.pid, slug: x.slug, tipo: resto[ip], forma: resto.slice(0, ip).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" "), suf: resto.slice(ip + 1).join(" ").toUpperCase() };
+        const cap = ws => ws.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+        const reg = REGIOES.includes(resto[ip]);
+        const f = { id: x.pid, sp: base.id, pid: x.pid, slug: x.slug, tipo: resto[ip], forma: cap(reg ? resto.slice(0, ip).concat(resto.slice(ip + 1)) : resto.slice(0, ip)), suf: reg ? "" : resto.slice(ip + 1).join(" ").toUpperCase() };
         f.n = nomeForma(f, "en");
         f.nn = norm(f.n) + " " + norm(nomeForma(f, "ja")) + " " + norm(base.n);
         FORMAS.push(f);
@@ -4081,7 +4143,7 @@
       FORMAS.forEach(f => { if (!FORMAS_POR_SP.has(f.sp)) FORMAS_POR_SP.set(f.sp, []); FORMAS_POR_SP.get(f.sp).push(f); });
       DEX_POR_ID.clear(); DEX.forEach(p => DEX_POR_ID.set(p.id, p)); FORMAS.forEach(f => DEX_POR_ID.set(f.id, f));
       DEX_CHAVES = new Map(DEX.map(p => [compacto(p.slug), p.id]));
-      CARTAS.forEach(c => { c.dx = undefined; });
+      CARTAS.forEach(c => { c.dx = undefined; c.dxs = undefined; });
       dexState.status = "ok";
     } catch (e) {
       console.error(e);
@@ -4106,6 +4168,7 @@
     const fm = dexState.forma;
     let base;
     if (fm === "mega" || fm === "gmax") base = FORMAS.filter(f => f.tipo === fm);
+    else if (fm === "regional") base = FORMAS.filter(f => ehRegional(f.tipo));
     else if (fm === "todas" || tks.length) base = DEX.concat(FORMAS).sort((a, b) => a.sp - b.sp || (a.tipo ? 1 : 0) - (b.tipo ? 1 : 0) || a.pid - b.pid);
     else base = DEX;
     return base.filter(p => {
@@ -4138,7 +4201,7 @@
     } else {
       xVazio.hidden = true; xGrid.hidden = false;
       const fatia = lista.slice(dexState.page * pp, dexState.page * pp + pp);
-      xGrid.innerHTML = fatia.map(p => `<li><button type="button" class="dex-tile${p.tipo ? " especial" : ""}" data-dex="${p.id}" aria-label="${esc(t("dexOpen", nomeDex(p.id), pad4(p.sp)))}">${p.tipo ? `<span class="dex-badge">${esc(p.tipo === "mega" ? "Mega" : "G-Max")}</span>` : ""}
+      xGrid.innerHTML = fatia.map(p => `<li><button type="button" class="dex-tile${p.tipo ? " especial" : ""}" data-dex="${p.id}" aria-label="${esc(t("dexOpen", nomeDex(p.id), pad4(p.sp)))}">${p.tipo ? `<span class="dex-badge">${esc(seloForma(p.tipo))}</span>` : ""}
           <span class="dex-art"><img src="${ARTE(p.pid)}" alt="" width="120" height="120" loading="lazy" decoding="async"></span>
           <span class="dex-no">#${pad4(p.sp)}</span><span class="dex-nm">${esc(nomeDex(p.id))}</span>
         </button></li>`).join("");
@@ -4166,7 +4229,7 @@
     tp.innerHTML = `<option value="">${esc(t("dexType"))}</option>` + TIPOS.map(x => `<option value="${x}">${esc(t("tipos")[x])}</option>`).join("");
     tp.value = dexState.tipo;
     const fm = $("xForma");
-    fm.innerHTML = `<option value="">${esc(t("formBase"))}</option><option value="todas">${esc(t("formAll"))}</option><option value="mega">${esc(t("formMega"))}</option><option value="gmax">${esc(t("formGmax"))}</option>`;
+    fm.innerHTML = `<option value="">${esc(t("formBase"))}</option><option value="todas">${esc(t("formAll"))}</option><option value="mega">${esc(t("formMega"))}</option><option value="gmax">${esc(t("formGmax"))}</option><option value="regional">${esc(t("formRegional"))}</option>`;
     fm.value = dexState.forma;
   }
   $("xForma").addEventListener("change", e => { dexState.forma = e.target.value; dexState.page = 0; renderDex(); });
@@ -4239,7 +4302,7 @@
     if (!box.firstChild) box.setAttribute("aria-live", "off");
     criar(true);
   }
-  const xState = { ids: [], i: 0, origem: null, shiny: false, pedido: 0 };
+  const xState = { ids: [], i: 0, origem: null, shiny: false, pedido: 0, aba: "info", filtro: "todas", mostrar: 24 };
   async function carregarDetalhe(id) {
     if (DETALHES.has(id)) return DETALHES.get(id);
     const [pk, sp] = await Promise.all([papi("/pokemon/" + pidDe(id)), papi("/pokemon-species/" + spDe(id))]);
@@ -4363,6 +4426,8 @@
     $("xShiny").setAttribute("aria-pressed", String(xState.shiny));
     $("xShiny").textContent = xState.shiny ? t("normalArt") : t("shiny");
     $("xHero").innerHTML = "";
+    xState.mostrar = 24;
+    desenharAbaCartas();
     $("xCorpo").innerHTML = `<p class="ficha-carregando"><span class="spin" aria-hidden="true"></span>${esc(t("detailLoading"))}</p>`;
     $("xTopo").style.setProperty("--tc", "#E9DDE3");
     let d;
@@ -4392,7 +4457,7 @@
     const pol = Math.round(m * 39.3701), pes = Math.floor(pol / 12), polR = pol % 12;
     const lb = fmtNum(kg * 2.20462);
     const tags = [];
-    if (ent.tipo) tags.push(t(ent.tipo === "mega" ? "tagMega" : "tagGmax"));
+    if (ent.tipo) tags.push(tagForma(ent.tipo));
     if (sp.is_legendary) tags.push(t("legendary"));
     if (sp.is_mythical) tags.push(t("mythical"));
     if (sp.is_baby) tags.push(t("baby"));
@@ -4433,7 +4498,7 @@
     const especiaisHTML = especiaisLinha.length ? `<div class="evo-especiais"><p class="evo-sub">${esc(t("specialForms"))}</p><div class="evo">${especiaisLinha.map(f => `<button type="button" class="evo-etapa especial${f.id === id ? " atual" : ""}" data-evo="${f.id}" ${f.id === id ? 'aria-current="true"' : ""}>
           <img src="${ARTE(f.pid)}" alt="" width="72" height="72" loading="lazy">
           <span class="evo-nm">${esc(nomeDex(f.id))}</span><span class="evo-no">#${pad4(f.sp)}</span>
-          <span class="evo-cond">${esc(t(f.tipo === "mega" ? "tagMega" : "tagGmax"))}</span>
+          <span class="evo-cond">${esc(tagForma(f.tipo))}</span>
         </button>`).join("")}</div></div>` : "";
     const geracao = sp.generation ? t("dexGenN", ROMANOS[idDaUrl(sp.generation.url) - 1] || "?") : "—";
     const somNovo = pk.cries && pk.cries.latest, somAntigo = pk.cries && pk.cries.legacy;
@@ -4477,6 +4542,103 @@
       ${sec(t("evolution"), evoHTML(evo, ent.tipo ? 0 : id) + especiaisHTML, "larga")}
       ${formas.length ? sec(t("forms"), `<div class="ficha-tipos">${formas.map(f => f.id ? `<button type="button" class="tag tag-link" data-evo="${f.id}">${esc(f.n)}</button>` : `<span class="tag">${esc(f.n)}</span>`).join("")}</div>`, "larga") : ""}`;
   }
+  /* ---------- Aba "Cartas" da ficha: todas as cartas daquele Pokémon ---------- */
+  // todos os Pokémon citados no nome da carta (ex.: "Pikachu & Zekrom-GX" -> Pikachu e Zekrom)
+  function dxsDe(c) {
+    if (c.dxs) return c.dxs;
+    const r = [];
+    if (DEX_CHAVES) {
+      const pal = norm(c.n).replace(/♀/g, "f").replace(/♂/g, "m").split(/[^a-z0-9]+/).filter(Boolean);
+      for (let i = 0; i < pal.length; i++) {
+        for (let k = Math.min(3, pal.length - i); k >= 1; k--) {
+          const id = DEX_CHAVES.get(pal.slice(i, i + k).join(""));
+          if (id) { if (!r.includes(id)) r.push(id); i += k - 1; break; }
+        }
+      }
+    }
+    return (c.dxs = r);
+  }
+  const REG_CARTA = { alola: /\balolan\b/, galar: /\bgalarian\b/, hisui: /\bhisuian\b/, paldea: /\bpaldean\b/ };
+  function cartasDoPokemon(ent) {
+    if (!CARTAS.length || !DEX_CHAVES) return null;
+    const sp = ent.sp;
+    let l = CARTAS.filter(c => dxsDe(c).includes(sp));
+    if (ent.tipo === "mega") {
+      const suf = (ent.suf || "").toLowerCase();
+      l = l.filter(c => { const n = " " + norm(c.n).replace(/[^a-z0-9]+/g, " ") + " "; return /\smega\s|^\sm\s/.test(n) && (!suf || n.includes(" " + suf + " ")); });
+    } else if (ent.tipo === "gmax") l = l.filter(c => /\bvmax\b|gigantamax/.test(norm(c.n)));
+    else if (ehRegional(ent.tipo)) l = l.filter(c => REG_CARTA[ent.tipo].test(norm(c.n)));
+    return l;
+  }
+  function desenharAbaCartas() {
+    const id = xState.ids[xState.i];
+    const ent = DEX_POR_ID.get(id) || { id, sp: id, pid: id, tipo: "" };
+    const todas = cartasDoPokemon(ent);
+    const caixa = $("xCartas");
+    $("xAbaInfo").textContent = t("xTabInfo");
+    $("xAbaCartasTxt").textContent = t("xTabCards");
+    $("xCartasN").textContent = todas ? todas.length.toLocaleString() : "";
+    const naInfo = xState.aba !== "cartas";
+    $("xAbaInfo").setAttribute("aria-selected", String(naInfo));
+    $("xAbaCartas").setAttribute("aria-selected", String(!naInfo));
+    $("xCorpo").hidden = !naInfo; caixa.hidden = naInfo;
+    if (naInfo) return;
+    if (!todas) { caixa.innerHTML = `<p class="ficha-carregando"><span class="spin" aria-hidden="true"></span>${esc(t("loading"))}</p>`; return; }
+    if (!todas.length) { caixa.innerHTML = `<p class="xc-vazio">${esc(t("xNoCards"))}</p>`; return; }
+    const tem = todas.filter(c => state.own.has(c.id)).length;
+    const f = xState.filtro;
+    const vis = todas.filter(c => f === "tenho" ? state.own.has(c.id) : f === "faltam" ? !state.own.has(c.id) : true);
+    const lim = vis.slice(0, xState.mostrar);
+    caixa.innerHTML = `
+      <div class="xc-topo">
+        <div class="xc-filtro" role="group" aria-label="${esc(t("xTabCards"))}">
+          ${[["todas", "stAll", todas.length], ["tenho", "stOwned", tem], ["faltam", "stMiss", todas.length - tem]].map(([v, k, n]) =>
+            `<button type="button" data-xcf="${v}" aria-pressed="${f === v}">${esc(t(k))} <span>${n}</span></button>`).join("")}
+        </div>
+        <span class="xc-prog"><i style="width:${Math.round(tem / todas.length * 100)}%"></i></span>
+      </div>
+      ${lim.length ? `<ul class="xc-grade">${lim.map(c => {
+        const src = imgPequena(c), own = state.own.has(c.id);
+        return `<li><button type="button" class="xc-carta${own ? " on" : ""}" data-xc="${esc(c.id)}" aria-label="${esc(t("enlarge"))}: ${esc(c.n)}, ${esc(setNome(c))} ${esc(numeroTxt(c))}">
+          <span class="xc-img">${src ? `<img src="${esc(src)}" alt="" width="245" height="342" loading="lazy" decoding="async" referrerpolicy="no-referrer">` : `<span class="xc-sem">${esc(c.n)}</span>`}${own ? `<span class="xc-ok" aria-hidden="true">${ICON.check}</span>` : ""}</span>
+          <span class="xc-set">${esc(setNome(c))}</span><span class="xc-num">#${esc(numeroTxt(c))}</span>
+        </button></li>`;
+      }).join("")}</ul>` : `<p class="xc-vazio">${esc(t("none"))}</p>`}
+      ${vis.length > lim.length ? `<button type="button" class="xc-mais" data-xc-mais="1">${esc(t("stMore"))} <span>(${vis.length - lim.length})</span></button>` : ""}`;
+  }
+  $("xAbas").addEventListener("click", e => {
+    const b = e.target.closest("[data-xaba]");
+    if (!b || b.dataset.xaba === xState.aba) return;
+    xState.aba = b.dataset.xaba;
+    desenharAbaCartas();
+  });
+  $("xAbas").addEventListener("keydown", e => {
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    e.stopPropagation(); e.preventDefault();
+    xState.aba = xState.aba === "cartas" ? "info" : "cartas";
+    desenharAbaCartas();
+    $(xState.aba === "cartas" ? "xAbaCartas" : "xAbaInfo").focus();
+  });
+  $("xCartas").addEventListener("click", e => {
+    const fb = e.target.closest("[data-xcf]");
+    if (fb) { xState.filtro = fb.dataset.xcf; xState.mostrar = 24; desenharAbaCartas(); const n = $("xCartas").querySelector(`[data-xcf="${xState.filtro}"]`); if (n) n.focus(); return; }
+    if (e.target.closest("[data-xc-mais]")) { xState.mostrar += 24; desenharAbaCartas(); return; }
+    const cb = e.target.closest("[data-xc]");
+    if (cb) {
+      const ids = [...$("xCartas").querySelectorAll("[data-xc]")].map(x => x.dataset.xc);
+      abrirZoom(cb.dataset.xc, ids);
+    }
+  });
+  $("xCartas").addEventListener("error", e => {
+    const img = e.target;
+    if (!(img instanceof HTMLImageElement)) return;
+    const b = img.closest("[data-xc]"), c = b && POR_ID.get(b.dataset.xc);
+    if (!c) return;
+    const nx = proximaImg(img, c, false); if (nx) { img.src = nx; return; }
+    const semImg = () => { const sp = document.createElement("span"); sp.className = "xc-sem"; sp.textContent = c.n; if (img.isConnected) img.replaceWith(sp); };
+    if (tentarTp(img, c, semImg)) return;
+    semImg();
+  }, true);
   function abrirFicha(id, ids) {
     xState.ids = ids && ids.length ? ids : [id];
     xState.i = Math.max(0, xState.ids.indexOf(id));
@@ -4557,7 +4719,7 @@
     if (e.target.closest("[data-ficha-retry]")) desenharFicha();
   });
   document.addEventListener("keydown", e => {
-    if (dexModal.hidden) return;
+    if (dexModal.hidden || e._zoom || !zoom.hidden) return;
     if (e.key === "Escape") { e.preventDefault(); fecharFicha(); }
     else if (e.key === "ArrowLeft" && !e.target.closest("input, select")) irFicha(-1);
     else if (e.key === "ArrowRight" && !e.target.closest("input, select")) irFicha(1);
@@ -7578,7 +7740,7 @@
         const id = zState.ids[zState.i];
         o.z = igual(zState.ids, state.lista) ? { id, src: "b" } : igual(zState.ids, dState.lista) ? { id, src: "d" } : Object.assign({ id, src: "j" }, janela(zState.ids, zState.i));
       }
-      if (!dexModal.hidden && xState.ids.length) o.f = Object.assign({ id: xState.ids[xState.i] }, janela(xState.ids, xState.i));
+      if (!dexModal.hidden && xState.ids.length) o.f = Object.assign({ id: xState.ids[xState.i], aba: xState.aba, fl: xState.filtro }, janela(xState.ids, xState.i));
       return o;
     }
     function guardarNav() {
@@ -7630,7 +7792,11 @@
         abrirZoom(v.z.id, lista.length ? lista : undefined);
       }
       // ficha da Pokédex
-      if (v.f && v.f.id && (a === "dex" ? true : await esperarDex())) abrirFicha(v.f.id, Array.isArray(v.f.ids) && v.f.ids.length ? v.f.ids : [v.f.id]);
+      if (v.f && v.f.id && (a === "dex" || await esperarDex()) && DEX_POR_ID.size) {
+        xState.aba = v.f.aba === "cartas" ? "cartas" : "info";
+        xState.filtro = ["todas", "tenho", "faltam"].includes(v.f.fl) ? v.f.fl : "todas";
+        abrirFicha(v.f.id, Array.isArray(v.f.ids) && v.f.ids.length ? v.f.ids : [v.f.id]);
+      }
       // posição da rolagem (as imagens ainda estão chegando, então tenta de novo)
       const y = Math.max(0, parseInt(v.y, 10) || 0);
       if (y) { [60, 500, 1500].forEach(ms => setTimeout(() => { if (Math.abs(window.scrollY - y) > 4) window.scrollTo(0, y); }, ms)); }
