@@ -950,6 +950,7 @@
   .foot .link-btn + .link-btn { margin-left: 14px; }
   .kofi { display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px; border-radius: 99px; border: 1.5px solid color-mix(in srgb, var(--own) 45%, transparent); background: color-mix(in srgb, var(--own) 10%, transparent); color: var(--own); font: 700 0.85rem "Figtree", system-ui, sans-serif; text-decoration: none; }
   .kofi svg { flex: none; }
+  .kofi-painel { margin: 2px 0 14px; align-self: flex-start; }
   @media (hover: hover) { .kofi:hover { background: color-mix(in srgb, var(--own) 18%, transparent); border-color: var(--own); } }
   @media (prefers-reduced-motion: no-preference) { .kofi svg { transition: transform 0.2s ease; } .kofi:hover svg { transform: scale(1.18); } }
   /* celular: espaço para as bolinhas de cor não cobrirem o fim da página */
@@ -1512,6 +1513,10 @@
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
     </button>
   </div>
+  <a class="kofi kofi-painel" href="https://ko-fi.com/annaincodes" target="_blank" rel="noopener noreferrer">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.5C1.3 8.4 3.3 5 6.8 5c2 0 3.5 1.1 5.2 3.1C13.7 6.1 15.2 5 17.2 5c3.5 0 5.5 3.4 4.3 6.5C19.5 16.4 12 21 12 21z"/></svg>
+    <span data-i18n="supportLink">Support NanaDex</span>
+  </a>
 
   <section aria-labelledby="tConta">
     <h3 id="tConta" data-i18n="account">Account</h3>
@@ -7492,7 +7497,7 @@
   /* ---------- Termos e privacidade ---------- */
   const termosModal = $("termosModal");
   let termosVolta = null;
-  function kofiAria() { const k = $("kofiLink"); if (k) k.setAttribute("aria-label", t("supportAria")); }
+  function kofiAria() { document.querySelectorAll(".kofi").forEach(k => k.setAttribute("aria-label", t("supportAria"))); }
   function abrirTermos() {
     termosVolta = document.activeElement;
     $("termosCorpo").innerHTML = t("termsBody");
@@ -7553,6 +7558,91 @@
   aplicarCfg();
   renderBinders();
   carregarDados();
+
+  /* ---------- F5 mantém o ponto onde você está ----------
+     Guarda (só nesta aba) a seção, a carta ampliada, a ficha da Pokédex, a coleção aberta,
+     filtros, páginas e a posição da rolagem, e devolve tudo depois de recarregar. */
+  {
+    const KEY_NAV = "nanadex-nav-v1";
+    let pronto = false, timer = 0;
+    const igual = (ids, lista) => lista.length > 0 && ids.length === lista.length && ids[0] === lista[0].id && ids[ids.length - 1] === lista[lista.length - 1].id;
+    const janela = (ids, i) => { const a = Math.max(0, i - 60); return { ids: ids.slice(a, a + 121), i: i - a }; };
+    function fotografar() {
+      const o = {
+        a: conta.cfg.area, y: Math.round(window.scrollY),
+        st: { q: stState.q, serie: stState.serie, ordem: stState.ordem, aberto: stState.aberto, filtro: stState.filtro, mostrar: stState.mostrar },
+        dx: { q: dexState.q, gen: dexState.gen, tipo: dexState.tipo, forma: dexState.forma, page: dexState.page },
+        dk: { tab: dState.tab, q: dState.q, posse: dState.posse, serie: dState.serie, set: dState.set, page: dState.page }
+      };
+      if (!zoom.hidden && zState.ids.length) {
+        const id = zState.ids[zState.i];
+        o.z = igual(zState.ids, state.lista) ? { id, src: "b" } : igual(zState.ids, dState.lista) ? { id, src: "d" } : Object.assign({ id, src: "j" }, janela(zState.ids, zState.i));
+      }
+      if (!dexModal.hidden && xState.ids.length) o.f = Object.assign({ id: xState.ids[xState.i] }, janela(xState.ids, xState.i));
+      return o;
+    }
+    function guardarNav() {
+      if (!pronto) return;
+      try { sessionStorage.setItem(KEY_NAV, JSON.stringify(fotografar())); } catch (e) { /* segue sem guardar */ }
+    }
+    const agendar = () => { clearTimeout(timer); timer = setTimeout(guardarNav, 150); };
+    ["click", "input", "change", "keyup"].forEach(ev => document.addEventListener(ev, agendar, true));
+    window.addEventListener("scroll", agendar, { passive: true });
+    window.addEventListener("pagehide", guardarNav);
+    document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") guardarNav(); });
+
+    const txt = x => typeof x === "string" ? x : "";
+    async function restaurar() {
+      let v = null;
+      try { v = JSON.parse(sessionStorage.getItem(KEY_NAV) || "null"); } catch (e) { v = null; }
+      if (!v || v.a !== conta.cfg.area) return;
+      const a = v.a;
+      if (a === "sets" && v.st) {
+        stState.q = txt(v.st.q); stState.serie = txt(v.st.serie); stState.ordem = txt(v.st.ordem) || "novas";
+        stState.filtro = ["todas", "tenho", "faltam"].includes(v.st.filtro) ? v.st.filtro : "todas";
+        stState.mostrar = Math.max(60, parseInt(v.st.mostrar, 10) || 60);
+        stPreencherFiltros();
+        $("stBusca").value = stState.q; $("stSerie").value = stState.serie; $("stOrdem").value = stState.ordem;
+        const id = txt(v.st.aberto);
+        if (id && SETS[id]) {
+          stState.aberto = id;
+          renderSets();
+          carregarSetDet(id).then(() => { if (stState.aberto === id && conta.cfg.area === "sets") renderSetDet(); });
+        } else renderSets();
+      } else if (a === "decks" && v.dk) {
+        dState.tab = v.dk.tab === "add" ? "add" : "deck"; dState.q = txt(v.dk.q); dState.posse = txt(v.dk.posse);
+        dState.serie = txt(v.dk.serie); dState.set = txt(v.dk.set); dState.page = Math.max(0, parseInt(v.dk.page, 10) || 0);
+        $("dBusca").value = dState.q;
+        renderDeck();
+        try { $("dPosse").value = dState.posse; $("dSerie").value = dState.serie; $("dSet").value = dState.set; } catch (e) { /* segue */ }
+      } else if (a === "dex" && v.dx) {
+        if (await esperarDex()) {
+          dexState.q = txt(v.dx.q); dexState.gen = txt(v.dx.gen); dexState.forma = txt(v.dx.forma);
+          if (txt(v.dx.tipo)) { try { await dadosTipo(v.dx.tipo); dexState.tipo = v.dx.tipo; } catch (e) { dexState.tipo = ""; } }
+          dexState.page = Math.max(0, parseInt(v.dx.page, 10) || 0);
+          $("xBusca").value = dexState.q; $("xGen").value = dexState.gen; $("xForma").value = dexState.forma; $("xTipo").value = dexState.tipo;
+          renderDex();
+        }
+      }
+      // carta ampliada
+      if (v.z && POR_ID.has(v.z.id)) {
+        const lista = v.z.src === "b" ? state.lista.map(c => c.id) : v.z.src === "d" ? dState.lista.map(c => c.id) : (v.z.ids || []).filter(id => POR_ID.has(id));
+        abrirZoom(v.z.id, lista.length ? lista : undefined);
+      }
+      // ficha da Pokédex
+      if (v.f && v.f.id && (a === "dex" ? true : await esperarDex())) abrirFicha(v.f.id, Array.isArray(v.f.ids) && v.f.ids.length ? v.f.ids : [v.f.id]);
+      // posição da rolagem (as imagens ainda estão chegando, então tenta de novo)
+      const y = Math.max(0, parseInt(v.y, 10) || 0);
+      if (y) { [60, 500, 1500].forEach(ms => setTimeout(() => { if (Math.abs(window.scrollY - y) > 4) window.scrollTo(0, y); }, ms)); }
+    }
+    const t0 = Date.now();
+    const espera = setInterval(() => {
+      const fim = state.status === "ok" || state.status === "error" || Date.now() - t0 > 60000;
+      if (!fim) return;
+      clearInterval(espera);
+      (state.status === "ok" ? restaurar() : Promise.resolve()).catch(e => console.warn("F5:", e)).then(() => { pronto = true; agendar(); });
+    }, 150);
+  }
 })();
 </script>
 </body>
