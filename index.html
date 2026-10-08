@@ -983,7 +983,7 @@
   .foot .link-btn + .link-btn { margin-left: 14px; }
   .kofi { display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px; border-radius: 99px; border: 1.5px solid color-mix(in srgb, var(--own) 45%, transparent); background: color-mix(in srgb, var(--own) 10%, transparent); color: var(--own); font: 700 0.85rem "Figtree", system-ui, sans-serif; text-decoration: none; }
   .kofi svg { flex: none; }
-  .kofi-painel { margin: 2px 0 14px; align-self: flex-start; }
+  .kofi-painel { display: flex; width: fit-content; margin: 0 auto 14px; }
   @media (hover: hover) { .kofi:hover { background: color-mix(in srgb, var(--own) 18%, transparent); border-color: var(--own); } }
   @media (prefers-reduced-motion: no-preference) { .kofi svg { transition: transform 0.2s ease; } .kofi:hover svg { transform: scale(1.18); } }
   /* celular: espaço para as bolinhas de cor não cobrirem o fim da página */
@@ -1545,16 +1545,16 @@
 
 <div class="scrim" id="scrim" hidden></div>
 <div class="painel" id="painel" role="dialog" aria-modal="true" aria-labelledby="tPainel">
+  <a class="kofi kofi-painel" href="https://ko-fi.com/annaincodes" target="_blank" rel="noopener noreferrer">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.5C1.3 8.4 3.3 5 6.8 5c2 0 3.5 1.1 5.2 3.1C13.7 6.1 15.2 5 17.2 5c3.5 0 5.5 3.4 4.3 6.5C19.5 16.4 12 21 12 21z"/></svg>
+    <span data-i18n="supportLink">Support NanaDex</span>
+  </a>
   <div class="painel-top">
     <h2 id="tPainel" data-i18n="panelTitle">Account &amp; settings</h2>
     <button type="button" class="fechar" id="fechar" data-i18n-aria="closePanel" aria-label="Close panel">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
     </button>
   </div>
-  <a class="kofi kofi-painel" href="https://ko-fi.com/annaincodes" target="_blank" rel="noopener noreferrer">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.5C1.3 8.4 3.3 5 6.8 5c2 0 3.5 1.1 5.2 3.1C13.7 6.1 15.2 5 17.2 5c3.5 0 5.5 3.4 4.3 6.5C19.5 16.4 12 21 12 21z"/></svg>
-    <span data-i18n="supportLink">Support NanaDex</span>
-  </a>
 
   <section aria-labelledby="tConta">
     <h3 id="tConta" data-i18n="account">Account</h3>
@@ -4495,6 +4495,9 @@
     (function andar(no) { if (!no) return; idsLinha.push(idDaUrl(no.species.url)); (no.evolves_to || []).forEach(andar); })(evo && evo.chain);
     if (!idsLinha.includes(spId)) idsLinha.push(spId);
     const especiaisLinha = idsLinha.flatMap(s => FORMAS_POR_SP.get(s) || []);
+    // "Outras formas" só mostra o que ainda não aparece com imagem na evolução ou nas formas especiais
+    const jaComImagem = new Set(especiaisLinha.map(f => f.id).concat(idsLinha));
+    for (let k = formas.length - 1; k >= 0; k--) if (formas[k].id && jaComImagem.has(formas[k].id)) formas.splice(k, 1);
     const especiaisHTML = especiaisLinha.length ? `<div class="evo-especiais"><p class="evo-sub">${esc(t("specialForms"))}</p><div class="evo">${especiaisLinha.map(f => `<button type="button" class="evo-etapa especial${f.id === id ? " atual" : ""}" data-evo="${f.id}" ${f.id === id ? 'aria-current="true"' : ""}>
           <img src="${ARTE(f.pid)}" alt="" width="72" height="72" loading="lazy">
           <span class="evo-nm">${esc(nomeDex(f.id))}</span><span class="evo-no">#${pad4(f.sp)}</span>
