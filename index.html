@@ -37,7 +37,7 @@
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
   /* Cores do fichário (escolhidas nas bolinhas do canto inferior direito) */
-  html[data-tema="pastel"] { --hd-bg: #3A1626; --hd-fg: #F8C8DC; --hd-sub: #FFF1F7; --bg: #F8C8DC; --cover: #F8C8DC; --text: #3A1626; --muted: #6B2A45; --line: #A24D72; --seg-bg: #FBDDE9; --seg-on-bg: #4A1B30; --seg-on-fg: #FFFFFF; --stitch: rgba(106, 40, 70, 0.5); --field-fg: #3A1626; --field-muted: #6B2A45; --page: #331A28; --acc: #F6A9C6; --acc-hover: #F9C3D8; --acc-ink: #4A1B30; --acc-soft: #FFBFD7; --b-ink: #F7E6EE; --b-muted: #DDB8C9; --zoom-bg: rgba(28, 9, 18, 0.95); --own: #C93C77; }
+  html[data-tema="pastel"] { --hd-bg: #3A1626; --hd-fg: #F8C8DC; --hd-sub: #FFF1F7; --bg: #F5C6E1; --cover: #F8C8DC; --text: #3A1626; --muted: #6B2A45; --line: #A24D72; --seg-bg: #FBDDE9; --seg-on-bg: #4A1B30; --seg-on-fg: #FFFFFF; --stitch: rgba(106, 40, 70, 0.5); --field-fg: #3A1626; --field-muted: #6B2A45; --page: #331A28; --acc: #F6A9C6; --acc-hover: #F9C3D8; --acc-ink: #4A1B30; --acc-soft: #FFBFD7; --b-ink: #F7E6EE; --b-muted: #DDB8C9; --zoom-bg: rgba(28, 9, 18, 0.95); --own: #C93C77; }
   html[data-tema="azul"] { --hd-bg: #24395A; --hd-fg: #BFD7F2; --hd-sub: #EEF5FC; --bg: #E4EEF9; --cover: #BBD4EF; --text: #1F3351; --muted: #47657F; --line: #7FA3C9; --seg-bg: #C9DDF1; --seg-on-bg: #24395A; --seg-on-fg: #FFFFFF; --stitch: rgba(36, 57, 90, 0.35); --field-fg: #1F3351; --field-muted: #4D6882; --page: #1C2530; --acc: #ABC9EB; --acc-hover: #C1D9F2; --acc-ink: #24395A; --acc-soft: #CFE1F5; --b-ink: #EAF1FA; --b-muted: #B3C4D6; --zoom-bg: rgba(12, 20, 32, 0.95); --own: #5E91CC; }
   html[data-tema="verde"] { --hd-bg: #2B4435; --hd-fg: #C6E0CA; --hd-sub: #EEF6EF; --bg: #E5F1E4; --cover: #BFDDC0; --text: #223A2B; --muted: #4B6B56; --line: #86AE8D; --seg-bg: #CDE5CE; --seg-on-bg: #2B4435; --seg-on-fg: #FFFFFF; --stitch: rgba(43, 68, 53, 0.35); --field-fg: #223A2B; --field-muted: #52705C; --page: #1B2620; --acc: #B4D7B9; --acc-hover: #C9E5CD; --acc-ink: #2B4435; --acc-soft: #D2E9D4; --b-ink: #EAF4EB; --b-muted: #B4C9B8; --zoom-bg: rgba(12, 24, 16, 0.95); --own: #5F9F6F; }
   html[data-tema="amarelo"] { --hd-bg: #A85A20; --hd-fg: #FFE9B5; --hd-sub: #FFF8E3; --bg: #FFF5D8; --cover: #F5E0A0; --text: #4A3220; --muted: #85592D; --line: #D4A867; --seg-bg: #FAE3B8; --seg-on-bg: #A85A20; --seg-on-fg: #FFFFFF; --stitch: rgba(168, 90, 32, 0.35); --field-fg: #4A3220; --field-muted: #85592D; --page: #26211A; --acc: #F6BE88; --acc-hover: #F9D0A7; --acc-ink: #5A2A0A; --acc-soft: #FBD8B6; --b-ink: #FAF3E1; --b-muted: #D6C9A6; --zoom-bg: rgba(28, 20, 8, 0.95); --own: #E48A4C; }
@@ -1003,34 +1003,80 @@
 
   /* Carta 3D com brilho (holo / foil) */
   .c3d-host { position: relative; overflow: visible !important; }
-  .c3d { --rx: 0deg; --ry: 0deg; --mx: 50%; --my: 50%; --px: 0; --py: 0; --o: 0.5; --sx: 0; --sy: 0;
-    --art: linear-gradient(#000 0 0) 50% 18.7% / 84% 38.5% no-repeat;
-    position: absolute; inset: 0; perspective: 900px; touch-action: none; cursor: grab; user-select: none; -webkit-user-select: none; }
+  .c3d { --rx: 0deg; --ry: 0deg; --mx: 50%; --my: 50%; --px: 0; --py: 0; --o: 0.34; --sc: 1; --sx: 0; --sy: 0;
+    --art: linear-gradient(#000 0 0) 50% 18.5% / 84% 38.5% no-repeat;
+    --rb: linear-gradient(102deg, #ff2f6e 0%, #ff8a2b 9%, #ffe74a 18%, #5bff8f 28%, #2fd4ff 38%, #7b63ff 48%, #ff4fd8 58%, #ff2f6e 68%, #ffe74a 79%, #2fd4ff 89%, #ff2f6e 100%);
+    position: absolute; inset: 0; perspective: 820px; touch-action: none; cursor: grab; user-select: none; -webkit-user-select: none; }
   .c3d:active { cursor: grabbing; }
-  .c3d-in { position: absolute; inset: 0; display: grid; place-items: center; transform-style: preserve-3d; transform: rotateX(var(--rx)) rotateY(var(--ry)); will-change: transform; }
-  .c3d-in img { -webkit-user-drag: none; box-shadow: calc(var(--sx) * 1px) calc(18px + var(--sy) * 1px) 50px rgba(0, 0, 0, 0.55); }
-  .c3d-fx { position: absolute; pointer-events: none; overflow: hidden; border-radius: 4.5%; opacity: var(--o); }
+  .c3d-in { position: absolute; inset: 0; display: grid; place-items: center; transform-style: preserve-3d; transform: rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--sc)); will-change: transform; }
+  .c3d-in img { -webkit-user-drag: none; box-shadow: calc(var(--sx) * 1.4px) calc(16px + var(--sy) * 1.4px) 44px rgba(0, 0, 0, 0.62); }
+  .c3d-fx { position: absolute; pointer-events: none; overflow: hidden; border-radius: 4.5%; }
   .c3d-fx i { position: absolute; inset: 0; display: block; }
-  .c3d-fx .fx-a { background-image: linear-gradient(115deg, #ff3d7f 0%, #ffb23b 15%, #f4ff5c 29%, #3dffa6 43%, #38c9ff 57%, #8e6cff 71%, #ff52d6 85%, #ff3d7f 100%); background-size: 280% 280%; background-position: var(--mx) var(--my); mix-blend-mode: color-dodge; opacity: 0.4; filter: saturate(1.2) brightness(0.72); }
-  .c3d-fx .fx-b { background: radial-gradient(farthest-corner circle at var(--mx) var(--my), rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0.2) 26%, rgba(255, 255, 255, 0) 60%); mix-blend-mode: overlay; }
-  .c3d-fx .fx-c { display: none; }
-  .c3d[data-fx="none"] .fx-a { display: none; }
-  .c3d[data-fx="none"] .c3d-fx { opacity: calc(var(--o) * 0.7); }
-  .c3d[data-fx="holo"] .fx-a { -webkit-mask: var(--art); mask: var(--art); }
-  .c3d[data-fx="reverse"] .fx-a { -webkit-mask: linear-gradient(#000 0 0), var(--art); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0), var(--art); mask-composite: exclude; opacity: 0.42; }
-  .c3d[data-fx="full"] .fx-c { display: block; background: repeating-linear-gradient(125deg, rgba(255, 255, 255, 0) 0 4px, rgba(255, 255, 255, 0.3) 4px 5px); background-position: calc(var(--px) * 14px) calc(var(--py) * 14px); mix-blend-mode: overlay; opacity: 0.7; }
-  .c3d[data-fx="glitter"] .fx-a { opacity: 0.38; }
-  .c3d[data-fx="sir"] .fx-a { opacity: 0.62; filter: saturate(1.5) brightness(0.85); }
-  .c3d[data-fx="gold"] .fx-a { background-image: linear-gradient(115deg, rgba(120, 70, 0, 0) 8%, #ffd45a 28%, #fff4c2 40%, #ffbb3a 52%, #fff1b0 64%, #e8a21c 78%, rgba(120, 70, 0, 0) 92%); background-size: 260% 260%; mix-blend-mode: overlay; opacity: 0.85; filter: none; }
-  .c3d[data-fx="shiny"] .fx-a { background-image: linear-gradient(115deg, #7be9ff 0%, #fff 18%, #ffc2f2 34%, #9fb2ff 50%, #fff 66%, #7bffe0 82%, #7be9ff 100%); mix-blend-mode: soft-light; opacity: 0.8; filter: none; }
-  .c3d[data-fx="glitter"] .fx-c, .c3d[data-fx="sir"] .fx-c, .c3d[data-fx="gold"] .fx-c, .c3d[data-fx="shiny"] .fx-c {
-    display: block; mix-blend-mode: color-dodge; filter: brightness(1.35);
-    background-image: radial-gradient(circle at 20% 30%, #fff 0 1px, transparent 2.2px), radial-gradient(circle at 70% 60%, #fff 0 1px, transparent 2.2px), radial-gradient(circle at 45% 82%, #fff 0 1.3px, transparent 2.6px), radial-gradient(circle at 86% 18%, #fff 0 1px, transparent 2.2px), radial-gradient(circle at 12% 74%, #fff 0 1px, transparent 2px);
-    background-size: 37px 41px, 53px 47px, 29px 33px, 61px 59px, 43px 39px;
-    background-position: calc(var(--px) * 7px) calc(var(--py) * 7px), calc(var(--px) * -11px) calc(var(--py) * 9px), calc(var(--px) * 13px) calc(var(--py) * -6px), calc(var(--px) * -5px) calc(var(--py) * -12px), calc(var(--px) * 9px) calc(var(--py) * 5px);
-    -webkit-mask-image: radial-gradient(circle at var(--mx) var(--my), #000 0%, rgba(0, 0, 0, 0.25) 55%, transparent 85%); mask-image: radial-gradient(circle at var(--mx) var(--my), #000 0%, rgba(0, 0, 0, 0.25) 55%, transparent 85%); }
-  .c3d[data-fx="sir"] .fx-c { background-size: 29px 31px, 41px 37px, 23px 27px, 47px 45px, 33px 29px; }
-  .c3d[data-fx="sir"] .fx-c::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(125deg, rgba(255, 255, 255, 0) 0 5px, rgba(255, 255, 255, 0.18) 5px 6px); mix-blend-mode: overlay; }
+
+  /* 1 textura do foil · 2 arco-íris · 3 estrelinhas · 4 brilho do ponteiro */
+  .c3d-fx .fx-tex { display: none; mix-blend-mode: overlay; opacity: calc(var(--o) * 0.6); }
+  .c3d-fx .fx-rb { background-image: var(--rb); background-size: 430% 430%; background-position: var(--mx) var(--my);
+    mix-blend-mode: overlay; filter: saturate(1.35) contrast(1.05); opacity: calc(var(--o) * 0.5); }
+  .c3d-fx .fx-star { display: none; mix-blend-mode: screen; opacity: calc(var(--o) * 0.52); }
+  .c3d-fx .fx-gl { mix-blend-mode: soft-light; opacity: 1;
+    background-image: radial-gradient(farthest-corner circle at var(--mx) var(--my), rgba(255, 255, 255, calc(0.22 + var(--o) * 0.45)) 0%, rgba(255, 255, 255, calc(var(--o) * 0.12)) 28%, rgba(255, 255, 255, 0) 62%),
+      linear-gradient(104deg, rgba(255, 255, 255, 0) 36%, rgba(255, 255, 255, calc(var(--o) * 0.5)) 49%, rgba(255, 255, 255, 0) 62%);
+    background-size: auto, 250% 250%; background-position: 0 0, var(--mx) var(--my); }
+
+  /* sem foil: só o reflexo do papel */
+  .c3d[data-fx="none"] .fx-rb { display: none; }
+  .c3d[data-fx="none"] .fx-gl { opacity: 0.5; }
+
+  /* holo clássico: só na janela da ilustração */
+  .c3d[data-fx="holo"] .fx-rb, .c3d[data-fx="holo"] .fx-tex { -webkit-mask: var(--art); mask: var(--art); }
+  .c3d[data-fx="holo"] .fx-rb { opacity: calc(var(--o) * 0.62); }
+  .c3d[data-fx="holo"] .fx-tex { display: block;
+    background-image: repeating-linear-gradient(97deg, rgba(255, 255, 255, 0) 0 2px, rgba(255, 255, 255, 0.7) 2px 3.2px);
+    background-position: calc(var(--px) * 12px) calc(var(--py) * 12px); }
+  /* reverse: tudo menos a ilustração */
+  .c3d[data-fx="reverse"] .fx-rb, .c3d[data-fx="reverse"] .fx-tex {
+    -webkit-mask: linear-gradient(#000 0 0), var(--art); -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0), var(--art); mask-composite: exclude; }
+  .c3d[data-fx="reverse"] .fx-rb { opacity: calc(var(--o) * 0.5); }
+  .c3d[data-fx="reverse"] .fx-tex { display: block; opacity: calc(var(--o) * 0.5);
+    background-image: repeating-linear-gradient(97deg, rgba(255, 255, 255, 0) 0 3px, rgba(255, 255, 255, 0.6) 3px 4.4px);
+    background-position: calc(var(--px) * 10px) calc(var(--py) * 10px); }
+
+  /* full art (ex, V, VMAX, Ultra): raios saindo do centro */
+  .c3d[data-fx="full"] .fx-tex { display: block; opacity: calc(var(--o) * 0.4);
+    background-image: repeating-conic-gradient(from calc(var(--px) * 6deg) at 50% 42%, rgba(255, 255, 255, 0) 0deg 1.3deg, rgba(255, 255, 255, 0.55) 1.3deg 2.2deg, rgba(255, 255, 255, 0) 2.2deg 3.8deg); }
+  .c3d[data-fx="full"] .fx-star { display: block; opacity: calc(var(--o) * 0.45); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='104' height='118' viewBox='0 0 104 118'%3E%3Cpath d='M78 18C78.8 23.759999999999998 80.24 25.2 86 26 C80.24 26.8 78.8 28.240000000000002 78 34 C75.76 28.240000000000002 77.2 26.8 70 26 C77.2 25.2 75.76 23.759999999999998 78 18z' fill='white' opacity='0.8'/%3E%3Cpath d='M24 72C25.0 79.2 26.8 81.0 34 82 C26.8 83.0 25.0 84.8 24 92 C21.2 84.8 23.0 83.0 14 82 C23.0 81.0 21.2 79.2 24 72z' fill='white' opacity='0.7'/%3E%3C/svg%3E");
+    background-size: 128px 146px; background-position: calc(var(--px) * 10px) calc(var(--py) * 10px); }
+
+  /* illustration rare: riscos finos diagonais na carta toda */
+  .c3d[data-fx="glitter"] .fx-tex { display: block; opacity: calc(var(--o) * 0.66);
+    background-image: repeating-linear-gradient(103deg, rgba(255, 255, 255, 0) 0 2.2px, rgba(255, 255, 255, 0.65) 2.2px 3.4px), radial-gradient(circle at 18% 26%, rgba(255,255,255,0.9) 0 0.5px, transparent 1.3px), radial-gradient(circle at 72% 58%, rgba(255,255,255,0.75) 0 0.45px, transparent 1.1px), radial-gradient(circle at 44% 84%, rgba(255,255,255,0.85) 0 0.55px, transparent 1.4px), radial-gradient(circle at 88% 14%, rgba(255,255,255,0.7) 0 0.45px, transparent 1.1px);
+    background-size: auto, 24px 28px; background-position: calc(var(--px) * 13px) calc(var(--py) * 13px), calc(var(--px) * -8px) calc(var(--py) * 10px); }
+
+  /* special illustration rare: glitter fino + estrelas */
+  .c3d[data-fx="sir"] .fx-rb { opacity: calc(var(--o) * 0.52); }
+  .c3d[data-fx="sir"] .fx-tex { display: block; mix-blend-mode: screen; opacity: calc(var(--o) * 0.8); background-image: radial-gradient(circle at 18% 26%, rgba(255,255,255,0.9) 0 0.5px, transparent 1.3px), radial-gradient(circle at 72% 58%, rgba(255,255,255,0.75) 0 0.45px, transparent 1.1px), radial-gradient(circle at 44% 84%, rgba(255,255,255,0.85) 0 0.55px, transparent 1.4px), radial-gradient(circle at 88% 14%, rgba(255,255,255,0.7) 0 0.45px, transparent 1.1px), radial-gradient(circle at 30% 70%, rgba(255,255,255,0.8) 0 0.6px, transparent 1.5px), radial-gradient(circle at 80% 30%, rgba(255,255,255,0.65) 0 0.5px, transparent 1.2px);
+    background-size: 17px 20px, 27px 24px; background-position: calc(var(--px) * 10px) calc(var(--py) * 10px), calc(var(--px) * -13px) calc(var(--py) * 8px); }
+  .c3d[data-fx="sir"] .fx-star, .c3d[data-fx="gold"] .fx-star, .c3d[data-fx="rainbow"] .fx-star, .c3d[data-fx="shiny"] .fx-star {
+    display: block; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='170' viewBox='0 0 150 170'%3E%3Cpath d='M34 17C35.3 26.36 37.64 28.7 47 30 C37.64 31.3 35.3 33.64 34 43 C30.36 33.64 32.7 31.3 21 30 C32.7 28.7 30.36 26.36 34 17z' fill='white' opacity='0.95'/%3E%3Cpath d='M112 79C113.7 91.24 116.76 94.3 129 96 C116.76 97.7 113.7 100.76 112 113 C107.24 100.76 110.3 97.7 95 96 C110.3 94.3 107.24 91.24 112 79z' fill='white' opacity='0.9'/%3E%3Cpath d='M66 128C67.0 135.2 68.8 137.0 76 138 C68.8 139.0 67.0 140.8 66 148 C63.2 140.8 65.0 139.0 56 138 C65.0 137.0 63.2 135.2 66 128z' fill='white' opacity='0.8'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='104' height='118' viewBox='0 0 104 118'%3E%3Cpath d='M78 18C78.8 23.759999999999998 80.24 25.2 86 26 C80.24 26.8 78.8 28.240000000000002 78 34 C75.76 28.240000000000002 77.2 26.8 70 26 C77.2 25.2 75.76 23.759999999999998 78 18z' fill='white' opacity='0.8'/%3E%3Cpath d='M24 72C25.0 79.2 26.8 81.0 34 82 C26.8 83.0 25.0 84.8 24 92 C21.2 84.8 23.0 83.0 14 82 C23.0 81.0 21.2 79.2 24 72z' fill='white' opacity='0.7'/%3E%3C/svg%3E");
+    background-size: 186px 210px, 128px 146px; background-position: calc(var(--px) * 14px) calc(var(--py) * 14px), calc(var(--px) * -10px) calc(var(--py) * 12px); }
+
+  /* rainbow rare */
+  .c3d[data-fx="rainbow"] .fx-rb { opacity: calc(var(--o) * 0.6); filter: saturate(1.6) contrast(1.1); }
+  .c3d[data-fx="rainbow"] .fx-tex { display: block; mix-blend-mode: screen; opacity: calc(var(--o) * 0.6); background-image: radial-gradient(circle at 18% 26%, rgba(255,255,255,0.9) 0 0.5px, transparent 1.3px), radial-gradient(circle at 72% 58%, rgba(255,255,255,0.75) 0 0.45px, transparent 1.1px), radial-gradient(circle at 44% 84%, rgba(255,255,255,0.85) 0 0.55px, transparent 1.4px), radial-gradient(circle at 88% 14%, rgba(255,255,255,0.7) 0 0.45px, transparent 1.1px);
+    background-size: 20px 23px; background-position: calc(var(--px) * 11px) calc(var(--py) * 11px); }
+
+  /* dourada (hyper, secret) */
+  .c3d[data-fx="gold"] .fx-rb { background-image: linear-gradient(102deg, rgba(90, 55, 0, 0) 6%, #ffd758 24%, #fff6cd 36%, #ffb62e 48%, #fff3b8 60%, #e59a12 74%, rgba(90, 55, 0, 0) 92%);
+    background-size: 300% 300%; opacity: calc(var(--o) * 0.6); filter: saturate(1.2); }
+  .c3d[data-fx="gold"] .fx-tex { display: block; mix-blend-mode: screen; opacity: calc(var(--o) * 0.75); background-image: radial-gradient(circle at 18% 26%, rgba(255,255,255,0.9) 0 0.5px, transparent 1.3px), radial-gradient(circle at 72% 58%, rgba(255,255,255,0.75) 0 0.45px, transparent 1.1px), radial-gradient(circle at 44% 84%, rgba(255,255,255,0.85) 0 0.55px, transparent 1.4px), radial-gradient(circle at 88% 14%, rgba(255,255,255,0.7) 0 0.45px, transparent 1.1px), radial-gradient(circle at 30% 70%, rgba(255,255,255,0.8) 0 0.6px, transparent 1.5px), radial-gradient(circle at 80% 30%, rgba(255,255,255,0.65) 0 0.5px, transparent 1.2px);
+    background-size: 15px 18px, 26px 23px; background-position: calc(var(--px) * 9px) calc(var(--py) * 9px), calc(var(--px) * -12px) calc(var(--py) * 7px); }
+
+  /* shiny */
+  .c3d[data-fx="shiny"] .fx-rb { background-image: linear-gradient(102deg, #8fefff 0%, #fff 16%, #ffc9f3 32%, #a8b8ff 48%, #fff 64%, #8fffe2 80%, #8fefff 100%);
+    opacity: calc(var(--o) * 0.45); filter: saturate(1.1); }
+  .c3d[data-fx="shiny"] .fx-tex { display: block; mix-blend-mode: screen; opacity: calc(var(--o) * 0.7); background-image: radial-gradient(circle at 18% 26%, rgba(255,255,255,0.9) 0 0.5px, transparent 1.3px), radial-gradient(circle at 72% 58%, rgba(255,255,255,0.75) 0 0.45px, transparent 1.1px), radial-gradient(circle at 44% 84%, rgba(255,255,255,0.85) 0 0.55px, transparent 1.4px), radial-gradient(circle at 88% 14%, rgba(255,255,255,0.7) 0 0.45px, transparent 1.1px);
+    background-size: 16px 19px; background-position: calc(var(--px) * 10px) calc(var(--py) * 10px); }
   .fv-zimg.c3d-host { background: transparent; }
   .z-fx { margin-top: 12px; padding: 10px 12px; border-radius: 14px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); text-align: left; }
   .z-fx-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
@@ -1049,10 +1095,10 @@
   html[data-modo="escuro"] .st-card { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 10px 22px -18px rgba(0, 0, 0, 0.8); }
   @media (hover: hover) { .st-card:hover { border-color: var(--own); transform: translateY(-2px); } }
   .st-card { transition: transform 0.15s ease, border-color 0.15s ease; }
-  .st-logo { height: 62px; display: grid; place-items: center; }
-  .st-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .st-logo { --lg-h: 62px; height: var(--lg-h); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .st-logo img { display: block; max-width: 100%; max-height: var(--lg-h); width: auto; height: auto; object-fit: contain; }
   html[data-modo="escuro"] .st-logo img { filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.35)); }
-  .st-logo .st-sem { font: 800 1rem "Bricolage Grotesque", system-ui, sans-serif; text-align: center; opacity: 0.75; }
+  .st-logo .st-sem { padding: 0 6px; font: 800 0.95rem/1.2 "Bricolage Grotesque", system-ui, sans-serif; text-align: center; opacity: 0.75; }
   .st-nome { display: flex; align-items: center; gap: 7px; font: 800 0.98rem/1.25 "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif; }
   .st-nome img { width: 20px; height: 20px; object-fit: contain; flex: none; }
   .st-sub { margin: 0; color: var(--muted); font-size: 0.8rem; }
@@ -1064,7 +1110,7 @@
   .st-topo { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 14px; }
   .st-voltar { display: inline-flex; align-items: center; gap: 7px; height: 40px; padding: 0 16px; border: 1.5px solid var(--line); border-radius: 99px; background: transparent; color: var(--text); font: 700 14px "Figtree", system-ui, sans-serif; cursor: pointer; }
   .st-cab { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
-  .st-cab .st-logo { height: 84px; min-width: 150px; flex: 0 1 220px; }
+  .st-cab .st-logo { --lg-h: 88px; min-width: 150px; flex: 0 1 220px; }
   .st-cab h2 { margin: 0; font: 800 1.5rem/1.15 "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif; letter-spacing: -0.015em; }
   .st-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
   .st-meta span { padding: 3px 10px; border-radius: 99px; border: 1px solid var(--tl-line); font-size: 0.78rem; font-weight: 700; color: var(--tl-muted); }
@@ -2406,21 +2452,21 @@
   const RAR_TXT = {
     en: { rarAll: "Rarity", rarLoading: "Rarity (loading…)", rarGroups: "Groups", rarEach: "Rarities",
       rarG_fullart: "Full Art (all)", rarG_alt: "Illustration / Alt Art (IR + SIR)", rarG_gold: "Gold, Hyper & Secret", rarG_shiny: "Shiny", rarG_gal: "Trainer / Galarian Gallery", rarG_vex: "Pokémon V, VMAX, VSTAR, GX & ex",
-      fxLbl: "Finish", fxNormal: "Normal", fxReverse: "Reverse Holo", fxName_holo: "Holo", fxName_full: "Full-art holo", fxName_glitter: "Glitter foil", fxName_sir: "Rainbow glitter", fxName_gold: "Gold foil", fxName_shiny: "Shiny foil", fxNote_none: "Standard print, no foil.", fxNote_holo: "Holographic foil on the artwork.", fxNote_reverse: "Reverse holo: foil everywhere except the artwork.", fxNote_full: "Holographic foil across the whole card.", fxNote_glitter: "Textured glitter foil.", fxNote_sir: "Rainbow glitter foil with a deep texture.", fxNote_gold: "Gold metallic foil.", fxNote_shiny: "Sparkling shiny foil.", fxHint: "Move your mouse over the card, or drag it, to tilt it in 3D.", fx1st: "1st Edition", fxPromo: "Promo", rar_common: "Common", rar_uncommon: "Uncommon", rar_rare: "Rare", rar_holo: "Rare Holo", rar_double: "Double Rare (ex)", rar_vseries: "Rare Holo V / VMAX / VSTAR / GX", rar_oldex: "Rare Holo EX (classic)",
+      fxLbl: "Finish", fxNormal: "Normal", fxReverse: "Reverse Holo", fxName_holo: "Holo", fxName_full: "Full-art holo", fxName_glitter: "Glitter foil", fxName_sir: "Rainbow glitter", fxName_rainbow: "Rainbow foil", fxName_gold: "Gold foil", fxName_shiny: "Shiny foil", fxNote_none: "Standard print, no foil.", fxNote_holo: "Holographic foil on the artwork.", fxNote_reverse: "Reverse holo: foil everywhere except the artwork.", fxNote_full: "Holographic foil across the whole card.", fxNote_glitter: "Textured glitter foil.", fxNote_sir: "Rainbow glitter foil with a deep texture.", fxNote_rainbow: "Rainbow foil across the whole card.", fxNote_gold: "Gold metallic foil.", fxNote_shiny: "Sparkling shiny foil.", fxHint: "Move your mouse over the card, or drag it, to tilt it in 3D.", fx1st: "1st Edition", fxPromo: "Promo", rar_common: "Common", rar_uncommon: "Uncommon", rar_rare: "Rare", rar_holo: "Rare Holo", rar_double: "Double Rare (ex)", rar_vseries: "Rare Holo V / VMAX / VSTAR / GX", rar_oldex: "Rare Holo EX (classic)",
       rar_ultra: "Ultra Rare (Full Art)", rar_ir: "Illustration Rare (IR)", rar_sir: "Special Illustration Rare (SIR / SAR)", rar_mhr: "Mega Hyper Rare", rar_hyper: "Hyper Rare (Gold)", rar_secret: "Secret Rare",
       rar_rainbow: "Rainbow Rare", rar_trainerfull: "Full Art Trainer", rar_gallery: "Trainer / Galarian Gallery", rar_bwr: "Black White Rare", rar_shiny: "Shiny Rare", rar_shinyultra: "Shiny Ultra Rare",
       rar_acespec: "ACE SPEC Rare", rar_radiant: "Radiant Rare", rar_amazing: "Amazing Rare", rar_lvx: "LV.X", rar_prime: "Prime", rar_legend: "LEGEND", rar_break: "BREAK", rar_prism: "Prism Star",
       rar_star: "Gold Star", rar_classic: "Classic Collection", rar_promo: "Promo", rar_outra: "Other", rarLbl: "Rarity" },
     pt: { rarAll: "Raridade", rarLoading: "Raridade (carregando…)", rarGroups: "Grupos", rarEach: "Raridades",
       rarG_fullart: "Full Art (todas)", rarG_alt: "Ilustração / Alt Art (IR + SIR)", rarG_gold: "Douradas, Hyper e Secretas", rarG_shiny: "Shiny", rarG_gal: "Trainer / Galarian Gallery", rarG_vex: "Pokémon V, VMAX, VSTAR, GX e ex",
-      fxLbl: "Acabamento", fxNormal: "Normal", fxReverse: "Reverse Holo", fxName_holo: "Holo", fxName_full: "Holo full art", fxName_glitter: "Foil com glitter", fxName_sir: "Glitter arco-íris", fxName_gold: "Foil dourado", fxName_shiny: "Foil shiny", fxNote_none: "Impressão comum, sem foil.", fxNote_holo: "Foil holográfico na ilustração.", fxNote_reverse: "Reverse holo: foil em toda a carta, menos na ilustração.", fxNote_full: "Foil holográfico na carta inteira.", fxNote_glitter: "Foil texturizado com glitter.", fxNote_sir: "Foil glitter arco-íris com textura profunda.", fxNote_gold: "Foil metálico dourado.", fxNote_shiny: "Foil brilhante com cintilações.", fxHint: "Passe o mouse sobre a carta, ou arraste-a, para inclinar em 3D.", fx1st: "1ª Edição", fxPromo: "Promo", rar_common: "Comum", rar_uncommon: "Incomum", rar_rare: "Rara", rar_holo: "Rara Holo", rar_double: "Rara Dupla (ex)", rar_vseries: "Rara Holo V / VMAX / VSTAR / GX", rar_oldex: "Rara Holo EX (clássica)",
+      fxLbl: "Acabamento", fxNormal: "Normal", fxReverse: "Reverse Holo", fxName_holo: "Holo", fxName_full: "Holo full art", fxName_glitter: "Foil com glitter", fxName_sir: "Glitter arco-íris", fxName_rainbow: "Foil arco-íris", fxName_gold: "Foil dourado", fxName_shiny: "Foil shiny", fxNote_none: "Impressão comum, sem foil.", fxNote_holo: "Foil holográfico na ilustração.", fxNote_reverse: "Reverse holo: foil em toda a carta, menos na ilustração.", fxNote_full: "Foil holográfico na carta inteira.", fxNote_glitter: "Foil texturizado com glitter.", fxNote_sir: "Foil glitter arco-íris com textura profunda.", fxNote_rainbow: "Foil arco-íris na carta inteira.", fxNote_gold: "Foil metálico dourado.", fxNote_shiny: "Foil brilhante com cintilações.", fxHint: "Passe o mouse sobre a carta, ou arraste-a, para inclinar em 3D.", fx1st: "1ª Edição", fxPromo: "Promo", rar_common: "Comum", rar_uncommon: "Incomum", rar_rare: "Rara", rar_holo: "Rara Holo", rar_double: "Rara Dupla (ex)", rar_vseries: "Rara Holo V / VMAX / VSTAR / GX", rar_oldex: "Rara Holo EX (clássica)",
       rar_ultra: "Ultra Rara (Full Art)", rar_ir: "Rara Ilustrada (IR)", rar_sir: "Rara Ilustrada Especial (SIR / SAR)", rar_mhr: "Mega Hyper Rara", rar_hyper: "Hyper Rara (dourada)", rar_secret: "Rara Secreta",
       rar_rainbow: "Rara Arco-íris", rar_trainerfull: "Treinador Full Art", rar_gallery: "Trainer / Galarian Gallery", rar_bwr: "Black White Rare", rar_shiny: "Rara Shiny", rar_shinyultra: "Ultra Rara Shiny",
       rar_acespec: "ACE SPEC", rar_radiant: "Rara Radiante", rar_amazing: "Rara Incrível", rar_lvx: "LV.X", rar_prime: "Prime", rar_legend: "LENDA", rar_break: "TURBO (BREAK)", rar_prism: "Prisma",
       rar_star: "Estrela Dourada", rar_classic: "Classic Collection", rar_promo: "Promo", rar_outra: "Outra", rarLbl: "Raridade" },
     ja: { rarAll: "レアリティ", rarLoading: "レアリティ（読み込み中…）", rarGroups: "グループ", rarEach: "レアリティ",
       rarG_fullart: "フルアート（すべて）", rarG_alt: "イラスト（AR + SAR）", rarG_gold: "ゴールド・UR・シークレット", rarG_shiny: "色違い", rarG_gal: "トレーナー／ガラルギャラリー", rarG_vex: "V・VMAX・VSTAR・GX・ex",
-      fxLbl: "仕上げ", fxNormal: "ノーマル", fxReverse: "リバースホロ", fxName_holo: "ホロ", fxName_full: "フルアートホロ", fxName_glitter: "グリッターホイル", fxName_sir: "レインボーグリッター", fxName_gold: "ゴールドホイル", fxName_shiny: "シャイニーホイル", fxNote_none: "通常印刷（ホイルなし）", fxNote_holo: "イラスト部分のホログラムホイル", fxNote_reverse: "イラスト以外がホイルになるリバースホロ", fxNote_full: "カード全面のホログラムホイル", fxNote_glitter: "凹凸のあるグリッターホイル", fxNote_sir: "深い質感のレインボーグリッターホイル", fxNote_gold: "金色のメタリックホイル", fxNote_shiny: "きらめくシャイニーホイル", fxHint: "カードの上でマウスを動かすか、ドラッグすると3Dで傾きます。", fx1st: "初版", fxPromo: "プロモ", rar_common: "C", rar_uncommon: "U", rar_rare: "R", rar_holo: "R（ホロ）", rar_double: "RR（ex）", rar_vseries: "V・VMAX・VSTAR・GX", rar_oldex: "ex（旧）",
+      fxLbl: "仕上げ", fxNormal: "ノーマル", fxReverse: "リバースホロ", fxName_holo: "ホロ", fxName_full: "フルアートホロ", fxName_glitter: "グリッターホイル", fxName_sir: "レインボーグリッター", fxName_rainbow: "レインボーホイル", fxName_gold: "ゴールドホイル", fxName_shiny: "シャイニーホイル", fxNote_none: "通常印刷（ホイルなし）", fxNote_holo: "イラスト部分のホログラムホイル", fxNote_reverse: "イラスト以外がホイルになるリバースホロ", fxNote_full: "カード全面のホログラムホイル", fxNote_glitter: "凹凸のあるグリッターホイル", fxNote_sir: "深い質感のレインボーグリッターホイル", fxNote_rainbow: "カード全面のレインボーホイル", fxNote_gold: "金色のメタリックホイル", fxNote_shiny: "きらめくシャイニーホイル", fxHint: "カードの上でマウスを動かすか、ドラッグすると3Dで傾きます。", fx1st: "初版", fxPromo: "プロモ", rar_common: "C", rar_uncommon: "U", rar_rare: "R", rar_holo: "R（ホロ）", rar_double: "RR（ex）", rar_vseries: "V・VMAX・VSTAR・GX", rar_oldex: "ex（旧）",
       rar_ultra: "SR（フルアート）", rar_ir: "AR（イラストレア）", rar_sir: "SAR（スペシャルアートレア）", rar_mhr: "MUR（メガウルトラレア）", rar_hyper: "UR（ゴールド）", rar_secret: "シークレットレア",
       rar_rainbow: "HR（レインボー）", rar_trainerfull: "トレーナーズ SR", rar_gallery: "トレーナー／ガラルギャラリー", rar_bwr: "BWR", rar_shiny: "S（色違い）", rar_shinyultra: "SSR（色違いSR）",
       rar_acespec: "ACE SPEC", rar_radiant: "K（かがやく）", rar_amazing: "A（アメイジング）", rar_lvx: "LV.X", rar_prime: "グレート", rar_legend: "LEGEND", rar_break: "BREAK", rar_prism: "プリズムスター",
@@ -2936,10 +2982,14 @@
 
 
   /* ---------- Carta 3D com brilho (holo / foil) ---------- */
-  const FX_RAR = { holo: "holo", lvx: "holo", prime: "holo", star: "holo", classic: "holo", acespec: "holo",
-    legend: "full", break: "full", prism: "full", oldex: "full", double: "full", vseries: "full", ultra: "full", trainerfull: "full", bwr: "full",
-    ir: "glitter", gallery: "glitter", radiant: "glitter", amazing: "glitter", sir: "sir",
-    hyper: "gold", secret: "gold", rainbow: "gold", mhr: "gold", shiny: "shiny", shinyultra: "shiny" };
+  const FX_RAR = { holo: "holo", classic: "holo",
+    lvx: "full", prime: "full", star: "full", acespec: "full", legend: "full", break: "full", prism: "full",
+    oldex: "full", double: "full", vseries: "full", ultra: "full", trainerfull: "full", bwr: "full",
+    ir: "glitter", gallery: "glitter", radiant: "glitter", amazing: "glitter",
+    sir: "sir", rainbow: "rainbow", hyper: "gold", secret: "gold", mhr: "gold",
+    shiny: "shiny", shinyultra: "shiny" };
+  // raridades em que a carta é sempre foil (não existe versão comum)
+  const FX_SEMPRE = new Set(["full", "glitter", "sir", "rainbow", "gold", "shiny"]);
   const FIN_ESC = new Map();      // id da carta -> acabamento escolhido
   const DADOS_CARTA = new Map();  // id da carta -> promessa dos dados da TCGdex
   function dadosCarta(id) {
@@ -2951,14 +3001,26 @@
     const k = c && c.rar ? c.rar : (d && d.rarity ? rarChave(d.rarity) : "");
     return FX_RAR[k] || "none";
   }
+  // Quais acabamentos essa carta realmente teve: vem dos "variants" da TCGdex.
   function acabamentosDe(base, d) {
     const v = d && d.variants && typeof d.variants === "object" ? d.variants : null;
-    if (base !== "none" && base !== "holo") return ["holo"];
+    if (FX_SEMPRE.has(base)) return ["holo"];        // full art, IR, SIR, dourada… só existem em foil
     const ops = [];
-    if (v) { if (v.normal) ops.push("normal"); if (v.holo) ops.push("holo"); if (v.reverse) ops.push("reverse"); }
-    if (base === "holo" && !ops.includes("holo")) ops.unshift("holo");
-    if (!ops.length) ops.push(base === "none" ? "normal" : "holo");
-    return ops;
+    if (v) {
+      if (v.normal) ops.push("normal");
+      if (v.holo) ops.push("holo");
+      if (v.reverse) ops.push("reverse");
+      if (ops.length) return ops;                     // a API sabe: respeita o que ela diz
+    }
+    // sem dados da API: decide pela raridade
+    return base === "holo" ? ["holo"] : ["normal"];
+  }
+  // acabamento mostrado por padrão: o da impressão mais comum da carta
+  function finPadrao(base, ops) {
+    if (FX_SEMPRE.has(base)) return "holo";
+    if (base === "holo" && ops.includes("holo")) return "holo";
+    if (ops.includes("normal")) return "normal";
+    return ops[0];
   }
   const fxDe = (base, fin) => fin === "normal" ? "none" : fin === "reverse" ? "reverse" : (base === "none" ? "holo" : base);
   const nomeFin = (base, fin) => fin === "normal" ? t("fxNormal") : fin === "reverse" ? t("fxReverse") : t("fxName_" + (base === "none" ? "holo" : base));
@@ -2973,11 +3035,11 @@
     box.classList.add("c3d-host");
     const raiz = document.createElement("div"); raiz.className = "c3d"; raiz.dataset.fx = "none";
     const dentro = document.createElement("div"); dentro.className = "c3d-in";
-    const efeito = document.createElement("div"); efeito.className = "c3d-fx"; efeito.innerHTML = "<i class=\"fx-a\"></i><i class=\"fx-b\"></i><i class=\"fx-c\"></i>";
+    const efeito = document.createElement("div"); efeito.className = "c3d-fx"; efeito.innerHTML = "<i class=\"fx-tex\"></i><i class=\"fx-rb\"></i><i class=\"fx-star\"></i><i class=\"fx-gl\"></i>";
     dentro.append(img, efeito); raiz.appendChild(dentro); box.appendChild(raiz);
     const reduz = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const MAXY = 18, MAXX = 14, BASE = 0.5;
-    const st = { rx: 0, ry: 0, trx: 0, try: 0, mx: 50, my: 50, tmx: 50, tmy: 50, o: BASE, to: BASE, raf: 0, intro: !reduz && opts.intro !== false, t0: 0, arrasta: false };
+    const MAXY = 21, MAXX = 16, BASE = 0.42;
+    const st = { rx: 0, ry: 0, trx: 0, try: 0, mx: 50, my: 50, tmx: 50, tmy: 50, o: BASE, to: BASE, sc: 1, tsc: 1, raf: 0, intro: !reduz && opts.intro !== false, t0: 0, arrasta: false };
     const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
     const ajusta = () => { efeito.style.left = img.offsetLeft + "px"; efeito.style.top = img.offsetTop + "px"; efeito.style.width = img.offsetWidth + "px"; efeito.style.height = img.offsetHeight + "px"; };
     img.addEventListener("load", ajusta);
@@ -2989,6 +3051,7 @@
       raiz.style.setProperty("--mx", st.mx.toFixed(1) + "%"); raiz.style.setProperty("--my", st.my.toFixed(1) + "%");
       raiz.style.setProperty("--px", ((st.mx - 50) / 50).toFixed(3)); raiz.style.setProperty("--py", ((st.my - 50) / 50).toFixed(3));
       raiz.style.setProperty("--o", st.o.toFixed(3));
+      raiz.style.setProperty("--sc", st.sc.toFixed(3));
       raiz.style.setProperty("--sx", (-st.ry * 0.9).toFixed(1)); raiz.style.setProperty("--sy", (st.rx * 0.9).toFixed(1));
     };
     const passo = agora => {
@@ -2996,24 +3059,24 @@
       if (st.intro) {
         if (!st.t0) st.t0 = agora;
         const k = Math.min(1, (agora - st.t0) / 1500), e = 0.5 - 0.5 * Math.cos(Math.PI * k);
-        st.tmx = 18 + 64 * e; st.tmy = 22 + 50 * e; st.try = (e - 0.5) * 16; st.trx = -Math.sin(Math.PI * k) * 5; st.to = 0.5 + 0.4 * Math.sin(Math.PI * k);
+        st.tmx = 14 + 72 * e; st.tmy = 20 + 56 * e; st.try = (e - 0.5) * 20; st.trx = -Math.sin(Math.PI * k) * 6; st.to = BASE + 0.5 * Math.sin(Math.PI * k);
         if (k >= 1) { st.intro = false; soltar(); }
       }
-      const f = 0.16;
+      const f = 0.2;
       st.rx += (st.trx - st.rx) * f; st.ry += (st.try - st.ry) * f;
-      st.mx += (st.tmx - st.mx) * 0.22; st.my += (st.tmy - st.my) * 0.22; st.o += (st.to - st.o) * 0.15;
+      st.mx += (st.tmx - st.mx) * 0.26; st.my += (st.tmy - st.my) * 0.26; st.o += (st.to - st.o) * 0.18; st.sc += (st.tsc - st.sc) * 0.16;
       escrever();
-      const mexendo = Math.abs(st.trx - st.rx) > 0.03 || Math.abs(st.try - st.ry) > 0.03 || Math.abs(st.tmx - st.mx) > 0.1 || Math.abs(st.tmy - st.my) > 0.1 || Math.abs(st.to - st.o) > 0.004 || st.intro;
+      const mexendo = Math.abs(st.trx - st.rx) > 0.03 || Math.abs(st.try - st.ry) > 0.03 || Math.abs(st.tmx - st.mx) > 0.1 || Math.abs(st.tmy - st.my) > 0.1 || Math.abs(st.to - st.o) > 0.004 || Math.abs(st.tsc - st.sc) > 0.0015 || st.intro;
       if (mexendo) st.raf = requestAnimationFrame(passo);
     };
     const roda = () => { if (!st.raf) st.raf = requestAnimationFrame(passo); };
-    function soltar() { st.trx = 0; st.try = 0; st.tmx = 50; st.tmy = 50; st.to = BASE; roda(); }
+    function soltar() { st.trx = 0; st.try = 0; st.tmx = 50; st.tmy = 50; st.to = BASE; st.tsc = 1; roda(); }
     const mirar = e => {
       const r = raiz.getBoundingClientRect();
       const W = img.offsetWidth || r.width, H = img.offsetHeight || r.height;
       const px = clamp((e.clientX - (r.left + img.offsetLeft)) / W, 0, 1), py = clamp((e.clientY - (r.top + img.offsetTop)) / H, 0, 1);
       st.intro = false; st.tmx = px * 100; st.tmy = py * 100;
-      if (!reduz) { st.try = (px - 0.5) * 2 * MAXY; st.trx = -(py - 0.5) * 2 * MAXX; }
+      if (!reduz) { st.try = (px - 0.5) * 2 * MAXY; st.trx = -(py - 0.5) * 2 * MAXX; st.tsc = 1.035; }
       st.to = 1; roda();
     };
     raiz.addEventListener("pointermove", e => { if (e.pointerType === "mouse" || st.arrasta) mirar(e); });
@@ -3027,7 +3090,7 @@
     const aplicar = () => {
       const base = fxBaseDe(c, dados), ops = acabamentosDe(base, dados);
       let fin = FIN_ESC.get(c.id);
-      if (!fin || !ops.includes(fin)) fin = ops.includes("holo") ? "holo" : ops[0];
+      if (!fin || !ops.includes(fin)) fin = finPadrao(base, ops);
       ctrl.fin = fin; ctrl.fx = fxDe(base, fin); raiz.dataset.fx = ctrl.fx;
       if (opts.onFin) opts.onFin({ base, ops, fin, fx: ctrl.fx, dados, escolher: f => { FIN_ESC.set(c.id, f); aplicar(); } });
     };
@@ -3335,12 +3398,58 @@
     }
     return l;
   }
-  const imgLogo = u => !u ? "" : /\.(png|webp|jpg)$/i.test(u) ? u : u + ".webp";
+  const ASSETS = "https://assets.tcgdex.net/en";
+  const imgLogo = u => !u ? "" : (/^data:/i.test(u) || /\.(png|webp|jpg|jpeg|svg)(\?|$)/i.test(u)) ? u : u + ".webp";
+  const pidDoSet = st => st.ptcg || (((PTCG_POR_SET[st.id] || []).find(x => !x.sub) || (PTCG_POR_SET[st.id] || [])[0] || {}).pid) || "";
+  // imagem da coleção: tenta TCGdex (webp e png) e depois a pokemontcg.io
+  function urlsSet(st, tipo) {
+    const l = [], bruto = tipo === "logo" ? st.logo : st.simb;
+    if (bruto) { l.push(imgLogo(bruto)); if (!/^data:/i.test(bruto) && !/\.(png|webp|jpg|jpeg|svg)(\?|$)/i.test(bruto)) l.push(bruto + ".png"); }
+    if (!st.ptcg && st.serie) {
+      const base = `${ASSETS}/${encodeURIComponent(st.serie)}/${encodeURIComponent(st.id)}/${tipo}`;
+      l.push(base + ".webp", base + ".png");
+    }
+    const pid = pidDoSet(st);
+    if (pid) l.push(`https://images.pokemontcg.io/${encodeURIComponent(pid)}/${tipo === "logo" ? "logo" : "symbol"}.png`);
+    return l.filter((u, i) => u && l.indexOf(u) === i);
+  }
+  const imgSetHTML = (st, tipo, cls) => {
+    const l = urlsSet(st, tipo);
+    if (!l.length) return "";
+    return `<img${cls ? ` class="${cls}"` : ""} src="${esc(l[0])}" data-fb="${esc(l.slice(1).join("|"))}" data-sid="${esc(st.id)}" data-tipo="${tipo}" alt="" loading="lazy" decoding="async">`;
+  };
+  // troca de fonte quando a imagem não carrega e tira o nome de reserva quando ela carrega
+  function ligarImgsSet(raiz) {
+    raiz.querySelectorAll("img[data-fb]").forEach(img => {
+      if (img._lig) return;
+      img._lig = true;
+      const tirarNome = () => { const a = img.previousElementSibling; if (a && a.classList.contains("st-sem")) a.remove(); };
+      img.addEventListener("load", tirarNome);
+      img.addEventListener("error", () => {
+        const r = (img.dataset.fb || "").split("|").filter(Boolean);
+        const nx = r.shift();
+        img.dataset.fb = r.join("|");
+        if (nx) { img.src = nx; return; }
+        // acabaram os endereços: pergunta o detalhe da coleção à TCGdex (traz logo e símbolo)
+        const sid = img.dataset.sid, tipo = img.dataset.tipo;
+        if (!sid || img._det) { img.remove(); return; }
+        img._det = true;
+        carregarSetDet(sid).then(d => {
+          const novo = d && (tipo === "logo" ? d.logo : d.symbol);
+          if (!novo) { img.remove(); return; }
+          const l = [imgLogo(novo), novo + ".png"].filter((u, i, a) => u && a.indexOf(u) === i);
+          img.dataset.fb = l.slice(1).join("|");
+          img.src = l[0];
+        }).catch(() => img.remove());
+      });
+      if (img.complete && img.naturalWidth) tirarNome();
+    });
+  }
   function stCardHTML(st) {
-    const p = stProgresso(st.id), logo = imgLogo(st.logo), simb = imgLogo(st.simb), ano = stAno(st);
+    const p = stProgresso(st.id), ano = stAno(st);
     return `<button type="button" class="st-card${p.total && p.tem >= p.total ? " st-cheio" : ""}" data-set="${esc(st.id)}">
-      <span class="st-logo">${logo ? `<img src="${esc(logo)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : `<span class="st-sem">${esc(st.name)}</span>`}</span>
-      <span class="st-nome">${simb ? `<img src="${esc(simb)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : ""}${esc(st.name)}</span>
+      <span class="st-logo"><span class="st-sem">${esc(st.name)}</span>${imgSetHTML(st, "logo")}</span>
+      <span class="st-nome">${imgSetHTML(st, "symbol")}${esc(st.name)}</span>
       <span class="st-sub">${esc(st.serieName || "")}${ano ? " · " + ano : ""}</span>
       <span class="st-barra" aria-hidden="true"><i style="width:${p.pct}%"></i></span>
       <span class="st-num"><span>${p.tem} / ${p.total}</span><b>${p.pct}%</b></span>
@@ -3352,6 +3461,7 @@
     const l = stListaSets();
     $("stGrid").innerHTML = l.slice(0, stState.mostrar).map(stCardHTML).join("") +
       (l.length > stState.mostrar ? `<button type="button" class="btn-sec st-mais" id="stMais" style="grid-column:1/-1;max-width:260px;margin:0 auto">${esc(t("stMore"))}</button>` : "");
+    ligarImgsSet($("stGrid"));
     $("stVazio").hidden = !!l.length;
     $("stVazio").textContent = l.length ? "" : (state.status === "ok" ? t("stNone") : t("loading"));
   }
@@ -3375,7 +3485,12 @@
     if (SET_DET.has(id)) return SET_DET.get(id);
     const st = SETS[id];
     if (!st || st.ptcg) { SET_DET.set(id, null); return null; }
-    try { const d = await getJSON(API + "/sets/" + encodeURIComponent(id)); SET_DET.set(id, d); return d; }
+    try {
+      const d = await getJSON(API + "/sets/" + encodeURIComponent(id));
+      SET_DET.set(id, d);
+      if (d && SETS[id]) { if (d.logo) SETS[id].logo = d.logo; if (d.symbol) SETS[id].simb = d.symbol; if (d.releaseDate && !SETS[id].lanc) SETS[id].lanc = d.releaseDate; }
+      return d;
+    }
     catch (e) { SET_DET.set(id, null); return null; }
   }
   function renderSetDet() {
@@ -3383,7 +3498,7 @@
     if (!st) { stState.aberto = null; renderSets(); return; }
     $("stLista").hidden = true; $("stDet").hidden = false;
     const det = SET_DET.get(st.id) || null;
-    const p = stProgresso(st.id), logo = imgLogo(st.logo);
+    const p = stProgresso(st.id);
     const of = (det && det.cardCount && det.cardCount.official) || st.official || 0;
     const data = (det && det.releaseDate) || st.lanc || "";
     const pd = prodSet(st.id);
@@ -3401,7 +3516,7 @@
       </div>
       <section class="tl-card">
         <div class="st-cab">
-          <span class="st-logo">${logo ? `<img src="${esc(logo)}" alt="" onerror="this.remove()">` : `<span class="st-sem">${esc(st.name)}</span>`}</span>
+          <span class="st-logo"><span class="st-sem">${esc(st.name)}</span>${imgSetHTML(st, "logo")}</span>
           <div style="min-width:0;flex:1 1 240px">
             <h2>${esc(st.name)}</h2>
             <div class="st-meta">
@@ -3443,6 +3558,7 @@
         }).join("")}</ul>${vis.length > lim.length ? `<button type="button" class="btn-sec st-mais" id="stMaisC">${esc(t("stMore"))}</button>` : ""}`
         : `<p class="tl-nota">${esc(t("stNoCards"))}</p>`}
       </section>`;
+    ligarImgsSet($("stDet"));
   }
   function abrirSet(id) { stState.aberto = id; stState.filtro = "todas"; stState.mostrar = 60; renderSets(); window.scrollTo({ top: 0, behavior: "auto" });
     carregarSetDet(id).then(() => { if (stState.aberto === id && conta.cfg.area === "sets") renderSetDet(); }); }
