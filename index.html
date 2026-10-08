@@ -3094,20 +3094,42 @@
     const v = () => { if (dexState.status === "ok" || dexState.status === "error" || ++n > 40) ok(dexState.status === "ok"); else setTimeout(v, 400); };
     v();
   });
+  // Quando a TCGdex não traz o número da Pokédex, descobre o Pokémon pelo nome da carta
+  const palavrasNome = n => " " + norm(String(n || "")).replace(/[^a-z0-9]+/g, " ").trim() + " ";
+  function pokemonPeloNome(c) {
+    const alvo = palavrasNome(c.n);
+    let melhor = null;
+    DEX.forEach(p => {
+      if (p.tipo || !p.n) return;
+      const nm = palavrasNome(p.n);
+      if (nm.length > 3 && alvo.includes(nm) && (!melhor || nm.length > melhor.nm.length)) melhor = { nm, sp: p.sp };
+    });
+    return melhor ? [melhor.sp] : [];
+  }
   async function desenharPoke(c) {
     const box = $("zPoke");
     box._tok = c.id; box.hidden = true; box.innerHTML = "";
-    const d = PRECOS.get(c.id) || await dadosCarta(c.id);
-    if (box._tok !== c.id || !d) return;
-    const ids = (Array.isArray(d.dexId) ? d.dexId : []).map(Number).filter(n => n > 0 && n < 2000).slice(0, 2);
-    if (!ids.length) return;
+    let ids = [], oficial = false;
     const pinta = () => {
       if (box._tok !== c.id) return;
-      box.innerHTML = ids.map(id => `<button type="button" class="z-poke-b" data-poke="${id}" aria-label="${esc(t("zPoke", nomeDex(id)))}"><img src="${ARTE(id)}" alt="" width="44" height="44" decoding="async"><span><small>#${pad4(id)}</small>${esc(nomeDex(id))}</span></button>`).join("");
+      const lista = ids.length ? ids : pokemonPeloNome(c);
+      if (!lista.length) { box.hidden = true; box.innerHTML = ""; return; }
+      box.innerHTML = lista.map(id => `<button type="button" class="z-poke-b" data-poke="${id}" aria-label="${esc(t("zPoke", nomeDex(id)))}"><img src="${ARTE(id)}" alt="" width="44" height="44" decoding="async"><span><small>#${pad4(id)}</small>${esc(nomeDex(id))}</span></button>`).join("");
       box.hidden = false;
     };
-    pinta();
-    if (!DEX_POR_ID.size) esperarDex().then(pinta);
+    const usar = d => {
+      const cat = String((d && d.category) || "").toLowerCase();
+      if (cat === "trainer" || cat === "energy") { ids = []; oficial = true; box.hidden = true; box.innerHTML = ""; return; }
+      ids = (d && Array.isArray(d.dexId) ? d.dexId : []).map(Number).filter(n => n > 0 && n < 2000).slice(0, 2);
+      pinta();
+    };
+    // 1) pelo nome da carta, na hora (se a Pokédex já carregou)
+    if (DEX.length) pinta();
+    // 2) pelo número da Pokédex que vem no detalhe da carta (mais exato)
+    const d = PRECOS.get(c.id);
+    if (d) usar(d); else dadosCarta(c.id).then(x => { if (box._tok === c.id && x) usar(x); });
+    // 3) Pokédex ainda não carregou: carrega e pinta de novo
+    if (!DEX.length) esperarDex().then(() => { if (!oficial) pinta(); });
   }
   async function irParaDex(id) {
     fecharZoom();
