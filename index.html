@@ -1022,6 +1022,13 @@
       linear-gradient(104deg, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, calc(var(--o) * 0.3)) 50%, rgba(255, 255, 255, 0) 62%);
     background-size: auto, 250% 250%; background-position: 0 0, var(--mx) var(--my); }
   .fv-zimg.c3d-host { background: transparent; }
+  .z-poke { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .z-poke[hidden] { display: none; }
+  .z-poke-b { display: inline-flex; align-items: center; gap: 10px; padding: 4px 16px 4px 6px; border-radius: 99px; border: 1px solid rgba(255, 255, 255, 0.24); background: rgba(255, 255, 255, 0.08); color: #FFF3F7; font: inherit; font-weight: 800; font-size: 0.95rem; cursor: pointer; text-align: left; transition: background 0.15s, transform 0.15s; }
+  .z-poke-b:hover { background: rgba(255, 255, 255, 0.16); transform: translateY(-1px); }
+  .z-poke-b:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+  .z-poke-b img { width: 44px; height: 44px; object-fit: contain; border-radius: 50%; background: rgba(255, 255, 255, 0.12); }
+  .z-poke-b small { display: block; font-size: 0.7rem; font-weight: 600; opacity: 0.75; line-height: 1.1; }
   .z-fx { margin-top: 12px; padding: 10px 12px; border-radius: 14px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); text-align: left; }
   .z-fx-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
   .z-fx-lbl { display: inline-flex; align-items: center; gap: 6px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.8; }
@@ -1415,12 +1422,7 @@
     <div class="zoom-info">
       <h2 id="zNome"></h2>
       <p id="zDet"></p>
-      <div class="z-fx" id="zFx" hidden>
-        <div class="z-fx-top"><span class="z-fx-lbl"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg><span id="zFxLbl"></span></span><div class="z-fx-seg" id="zFxSeg" role="group"></div></div>
-        <p class="z-fx-nota" id="zFxNota"></p>
-        <div class="z-fx-tags" id="zFxTags"></div>
-        <p class="z-fx-dica" id="zFxDica"></p>
-      </div>
+      <div class="z-poke" id="zPoke" hidden></div>
       <p class="pos" id="zPos" aria-live="polite"></p>
       <p class="z-onde" id="zOnde" hidden></p>
     </div>
@@ -1610,7 +1612,7 @@
       page: "Page", of: n => "of " + n,
       footer: "Card data and images from TCGdex (tcgdex.dev), an open-source Pokémon TCG API, with the official Pokémon TCG gallery as a backup for some images. Pokémon TCG Pocket (digital) cards are not included. Pokédex data from PokéAPI (pokeapi.co). Your collection and favorites are saved in this browser.",
       reset: "Clear binder", resetArm: "Tap again to clear everything",
-      zClose: "Close enlarged card", zPrev: "Previous card", zNext: "Next card", zPos: (i, n) => `${i} of ${n}`,
+      zClose: "Close enlarged card", zPoke: n => `Open ${n} in the Pokédex`, zPrev: "Previous card", zNext: "Next card", zPos: (i, n) => `${i} of ${n}`,
       panelTitle: "Account & settings", closePanel: "Close panel", account: "Account", siteSettings: "Site settings",
       dim: "Darken cards I don't own", dimD: "Turn off to see every card in full color.",
       anim: "Animations", animD: "Effects when turning pages and marking cards.",
@@ -1707,7 +1709,7 @@
       page: "Página", of: n => "de " + n,
       footer: "Dados e imagens das cartas da TCGdex (tcgdex.dev), uma API aberta de Pokémon Estampas Ilustradas, com a galeria oficial como reserva para algumas imagens. As cartas do Pokémon TCG Pocket (digital) não estão incluídas. Dados da Pokédex da PokéAPI (pokeapi.co). Sua coleção e suas favoritas ficam salvas neste navegador.",
       reset: "Limpar fichário", resetArm: "Toque de novo para limpar tudo",
-      zClose: "Fechar carta ampliada", zPrev: "Carta anterior", zNext: "Próxima carta", zPos: (i, n) => `${i} de ${n}`,
+      zClose: "Fechar carta ampliada", zPoke: n => `Abrir ${n} na Pokédex`, zPrev: "Carta anterior", zNext: "Próxima carta", zPos: (i, n) => `${i} de ${n}`,
       panelTitle: "Conta e configurações", closePanel: "Fechar painel", account: "Cadastro", siteSettings: "Configurações do site",
       dim: "Escurecer cartas que não tenho", dimD: "Desligue para ver todas as cartas com a cor original.",
       anim: "Animações", animD: "Efeitos ao virar a página e ao marcar uma carta.",
@@ -1804,7 +1806,7 @@
       page: "ページ", of: n => "/ " + n,
       footer: "カードのデータと画像は、オープンソースのポケモンカードAPI「TCGdex」（tcgdex.dev）のものです。一部の画像は公式ギャラリーを予備として使っています。ポケモンカードゲーム ポケット（デジタル）のカードは含まれません。図鑑のデータは PokéAPI（pokeapi.co）のものです。コレクションとお気に入りはこのブラウザに保存されます。",
       reset: "バインダーをリセット", resetArm: "もう一度タップですべて削除",
-      zClose: "拡大カードを閉じる", zPrev: "前のカード", zNext: "次のカード", zPos: (i, n) => `${i} / ${n}`,
+      zClose: "拡大カードを閉じる", zPoke: n => `${n}をポケモン図鑑で開く`, zPrev: "前のカード", zNext: "次のカード", zPos: (i, n) => `${i} / ${n}`,
       panelTitle: "アカウントと設定", closePanel: "パネルを閉じる", account: "アカウント", siteSettings: "サイト設定",
       dim: "持っていないカードを暗くする", dimD: "オフにすると、すべてのカードが元の色で表示されます。",
       anim: "アニメーション", animD: "ページをめくるときやカードをチェックするときの効果。",
@@ -3082,22 +3084,41 @@
     if (!dados) dadosCarta(c.id).then(x => { if (box._c3dTok !== tok || !x) return; dados = x; aplicar(); });
     return ctrl;
   }
-  function desenharFx(info) {
-    const wrap = $("zFx");
-    wrap.hidden = false;
-    $("zFxLbl").textContent = t("fxLbl");
-    const { base, ops, fin, dados } = info;
-    $("zFxSeg").innerHTML = ops.map(o => `<span class="z-fx-chip${o === fin ? "" : " z-fx-off"}">${esc(nomeFin(base, o))}</span>`).join("");
-    $("zFxSeg")._info = info;
-    $("zFxNota").textContent = t("fxNote_" + info.fx);
-    const v = dados && dados.variants && typeof dados.variants === "object" ? dados.variants : {};
-    const tags = [];
-    if (v.firstEdition) tags.push(t("fx1st"));
-    if (v.wPromo) tags.push(t("fxPromo"));
-    $("zFxTags").innerHTML = tags.map(x => `<span>${esc(x)}</span>`).join("");
-    $("zFxDica").textContent = t("fxHint2");
-  }
+  function desenharFx() { /* o painel de acabamento foi retirado */ }
 
+
+  /* ---------- Pokémon da carta: ícone que leva à Pokédex ---------- */
+  const esperarDex = () => new Promise(ok => {
+    if (dexState.status === "idle") carregarDex();
+    let n = 0;
+    const v = () => { if (dexState.status === "ok" || dexState.status === "error" || ++n > 40) ok(dexState.status === "ok"); else setTimeout(v, 400); };
+    v();
+  });
+  async function desenharPoke(c) {
+    const box = $("zPoke");
+    box._tok = c.id; box.hidden = true; box.innerHTML = "";
+    const d = PRECOS.get(c.id) || await dadosCarta(c.id);
+    if (box._tok !== c.id || !d) return;
+    const ids = (Array.isArray(d.dexId) ? d.dexId : []).map(Number).filter(n => n > 0 && n < 2000).slice(0, 2);
+    if (!ids.length) return;
+    const pinta = () => {
+      if (box._tok !== c.id) return;
+      box.innerHTML = ids.map(id => `<button type="button" class="z-poke-b" data-poke="${id}" aria-label="${esc(t("zPoke", nomeDex(id)))}"><img src="${ARTE(id)}" alt="" width="44" height="44" decoding="async"><span><small>#${pad4(id)}</small>${esc(nomeDex(id))}</span></button>`).join("");
+      box.hidden = false;
+    };
+    pinta();
+    if (!DEX_POR_ID.size) esperarDex().then(pinta);
+  }
+  async function irParaDex(id) {
+    fecharZoom();
+    conta.cfg.area = "dex"; state.qtyOpen = null; salvarConta(); aplicarArea(); atualizar();
+    if (!(await esperarDex())) return;
+    abrirFicha(id, [id]);
+  }
+  $("zPoke").addEventListener("click", e => {
+    const b = e.target.closest("[data-poke]");
+    if (b) irParaDex(Number(b.dataset.poke));
+  });
   function desenharZoom() {
     const c = POR_ID.get(zState.ids[zState.i]);
     const own = state.own.has(c.id), fav = state.fav.has(c.id);
@@ -3121,17 +3142,18 @@
       img.alt = `${c.n}, ${t("number")} ${num}, ${setNome(c)}`;
       img.addEventListener("error", () => {
         const nx = proximaImg(img, c, true); if (nx) { img.src = nx; return; }
-        const semImg = () => { if (box._c3dId !== c.id) return; limparCard3D(box); box.innerHTML = fallbackHTML(c); $("zFx").hidden = true; };
+        const semImg = () => { if (box._c3dId !== c.id) return; limparCard3D(box); box.innerHTML = fallbackHTML(c);  };
         if (tentarTp(img, c, semImg)) return;
         semImg();
       });
       img.src = src;
       iniciarCard3D(box, img, c, { onFin: desenharFx, intro: box._c3dId !== c.id });
       box._c3dId = c.id;
-    } else { box.innerHTML = fallbackHTML(c); $("zFx").hidden = true; }
+    } else { box.innerHTML = fallbackHTML(c);  }
     $("zNome").textContent = `${c.n} #${num}`;
     $("zDet").textContent = `${setNome(c)} · ${SETS[c.set] ? SETS[c.set].serieName : ""}` + (c.rar ? " · " + t("rar_" + c.rar) : "");
     $("zPos").textContent = t("zPos", zState.i + 1, zState.ids.length);
+    desenharPoke(c);
     const f = $("zFav"), o = $("zOwn");
     f.setAttribute("aria-pressed", String(fav));
     f.setAttribute("aria-label", t("wishLabel") + ": " + c.n);
