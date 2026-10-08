@@ -472,7 +472,9 @@
   .zoom-nav:disabled { opacity: 0.3; cursor: default; }
   .zoom-img { flex: 1; min-width: 0; display: grid; place-items: center; aspect-ratio: 63 / 88; max-height: min(66vh, 560px); }
   .zoom-img img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 4.5%; box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55); }
-  .zoom-img .fallback { width: 100%; height: 100%; font-size: 1.1rem; }
+  .zoom-img .fallback { width: 100%; height: 100%; max-width: 100%; box-sizing: border-box; padding: 18px; gap: 10px; align-content: center; font-size: clamp(1rem, 4.2vw, 1.35rem); line-height: 1.25; overflow: hidden; overflow-wrap: anywhere; word-break: normal; border-radius: 4.5%; background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.14); }
+  .zoom-img .fallback span { overflow-wrap: anywhere; }
+  .zoom-img .fallback small { font-size: clamp(0.8rem, 3vw, 0.95rem); line-height: 1.35; overflow-wrap: anywhere; }
   .zoom-info { width: 100%; text-align: center; }
   .zoom-info h2 { margin: 0; font: 800 1.35rem/1.2 "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif; letter-spacing: -0.01em; overflow-wrap: anywhere; }
   .zoom-info p { margin: 4px 0 0; font-size: 0.9rem; color: #E6C7D3; }
@@ -2266,7 +2268,7 @@
   }
   // próxima imagem a tentar quando uma falha: TCGdex → pokemontcg.io → galeria oficial
   function proximaImg(img, c, grande) {
-    const lista = [grande ? c.pg : c.pi, c.fb].concat(imgsOutrosIdiomas(c, grande)).filter(Boolean);
+    const lista = [grande ? c.pg : c.pi, c.fb].concat(outrasImgs(c, grande)).filter(Boolean);
     const i = parseInt(img.dataset.alt || "0", 10);
     for (let k = i; k < lista.length; k++) if (lista[k] && img.src !== lista[k]) { img.dataset.alt = String(k + 1); return lista[k]; }
     img.dataset.alt = String(lista.length);
@@ -2520,8 +2522,16 @@
     const ext = grande ? "/high.webp" : "/low.webp";
     return LANGS_ASSET.map(g => `https://assets.tcgdex.net/${g}/${encodeURIComponent(st.serie)}/${encodeURIComponent(c.set)}/${encodeURIComponent(c.lid)}${ext}`);
   }
-  const imgPequena = c => c.img ? c.img + "/low.webp" : c.pi || c.fb || imgsOutrosIdiomas(c, false)[0] || "";
-  const imgGrande = c => c.img ? c.img + "/high.webp" : c.pg || c.pi || c.fb || imgsOutrosIdiomas(c, true)[0] || "";
+  // McDonald's Collection: o código do ano segue o padrão "mcd24" nas outras bases de imagens
+  function imgsMcd(c, grande) {
+    const st = SETS[c.set], m = st && /mcdonald/i.test(st.name) && /(20)?(\d\d)\s*$/.exec(st.name);
+    if (!m) return [];
+    const pid = "mcd" + m[2], n = /^\d+$/.test(c.lid) ? String(parseInt(c.lid, 10)) : c.lid;
+    return [`https://images.pokemontcg.io/${pid}/${n}${grande ? "_hires" : ""}.png`, `https://images.scrydex.com/pokemon/${pid}-${n}/${grande ? "large" : "small"}`];
+  }
+  const outrasImgs = (c, grande) => imgsOutrosIdiomas(c, grande).concat(imgsMcd(c, grande));
+  const imgPequena = c => c.img ? c.img + "/low.webp" : c.pi || c.fb || outrasImgs(c, false)[0] || "";
+  const imgGrande = c => c.img ? c.img + "/high.webp" : c.pg || c.pi || c.fb || outrasImgs(c, true)[0] || "";
   // Candidatas de maior qualidade para o zoom: pokemontcg.io (hires) e PNG sem perdas da TCGdex
   function imgsMelhores(c) {
     const l = [];
